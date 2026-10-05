@@ -203,6 +203,26 @@ claims:
               N64_aRho_mono_T_inicial, N64_aRho_mono_T_final, N64_integral_max, N64_T_tchi,
               N64_mono_tchi, N64_E1_tchi, N64_E5_tchi, N64_T_f_pico, N64_E1_f_pico, N64_E5_f_pico, N64_mono_f_pico,
               cuartico_E1_phi0_sobre_M, cuartico_T1_phi0_sobre_M, cuartico_E5_phi0_sobre_M]
+  - id: emodel-N64
+    statement: >
+      Con N = 64 los E-models resuenan más tarde que el T-model (t~_chi = 186 con aK = 1, 146 con aK = 5)
+      porque arrancan lejos del régimen cuártico y la amplitud previa a la resonancia es menor que 1;
+      tienen menos potencia UV en la red. Hoy aK = 1 da 6.3e-11 en 9.5e8 Hz (banda 4.8e8-2.1e9 Hz) y
+      aK = 5 da 8.4e-11 en 4.9e8 Hz (banda 2.5e8-1.5e9 Hz).
+    verificacion: >
+      Números recalculados de las salidas por dos scripts. La explicación de la amplitud previa (el lado
+      del plateau es más plano que phi^4 y la amplitud decae más rápido que 1/a) es cualitativa, coherente
+      con phi_0/M = 1.2 y 0.71, no se aisló con una corrida aparte. La diferencia de amplitud entre aK = 1
+      y 5 (35%) está al borde de la incerteza de una corrida (+-10% en rho_GW/rho).
+    evidence:
+      - code/comparar_corridas.py::cargar
+      - code/analisis_cosmolattice.py::analizar
+      - Notas/modelos/emodel.tex «Resultados con N = 64»
+    numbers: [N64_E1_banda_Hz_min, N64_E1_banda_Hz_max, N64_E5_banda_Hz_min, N64_E5_banda_Hz_max,
+              N64_E1_amp_previa, N64_E5_amp_previa, N64_E5_E1_cociente_f, N64_E5_E1_cociente_Omega,
+              N64_E1_tchi, N64_E5_tchi, N64_E1_t90, N64_E5_t90, N64_E1_ult100, N64_E1_f_pico,
+              N64_E5_f_pico, N64_E1_Omega_pico, N64_E5_Omega_pico, N64_E1_Hz_por_k,
+              cuartico_E1_phi0_sobre_M, cuartico_E5_phi0_sobre_M]
 
 figures:
   - file: Notas/figuras/corridas_N64.pdf
@@ -218,3 +238,35 @@ figures:
               "rho_GW/rho contra t~ (unidades de 1/omega_*, el período de oscilación) y no contra a.",
               "Colores categóricos en orden fijo de la paleta del analizador; leyenda en (a)."]
     supports: [comparacion-N64]
+  - file: Notas/figuras/genemodel_cuartico_N64_campos.png
+    produced_by: code/analisis_cosmolattice.py::analizar
+    shows: >
+      E-model aK = 1, N = 64. <phi~> por a y rms de cada campo contra t~: cuándo crece y satura el campo hijo y cómo se fragmenta el condensado.
+    from_scratch: Reescaleo a hoy y lectura de las salidas de CosmoLattice.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Copia de build_corridas/genemodel_cuartico_N64_kIR0.7/analisis/02_campos.png (PNG a 150 dpi, como la escribe el analizador)."]
+    supports: [emodel-N64]
+  - file: Notas/figuras/genemodel_cuartico_N64_gws.png
+    produced_by: code/analisis_cosmolattice.py::analizar
+    shows: >
+      E-model aK = 1, N = 64. Omega_GW(k~) en la red y h^2 Omega_GW,0(f) hoy a cada tiempo de salida: primero crece la banda resonante, después la cascada llena el UV y el espectro satura.
+    from_scratch: Reescaleo a hoy y lectura de las salidas de CosmoLattice.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Copia de build_corridas/genemodel_cuartico_N64_kIR0.7/analisis/05_gws.png (PNG a 150 dpi, como la escribe el analizador)."]
+    supports: [emodel-N64]
+  - file: Notas/figuras/genemodel_cuartico_aK5_N64_campos.png
+    produced_by: code/analisis_cosmolattice.py::analizar
+    shows: >
+      E-model aK = 5, N = 64. <phi~> por a y rms de cada campo contra t~: cuándo crece y satura el campo hijo y cómo se fragmenta el condensado.
+    from_scratch: Reescaleo a hoy y lectura de las salidas de CosmoLattice.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Copia de build_corridas/genemodel_cuartico_aK5_N64_kIR0.7/analisis/02_campos.png (PNG a 150 dpi, como la escribe el analizador)."]
+    supports: [emodel-N64]
+  - file: Notas/figuras/genemodel_cuartico_aK5_N64_gws.png
+    produced_by: code/analisis_cosmolattice.py::analizar
+    shows: >
+      E-model aK = 5, N = 64. Omega_GW(k~) en la red y h^2 Omega_GW,0(f) hoy a cada tiempo de salida: primero crece la banda resonante, después la cascada llena el UV y el espectro satura.
+    from_scratch: Reescaleo a hoy y lectura de las salidas de CosmoLattice.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Copia de build_corridas/genemodel_cuartico_aK5_N64_kIR0.7/analisis/05_gws.png (PNG a 150 dpi, como la escribe el analizador)."]
+    supports: [emodel-N64]

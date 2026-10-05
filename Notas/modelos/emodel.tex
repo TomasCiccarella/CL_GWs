@@ -71,3 +71,43 @@
             \label{sec:momento-inicial-E}
 
             Por el argumento de la Sec.~\ref{sec:momento-inicial}, $\dot{\phi}_0 = -\sqrt{(\sqrt{7/3} - 1) \, A \left(1 - e^{-\phi_0/M}\right)^n}$. Con los parámetros de \texttt{genemodel.in} ($n = 2.5$, $M = 10\,m_p$) da $\dot\phi_0 = -1.621 \times 10^{31}\,\text{GeV}^2$. El final exacto de la inflación ($\epsilon_H = 1$) cae en $\phi = 2.95 \times 10^{18}\,\text{GeV}$, contra $\phi_0 = 3.96 \times 10^{18}\,\text{GeV}$.
+
+        \subsection{Resultados con $N = 64$}
+            \label{sec:emodel-N64}
+
+            La comparación con los otros casos está en la Sec.~\ref{sec:resultados-N64}; acá van las figuras de las corridas \texttt{genemodel\_cuartico.in} ($\alpha_K = 1$) y \texttt{genemodel\_cuartico\_aK5.in} ($\alpha_K = 5$), que salen de \texttt{code/analisis\_cosmolattice.py} (las cuatro restantes, \texttt{01\_fondo}, \texttt{03\_espectros\_campos}, \texttt{04\_errores} y \texttt{06\_energias}, quedan en \texttt{build\_corridas/<caso>\_N64\_kIR0.7/analisis/}).
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genemodel_cuartico_N64_campos.png}
+                \caption{E-model, $\alpha_K = 1$, $N = 64$. Izquierda: $\langle\tilde\phi\rangle$ multiplicado por $a^{6/(n+2)} = a$, que sería una oscilación de amplitud constante sin resonancia. Derecha: rms de cada campo y $|\langle\tilde\phi\rangle|$.}
+                \label{fig:genemodel_cuartico-campos}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genemodel_cuartico_N64_gws.png}
+                \caption{E-model, $\alpha_K = 1$, $N = 64$. Espectro de GWs en la red (izquierda) y llevado a hoy (derecha), a cada tiempo de salida (claro = temprano). La corrida llega a $\tilde t = 600$.}
+                \label{fig:genemodel_cuartico-gws}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genemodel_cuartico_aK5_N64_campos.png}
+                \caption{E-model, $\alpha_K = 5$, $N = 64$. Izquierda: $\langle\tilde\phi\rangle$ multiplicado por $a^{6/(n+2)} = a$, que sería una oscilación de amplitud constante sin resonancia. Derecha: rms de cada campo y $|\langle\tilde\phi\rangle|$.}
+                \label{fig:genemodel_cuartico_aK5-campos}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genemodel_cuartico_aK5_N64_gws.png}
+                \caption{E-model, $\alpha_K = 5$, $N = 64$. Espectro de GWs en la red (izquierda) y llevado a hoy (derecha), a cada tiempo de salida (claro = temprano).}
+                \label{fig:genemodel_cuartico_aK5-gws}
+            \end{figure}
+
+            Los dos E-models son los casos en que la resonancia llega más tarde: el rms del campo hijo es máximo en $\tilde t = 186$ ($\alpha_K = 1$) y $146$ ($\alpha_K = 5$), contra $121$ en el T-model. Antes de eso, $\langle\tilde\phi\rangle a$ oscila con amplitud constante, pero menor que $1$ ($\simeq 0.75$ con $\alpha_K = 1$ y $\simeq 0.94$ con $\alpha_K = 5$; Fig.~\ref{fig:genemodel_cuartico-campos}). Eso pasa porque el campo arranca lejos del régimen cuártico ($\phi_0/M = 1.2$ con $\alpha_K = 1$): mientras $\phi \gtrsim M$, del lado del plateau el potencial es más plano que $\phi^4$, y ahí la amplitud decae más rápido que $1/a$. Por eso $\alpha_K = 1$ necesita $\tilde t_{\max} = 600$: $\rho_{GW}/\rho$ llega al $90\%$ de su valor final recién en $\tilde t = 380$ ($340$ con $\alpha_K = 5$), y crece un $1\%$ en los últimos 100 de $\tilde t$.
+
+            El espectro de la red tiene menos potencia UV cuanto más tarde satura la resonancia: supera la mitad del máximo hasta $\tilde k = 6.3$ con $\alpha_K = 1$ y hasta $8.4$ con $\alpha_K = 5$. Hoy, eso da:
+            \begin{itemize}
+                \item $\alpha_K = 1$: máximo $h^2\Omega_{GW,0} = 6.3 \times 10^{-11}$ en $9.5 \times 10^8$\,Hz, y más de la mitad del máximo entre $4.8 \times 10^8$ y $2.1 \times 10^9$\,Hz. Es el caso de frecuencias más altas de los cuatro, porque su factor de reescaleo es el mayor ($3.4 \times 10^8$\,Hz por unidad de $\tilde k$).
+                \item $\alpha_K = 5$: máximo $8.4 \times 10^{-11}$ en $4.9 \times 10^8$\,Hz, y más de la mitad del máximo entre $2.5 \times 10^8$ y $1.5 \times 10^9$\,Hz.
+            \end{itemize}
+            Pasar de $\alpha_K = 1$ a $5$ (más cerca de ACT) baja las frecuencias un factor $\sim 2$ y sube la amplitud del máximo un $35\%$. Con una corrida por caso y bins de $20$--$25\%$, la diferencia de amplitud está al borde de la incerteza de una sola corrida ($\pm 10\%$ en $\rho_{GW}/\rho$, Sec.~\ref{sec:recomendacion}).
