@@ -1888,5 +1888,39 @@
     "choices": [
       "Máximo de rms(chi) como marca de saturación de la resonancia (alternativa: cuando rho_GW/rho deja de crecer exponencialmente)."
     ]
+  },
+  "N64_T_banda_Hz_min": {
+    "value": 166000000.0,
+    "statement": "f_0 mínima con h^2 Omega_GW,0 >= pico/2, T-model N = 64 (k~ = 1.4).",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Banda a media altura del último espectro, por el factor Hz por k~.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4)."
+    ]
+  },
+  "N64_T_banda_Hz_max": {
+    "value": 1330000000.0,
+    "statement": "f_0 máxima con h^2 Omega_GW,0 >= pico/2, T-model N = 64 (k~ = 11.2).",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Banda a media altura del último espectro, por el factor Hz por k~.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4)."
+    ]
+  },
+  "N64_T_chi_inicio": {
+    "value": 23,
+    "statement": "t~ del mínimo de rms(chi) antes de la resonancia (inicio del crecimiento), T-model N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_1.txt",
+    "from_scratch": "argmin de rms(chi) en el primer 40% de la corrida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Mínimo de rms(chi) como inicio del crecimiento exponencial; en el texto se redondea a 25."
+    ]
   }
 }

@@ -59,3 +59,25 @@
             \label{sec:momento-inicial-T}
 
             Por el argumento de la Sec.~\ref{sec:momento-inicial}, $\dot{\phi}_0 = -\sqrt{(\sqrt{7/3} - 1) \, A \tanh^n(\phi_0/M)}$. Con los parámetros de \texttt{gentmodel.in} ($n = 2.5$, $M = 10\,m_p$) da $\dot\phi_0 = -1.914 \times 10^{31}\,\text{GeV}^2$. El final exacto de la inflación ($\epsilon_H = 1$) cae en $\phi = 3.18 \times 10^{18}\,\text{GeV}$, contra $\phi_0 = 4.22 \times 10^{18}\,\text{GeV}$.
+
+        \subsection{Resultados con $N = 64$}
+            \label{sec:tmodel-N64}
+
+            La comparación con los otros casos está en la Sec.~\ref{sec:resultados-N64}; acá van las figuras de la corrida \texttt{gentmodel\_cuartico.in}, que salen de \texttt{code/analisis\_cosmolattice.py} (las cuatro restantes, \texttt{01\_fondo}, \texttt{03\_espectros\_campos}, \texttt{04\_errores} y \texttt{06\_energias}, quedan en \texttt{build\_corridas/<caso>\_N64\_kIR0.7/analisis/}).
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/gentmodel_cuartico_N64_campos.png}
+                \caption{T-model, $\alpha_K = 1$, $N = 64$. Izquierda: $\langle\tilde\phi\rangle$ multiplicado por $a^{6/(n+2)} = a$, que sería una oscilación de amplitud constante sin resonancia. Derecha: rms de cada campo y $|\langle\tilde\phi\rangle|$.}
+                \label{fig:gentmodel_cuartico-campos}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/gentmodel_cuartico_N64_gws.png}
+                \caption{T-model, $\alpha_K = 1$, $N = 64$. Espectro de GWs en la red (izquierda) y llevado a hoy (derecha), a cada tiempo de salida (claro = temprano).}
+                \label{fig:gentmodel_cuartico-gws}
+            \end{figure}
+
+            El campo hijo crece exponencialmente desde $\tilde t \simeq 25$ y su rms es máximo en $\tilde t = 121$. Ahí la resonancia satura: el condensado $\langle\tilde\phi\rangle$ deja de oscilar con amplitud constante (Fig.~\ref{fig:gentmodel_cuartico-campos}) y la energía pasa a las fluctuaciones de los dos campos. Las GWs siguen ese mismo orden (Fig.~\ref{fig:gentmodel_cuartico-gws}). Primero crece la banda de la resonancia, $\tilde k \simeq 1$--$3$; después la cascada no lineal llena el espectro hasta $\tilde k \sim 20$. A partir de $\tilde t \simeq 270$ el espectro sólo cambia de forma ($\rho_{GW}/\rho$ crece un $4\%$ en los últimos 100 de $\tilde t$).
+
+            Hoy, el espectro final tiene el máximo en $h^2\Omega_{GW,0} = 8.7 \times 10^{-11}$, en $f_0 = 4.1 \times 10^8$\,Hz, y supera la mitad del máximo entre $1.7 \times 10^8$ y $1.3 \times 10^9$\,Hz ($\tilde k = 1.4$--$11$). La corrida repite la de validación de la Sec.~\ref{sec:recomendacion} con otra semilla, y $\rho_{GW}/\rho$ coincide a un $0.2\%$.
