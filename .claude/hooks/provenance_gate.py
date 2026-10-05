@@ -32,6 +32,7 @@ ONE SCRIPT, TWO WIRINGS. `.claude/settings.json` runs it for Claude Code and
 import glob
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -64,13 +65,14 @@ def figures_in_tree():
     out = []
     for p in glob.glob(os.path.join(ROOT, "**", "*"), recursive=True):
         # Here the repo root *is* CosmoLattice: include/, source/, tests/, cmake/ and
-        # the build dirs are inputs handed to the work, not results. Notas/Notas.pdf
-        # is the compiled notes, not a figure; figures included in the notes still count.
+        # the build dirs are inputs handed to the work, not results. Notas/Notas.pdf and
+        # Notas/Notas_<rama>.pdf are the compiled notes, not figures; figures included in the
+        # notes still count.
         rel = "/" + os.path.relpath(p, ROOT)
         if os.path.isdir(p) or "/.claude/" in p or "/.codex/" in p \
                 or "/provenance/" in p or "/bibliografía/" in p \
                 or rel.startswith(("/include/", "/source/", "/tests/", "/cmake/", "/build")) \
-                or rel == "/Notas/Notas.pdf":
+                or re.fullmatch(r"/Notas/Notas(_[\w-]+)?\.pdf", rel):
             continue
         if p.lower().endswith(FIGURE_EXT) and os.path.getmtime(p) > t0:
             out.append(os.path.relpath(p, ROOT))

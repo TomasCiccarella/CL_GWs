@@ -42,7 +42,7 @@ con $\epsilon = (a_e/a_{RD})^{2(4-n)/(n+2)}$, que vale exactamente $1$ para $n =
 
 ## Cómo leer el repositorio
 
-- **Para entender la física:** leé [La idea](#la-idea) y después las notas (`Notas/Notas.tex`; el PDF se compila con `latexmk`). Las notas están en este orden:
+- **Para entender la física:** leé [La idea](#la-idea) y después las notas: `Notas/Notas.pdf` en `main` (notas generales) o `Notas/Notas_<rama>.pdf` en cada rama de modelo (notas completas con la sección de ese modelo). Las notas están en este orden:
   1. el marco común para potenciales con mínimo $|\phi|^n$: variables de programa, reescaleo temporal, condiciones iniciales y estabilidad;
   2. los parámetros del paper para $n = 4$;
   3. el análisis y el reescaleo a hoy;
@@ -66,7 +66,7 @@ Todo lo general está en `main`, y cada tipo de modelo tiene su rama, que es `ma
 
 Además, en cada rama `provenance/` suma las afirmaciones propias de ese modelo.
 
-Para trabajar con un modelo: `git checkout t-model` (o `e-model`, `monomial`). Los cambios generales se hacen en `main` y después se llevan a cada rama con `git merge main`. Si el merge da conflicto en `provenance/` (pasa cuando los dos lados agregaron entradas), se resuelve con `python3 code/resolver_procedencia.py` y después `git add provenance && git commit --no-edit`.
+Para trabajar con un modelo: `git checkout t-model` (o `e-model`, `monomial`). Los cambios generales se hacen en `main` y después se llevan a cada rama con `git merge main`. Si el merge da conflicto en `provenance/` (pasa cuando los dos lados agregaron entradas), se resuelve con `python3 code/resolver_procedencia.py` y después `git add provenance && git commit --no-edit`. Si el cambio tocó las notas, conviene recompilar con `code/compilar_notas.sh` en cada rama y commitear su PDF.
 
 ## Guía de carpetas
 
@@ -75,7 +75,7 @@ Para trabajar con un modelo: `git checkout t-model` (o `e-model`, `monomial`). L
 | carpeta / archivo | qué tiene |
 |---|---|
 | `code/` | herramientas del estudio (ver la tabla de abajo) |
-| `Notas/` | notas en LaTeX: `Notas.tex` (documento principal), `Librerías.tex` (paquetes y estilo) y, en cada rama, `modelos/<modelo>.tex` con la sección de su modelo |
+| `Notas/` | notas en LaTeX: `Notas.tex` (documento principal), `Librerías.tex` (paquetes y estilo), `Notas.pdf` (compilado, notas generales) y, en cada rama de modelo, `modelos/<modelo>.tex` con la sección de su modelo y `Notas_<rama>.pdf` con las notas completas |
 | `provenance/` | registro de procedencia: `numbers.json` (cada número: qué código lo produjo, qué se hizo a mano, qué elecciones) y `claims.yaml` (cada afirmación: evidencia y cómo se verificó) |
 | `models/gen*.h`, `models/parameter-files/gen*.in` | modelos generalizados y sus archivos de parámetros (sólo en las ramas de modelo) |
 | `MODELO.md` | descripción de la rama y cómo correr su modelo (sólo en las ramas de modelo) |
@@ -95,6 +95,7 @@ Contenido de `code/`:
 | `verificar_genmodels.py` | derivadas, condiciones iniciales y cotas de estabilidad de los modelos de la rama |
 | `probar_genmodels.sh` | compila y prueba los modelos de la rama |
 | `resolver_procedencia.py` | resuelve el conflicto de `provenance/` al hacer `git merge main` en una rama |
+| `compilar_notas.sh` | compila las notas con el nombre de la rama actual: `Notas.pdf` en `main`, `Notas_<rama>.pdf` en cada rama de modelo |
 
 ### CosmoLattice (sin modificar)
 
@@ -115,7 +116,6 @@ Contenido de `code/`:
 | `build_corridas/<caso>_N<N>_kIR<kIR>/` | salidas de las corridas de `correr_cuarticos.sh` (los `average_*.txt` y `spectra_*.txt` de CosmoLattice) y su `analisis/` |
 | `build_corridas/tiempos.txt` | tiempo real de cada corrida |
 | `corridas_*.log` | registro de las corridas lanzadas con `nohup` |
-| `Notas/Notas.pdf` | notas compiladas (cambian según la rama) |
 
 ## Cómo usarlo
 
@@ -127,7 +127,7 @@ python3 code/recursos_cosmolattice.py --kmax-fijo --N 64 128 192   # memoria y t
 code/correr_cuarticos.sh 64                            # compila si hace falta, corre y analiza (~30 min por caso)
 nohup code/correr_cuarticos.sh 128 > corridas_N128.log 2>&1 &      # producción, en segundo plano
 python3 code/analisis_cosmolattice.py build_corridas/gentmodel_cuartico_N64_kIR0.7   # análisis de una corrida
-cd Notas && latexmk -g -pdf Notas.tex                  # compilar las notas (-g: rehacer al cambiar de rama)
+code/compilar_notas.sh                                 # compilar las notas (Notas.pdf o Notas_<rama>.pdf)
 ```
 
 Con 3.7 GB de RAM entra hasta $N = 192$ con GWs (~1 GB). $N = 256$ necesita ~2.5 GB. Los detalles están en las notas, en las secciones «Corridas cuárticas» y «Guía de uso». Todos los parámetros de los `.in` se explican ahí, y cualquiera se puede cambiar desde la terminal, por ejemplo `N=128 kIR=0.35 baseSeed=1234`.
