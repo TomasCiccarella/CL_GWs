@@ -72,7 +72,7 @@ python3 code/recursos_cosmolattice.py --kmax-fijo --N 64 128 192   # memoria y t
 code/correr_cuarticos.sh 64                            # compila si hace falta, corre y analiza (~30 min por caso)
 nohup code/correr_cuarticos.sh 128 > corridas_N128.log 2>&1 &      # producción, en segundo plano
 python3 code/analisis_cosmolattice.py build_corridas/gentmodel_cuartico_N64_kIR0.7   # análisis de una corrida
-cd Notas && latexmk -pdf Notas.tex                     # compilar las notas
+cd Notas && latexmk -g -pdf Notas.tex                  # compilar las notas (-g: rehacer al cambiar de rama)
 ```
 
 Con 3.7 GB de RAM entra hasta $N = 192$ con GWs (~1 GB). $N = 256$ necesita ~2.5 GB. Los detalles están en las notas, en las secciones «Corridas cuárticas» y «Guía de uso». Todos los parámetros de los `.in` se explican ahí, y cualquiera se puede cambiar desde la terminal, por ejemplo `N=128 kIR=0.35 baseSeed=1234`.
