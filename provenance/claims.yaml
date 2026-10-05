@@ -106,3 +106,78 @@ claims:
               dt_scan_friedmann_0.005, dt_scan_rhogw_0.04, dt_scan_rhogw_0.02, dt_scan_rhogw_0.01,
               dt_scan_rhogw_0.005, rhogw_uv_k2.8_dt0.01, rhogw_uv_k2.8_dt0.005, rhogw_uv_k4.2_dt0.01,
               rhogw_uv_k4.2_dt0.005, n64_friedmann]
+
+  - id: derivadas-correctas
+    statement: >
+      Las derivadas primera y segunda del potencial de programa escritas a mano en genmonomial.h,
+      gentmodel.h y genemodel.h coinciden con las derivadas de los potenciales de Notas.tex.
+    verificacion: >
+      Comparación numérica contra la derivada simbólica de sympy en una grilla de n y phi~; además, para
+      n = 2 la V' de gentmodel.h coincide término a término con la de tanh2.h. Firme.
+    evidence:
+      - code/verificar_genmodels.py::chequear_derivadas
+      - models/tanh2.h::potDeriv
+    numbers: [derivadas_max_diff]
+
+  - id: condiciones-iniciales
+    statement: >
+      Los phi_0 y momentos iniciales de los tres .in corresponden a epsilon_V = 1 con la velocidad de
+      slow-roll autoconsistente, phi'_0 = -sqrt((sqrt(7/3) - 1) V(phi_0)), igual en los tres modelos.
+    verificacion: >
+      El script recalcula los valores desde los parámetros de cada .in y los compara con lo escrito. La
+      fórmula aplicada a tanh2.in da -3.02e31 contra el -3.07e31 de CosmoLattice (2 por ciento). El
+      fondo exacto muestra que epsilon_V = 1 queda antes del final exacto (epsilon_H = 1); es una
+      convención, la misma que usa tanh2.in.
+    evidence:
+      - code/verificar_genmodels.py::condiciones_iniciales
+      - code/verificar_genmodels.py::fin_exacto
+      - Notas/Notas.tex «Condiciones iniciales», «Momento inicial» y la sección de cada modelo
+      - models/parameter-files/tanh2.in (initial_amplitudes, initial_momenta)
+    numbers: [phi0_genmonomial, phi0_gentmodel, phi0_genemodel, pi0_genmonomial, pi0_gentmodel,
+              pi0_genemodel, pi0_tanh2_formula, phi_fin_exacto_genmonomial, phi_fin_exacto_gentmodel,
+              phi_fin_exacto_genemodel]
+
+  - id: in-corregidos-corren
+    statement: >
+      Con los .in corregidos (momento inicial y, para n = 6, q = 1e2, dt = 1e-3, tMax = 20), las tres
+      simulaciones corren hasta tMax sin NaN y conservan la ecuación de Friedmann a 1e-5.
+    verificacion: >
+      Corrida completa de los tres modelos con N = 64 y los .in tal como quedan en el repo.
+    evidence:
+      - code/probar_genmodels.sh
+    numbers: [a_final_genmonomial, friedmann_max_rel]
+
+  - id: inestabilidad-n-mayor-4
+    statement: >
+      Para n > 4 el término de gradiente y la masa efectiva del campo hijo crecen en tiempo de programa
+      (como a^(2(n-4)/(n+2)) y a^(3(n-4)/(n+2))), así que con dt fijo toda simulación termina siendo
+      inestable; con n = 6, q = 4e4 y dt = 0.005 (el .in original) eso ocurre ya en t ~ 0.5.
+    verificacion: >
+      La cota analítica del gradiente (a ~ 357) es del mismo orden que el punto donde la corrida
+      exploratoria explota (a ~ 290); con q = 0 la corrida a N = 16 también explota, en a ~ 240, contra
+      una cota de gradiente de 228 para esa grilla, lo que aísla el gradiente como causa.
+    evidence:
+      - code/verificar_genmodels.py::cotas_estabilidad
+      - code/probar_genmodels.sh
+      - Notas/Notas.tex «Estabilidad numérica para n > 4»
+      - Figueroa, Florio, Torrenti & Valkenburg, arXiv:2006.15122, ecuaciones de movimiento en variables de programa
+    numbers: [a_max_gradiente_n6, a_max_hija_n6, a_nan_n6_q100, t_nan_n6_original]
+
+  - id: monomial-de-control
+    statement: >
+      genmonomial_cuartico.in es un phi^4 con el lambda_eff y el q del T-model (mismo acople físico g y
+      mismo omega_*/f_*); no es un modelo del paper (n_s = 0.946, r = 0.29 para N_* = 55) y sirve como
+      control del efecto del plateau. Con N = 32 resuena antes que el T-model y da rho_GW/rho = 2.3e-5.
+    verificacion: >
+      chequear_in compara A, phi_0 y phi'_0 del .in con monomial_control (diferencia <= 1.3e-5).
+      omega_*/f_* del análisis coincide con el del T-model (3.6514e-6 en ambos). Corrida N = 32 hasta t~
+      = 500 sin NaN, <w> = 0.333; la comparación con el T-model es con N = 32 y semillas distintas, así
+      que es cualitativa.
+    evidence:
+      - code/parametros_cuarticos.py::monomial_control
+      - code/parametros_cuarticos.py::chequear_in
+      - models/parameter-files/genmonomial_cuartico.in
+      - Notas/Notas.tex «El monomial de control» (rama monomial)
+    numbers: [mono_A, mono_lam_eff, mono_phi0, mono_pi0, mono_omega, mono_ns, mono_r, mono_N32_tchi,
+              mono_N32_t90, mono_N32_rhogw, mono_aH0, mono_N32_cola_uv, mono_N32_kIR_aH, T_N32_tchi,
+              rhogw_N32_t500_T, gw_mem_factor, gw_time_factor]
