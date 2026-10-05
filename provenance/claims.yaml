@@ -106,3 +106,24 @@ claims:
               dt_scan_friedmann_0.005, dt_scan_rhogw_0.04, dt_scan_rhogw_0.02, dt_scan_rhogw_0.01,
               dt_scan_rhogw_0.005, rhogw_uv_k2.8_dt0.01, rhogw_uv_k2.8_dt0.005, rhogw_uv_k4.2_dt0.01,
               rhogw_uv_k4.2_dt0.005, n64_friedmann]
+  - id: corridas-N64
+    statement: >
+      Con N = 64 los tres casos cuárticos del paper dan picos h^2 Omega_GW ~ 6-9e-11 entre 4e8 y 1e9 Hz,
+      con frecuencias ordenadas como omega_*/f_*; el monomial de control resuena antes y tiene más
+      potencia UV (k~ > 10) que el T-model con el mismo lambda_eff, con un pico de amplitud similar.
+    verificacion: >
+      Corridas completas con tMax del .in; rho_GW/rho crece < 5% en los últimos 100 de t~ (saturado), w
+      = 1/3 a 0.5%, Friedmann <= 2.4e-3, todos los modos dentro del horizonte al final. La corrida T
+      repite la de validación con otra semilla: rho_GW/rho 1.116e-5 contra 1.114e-5. Bins de 20-25% en
+      el pico (kIR = 0.7), así que diferencias de frecuencia menores no son significativas.
+    evidence:
+      - code/correr_cuarticos.sh
+      - code/analisis_cosmolattice.py::analizar
+    numbers: [N64_T_f_pico, N64_T_Omega_pico, N64_T_rhogw, N64_T_friedmann, N64_T_w, N64_T_t90,
+              N64_T_ult100, N64_E5_f_pico, N64_E5_Omega_pico, N64_E5_rhogw, N64_E5_friedmann,
+              N64_E5_w, N64_E5_t90, N64_E5_ult100, N64_E1_f_pico, N64_E1_Omega_pico, N64_E1_rhogw,
+              N64_E1_friedmann, N64_E1_w, N64_E1_t90, N64_E1_ult100, N64_mono_f_pico,
+              N64_mono_Omega_pico, N64_mono_rhogw, N64_mono_friedmann, N64_mono_w, N64_mono_t90,
+              N64_mono_ult100, N64_T_minutos, N64_E5_minutos, N64_E1_minutos, N64_mono_minutos,
+              N64_T_k3.5, N64_T_k11.2, N64_T_k22.4, N64_mono_k3.5, N64_mono_k11.2, N64_mono_k22.4,
+              N64_T_tchi, N64_mono_tchi]

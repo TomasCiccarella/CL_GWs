@@ -1072,5 +1072,445 @@
       "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
       "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
     ]
+  },
+  "N64_T_f_pico": {
+    "value": 414940000.0,
+    "statement": "f_0 [Hz] del pico final, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_Omega_pico": {
+    "value": 8.7212e-11,
+    "statement": "h^2 Omega_GW,0 del pico final, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_rhogw": {
+    "value": 1.1161e-05,
+    "statement": "rho_GW/rho final, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_friedmann": {
+    "value": 0.00123,
+    "statement": "máximo error de Friedmann, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_w": {
+    "value": 0.3324,
+    "statement": "<w> en los dos últimos períodos, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_t90": {
+    "value": 270,
+    "statement": "t~ en que rho_GW/rho llega al 90% del final, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_ult100": {
+    "value": 4.4,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_minutos": {
+    "value": 30,
+    "statement": "tiempo de pared [min], gentmodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E5_f_pico": {
+    "value": 492420000.0,
+    "statement": "f_0 [Hz] del pico final, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E5_Omega_pico": {
+    "value": 8.4217e-11,
+    "statement": "h^2 Omega_GW,0 del pico final, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E5_rhogw": {
+    "value": 9.8648e-06,
+    "statement": "rho_GW/rho final, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E5_friedmann": {
+    "value": 0.000837,
+    "statement": "máximo error de Friedmann, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E5_w": {
+    "value": 0.3329,
+    "statement": "<w> en los dos últimos períodos, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E5_t90": {
+    "value": 340,
+    "statement": "t~ en que rho_GW/rho llega al 90% del final, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E5_ult100": {
+    "value": 3.8,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E5_minutos": {
+    "value": 27,
+    "statement": "tiempo de pared [min], genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E1_f_pico": {
+    "value": 952960000.0,
+    "statement": "f_0 [Hz] del pico final, genemodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E1_Omega_pico": {
+    "value": 6.2519e-11,
+    "statement": "h^2 Omega_GW,0 del pico final, genemodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E1_rhogw": {
+    "value": 7.9401e-06,
+    "statement": "rho_GW/rho final, genemodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E1_friedmann": {
+    "value": 0.000494,
+    "statement": "máximo error de Friedmann, genemodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E1_w": {
+    "value": 0.3344,
+    "statement": "<w> en los dos últimos períodos, genemodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E1_t90": {
+    "value": 380,
+    "statement": "t~ en que rho_GW/rho llega al 90% del final, genemodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E1_ult100": {
+    "value": 1.1,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, genemodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_E1_minutos": {
+    "value": 30,
+    "statement": "tiempo de pared [min], genemodel_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_f_pico": {
+    "value": 993680000.0,
+    "statement": "f_0 [Hz] del pico final, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_Omega_pico": {
+    "value": 8.8139e-11,
+    "statement": "h^2 Omega_GW,0 del pico final, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_rhogw": {
+    "value": 1.3576e-05,
+    "statement": "rho_GW/rho final, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_friedmann": {
+    "value": 0.00239,
+    "statement": "máximo error de Friedmann, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_w": {
+    "value": 0.3318,
+    "statement": "<w> en los dos últimos períodos, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_t90": {
+    "value": 230,
+    "statement": "t~ en que rho_GW/rho llega al 90% del final, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_ult100": {
+    "value": 4.4,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_minutos": {
+    "value": 19,
+    "statement": "tiempo de pared [min], genmonomial_cuartico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice.",
+    "from_library": "numpy, scipy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_k3.5": {
+    "value": 8.72e-11,
+    "statement": "h^2 Omega_GW,0 en k~ = 3.5, T-model N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py (gws_hoy.txt, average_scalar_1.txt)",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_k11.2": {
+    "value": 4.76e-11,
+    "statement": "h^2 Omega_GW,0 en k~ = 11.2, T-model N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py (gws_hoy.txt, average_scalar_1.txt)",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_k22.4": {
+    "value": 1.41e-12,
+    "statement": "h^2 Omega_GW,0 en k~ = 22.4, T-model N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py (gws_hoy.txt, average_scalar_1.txt)",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_k3.5": {
+    "value": 7.78e-11,
+    "statement": "h^2 Omega_GW,0 en k~ = 3.5, monomial de control N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py (gws_hoy.txt, average_scalar_1.txt)",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_k11.2": {
+    "value": 8.81e-11,
+    "statement": "h^2 Omega_GW,0 en k~ = 11.2, monomial de control N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py (gws_hoy.txt, average_scalar_1.txt)",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_k22.4": {
+    "value": 2.13e-11,
+    "statement": "h^2 Omega_GW,0 en k~ = 22.4, monomial de control N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py (gws_hoy.txt, average_scalar_1.txt)",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_T_tchi": {
+    "value": 121,
+    "statement": "t~ del máximo de rms(chi), T-model N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py (gws_hoy.txt, average_scalar_1.txt)",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "N64_mono_tchi": {
+    "value": 80,
+    "statement": "t~ del máximo de rms(chi), monomial de control N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py (gws_hoy.txt, average_scalar_1.txt)",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
   }
 }
