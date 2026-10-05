@@ -13,6 +13,10 @@ Opciones:
     --gsstar G         g_s* (por defecto = g_*)
     --a_e_sobre_a_RD X a_e/a_RD: cuánto se expande el universo entre el final de la simulación y la
                        dominación por radiación, con w = (n-2)/(n+2). Irrelevante para n = 4.
+    --TRH T            en vez de lo anterior: temperatura de reheating en GeV; a_e/a_RD sale de
+                       rho_e y de rho_RD = (pi^2 g_*/30) T^4 (para n = 2, Notas.tex «Reescaleo a hoy»)
+    --w_post W         ecuación de estado entre el final de la simulación y a_RD (por defecto la
+                       autosimilar (n-2)/(n+2)); por ejemplo, el <w> medido al final de la corrida
     --modelo M         forzar el modelo (por defecto, el nombre del .infos)
     --fstar, --omegastar, --alpha, --n
                        forzar las variables de programa (para modelos que el script no conoce)
@@ -226,9 +230,21 @@ def analizar(d, args):
     a_esp = np.interp(t_esp, t, a)
     rho_esp = np.interp(t_esp, t, rho)
 
+    # Ecuación de estado entre el final de la simulación y a_RD: la autosimilar (n-2)/(n+2) o la
+    # que se pida con --w_post. reescaleo_gws la toma de n, así que se pasa el n equivalente.
+    w_post = w_n if args.w_post is None else args.w_post
+    n_post = n if args.w_post is None else 2 * (1 + w_post) / (1 - w_post)
+
+    def a_RD(rho_x):  # a_x/a_RD: fijo (--a_e_sobre_a_RD) o desde T_RH (--TRH), con rho~ -> GeV^4
+        if args.TRH:
+            return rg.a_sobre_a_RD(rho_x * fs ** 2 * om ** 2, args.TRH, n_post, args.gstar)
+        return args.a_e_sobre_a_RD
+
     def f_hoy(k, a_x=a_e, rho_x=rho_e):
-        return rg.frecuencia_hoy(k, a_x, rho_x, om, fs, n, args.a_e_sobre_a_RD,
-                                 args.gstar, args.gsstar)
+        return rg.frecuencia_hoy(k, a_x, rho_x, om, fs, n_post, a_RD(rho_x), args.gstar, args.gsstar)
+
+    def Om_hoy(Om_e, rho_x=rho_e):
+        return rg.omega_gw_hoy(Om_e, n_post, a_RD(rho_x), args.gstar, args.gsstar)
     factor_f = f_hoy(1.0)  # Hz por unidad de k~ al final
 
     resumen = [f"Corrida: {os.path.abspath(d)}",
@@ -237,9 +253,11 @@ def analizar(d, args):
                f"N = {N:g}, kIR = {kIR:g}, k~_max = {kIR * N * np.sqrt(3) / 2:.3g}, "
                f"t~ final = {t[-1]:g}, a_e = {a_e:.5g}, rho~_e = {rho_e:.5e}",
                f"g_* = {args.gstar}, g_s* = {args.gsstar or args.gstar}, "
-               f"a_e/a_RD = {args.a_e_sobre_a_RD} -> eps = {rg.epsilon(n, args.a_e_sobre_a_RD):.4g}",
+               + (f"T_RH = {args.TRH:.3g} GeV (w = {w_post:.3g} hasta entonces), " if args.TRH else "")
+               + f"a_e/a_RD = {a_RD(rho_e):.4g} -> eps = {rg.epsilon(n_post, a_RD(rho_e)):.4g}",
+               f"rho_e^(1/4) = {(rho_e * fs ** 2 * om ** 2) ** 0.25:.4e} GeV",
                f"f_0 = {factor_f:.4e} Hz x k~   (C_f = {rg.C_f(args.gstar, args.gsstar):.4e} Hz)",
-               f"h^2 Omega_GW,0 = {rg.C_Omega(args.gstar, args.gsstar) * rg.epsilon(n, args.a_e_sobre_a_RD):.4e}"
+               f"h^2 Omega_GW,0 = {Om_hoy(1.0):.4e}"
                f" x Omega_GW,e",
                f"<w> en los últimos dos períodos = {w_final:.4f} "
                f"(autosimilar: {w_n:.4f}); período de <phi~> en t~: T = {T_osc:.4f}"]
@@ -362,13 +380,13 @@ def analizar(d, args):
             if ok.any():
                 ax[0].loglog(b[ok, 0], b[ok, 1], color=cols[j], lw=1.1)
                 ax[1].loglog(f_hoy(b[ok, 0], a_esp[j], rho_esp[j]),
-                             rg.omega_gw_hoy(b[ok, 1], n, args.a_e_sobre_a_RD, args.gstar, args.gsstar),
+                             Om_hoy(b[ok, 1], rho_esp[j]),
                              color=cols[j], lw=1.1)
         ax[0].set(xlabel=r"$\tilde k$", ylabel=r"$\Omega_{GW}(\tilde k, \tilde t) = \frac{1}{\rho}\frac{d\rho_{GW}}{d\log k}$",
                   title="Espectro de GWs en la simulación")
         b = esp_gw[m - 1]
         fh = f_hoy(b[:, 0])
-        Oh = rg.omega_gw_hoy(b[:, 1], n, args.a_e_sobre_a_RD, args.gstar, args.gsstar)
+        Oh = Om_hoy(b[:, 1])
         jp = int(np.argmax(Oh))
         ax[1].plot(fh[jp], Oh[jp], "o", ms=8, color=CAT[1], mec="white", mew=2,
                    label=rf"pico final: $f = {fh[jp]:.2e}$ Hz, $h^2\Omega = {Oh[jp]:.2e}$")
@@ -420,6 +438,8 @@ def main():
     ap.add_argument("--gstar", type=float, default=rg.G_SM)
     ap.add_argument("--gsstar", type=float, default=None)
     ap.add_argument("--a_e_sobre_a_RD", type=float, default=1.0)
+    ap.add_argument("--TRH", type=float, help="temperatura de reheating [GeV]; reemplaza a --a_e_sobre_a_RD")
+    ap.add_argument("--w_post", type=float, help="w entre el final de la simulación y a_RD (por defecto (n-2)/(n+2))")
     ap.add_argument("--modelo")
     ap.add_argument("--fstar", type=float)
     ap.add_argument("--omegastar", type=float)

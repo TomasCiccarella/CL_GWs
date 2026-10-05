@@ -1,16 +1,22 @@
 #!/usr/bin/env bash
-# Corre en secuencia los .in cuárticos de los modelos presentes en esta rama y analiza cada corrida
-# (Notas.tex, «Parámetros cosmológicos para modelos cuárticos» y «Corridas cuárticas»).
+# Corre en secuencia los .in cuárticos (o cuadráticos, con FAMILIA=cuadratico) de los modelos presentes
+# en esta rama y analiza cada corrida (Notas.tex, «Parámetros cosmológicos para modelos cuárticos»,
+# «... cuadráticos» y «Corridas cuárticas»). code/correr_cuadraticos.sh es el atajo para n = 2.
 #
 # En main no hay modelos: cada rama (monomial, t-model, e-model) agrega los suyos. El script busca los
 # casos conocidos cuyo .in exista en models/parameter-files/.
 #
 # Uso:  code/correr_cuarticos.sh [N] [kIR]
 #   N     tamaño de la grilla (por defecto 64)
-#   kIR   por defecto 0.7*64/N: mantiene k_max de N = 64 y agranda la caja
+#   kIR   por defecto (kIR del .in)*64/N (0.7*64/N en los cuárticos): mantiene k_max de N = 64 y agranda la caja
 #         (Notas.tex, «Corridas cuárticas», Recomendación)
 #
 # Variables opcionales:
+#   FAMILIA=cuadratico  casos n = 2 (*_cuadratico.in) en vez de los cuárticos
+#   ANALISIS_ARGS="..." argumentos para analisis_cosmolattice.py (p. ej. "--TRH 1e10" para n = 2)
+#   CL_BUILD=/ruta     raíz donde están build_<modelo>/ y donde se escribe build_corridas/ (por
+#                      defecto, este repositorio); sirve para correr desde un worktree de otra rama
+#                      sin recompilar
 #   DT=0.007           paso temporal (por defecto el del .in, 0.01)
 #   MODELOS="..."      subconjunto y orden de los casos (por defecto, los presentes de esta lista, del
 #                      más corto al más largo): gentmodel_cuartico genemodel_cuartico_aK5 genemodel_cuartico
@@ -29,17 +35,18 @@
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
+CL_BUILD=${CL_BUILD:-$ROOT}
 N=${1:-64}
-KIR=${2:-$(python3 -c "print(f'{0.7 * 64 / $N:.4g}')")}
 NTHREADS=${NTHREADS:-8}
 PARS=$ROOT/models/parameter-files
+FAMILIA=${FAMILIA:-cuartico}
 if [ -z "${MODELOS:-}" ]; then
   MODELOS=""
-  for c in gentmodel_cuartico genemodel_cuartico_aK5 genemodel_cuartico; do
+  for c in gentmodel_$FAMILIA genemodel_${FAMILIA}_aK5 genemodel_$FAMILIA; do
     [ -f "$PARS/$c.in" ] && MODELOS="$MODELOS $c"
   done
-  if [ -f "$PARS/genmonomial_cuartico.in" ] && { [ -n "${CONTROL:-}" ] || [ -z "$MODELOS" ]; }; then
-    MODELOS="$MODELOS genmonomial_cuartico"
+  if [ -f "$PARS/genmonomial_$FAMILIA.in" ] && { [ -n "${CONTROL:-}" ] || [ -z "$MODELOS" ]; }; then
+    MODELOS="$MODELOS genmonomial_$FAMILIA"
   fi
 fi
 MODELOS=$(echo $MODELOS)
@@ -50,7 +57,13 @@ fi
 for c in $MODELOS; do
   [ -f "$PARS/$c.in" ] || { echo "Falta $PARS/$c.in (¿estás en la rama de ese modelo?)"; exit 1; }
 done
-SALIDA=$ROOT/build_corridas
+leer_in() {  # leer_in caso clave -> valor en el .in
+  sed -n "s/^$2[[:space:]]*=[[:space:]]*\([^[:space:]#]*\).*/\1/p" "$PARS/$1.in" | head -1
+}
+primero=${MODELOS%% *}
+KIR=${2:-$(python3 -c "print(f'{$(leer_in "$primero" kIR) * 64 / $N:.4g}')")}
+DT_IN=$(leer_in "$primero" dt)
+SALIDA=$CL_BUILD/build_corridas
 mkdir -p "$SALIDA"
 
 ejecutable() {  # caso -> modelo de CosmoLattice
@@ -63,12 +76,12 @@ ejecutable() {  # caso -> modelo de CosmoLattice
 }
 
 compilar() {  # compila el modelo si no está el ejecutable
-  local m=$1 b=$ROOT/build_$1
+  local m=$1 b=$CL_BUILD/build_$1
   [ -x "$b/$m" ] && return
   echo "Compilando $m en $b ..."
   mkdir -p "$b"
   local args=(-DMODEL="$m" -DCMAKE_BUILD_TYPE=Release)
-  local deps=$ROOT/build_analisis/_deps  # reutiliza TempLat y Kokkos ya descargados, si están
+  local deps=$CL_BUILD/build_analisis/_deps  # reutiliza TempLat y Kokkos ya descargados, si están
   [ -d "$deps/templat-src" ] && args+=(-DFETCHCONTENT_SOURCE_DIR_TEMPLAT="$deps/templat-src")
   [ -d "$deps/kokkos-src" ] && args+=(-DFETCHCONTENT_SOURCE_DIR_KOKKOS="$deps/kokkos-src")
   (cd "$b" && cmake "$ROOT" "${args[@]}" > cmake.log 2>&1 && make -j4 > make.log 2>&1) \
@@ -79,7 +92,7 @@ compilar() {  # compila el modelo si no está el ejecutable
 python3 -c "
 import re, sys; sys.path.insert(0, '$ROOT/code')
 import recursos_cosmolattice as r
-N, kIR, dt = $N, $KIR, ${DT:-0.01}
+N, kIR, dt = $N, $KIR, ${DT:-$DT_IN}
 def leer(caso, clave):  # valor de una clave en el .in
     txt = open('$PARS/' + caso + '.in', encoding='utf-8').read()
     return float(re.search(r'^' + clave + r'\s*=\s*(\S+)', txt, re.M).group(1))
@@ -110,13 +123,13 @@ for caso in $MODELOS; do
   mkdir -p "$dir"
   echo "$caso: corriendo en $dir ($(date +%H:%M))"
   t0=$(date +%s)
-  if (cd "$dir" && OMP_NUM_THREADS=$NTHREADS "$ROOT/build_$m/$m" \
+  if (cd "$dir" && OMP_NUM_THREADS=$NTHREADS "$CL_BUILD/build_$m/$m" \
         input="$PARS/$caso.in" overwriteFiles=true \
         N="$N" kIR="$KIR" ${DT:+dt=$DT} ${EXTRA_ARGS:-} > salida.log 2>&1); then
     t1=$(date +%s)
     echo "$caso N=$N kIR=$KIR ${DT:+dt=$DT} $(( (t1 - t0) / 60 )) min ($(date))" >> "$SALIDA/tiempos.txt"
     echo "$caso: terminó en $(( (t1 - t0) / 60 )) min; analizando..."
-    python3 "$ROOT/code/analisis_cosmolattice.py" "$dir" | grep -E "Pico|Friedmann|<w>|k_IR" || true
+    python3 "$ROOT/code/analisis_cosmolattice.py" "$dir" ${ANALISIS_ARGS:-} | grep -E "Pico|Friedmann|<w>|k_IR" || true
   else
     echo "$caso: CosmoLattice falló (ver $dir/salida.log); sigo con el siguiente."
   fi

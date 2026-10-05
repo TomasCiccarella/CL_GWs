@@ -52,6 +52,17 @@ def epsilon(n, a_e_sobre_a_RD=1.0):
     return a_e_sobre_a_RD ** (1 - 3 * w_autosimilar(n))
 
 
+def a_sobre_a_RD(rho_x, T_RH, n, g_star=G_SM):
+    """a_x/a_RD cuando el reheating termina a temperatura T_RH [GeV] y entre a_x y a_RD la
+    ecuación de estado es w = (n-2)/(n+2): rho ~ a^(-3(1+w)), con rho_RD = (pi^2 g_*/30) T_RH^4.
+
+    rho_x es la densidad física [GeV^4] en a_x. Si rho_RD >= rho_x, el reheating ya terminó en a_x
+    (devuelve 1). Para n = 4 el resultado no importa, porque eps = 1.
+    """
+    rho_RD = np.pi ** 2 * g_star / 30 * T_RH ** 4
+    return np.minimum(1.0, (rho_RD / np.asarray(rho_x)) ** (1 / (3 * (1 + w_autosimilar(n)))))
+
+
 def C_f(g_star=G_SM, g_s_star=None):
     """Constante de la frecuencia de hoy, en Hz por GeV^(0) (ver docstring del módulo)."""
     g_s_star = g_star if g_s_star is None else g_s_star
