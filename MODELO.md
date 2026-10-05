@@ -20,5 +20,5 @@ El potencial es asimétrico: tiene plateau para $\phi \to +\infty$ y crece expon
 code/correr_cuarticos.sh 64            # corre los dos casos cuárticos y los analiza (~1.1 h)
 MODELOS=genemodel_cuartico_aK5 code/correr_cuarticos.sh 128   # uno solo, en producción
 python3 code/verificar_genmodels.py    # derivadas y condiciones iniciales
-cd Notas && latexmk -g -pdf Notas.tex  # notas con la sección del E-model
+code/compilar_notas.sh                 # notas con la sección del E-model (Notas/Notas_e-model.pdf)
 ```
