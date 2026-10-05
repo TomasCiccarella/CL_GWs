@@ -19,7 +19,7 @@ Los parámetros del caso cuártico salen de Ellis, Garcia, Olive & Verner (2026)
 code/correr_cuarticos.sh 64            # corre gentmodel_cuartico.in y lo analiza (~30 min)
 code/correr_cuarticos.sh 128           # producción: kIR = 0.35, ~4 h
 python3 code/verificar_genmodels.py    # derivadas y condiciones iniciales
-cd Notas && latexmk -g -pdf Notas.tex  # notas con la sección del T-model
+code/compilar_notas.sh                 # notas con la sección del T-model (Notas/Notas_t-model.pdf)
 ```
 
 Para comparar con el monomial de control (rama `monomial`) usá la misma `N`, el mismo `kIR` y la misma `baseSeed`.
