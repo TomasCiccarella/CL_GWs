@@ -109,61 +109,58 @@ claims:
 
   - id: derivadas-correctas
     statement: >
-      Las derivadas primera y segunda del potencial de programa escritas a mano en genmonomial.h,
-      gentmodel.h y genemodel.h coinciden con las derivadas de los potenciales de Notas.tex.
+      Las derivadas primera y segunda del potencial de programa escritas a mano en genemodel.h coinciden
+      con las derivadas del potencial de su sección de Notas.tex.
     verificacion: >
-      Comparación numérica contra la derivada simbólica de sympy en una grilla de n y phi~; además, para
-      n = 2 la V' de gentmodel.h coincide término a término con la de tanh2.h. Firme.
+      Comparación numérica contra la derivada simbólica de sympy en una grilla de n y phi~. Firme.
     evidence:
       - code/verificar_genmodels.py::chequear_derivadas
-      - models/tanh2.h::potDeriv
-    numbers: [derivadas_max_diff]
+    numbers: [derivadas_max_diff_genemodel]
 
   - id: condiciones-iniciales
     statement: >
-      Los phi_0 y momentos iniciales de los tres .in corresponden a epsilon_V = 1 con la velocidad de
-      slow-roll autoconsistente, phi'_0 = -sqrt((sqrt(7/3) - 1) V(phi_0)), igual en los tres modelos.
+      El phi_0 y el momento inicial de genemodel.in corresponden a epsilon_V = 1 con la velocidad de
+      slow-roll autoconsistente, phi'_0 = -sqrt((sqrt(7/3) - 1) V(phi_0)).
     verificacion: >
-      El script recalcula los valores desde los parámetros de cada .in y los compara con lo escrito. La
-      fórmula aplicada a tanh2.in da -3.02e31 contra el -3.07e31 de CosmoLattice (2 por ciento). El
-      fondo exacto muestra que epsilon_V = 1 queda antes del final exacto (epsilon_H = 1); es una
+      El script recalcula los valores desde los parámetros del .in y los compara con lo escrito. La
+      misma fórmula aplicada a tanh2.in da -3.02e31 contra el -3.07e31 de CosmoLattice (2 por ciento).
+      El fondo exacto muestra que epsilon_V = 1 queda antes del final exacto (epsilon_H = 1); es una
       convención, la misma que usa tanh2.in.
     evidence:
       - code/verificar_genmodels.py::condiciones_iniciales
       - code/verificar_genmodels.py::fin_exacto
-      - Notas/Notas.tex «Condiciones iniciales», «Momento inicial» y la sección de cada modelo
+      - Notas/Notas.tex «Condiciones iniciales», «Momento inicial» y la sección «E-model»
       - models/parameter-files/tanh2.in (initial_amplitudes, initial_momenta)
-    numbers: [phi0_genmonomial, phi0_gentmodel, phi0_genemodel, pi0_genmonomial, pi0_gentmodel,
-              pi0_genemodel, pi0_tanh2_formula, phi_fin_exacto_genmonomial, phi_fin_exacto_gentmodel,
-              phi_fin_exacto_genemodel]
+    numbers: [phi0_genemodel, pi0_genemodel, pi0_tanh2_formula, phi_fin_exacto_genemodel]
 
   - id: in-corregidos-corren
     statement: >
-      Con los .in corregidos (momento inicial y, para n = 6, q = 1e2, dt = 1e-3, tMax = 20), las tres
-      simulaciones corren hasta tMax sin NaN y conservan la ecuación de Friedmann a 1e-5.
+      Con el .in corregido genemodel.in (momento inicial), la simulación corre hasta tMax sin NaN y
+      conserva la ecuación de Friedmann a 1e-5.
     verificacion: >
-      Corrida completa de los tres modelos con N = 64 y los .in tal como quedan en el repo.
+      Corrida completa con N = 64 y el .in tal como queda en el repo, dentro de la prueba de los tres
+      modelos generalizados; friedmann_max_rel es el máximo sobre esas corridas, así que acota también
+      la de este modelo.
     evidence:
       - code/probar_genmodels.sh
-    numbers: [a_final_genmonomial, friedmann_max_rel]
+    numbers: [friedmann_max_rel]
 
   - id: in-cuarticos
     statement: >
-      Los .in gentmodel_cuartico, genemodel_cuartico y genemodel_cuartico_aK5 tienen los parámetros de
-      la Tabla de Notas.tex «Parámetros cosmológicos para modelos cuárticos», corren con withGWs = true
-      y su tMax (500, 600) cubre la saturación de rho_GW/rho.
+      genemodel_cuartico.in y genemodel_cuartico_aK5.in tienen los parámetros del E-model con alpha_K =
+      1 y 5 de la Tabla de Notas.tex «Parámetros cosmológicos para modelos cuárticos», corren con
+      withGWs = true y su tMax (600 y 500) cubre la saturación de rho_GW/rho.
     verificacion: >
-      chequear_in compara los valores con parametros_cuarticos.py. Corridas completas con N = 32 hasta
-      t~ = 500 de los tres; el E-model con alpha_K = 1 todavía crece ~10% en t~ = 500, de ahí tMax =
-      600. Los tiempos de saturación se midieron con N = 32 y pueden cambiar con N.
+      chequear_in compara los valores con parametros_cuarticos.py. Corridas N = 32 hasta t~ = 500:
+      alpha_K = 5 llega al 90% en t~ = 360; alpha_K = 1 en t~ = 420 y todavía crece ~10% en t~ = 500, de
+      ahí tMax = 600. Los tiempos de saturación se midieron con N = 32 y pueden cambiar con N.
     evidence:
       - code/parametros_cuarticos.py::chequear_in
       - code/analisis_cosmolattice.py::analizar
-      - models/parameter-files/gentmodel_cuartico.in
       - models/parameter-files/genemodel_cuartico.in
       - models/parameter-files/genemodel_cuartico_aK5.in
-    numbers: [in_cuarticos_max_diff, t90_T, t90_E1, t90_E5, aH0_T, aH0_E1, aH0_E5, n64_w, n64_rhogw,
-              n64_t90, n64_Omega_pico, n64_f_pico, n64_kIR_aH, rhogw_N32_t500_T]
+    numbers: [in_cuarticos_max_diff_E, t90_E1, t90_E5, aH0_E1, aH0_E5]
+
   - id: corridas-N64
     statement: >
       Con N = 64 los tres casos cuárticos del paper dan picos h^2 Omega_GW ~ 6-9e-11 entre 4e8 y 1e9 Hz,
@@ -178,10 +175,9 @@ claims:
       - code/correr_cuarticos.sh
       - code/analisis_cosmolattice.py::analizar
     numbers: [N64_T_f_pico, N64_T_Omega_pico, N64_T_rhogw, N64_T_friedmann, N64_T_w, N64_T_t90,
-              N64_T_ult100, N64_E5_f_pico, N64_E5_Omega_pico, N64_E5_rhogw, N64_E5_friedmann,
-              N64_E5_w, N64_E5_t90, N64_E5_ult100, N64_E1_f_pico, N64_E1_Omega_pico, N64_E1_rhogw,
-              N64_E1_friedmann, N64_E1_w, N64_E1_t90, N64_E1_ult100, N64_mono_f_pico,
-              N64_mono_Omega_pico, N64_mono_rhogw, N64_mono_friedmann, N64_mono_w, N64_mono_t90,
-              N64_mono_ult100, N64_T_minutos, N64_E5_minutos, N64_E1_minutos, N64_mono_minutos,
-              N64_T_k3.5, N64_T_k11.2, N64_T_k22.4, N64_mono_k3.5, N64_mono_k11.2, N64_mono_k22.4,
-              N64_T_tchi, N64_mono_tchi]
+              N64_T_ult100, N64_E5_f_pico, N64_E5_Omega_pico, N64_E5_rhogw, N64_E5_friedmann, N64_E5_w,
+              N64_E5_t90, N64_E5_ult100, N64_E1_f_pico, N64_E1_Omega_pico, N64_E1_rhogw, N64_E1_friedmann,
+              N64_E1_w, N64_E1_t90, N64_E1_ult100, N64_mono_f_pico, N64_mono_Omega_pico, N64_mono_rhogw,
+              N64_mono_friedmann, N64_mono_w, N64_mono_t90, N64_mono_ult100, N64_T_minutos,
+              N64_E5_minutos, N64_E1_minutos, N64_mono_minutos, N64_T_k3.5, N64_T_k11.2, N64_T_k22.4,
+              N64_mono_k3.5, N64_mono_k11.2, N64_mono_k22.4, N64_T_tchi, N64_mono_tchi]
