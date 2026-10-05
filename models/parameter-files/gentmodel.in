@@ -1,0 +1,42 @@
+#Output
+outputfile = ./
+print_headers = true
+overwriteFiles = false
+
+#Evolution
+expansion = true
+evolver = VV2
+
+#Lattice
+N = 64
+dt = 0.005
+kIR = 3
+
+#Times
+tOutputFreq = 0.1
+tOutputInfreq = 1
+tOutputRareFreq = 10
+tMax = 10
+
+#IC
+kCutOff = 18
+# initial_amplitudes[0] = phi_0 = (M/2) * arcsinh(sqrt(2)*n*m_p/M) (epsilon_V = 1, Notas.tex «T-models», condiciones iniciales)
+# initial_momenta[0] = -sqrt((sqrt(7/3) - 1) * V(phi_0)) (slow-roll, Notas/Notas.tex «T-models», momento inicial).
+# With m_p = 2.435e18 GeV and n, M, A below. Recomputed by code/verificar_genmodels.py.
+initial_amplitudes = 4.21953e18 0  # homogeneous amplitudes in GeV
+initial_momenta = -1.9143e31 0     # homogeneous momenta in GeV^2
+
+#Model Parameters
+# V(phi) = A |tanh(phi/M)|^n (the 1/n only appears in the program potential). M = 10*m_p keeps
+# phi_0 well inside the non-tachyonic region (see the inflection-point discussion in
+# arXiv:2006.15122 Sec. 8.1). A below is illustrative
+# (chosen only so that omega_* ~ 1e13 GeV, the same order of magnitude as in lphi4.in/tanh2.in):
+# for a physical run, fix it (or Lambda^4) from the observed CMB amplitude for your chosen n, M.
+n = 2.5
+M = 2.435e19
+A = 5.6974e64
+q = 4e4
+
+#GWs
+withGWs=false
+GWprojectorType = 1

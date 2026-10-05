@@ -106,3 +106,61 @@ claims:
               dt_scan_friedmann_0.005, dt_scan_rhogw_0.04, dt_scan_rhogw_0.02, dt_scan_rhogw_0.01,
               dt_scan_rhogw_0.005, rhogw_uv_k2.8_dt0.01, rhogw_uv_k2.8_dt0.005, rhogw_uv_k4.2_dt0.01,
               rhogw_uv_k4.2_dt0.005, n64_friedmann]
+
+  - id: derivadas-correctas
+    statement: >
+      Las derivadas primera y segunda del potencial de programa escritas a mano en genmonomial.h,
+      gentmodel.h y genemodel.h coinciden con las derivadas de los potenciales de Notas.tex.
+    verificacion: >
+      Comparación numérica contra la derivada simbólica de sympy en una grilla de n y phi~; además, para
+      n = 2 la V' de gentmodel.h coincide término a término con la de tanh2.h. Firme.
+    evidence:
+      - code/verificar_genmodels.py::chequear_derivadas
+      - models/tanh2.h::potDeriv
+    numbers: [derivadas_max_diff]
+
+  - id: condiciones-iniciales
+    statement: >
+      Los phi_0 y momentos iniciales de los tres .in corresponden a epsilon_V = 1 con la velocidad de
+      slow-roll autoconsistente, phi'_0 = -sqrt((sqrt(7/3) - 1) V(phi_0)), igual en los tres modelos.
+    verificacion: >
+      El script recalcula los valores desde los parámetros de cada .in y los compara con lo escrito. La
+      fórmula aplicada a tanh2.in da -3.02e31 contra el -3.07e31 de CosmoLattice (2 por ciento). El
+      fondo exacto muestra que epsilon_V = 1 queda antes del final exacto (epsilon_H = 1); es una
+      convención, la misma que usa tanh2.in.
+    evidence:
+      - code/verificar_genmodels.py::condiciones_iniciales
+      - code/verificar_genmodels.py::fin_exacto
+      - Notas/Notas.tex «Condiciones iniciales», «Momento inicial» y la sección de cada modelo
+      - models/parameter-files/tanh2.in (initial_amplitudes, initial_momenta)
+    numbers: [phi0_genmonomial, phi0_gentmodel, phi0_genemodel, pi0_genmonomial, pi0_gentmodel,
+              pi0_genemodel, pi0_tanh2_formula, phi_fin_exacto_genmonomial, phi_fin_exacto_gentmodel,
+              phi_fin_exacto_genemodel]
+
+  - id: in-corregidos-corren
+    statement: >
+      Con los .in corregidos (momento inicial y, para n = 6, q = 1e2, dt = 1e-3, tMax = 20), las tres
+      simulaciones corren hasta tMax sin NaN y conservan la ecuación de Friedmann a 1e-5.
+    verificacion: >
+      Corrida completa de los tres modelos con N = 64 y los .in tal como quedan en el repo.
+    evidence:
+      - code/probar_genmodels.sh
+    numbers: [a_final_genmonomial, friedmann_max_rel]
+
+  - id: in-cuarticos
+    statement: >
+      Los .in gentmodel_cuartico, genemodel_cuartico y genemodel_cuartico_aK5 tienen los parámetros de
+      la Tabla de Notas.tex «Parámetros cosmológicos para modelos cuárticos», corren con withGWs = true
+      y su tMax (500, 600) cubre la saturación de rho_GW/rho.
+    verificacion: >
+      chequear_in compara los valores con parametros_cuarticos.py. Corridas completas con N = 32 hasta
+      t~ = 500 de los tres; el E-model con alpha_K = 1 todavía crece ~10% en t~ = 500, de ahí tMax =
+      600. Los tiempos de saturación se midieron con N = 32 y pueden cambiar con N.
+    evidence:
+      - code/parametros_cuarticos.py::chequear_in
+      - code/analisis_cosmolattice.py::analizar
+      - models/parameter-files/gentmodel_cuartico.in
+      - models/parameter-files/genemodel_cuartico.in
+      - models/parameter-files/genemodel_cuartico_aK5.in
+    numbers: [in_cuarticos_max_diff, t90_T, t90_E1, t90_E5, aH0_T, aH0_E1, aH0_E5, n64_w, n64_rhogw,
+              n64_t90, n64_Omega_pico, n64_f_pico, n64_kIR_aH, rhogw_N32_t500_T]

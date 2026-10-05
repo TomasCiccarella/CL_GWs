@@ -1,0 +1,61 @@
+    \section{T-models: $V = A\tanh^n(\phi/M)$}
+        \label{sec:tmodel}
+
+        Implementado en \texttt{models/gentmodel.h}; los \texttt{.in} son \texttt{gentmodel.in} ($n = 2.5$, exploratorio) y \texttt{gentmodel\_cuartico.in} (caso del paper, Sec.~\ref{sec:parametros-cuarticos}).
+            
+        \subsection{Derivadas}
+
+            Consideremos que los potenciales de tipo T-model generales son de la forma
+            \begin{equation}
+                V(\phi) = A \tanh^n \left( \frac{\phi}{M} \right)
+            \end{equation}
+
+            Para la implementación de estos modelos en \CosmoLattice debemos calcular sus derivadas primera y segunda:
+            \begin{equation}
+                V^\prime (\phi) = \frac{A n}{M} \tanh^{n - 1} \left( \frac{\phi}{M} \right) \sech^2 \left( \frac{\phi}{M} \right)
+            \end{equation}
+            \begin{equation}
+                V^{\prime \prime} (\phi) = \frac{A n}{M^2} \sech^2 \left( \frac{\phi}{M} \right) \tanh^{n - 2} \left( \frac{\phi}{M} \right) \left[ (n - 1) \sech^2 \left( \frac{\phi}{M} \right) - 2 \tanh^2 \left( \frac{\phi}{M} \right) \right]
+            \end{equation}
+
+        \subsection{Variables computacionales}
+
+            El potencial de los T-models está acotado: satura en $A$ para $|\phi| \gg M$. Si eligiéramos $\omega_*$ pidiendo que el coeficiente de $\tanh^n(\tilde\phi/\tilde M)$ en $\tilde V$ sea exactamente $1$, $\omega_*$ no quedaría atado a la frecuencia física de oscilación alrededor de $\phi = 0$ y el $\alpha$ de la Sec.~\ref{sec:alpha} dejaría de cumplir su propósito. Seguimos en cambio el criterio de la Sec.~\ref{sec:variables}: durante el reheating el campo oscila en $|\phi| \ll M$, donde
+            \begin{equation}
+                V(\phi) = A \tanh^n \left( \frac{\phi}{M} \right) \underset{|\phi| \ll M}{\simeq} \frac{A}{M^n} \, |\phi|^n \, ,
+            \end{equation}
+            así que $A_{\text{eff}} = A/M^n$ y
+            \begin{equation}
+                \omega_*^2 = A_{\text{eff}} \, n \, \phi_0^{n - 2} = \frac{A n}{M^n} \, \phi_0^{n-2}
+                \hspace{1cm} \Longrightarrow \hspace{1cm}
+                \begin{cases}
+                    \omega_* = \sqrt{A n} \, M^{-n/2} \, \phi_0^{n/2 - 1} \\
+                    \displaystyle q = \frac{g^2 \phi_0^2}{\omega_*^2} = \frac{g^2 \phi_0^{4-n} M^n}{n A}
+                \end{cases}
+            \end{equation}
+            Con esta elección, y definiendo nuevamente $\tilde{M} \equiv M/\phi_0$, el potencial de programa resulta (puede verificarse por sustitución directa de $\phi = \phi_0 \tilde\phi$, $\chi = \phi_0\tilde\chi$)
+            \begin{equation}
+                \tilde{V} \left( \tilde{\phi}, \tilde{\chi} \right) = \frac{1}{n} \left| \tilde{M} \tanh \left( \frac{\tilde{\phi}}{\tilde{M}} \right) \right|^n + \frac{1}{2} \, q \, \tilde{\phi}^2 \tilde{\chi}^2 \, ,
+            \end{equation}
+            que se reduce correctamente al caso monomial ($|\tilde\phi|^n/n$) en el límite $\tilde M \to \infty$ ($M \to \infty$ a $\phi_0$ fijo), y a \texttt{tanh2.h} para $n=2$ ($\omega_* = \sqrt{2A}/M \to \sqrt{\Lambda^4}/M$ con $A = \Lambda^4/2$), como debe ser.
+
+        \subsection{Condiciones iniciales}
+
+            La condición $\epsilon_V = 1$ (Sec.~\ref{sec:ci}) para este potencial:
+            \begin{equation*}
+                \begin{split}
+                    \epsilon &= \frac{m_p^2}{2} \left[ \frac{V^\prime (\phi)}{V(\phi)} \right]^2\\
+                    \frac{V^\prime (\phi)}{V(\phi)} &= \frac{n}{M} \frac{\sech^2 (\phi/M)}{\tanh (\phi/M)} = \frac{n}{M} \frac{1}{\sinh (\phi/M) \cosh (\phi/M)} = \frac{2n}{M} \csch \left( \frac{2\phi}{M} \right)\\
+                    1 &= \frac{m_p^2}{2} \left[ \frac{2n}{M} \csch \left( \frac{2\phi_0}{M} \right) \right]^2\\
+                    \frac{M^2}{2 n^2 m_p^2} &= \csch^2 \left( \frac{2 \phi_0}{M} \right)\\
+                    \sinh \left( \frac{2 \phi_0}{M} \right) &= \frac{\sqrt{2} \, n \, m_p}{M}
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                \phi_0 = \frac{M}{2} \operatorname{arcsinh} \left( \frac{\sqrt{2} \, n \, m_p}{M} \right)
+            \end{equation}
+
+        \subsection{Momento inicial}
+            \label{sec:momento-inicial-T}
+
+            Por el argumento de la Sec.~\ref{sec:momento-inicial}, $\dot{\phi}_0 = -\sqrt{(\sqrt{7/3} - 1) \, A \tanh^n(\phi_0/M)}$. Con los parámetros de \texttt{gentmodel.in} ($n = 2.5$, $M = 10\,m_p$) da $\dot\phi_0 = -1.914 \times 10^{31}\,\text{GeV}^2$. El final exacto de la inflación ($\epsilon_H = 1$) cae en $\phi = 3.18 \times 10^{18}\,\text{GeV}$, contra $\phi_0 = 4.22 \times 10^{18}\,\text{GeV}$.
