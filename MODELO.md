@@ -18,5 +18,5 @@ El control **no es un modelo del paper**: $\phi^4$ puro predice $n_s = 0.946$ y 
 ```bash
 code/correr_cuarticos.sh 64            # corre genmonomial_cuartico.in y lo analiza (~30 min)
 python3 code/verificar_genmodels.py    # derivadas, condiciones iniciales y cotas de estabilidad
-cd Notas && latexmk -pdf Notas.tex     # notas con la sección del monomial
+cd Notas && latexmk -g -pdf Notas.tex  # notas con la sección del monomial
 ```
