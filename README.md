@@ -42,7 +42,7 @@ Todo lo general está en `main`, y cada tipo de modelo tiene su rama, que es `ma
 | `t-model` | `models/gentmodel.h`, `gentmodel.in` ($n = 2.5$, exploratorio), `gentmodel_cuartico.in` (caso del paper) y su sección de las notas |
 | `e-model` | `models/genemodel.h`, `genemodel.in` ($n = 2.5$), `genemodel_cuartico.in` y `genemodel_cuartico_aK5.in` (casos del paper) y su sección de las notas |
 
-Para trabajar con un modelo: `git checkout t-model` (o `e-model`, `monomial`). Los cambios generales se hacen en `main` y después se llevan a cada rama con `git merge main`.
+Para trabajar con un modelo: `git checkout t-model` (o `e-model`, `monomial`). Los cambios generales se hacen en `main` y después se llevan a cada rama con `git merge main`. Si el merge da conflicto en `provenance/` (pasa cuando los dos lados agregaron entradas), se resuelve con `python3 code/resolver_procedencia.py` y después `git add provenance && git commit --no-edit`.
 
 ### Qué hay en `main`
 
@@ -57,6 +57,7 @@ code/
   correr_cuarticos.sh        corre en secuencia los casos cuárticos de la rama y los analiza
   verificar_genmodels.py     derivadas, condiciones iniciales y cotas de estabilidad de los modelos de la rama
   probar_genmodels.sh        compila y prueba los modelos de la rama
+  resolver_procedencia.py    resuelve el conflicto de provenance/ al hacer git merge main en una rama
 Notas/                       notas en LaTeX (en cada rama se agrega la sección de su modelo)
 provenance/                  de dónde sale cada número y cada afirmación de las notas
 models/, include/, source/   CosmoLattice (sin modificar) y sus modelos originales
