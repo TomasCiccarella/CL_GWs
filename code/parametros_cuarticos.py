@@ -54,48 +54,53 @@ def d2f(mod, x, M):
     return -2 * np.tanh(x / M) / (M ** 2 * np.cosh(x / M) ** 2)
 
 
-def V(mod, x, M):
-    return 0.75 * f(mod, x, M) ** K
+def V(mod, x, M, k=K):
+    return 0.75 * f(mod, x, M) ** k
 
 
-def dV(mod, x, M):
-    return 0.75 * K * f(mod, x, M) ** (K - 1) * df(mod, x, M)
+def dV(mod, x, M, k=K):
+    return 0.75 * k * f(mod, x, M) ** (k - 1) * df(mod, x, M)
 
 
-def d2V(mod, x, M):
+def d2V(mod, x, M, k=K):
     u = f(mod, x, M)
-    return 0.75 * K * ((K - 1) * u ** (K - 2) * df(mod, x, M) ** 2 + u ** (K - 1) * d2f(mod, x, M))
+    return 0.75 * k * ((k - 1) * u ** (k - 2) * df(mod, x, M) ** 2 + u ** (k - 1) * d2f(mod, x, M))
 
 
-def epsV(mod, x, M):
-    return 0.5 * (dV(mod, x, M) / V(mod, x, M)) ** 2
+def epsV(mod, x, M, k=K):
+    return 0.5 * (dV(mod, x, M, k) / V(mod, x, M, k)) ** 2
 
 
-def phi_end_exacto(mod, M):
+def phi_end_exacto(mod, M, k=K):
     """Integra el fondo exacto (M_P = 1, lam = 1) desde eps_V = 1e-4 (plateau) hasta eps_H = 1."""
     def rhs(t, y):
-        H = np.sqrt((V(mod, y[0], M) + y[1] ** 2 / 2) / 3)
-        return [y[1], -3 * H * y[1] - dV(mod, y[0], M)]
+        H = np.sqrt((V(mod, y[0], M, k) + y[1] ** 2 / 2) / 3)
+        return [y[1], -3 * H * y[1] - dV(mod, y[0], M, k)]
 
     def ev(t, y):
-        return 1.5 * y[1] ** 2 / (V(mod, y[0], M) + y[1] ** 2 / 2) - 1
+        return 1.5 * y[1] ** 2 / (V(mod, y[0], M, k) + y[1] ** 2 / 2) - 1
     ev.terminal = True
-    xi = brentq(lambda x: epsV(mod, x, M) - 1e-4, 0.5, 40 * M)
-    Hi = np.sqrt(V(mod, xi, M) / 3)
-    sol = solve_ivp(rhs, [0, 1e6], [xi, -dV(mod, xi, M) / (3 * Hi)], events=ev,
+    xi = brentq(lambda x: epsV(mod, x, M, k) - 1e-4, 0.5, 40 * M)
+    Hi = np.sqrt(V(mod, xi, M, k) / 3)
+    sol = solve_ivp(rhs, [0, 1e6], [xi, -dV(mod, xi, M, k) / (3 * Hi)], events=ev,
                     rtol=1e-11, atol=1e-14)
-    return float(sol.y_events[0][0][0])
+    return float(sol.y_events[0][0][0]), float(sol.y_events[0][0][1])
 
 
-def calcular(mod, al, Nst):
+def calcular(mod, al, Nst, k=K):
+    """Parámetros del caso (mod, alpha_K, N_*) con exponente k. Nst puede ser una función de
+    (phi_*, phi_end, phi'_end) en unidades de M_P y lam = 1 (para k = 2, donde N_* depende de T_RH):
+    se resuelve N(phi_*) = Nst(phi_*, ...) de forma autoconsistente."""
     M = Mesc(mod, al)
-    xe = phi_end_exacto(mod, M)
+    xe, pe = phi_end_exacto(mod, M, k)
 
     def N(x):  # Eq. (18) del paper
-        return quad(lambda y: V(mod, y, M) / dV(mod, y, M), xe, x)[0]
-    xs = brentq(lambda x: N(x) - Nst, xe, 30 * M)
-    eps, eta = epsV(mod, xs, M), d2V(mod, xs, M) / V(mod, xs, M)
-    lam = AS * 24 * np.pi ** 2 * eps / V(mod, xs, M)
+        return quad(lambda y: V(mod, y, M, k) / dV(mod, y, M, k), xe, x)[0]
+    objetivo = Nst if callable(Nst) else (lambda xs, xe, pe: Nst)
+    xs = brentq(lambda x: N(x) - objetivo(x, xe, pe), xe, 30 * M)
+    Nst = N(xs)
+    eps, eta = epsV(mod, xs, M, k), d2V(mod, xs, M, k) / V(mod, xs, M, k)
+    lam = AS * 24 * np.pi ** 2 * eps / V(mod, xs, M, k)
     ns, r = 1 - 6 * eps + 2 * eta, 16 * eps
     lam38 = 24 * al * np.pi ** 2 * AS / Nst ** 2
 
@@ -103,15 +108,16 @@ def calcular(mod, al, Nst):
     A = 0.75 * lam * MP ** 4
     MG = M * MP
     if mod == "E":
-        phi0 = MG * np.log(1 + K * MP / (np.sqrt(2) * MG))
-        V0 = A * (1 - np.exp(-phi0 / MG)) ** K
+        phi0 = MG * np.log(1 + k * MP / (np.sqrt(2) * MG))
+        V0 = A * (1 - np.exp(-phi0 / MG)) ** k
     else:
-        phi0 = MG / 2 * np.arcsinh(np.sqrt(2) * K * MP / MG)
-        V0 = A * np.tanh(phi0 / MG) ** K
+        phi0 = MG / 2 * np.arcsinh(np.sqrt(2) * k * MP / MG)
+        V0 = A * np.tanh(phi0 / MG) ** k
     pi0 = -np.sqrt((np.sqrt(7 / 3) - 1) * V0)
-    om = np.sqrt(K * A) * MG ** (-K / 2) * phi0 ** (K / 2 - 1)
-    Hinf = np.sqrt(lam * V(mod, xs, M) / 3) * MP
-    return dict(M_MP=M, phi_end=xe * MP, phi_star=xs * MP, lam=lam, lam_eq38=lam38, ns=ns, r=r,
+    om = np.sqrt(k * A) * MG ** (-k / 2) * phi0 ** (k / 2 - 1)
+    Hinf = np.sqrt(lam * V(mod, xs, M, k) / 3) * MP
+    return dict(M_MP=M, phi_end=xe * MP, phi_star=xs * MP, lam=lam, lam_eq38=lam38, ns=ns, r=r, N_star=Nst,
+                rho_end=lam * (V(mod, xe, M, k) + pe ** 2 / 2) * MP ** 4,
                 A=A, M=MG, phi0=phi0, pi0=pi0, omega_star=om, H_star=Hinf,
                 lam_eff=4 * A / MG ** 4)
 
