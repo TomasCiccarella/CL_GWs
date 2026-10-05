@@ -78,7 +78,7 @@ def main():
     faltan = [k for c in yaml.safe_load(txt)["claims"] for k in c.get("numbers", []) if k not in rama]
     if len(ids) != len(set(ids)) or faltan:
         sys.exit(f"Resultado inconsistente: ids repetidos o números faltantes {faltan}")
-    print(f"provenance/ resuelto: {len(ids)} afirmaciones ({len(nuevos)} nuevas de main), "
+    print(f"provenance/ resuelto: {len(ids)} afirmaciones ({nuevos.count('  - id: ')} nuevas de main), "
           f"{len(rama)} números. Ahora: git add provenance && git commit --no-edit")
 
 
