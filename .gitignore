@@ -9,9 +9,7 @@ Notas/*.fdb_latexmk
 Notas/*.fls
 Notas/*.log
 Notas/*.out
-
-# PDF compilado de las notas: cambia en cada rama según qué modelos incluye; se genera con latexmk
-Notas/Notas.pdf
+Notas/*.synctex.gz
 
 # Registros de corridas lanzadas con nohup
 corridas_*.log
