@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+build*/
+.claude/.session-start
+.claude/hooks/.attempts
+# Auxiliares de LaTeX
+Notas/*.aux
+Notas/*.fdb_latexmk
+Notas/*.fls
+Notas/*.log
+Notas/*.out

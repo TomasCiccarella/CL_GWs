@@ -1,0 +1,678 @@
+\documentclass[11pt]{article}
+
+\input{Librerías}
+
+% Comando personalizado para CosmoLattice
+\usepackage{xspace}
+\newcommand{\CosmoLattice}{\ensuremath{\mathcal{C}}\text{osmo}\ensuremath{\mathcal{L}}\text{attice}\xspace}
+
+\begin{document}
+    \sloppy
+
+    \section{Potenciales Monomiales}
+
+        \subsection{Derivadas}
+
+            Consideremos que los potenciales monomiales generales para el potencial son de la forma
+            \begin{equation}
+                V(\phi) = A \left| \phi \right|^n
+            \end{equation}
+            El valor absoluto es necesario para que $V$ esté bien definido en $\phi < 0$ cuando $n$ no es un entero par.
+
+            Para la implementación de estos modelos en \CosmoLattice debemos calcular sus derivadas primera y segunda:
+            \begin{equation}
+                V^\prime (\phi) = A n \operatorname{sgn}(\phi) \left| \phi \right|^{n - 1} = A n \, \phi \left| \phi \right|^{n - 2}
+            \end{equation}
+            \begin{equation}
+                V^{\prime \prime} (\phi) = A n (n - 1) \left| \phi \right|^{n - 2}
+            \end{equation}
+            (para $n < 2$ ambas divergen en $\phi = 0$, y la expresión $\phi |\phi|^{n-2}$ del código da $0 \cdot \infty$ en ese punto).
+
+        \subsection{Variables computacionales}
+
+            Cerca del mínimo, la ecuación de movimiento del modo homogéneo del campo es
+            \begin{equation}
+                \ddot{\phi} + 3 H \dot{\phi} + \Omega^2(\phi) \, \phi = 0 \, ,
+                \hspace{1cm}
+                \Omega^2(\phi) \equiv \frac{V^\prime(\phi)}{\phi} = A n \, \phi^{n-2} \, ,
+            \end{equation}
+            es decir, un oscilador de frecuencia $\Omega(\phi)$ dependiente de la amplitud (excepto para $n=2$). Para que el exponente $\alpha$ de la subsección siguiente cumpla su propósito (período de oscilación aproximadamente constante en tiempo de programa), $\omega_*$ no puede elegirse con un criterio arbitrario: debe ser precisamente esta frecuencia física evaluada en la amplitud inicial $\phi_0$,
+            \begin{equation}
+                \omega_* \equiv \Omega(\phi_0) = \sqrt{A n} \, \phi_0^{n/2 - 1} \, .
+            \end{equation}
+            Definamos $f_* = \phi_0$ (por tanto $\phi = \phi_0 \tilde{\phi}$), y consideremos el acople usual $\frac12 g^2 \phi^2 \chi^2$. Pidiendo que se cumpla la relación de adimensionalización
+            \begin{equation}
+                \tilde{V} \left( \tilde{\phi}, \tilde{\chi} \right) = \frac{V(\phi, \chi)}{f_*^2 \omega_*^2}
+            \end{equation}
+            y sustituyendo $\phi = \phi_0 \tilde\phi$, $\chi = \phi_0 \tilde\chi$, se obtiene directamente
+            \begin{equation}
+                \tilde{V} \left( \tilde{\phi}, \tilde{\chi} \right) = \frac{1}{n} \left| \tilde{\phi} \right|^n + \frac{1}{2} \, q \, \tilde{\phi}^2 \tilde{\chi}^2 \, ,
+                \hspace{1cm}
+                q \equiv \frac{g^2 \phi_0^2}{\omega_*^2} = \frac{g^2 \phi_0^{4-n}}{n A} \, .
+            \end{equation}
+            El factor $1/n$ es el mismo que aparece en la normalización estándar de \CosmoLattice para potenciales monomiales (p.ej.\ \texttt{lphi4} escribe $V = \frac{\lambda}{4} \phi^4$, es decir $A = \lambda/4$ en nuestra notación); con $n=4$ y $A=\lambda/4$, la fórmula de $\omega_*$ de arriba se reduce exactamente a $\omega_* = \sqrt{\lambda}\,\phi_0$, tal como usa \texttt{lphi4.h}.
+
+        \subsection{Reescaleo temporal}
+
+            Además de $f_*$ y $\omega_*$, \CosmoLattice permite elegir un exponente de reescaleo temporal $\alpha$, definido a través de $d\tilde{t} = \omega_* a^{-\alpha} dt$. Con $\omega_* = \Omega(\phi_0)$ fijado como arriba, $\alpha$ debe elegirse de forma que $\Omega(\phi)$ siga siendo aproximadamente constante en tiempo de programa a lo largo de \emph{toda} la fase de oscilaciones post-inflacionarias, no sólo en $\phi = \phi_0$.
+
+            Para un potencial monomial $V \sim |\phi|^n$, la solución autosimilar de las oscilaciones post-inflacionarias del campo homogéneo (ver p.ej.\ Turner 1983, y la discusión en la Sec.~8 de Figueroa, Florio, Torrenti \& Valkenburg, arXiv:2006.15122) da una frecuencia de oscilación que decae con la expansión como $\Omega \sim a^{-3(n-2)/(n+2)}$. Pidiendo que esa frecuencia sea constante en tiempo de programa se obtiene
+            \begin{equation}
+                \alpha = 3 \, \frac{n - 2}{n + 2}
+            \end{equation}
+            Esta fórmula es consistente con los modelos ya implementados en \CosmoLattice: \texttt{lphi4} ($n=4$) usa $\alpha = 1$, y \texttt{tanh2} ($n=2$) usa $\alpha = 0$, ambos reproducidos por la expresión anterior. Usaremos esta misma elección de $\alpha$ para los T-models y E-models de las secciones siguientes, ya que ambos se reducen a un potencial monomial de índice $n$ cerca de $\phi = 0$ (que es precisamente la región que domina la dinámica durante el reheating).
+
+        \subsection{Condiciones iniciales}
+
+            Planteemos la condición inicial del campo como aquella tal que $\epsilon = 1$.
+            \begin{equation*}
+                \begin{split}
+                    \epsilon &= \frac{m_p^2}{2} \left[ \frac{V^\prime (\phi)}{V(\phi)} \right]^2\\
+                    1 &= \frac{m_p^2}{2} \left[ \frac{V^\prime (\phi_0)}{V(\phi_0)} \right]^2\\
+                    \frac{2}{m_p^2} &= \left[ \frac{A n \phi^{n-1}_0}{A \phi^n_0} \right]^2\\
+                    \frac{\sqrt{2}}{m_p} &= \frac{n}{\phi_0}\\
+                    \phi_0 &= \frac{n}{\sqrt{2}} m_p
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                \phi_0 = \frac{\sqrt{2}}{2} n m_p
+            \end{equation}
+
+        \subsection{Momento inicial}
+            \label{sec:momento-inicial}
+
+            En $\epsilon = 1$ el campo ya está rodando, así que el momento inicial no puede ser nulo (\texttt{tanh2.in} usa, por ejemplo, $\dot\phi_0 = -3.07 \times 10^{31}\,\text{GeV}^2$). Tomamos la velocidad de slow-roll, pero con el $H$ autoconsistente, que incluye la energía cinética:
+            \begin{equation}
+                \dot{\phi} = -\frac{V^\prime}{3H} \, ,
+                \hspace{1cm}
+                H^2 = \frac{1}{3 m_p^2} \left( V + \frac{1}{2} \dot{\phi}^2 \right) \, .
+            \end{equation}
+            Elevando al cuadrado la primera y reemplazando la segunda queda una cuadrática en $\dot\phi^2$:
+            \begin{equation*}
+                \begin{split}
+                    9 H^2 \dot{\phi}^2 &= V^{\prime 2}\\
+                    \frac{3}{m_p^2} \left( V + \frac{1}{2} \dot{\phi}^2 \right) \dot{\phi}^2 &= V^{\prime 2}\\
+                    \frac{3}{2} \dot{\phi}^4 + 3 V \dot{\phi}^2 - m_p^2 V^{\prime 2} &= 0\\
+                    \dot{\phi}^2 &= -V + \sqrt{V^2 + \frac{2}{3} m_p^2 V^{\prime 2}} \, .
+                \end{split}
+            \end{equation*}
+            En $\phi_0$, la condición $\epsilon = 1$ es justamente $m_p^2 V^{\prime 2} = 2 V^2$, de modo que
+            \begin{equation}
+                \dot{\phi}_0 = - \sqrt{ \left( \sqrt{\tfrac{7}{3}} - 1 \right) V(\phi_0) } \simeq -0.726 \, \sqrt{V(\phi_0)} \, ,
+            \end{equation}
+            con el signo negativo porque $\phi_0 > 0$ y el campo rueda hacia el mínimo. El resultado sólo usa $\epsilon = 1$, así que vale igual para los T-models y los E-models (Secs.~\ref{sec:momento-inicial-T} y \ref{sec:momento-inicial-E}), cambiando únicamente $V(\phi_0)$. Con los parámetros de \texttt{tanh2.in} esta fórmula da $-3.02 \times 10^{31}\,\text{GeV}^2$, un $2\%$ por debajo del valor de \CosmoLattice; para el monomial ($V(\phi_0) = A \phi_0^n$) con los parámetros de \texttt{genmonomial.in} da $\dot\phi_0 = -3.063 \times 10^{31}\,\text{GeV}^2$.
+
+            Nótese que $\epsilon = 1$ es la condición de slow-roll ($\epsilon_V$), no el final exacto de la inflación ($\epsilon_H \equiv -\dot H/H^2 = \frac{3}{2}\dot\phi^2/\rho = 1$): con el momento de arriba, $\epsilon_H(\phi_0) \simeq 0.63$. Integrando el fondo homogéneo exacto desde lo profundo de la inflación, $\epsilon_H = 1$ se alcanza en $\phi = 9.04 \times 10^{18}\,\text{GeV}$ para el monomial con $n = 6$ (contra $\phi_0 = 1.033 \times 10^{19}\,\text{GeV}$). Usamos $\epsilon_V = 1$ por consistencia con \texttt{tanh2.in}. Todos los números de esta subsección los recalcula \texttt{code/verificar\_genmodels.py}.
+
+        \subsection{Estabilidad numérica para $n > 4$}
+            \label{sec:estabilidad}
+
+            En variables de programa, la ecuación de movimiento de \CosmoLattice para cada campo es (arXiv:2006.15122)
+            \begin{equation}
+                \tilde{\phi}^{\prime\prime} + (3 - \alpha) \frac{a^\prime}{a} \tilde{\phi}^\prime - a^{-2(1-\alpha)} \tilde{\nabla}^2 \tilde{\phi} + a^{2\alpha} \frac{\partial \tilde{V}}{\partial \tilde{\phi}} = 0 \, ,
+            \end{equation}
+            de modo que un modo de número de onda $\tilde k$ oscila con frecuencia
+            \begin{equation}
+                \tilde{\omega}_{\tilde k}^2 = a^{2\alpha - 2} \tilde{k}^2 + a^{2\alpha} \, \frac{\partial^2 \tilde{V}}{\partial \tilde{\phi}^2} \, .
+            \end{equation}
+            El integrador (\texttt{VV2}, tipo leapfrog) es estable sólo si $\tilde{\omega}_{\max} \, \delta\tilde{t} < 2$. Con la amplitud de las oscilaciones autosimilares, $\tilde{\Phi} \propto a^{-6/(n+2)}$, y $\alpha = 3(n-2)/(n+2)$, cada término escala así:
+            \begin{itemize}
+                \item \textbf{Inflatón:} $a^{2\alpha} (n-1) \tilde\Phi^{n-2} \propto a^{0}$. Es constante, porque $\alpha$ se eligió precisamente para eso.
+                \item \textbf{Gradiente:} $a^{\alpha-1} \tilde{k}_{\max} \propto a^{2(n-4)/(n+2)}$, con $\tilde{k}_{\max} = 2\sqrt{3}/\delta\tilde{x}$ y $\delta\tilde x = 2\pi / (N \tilde{k}_{\text{IR}})$ para el laplaciano de segundo orden.
+                \item \textbf{Campo hijo:} $a^{\alpha} \sqrt{q} \, \tilde\Phi \propto \sqrt{q} \, a^{3(n-4)/(n+2)}$.
+            \end{itemize}
+            Para $n \le 4$ ningún término crece (en $n = 4$, \texttt{lphi4}, son constantes). Para $n > 4$ los dos últimos crecen sin cota, de modo que con $\delta\tilde t$ fijo la simulación se vuelve inestable a partir de
+            \begin{equation}
+                a_{\max}^{\text{grad}} = \left( \frac{2}{\tilde{k}_{\max} \, \delta\tilde{t}} \right)^{\frac{n+2}{2(n-4)}} \, ,
+                \hspace{1cm}
+                a_{\max}^{\text{hijo}} \sim \left( \frac{2}{\sqrt{q} \, \delta\tilde{t}} \right)^{\frac{n+2}{3(n-4)}} \, .
+            \end{equation}
+            La segunda es sólo una estimación, porque toma la envolvente de $\tilde\phi$ normalizada a $1$ en $a = 1$ y no tiene en cuenta el crecimiento resonante de $\chi$. Esto no se arregla con otra elección de $\alpha$: físicamente, para $n > 4$ la frecuencia del inflatón decae más rápido que $k/a$ y que la masa efectiva $g \Phi$ del campo hijo, así que la separación entre escalas crece con cualquier reescaleo temporal. Lo mismo vale para los T-models y E-models con $n > 4$, que cerca de $\phi = 0$ son monomiales.
+
+            Para $n = 6$ ($\alpha = 3/2$), con $N = 64$, $\tilde k_{\text{IR}} = 3$, $\delta\tilde t = 10^{-3}$ y $q = 10^2$, las cotas dan $a_{\max}^{\text{grad}} \simeq 357$ y $a_{\max}^{\text{hijo}} \sim 1170$. En la simulación, la corrida explota en $a \simeq 290$ ($\tilde t \simeq 27$), del orden de la cota del gradiente; por eso \texttt{genmonomial.in} usa $\tilde t_{\max} = 20$ ($a \simeq 190$). Con los parámetros originales ($q = 4 \times 10^4$, $\delta\tilde t = 5 \times 10^{-3}$) la corrida explotaba ya en $\tilde t \simeq 0.5$.
+
+    \section{T-models}
+            
+        \subsection{Derivadas}
+
+            Consideremos que los potenciales de tipo T-model generales son de la forma
+            \begin{equation}
+                V(\phi) = A \tanh^n \left( \frac{\phi}{M} \right)
+            \end{equation}
+
+            Para la implementación de estos modelos en \CosmoLattice debemos calcular sus derivadas primera y segunda:
+            \begin{equation}
+                V^\prime (\phi) = \frac{A n}{M} \tanh^{n - 1} \left( \frac{\phi}{M} \right) \sech^2 \left( \frac{\phi}{M} \right)
+            \end{equation}
+            \begin{equation}
+                V^{\prime \prime} (\phi) = \frac{A n}{M^2} \sech^2 \left( \frac{\phi}{M} \right) \tanh^{n - 2} \left( \frac{\phi}{M} \right) \left[ (n - 1) \sech^2 \left( \frac{\phi}{M} \right) - 2 \tanh^2 \left( \frac{\phi}{M} \right) \right]
+            \end{equation}
+
+        \subsection{Variables computacionales}
+
+            A diferencia del caso monomial, el potencial de los T-models está acotado: satura en $A$ para $|\phi| \gg M$. Si eligiéramos $\omega_*$ pidiendo que el coeficiente de $\tanh^n(\tilde\phi/\tilde M)$ en $\tilde V$ sea exactamente $1$ (como hicimos para el monomial), $\omega_*$ no quedaría atado a la frecuencia física de oscilación del campo alrededor de $\phi = 0$, y el $\alpha$ de la subsección anterior dejaría de cumplir su propósito (período de oscilación aproximadamente constante en tiempo de programa). En cambio, seguimos la prescripción de \CosmoLattice (Figueroa, Florio, Torrenti \& Valkenburg, arXiv:2006.15122, Sec.~8): dado que durante el reheating el campo oscila en la región $|\phi| \ll M$, donde
+            \begin{equation}
+                V(\phi) = A \tanh^n \left( \frac{\phi}{M} \right) \underset{|\phi| \ll M}{\simeq} \frac{A}{M^n} \, |\phi|^n \, ,
+            \end{equation}
+            fijamos $\omega_* \equiv \Omega(\phi_0)$ con el mismo criterio que en el caso monomial (frecuencia física de oscilación evaluada en $\phi_0$), pero usando la amplitud efectiva local $A_{\text{eff}} \equiv A / M^n$ en lugar de $A$:
+            \begin{equation}
+                \omega_*^2 = A_{\text{eff}} \, n \, \phi_0^{n - 2} = \frac{A n}{M^n} \, \phi_0^{n-2}
+                \hspace{1cm} \Longrightarrow \hspace{1cm}
+                \begin{cases}
+                    \omega_* = \sqrt{A n} \, M^{-n/2} \, \phi_0^{n/2 - 1} \\
+                    \displaystyle q = \frac{g^2 \phi_0^2}{\omega_*^2} = \frac{g^2 \phi_0^{4-n} M^n}{n A}
+                \end{cases}
+            \end{equation}
+            Con esta elección, y definiendo nuevamente $\tilde{M} \equiv M/\phi_0$, el potencial de programa resulta (puede verificarse por sustitución directa de $\phi = \phi_0 \tilde\phi$, $\chi = \phi_0\tilde\chi$)
+            \begin{equation}
+                \tilde{V} \left( \tilde{\phi}, \tilde{\chi} \right) = \frac{1}{n} \left| \tilde{M} \tanh \left( \frac{\tilde{\phi}}{\tilde{M}} \right) \right|^n + \frac{1}{2} \, q \, \tilde{\phi}^2 \tilde{\chi}^2 \, ,
+            \end{equation}
+            que se reduce correctamente al caso monomial ($|\tilde\phi|^n/n$) en el límite $\tilde M \to \infty$ ($M \to \infty$ a $\phi_0$ fijo), y a \texttt{tanh2.h} para $n=2$ ($\omega_* = \sqrt{2A}/M \to \sqrt{\Lambda^4}/M$ con $A = \Lambda^4/2$), como debe ser.
+
+        \subsection{Condiciones iniciales}
+
+            Planteemos nuevamente la condición inicial del campo como aquella tal que $\epsilon = 1$.
+            \begin{equation*}
+                \begin{split}
+                    \epsilon &= \frac{m_p^2}{2} \left[ \frac{V^\prime (\phi)}{V(\phi)} \right]^2\\
+                    \frac{V^\prime (\phi)}{V(\phi)} &= \frac{n}{M} \frac{\sech^2 (\phi/M)}{\tanh (\phi/M)} = \frac{n}{M} \frac{1}{\sinh (\phi/M) \cosh (\phi/M)} = \frac{2n}{M} \csch \left( \frac{2\phi}{M} \right)\\
+                    1 &= \frac{m_p^2}{2} \left[ \frac{2n}{M} \csch \left( \frac{2\phi_0}{M} \right) \right]^2\\
+                    \frac{M^2}{2 n^2 m_p^2} &= \csch^2 \left( \frac{2 \phi_0}{M} \right)\\
+                    \sinh \left( \frac{2 \phi_0}{M} \right) &= \frac{\sqrt{2} \, n \, m_p}{M}
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                \phi_0 = \frac{M}{2} \operatorname{arcsinh} \left( \frac{\sqrt{2} \, n \, m_p}{M} \right)
+            \end{equation}
+
+        \subsection{Momento inicial}
+            \label{sec:momento-inicial-T}
+
+            Por el argumento de la Sec.~\ref{sec:momento-inicial}, $\dot{\phi}_0 = -\sqrt{(\sqrt{7/3} - 1) \, A \tanh^n(\phi_0/M)}$. Con los parámetros de \texttt{gentmodel.in} ($n = 2.5$, $M = 10\,m_p$) da $\dot\phi_0 = -1.914 \times 10^{31}\,\text{GeV}^2$. El final exacto de la inflación ($\epsilon_H = 1$) cae en $\phi = 3.18 \times 10^{18}\,\text{GeV}$, contra $\phi_0 = 4.22 \times 10^{18}\,\text{GeV}$.
+
+    \section{E-models}
+
+        \subsection{Derivadas}
+
+            Consideremos que los potenciales de tipo E-model generales son de la forma
+            \begin{equation}
+                V(\phi) = A \left( 1 - e^{-\phi/M} \right)^n
+            \end{equation}
+
+            Para la implementación de estos modelos en \CosmoLattice debemos calcular sus derivadas primera y segunda. Definiendo $u \equiv 1 - e^{-\phi/M}$ (de modo que $1 - u = e^{-\phi/M}$ y $u^\prime = (1-u)/M$), tenemos
+            \begin{equation*}
+                \begin{split}
+                    V^\prime (\phi) &= A n \, u^{n-1} \, u^\prime = \frac{An}{M} \, u^{n-1} (1-u)
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                V^\prime (\phi) = \frac{A n}{M} \left( 1 - e^{-\phi/M} \right)^{n-1} e^{-\phi/M}
+            \end{equation}
+            y derivando nuevamente
+            \begin{equation*}
+                \begin{split}
+                    \frac{d}{d\phi} \left[ u^{n-1} (1-u) \right] &= u^\prime \, u^{n-2} \left[ (n-1)(1-u) - u \right] = u^\prime \, u^{n-2} \left[ (n-1) - n u \right]\\
+                    V^{\prime\prime} (\phi) &= \frac{An}{M^2} \, u^{n-2} (1-u) \left[ (n-1) - n u \right]
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                V^{\prime \prime} (\phi) = \frac{A n}{M^2} \, e^{-\phi/M} \left( 1 - e^{-\phi/M} \right)^{n-2} \left[ n \, e^{-\phi/M} - 1 \right]
+            \end{equation}
+
+        \subsection{Variables computacionales}
+
+            Al igual que los T-models, el potencial de los E-models está acotado por un lado: satura en $A$ para $\phi \gg M$ (aunque no del lado $\phi \ll -M$, donde crece exponencialmente, lo que vuelve asimétricas las oscilaciones posteriores; para $n$ no entero, en $\phi<0$ usamos $|1 - e^{-\phi/M}|^n$, igual que el código). Por la misma razón expuesta para los T-models, elegimos $\omega_*$ y $q$ a partir del comportamiento local del potencial cerca de $\phi = 0$ --- que es la región relevante durante el reheating --- en lugar de a partir de la amplitud global $A$:
+            \begin{equation}
+                V(\phi) = A \left( 1 - e^{-\phi/M} \right)^n \underset{|\phi| \ll M}{\simeq} \frac{A}{M^n} \, |\phi|^n \, ,
+            \end{equation}
+            de modo que, con la misma amplitud efectiva local $A_{\text{eff}} \equiv A/M^n$ que usamos para los T-models,
+            \begin{equation}
+                \omega_*^2 = A_{\text{eff}} \, n \, \phi_0^{n-2} = \frac{A n}{M^n} \, \phi_0^{n-2}
+                \hspace{1cm} \Longrightarrow \hspace{1cm}
+                \begin{cases}
+                    \omega_* = \sqrt{A n} \, M^{-n/2} \, \phi_0^{n/2 - 1} \\
+                    \displaystyle q = \frac{g^2 \phi_0^2}{\omega_*^2} = \frac{g^2 \phi_0^{4-n} M^n}{n A}
+                \end{cases}
+            \end{equation}
+            Nótese que $\omega_*$ y $q$ son exactamente los mismos que para los T-models (misma amplitud efectiva local $A/M^n$), ya que ambos potenciales comparten el mismo comportamiento monomial cerca de $\phi = 0$. Definiendo nuevamente $\tilde{M} \equiv M/\phi_0$, el potencial de programa resulta
+            \begin{equation}
+                \tilde{V} \left( \tilde{\phi}, \tilde{\chi} \right) = \frac{1}{n} \left| \tilde{M} \left( 1 - e^{-\tilde{\phi}/\tilde{M}} \right) \right|^n + \frac{1}{2} \, q \, \tilde{\phi}^2 \tilde{\chi}^2 \, ,
+            \end{equation}
+            que también se reduce correctamente al caso monomial en el límite $\tilde M \to \infty$.
+
+        \subsection{Condiciones iniciales}
+
+            Planteemos nuevamente la condición inicial del campo como aquella tal que $\epsilon = 1$.
+            \begin{equation*}
+                \begin{split}
+                    \epsilon &= \frac{m_p^2}{2} \left[ \frac{V^\prime (\phi)}{V(\phi)} \right]^2\\
+                    \frac{V^\prime (\phi)}{V(\phi)} &= \frac{n}{M} \frac{1-u}{u} = \frac{n}{M} \frac{e^{-\phi/M}}{1 - e^{-\phi/M}} = \frac{n}{M} \frac{1}{e^{\phi/M} - 1}\\
+                    1 &= \frac{m_p^2}{2} \left[ \frac{n}{M} \frac{1}{e^{\phi_0/M} - 1} \right]^2\\
+                    \left( e^{\phi_0/M} - 1 \right)^2 &= \frac{n^2 m_p^2}{2 M^2}\\
+                    e^{\phi_0/M} &= 1 + \frac{n \, m_p}{\sqrt{2} \, M}
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                \phi_0 = M \ln \left( 1 + \frac{\sqrt{2}}{2} \frac{n \, m_p}{M} \right)
+            \end{equation}
+
+        \subsection{Momento inicial}
+            \label{sec:momento-inicial-E}
+
+            Por el argumento de la Sec.~\ref{sec:momento-inicial}, $\dot{\phi}_0 = -\sqrt{(\sqrt{7/3} - 1) \, A \left(1 - e^{-\phi_0/M}\right)^n}$. Con los parámetros de \texttt{genemodel.in} ($n = 2.5$, $M = 10\,m_p$) da $\dot\phi_0 = -1.621 \times 10^{31}\,\text{GeV}^2$. El final exacto de la inflación ($\epsilon_H = 1$) cae en $\phi = 2.95 \times 10^{18}\,\text{GeV}$, contra $\phi_0 = 3.96 \times 10^{18}\,\text{GeV}$.
+
+    \section{Parámetros cosmológicos para modelos cuárticos ($n = 4$)}
+        \label{sec:parametros-cuarticos}
+
+        \subsection{Traducción desde Ellis, Garcia, Olive \& Verner}
+
+            Ellis, Garcia, Olive \& Verner, \emph{Phys.\ Rev.\ D} \textbf{113}, 063571 (2026) [doi:10.1103/d35r-7bn8], contrastan los $\alpha$-attractors generalizados con Planck 2018, BICEP/Keck, ACT DR6 y SPT-3G. Sus potenciales (Ecs.~39--40) son
+            \begin{equation}
+                V_E = \frac{3}{4} \lambda m_p^4 \left( 1 - e^{-\sqrt{\frac{2}{3\alpha_K}} \frac{\phi}{m_p}} \right)^k \, ,
+                \hspace{1cm}
+                V_T = \frac{3}{4} \lambda m_p^4 \tanh^k \left( \frac{\phi}{\sqrt{6 \alpha_K} \, m_p} \right) \, ,
+            \end{equation}
+            donde llamamos $\alpha_K$ al $\alpha$ del potencial de Kähler, para no confundirlo con el exponente de reescaleo temporal $\alpha$ de \CosmoLattice (que para $n = 4$ vale $\alpha = 1$). En nuestra notación ($V = A |f(\phi/M)|^n$) esto es
+            \begin{equation}
+                n = k \, , \hspace{1cm}
+                A = \frac{3}{4} \lambda m_p^4 \, , \hspace{1cm}
+                M_E = \sqrt{\tfrac{3}{2} \alpha_K} \, m_p \, , \hspace{1cm}
+                M_T = \sqrt{6 \alpha_K} \, m_p \, .
+            \end{equation}
+
+        \subsection{Por qué $k = 4$ y qué valores elegir}
+
+            Para $k = 4$ la ecuación de estado del inflatón oscilando es $w = (k-2)/(k+2) = 1/3$, y el término de reheating de $N_*$ se anula (Sec.~VII.B del paper): $N_* \simeq 55.7$ (E) y $55.8$ (T) para $\alpha_K = 1$, independientemente de $T_{\text{RH}}$ (Ec.~B15). Por eso $n_s$ y $r$ dependen sólo de $\alpha_K$ y, para las ondas gravitacionales, el universo se expande como radiación desde el final de la inflación, de modo que el corrimiento al rojo del espectro hasta hoy no depende de la historia de reheating. Además, por la Sec.~\ref{sec:estabilidad}, $n = 4$ no tiene la inestabilidad creciente de $n > 4$.
+
+            Lo que el paper encuentra para $k = 4$:
+            \begin{itemize}
+                \item \textbf{E-model:} $\alpha_K = 1$ da $n_s \simeq 0.965$, que atraviesa las elipses de Planck 2018 y es compatible con CMB-SPA; con $\alpha_K \simeq 5$ entra apenas en el $95\%$ de P-ACT-LB. La cota en $r$ da $\alpha_K \lesssim 17$.
+                \item \textbf{T-model:} $\alpha_K \lesssim 11$ es compatible con Planck 2018 y con el $95\%$ de CMB-SPA, aunque queda por debajo de ACT DR6.
+            \end{itemize}
+            Elegimos como casos de referencia el canónico $\alpha_K = 1$ para ambos modelos, y $\alpha_K = 5$ en el E-model como el más cercano a ACT. En vez de la Ec.~38 del paper ($\lambda \simeq 24 \alpha_K \pi^2 A_s / N_*^2$, aproximada) normalizamos $\lambda$ exactamente con $A_s = V/(24\pi^2 \epsilon_V m_p^4) = 2.1 \times 10^{-9}$ en $\phi_*$. Para eso calculamos $\phi_{\text{end}}$ ($\epsilon_H = 1$, fondo exacto) y $\phi_*$ ($N_*$ e-folds antes, Ec.~18). Las condiciones iniciales son las de las Secs.~2.3--2.4 y 3.3--3.4 ($\epsilon_V = 1$).
+
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{lccc}
+                    \toprule
+                    & E, $\alpha_K = 1$ & T, $\alpha_K = 1$ & E, $\alpha_K = 5$ \\
+                    \midrule
+                    $N_*$ & $55.7$ & $55.8$ & $55.7$ \\
+                    $n_s$ & $0.9647$ & $0.9641$ & $0.9652$ \\
+                    $r$ & $0.0036$ & $0.0038$ & $0.0153$ \\
+                    $\lambda$ & $1.528 \times 10^{-10}$ & $1.600 \times 10^{-10}$ & $7.12 \times 10^{-10}$ \\
+                    $H_*$ [GeV] & $1.49 \times 10^{13}$ & $1.52 \times 10^{13}$ & $3.06 \times 10^{13}$ \\
+                    \midrule
+                    \texttt{n} & $4$ & $4$ & $4$ \\
+                    \texttt{M} [GeV] & $2.98225 \times 10^{18}$ & $5.96451 \times 10^{18}$ & $6.66852 \times 10^{18}$ \\
+                    \texttt{A} [GeV$^4$] & $4.02858 \times 10^{63}$ & $4.21854 \times 10^{63}$ & $1.87750 \times 10^{64}$ \\
+                    \texttt{initial\_amplitudes} [GeV] & $3.56906 \times 10^{18}$ & $4.69413 \times 10^{18}$ & $4.73073 \times 10^{18}$ \\
+                    \texttt{initial\_momenta} [GeV$^2$] & $-2.2449 \times 10^{31}$ & $-2.0345 \times 10^{31}$ & $-2.5689 \times 10^{31}$ \\
+                    $\omega_*$ [GeV] & $5.09 \times 10^{13}$ & $1.71 \times 10^{13}$ & $2.92 \times 10^{13}$ \\
+                    $\lambda_{\text{eff}} = 4A/M^4$ & $2.04 \times 10^{-10}$ & $1.33 \times 10^{-11}$ & $3.80 \times 10^{-11}$ \\
+                    \bottomrule
+                \end{tabular}
+                \caption{Casos de referencia para $n = 4$ y valores para \texttt{genemodel.in} / \texttt{gentmodel.in} ($m_p = 2.435 \times 10^{18}$\,GeV). Los recalcula \texttt{code/parametros\_cuarticos.py}.}
+                \label{tab:parametros-cuarticos}
+            \end{table}
+
+            Como chequeo, el mismo código con $\alpha_K = 1$ y $N_* = 55$ reproduce la Tabla~II del paper: $n_s = 0.9643$ (E) y $0.9636$ (T), idénticos, y $r$ a menos del $1\%$ (el paper calcula las perturbaciones exactas; nosotros usamos slow-roll). La Ec.~38 del paper sobreestima $\lambda$ en un $5\%$ (E, $\alpha_K = 1$) y un $13\%$ (E, $\alpha_K = 5$); para el T-model coincide.
+
+            Dos observaciones. Primero, $\phi_0/M = 1.20$ (E, $\alpha_K = 1$), $0.79$ (T) y $0.71$ (E, $\alpha_K = 5$): al principio el campo no está en la región cuártica, y $\omega_*$ (calculado con la aproximación local $A/M^n$) es sólo una escala de referencia hasta que la amplitud cae por debajo de $M$. Segundo, el paper no fija el acople $g$, de modo que $q$ sigue siendo una elección nuestra. Cerca del mínimo el potencial de programa es $\tilde\phi^4/4 + \tfrac12 q \tilde\phi^2\tilde\chi^2$, igual que en \texttt{lphi4}, con $q = g^2/\lambda_{\text{eff}}$; un punto de partida razonable es el $q = 300$ de \texttt{lphi4.in}.
+
+    \section{Análisis de las corridas y reescaleo a hoy}
+        \label{sec:analisis}
+
+        El script \texttt{code/analisis\_cosmolattice.py} lee el directorio de salida de una corrida y produce seis gráficos (fondo, campos, espectros de los campos, errores, GWs y energías) más un \texttt{resumen.txt}. Las fórmulas de esta sección están verificadas con sympy en \texttt{code/verificar\_reescaleo.py}, y el reescaleo a hoy está implementado en \texttt{code/reescaleo\_gws.py}.
+
+        \subsection{Qué escribe \CosmoLattice}
+
+            Todo está en variables de programa: $\tilde t$ con $d\tilde t = \omega_* a^{-\alpha} dt$, $\tilde k = k/\omega_*$, $\tilde\phi = \phi/f_*$ y $\tilde\rho = \rho/(f_*^2\omega_*^2)$, con $a = 1$ al comienzo. El script lee los parámetros del \texttt{<modelo>.infos} que deja la corrida y recalcula $f_*$, $\omega_*$ y $\alpha$ con las fórmulas de las Secs.~1--3 (o las de \texttt{lphi4}). Los archivos que usa son:
+            \begin{itemize}
+                \item \texttt{average\_scale\_factor.txt}: $\tilde t$, $a$, $a' = da/d\tilde t$ y $a'/a$. El Hubble físico es $H = \omega_* a^{-\alpha} \, a'/a$.
+                \item \texttt{average\_scalar\_i.txt}: $\langle\tilde\phi\rangle$, $\langle\tilde\phi'\rangle$, sus cuadrados y sus rms.
+                \item \texttt{average\_energies.txt}: $\tilde\rho$ cinético y de gradiente de cada campo, cada término del potencial y el total.
+                \item \texttt{average\_energy\_conservation.txt}: el error relativo de la primera ecuación de Friedmann.
+                \item \texttt{spectra\_scalar\_i.txt}: un bloque por tiempo (los tiempos están en \texttt{average\_spectra\_times.txt}) con $\tilde k$, $\Delta_{\tilde\phi}(\tilde k)$, $\Delta_{\tilde\phi'}(\tilde k)$ y la multiplicidad del bin.
+                \item \texttt{spectra\_energy\_gws.txt} y \texttt{average\_energies\_gws.txt}: $\Omega_{GW}(\tilde k, \tilde t) = \rho_{\text{tot}}^{-1} \, d\rho_{GW}/d\log k$ (normalizado por la densidad total, no por la crítica, aunque con expansión autoconsistente son lo mismo; nota técnica~II de \CosmoLattice, Sec.~4), y la integral $\rho_{GW}/\rho_{\text{tot}}$.
+            \end{itemize}
+
+        \subsection{Fondo y dinámica de los campos}
+
+            La presión se arma con los términos de energía: para cada escalar $\tilde p = \tilde K - \tilde G/3 - \tilde V$ (para campos gauge, $\tilde p = \tilde\rho/3$), y $w = \tilde p / \tilde\rho$. Para un condensado que oscila en $V \propto |\phi|^n$, el teorema del virial da $\langle\dot\phi^2\rangle = n\langle V\rangle$, y entonces
+            \begin{equation}
+                \langle w \rangle = \frac{n-2}{n+2} \, , \hspace{1cm}
+                \rho \propto a^{-3(1+w)} = a^{-6n/(n+2)} \, , \hspace{1cm}
+                \Phi \propto a^{-6/(n+2)} \, ,
+            \end{equation}
+            donde $\Phi$ es la amplitud de las oscilaciones. El script grafica $w$ instantáneo y promediado, $\tilde\rho \, a^{3(1+w_n)}$ (constante si el fondo es autosimilar) y $a^{6/(n+2)}\langle\tilde\phi\rangle$ (oscilación de amplitud constante mientras el condensado domina). Para $n = 4$: $w = 1/3$ y $\Phi \propto a^{-1}$. El promedio de $w$ se toma sobre períodos enteros de $\langle\tilde\phi\rangle$, medidos de sus cruces por cero, porque el período en $\tilde t$ depende de la amplitud: en \texttt{lphi4} es $T \simeq 6.52$ y no el $7.42$ de amplitud unidad.
+
+        \subsection{Chequeos de errores}
+
+            En variables de programa (verificado con sympy partiendo de las ecuaciones en tiempo cósmico):
+            \begin{align}
+                a'^2 &= \frac{a^{2\alpha+2}}{3} \left( \frac{f_*}{m_p} \right)^2 \tilde\rho \, , \label{eq:friedmann1}\\
+                a'' &= \frac{a^{2\alpha+1}}{6} \left( \frac{f_*}{m_p} \right)^2 \left[ (2\alpha - 1) \tilde\rho - 3\tilde p \right] \, , \label{eq:friedmann2}\\
+                \tilde\rho' &= -3 \frac{a'}{a} \left( \tilde\rho + \tilde p \right) \, , \label{eq:continuidad}
+            \end{align}
+            y la Ec.~\eqref{eq:continuidad} no depende de $\alpha$. Como chequeo, con $\alpha = 1$ y radiación ($\tilde p = \tilde\rho/3$) la Ec.~\eqref{eq:friedmann2} da $a'' = 0$, es decir $a \propto \tilde t$ (tiempo conforme). El script grafica:
+            \begin{itemize}
+                \item el error de la Ec.~\eqref{eq:friedmann1}, que calcula \CosmoLattice;
+                \item los residuos de \eqref{eq:friedmann2} y \eqref{eq:continuidad}, con las derivadas calculadas por un spline cúbico de la salida. Estos residuos están limitados por \texttt{tOutputFreq}: con diferencias centradas daban $\sim 2\%$, y con el spline quedan en $\sim 4 \times 10^{-4}$, del orden del error de Friedmann;
+                \item la cola UV, $\Delta(\tilde k_{\max})/\max\Delta$, de cada espectro: si no es chica, falta resolución;
+                \item la integral $\sum \Omega_{GW} \, \Delta k/k$ contra el $\rho_{GW}/\rho$ que escribe \CosmoLattice;
+                \item $aH/k_{\text{IR}}$, que tiene que ser $< 1$. Si no, hay modos de GWs fuera del horizonte, que no se diluyen como radiación y para los que el reescaleo de abajo no vale.
+            \end{itemize}
+
+        \subsection{Reescaleo a hoy}
+            \label{sec:reescaleo}
+
+            Sea $a_e$ el factor de escala al final de la simulación (con $a_i = 1$) y $\rho_e$ la densidad total en ese momento. Suponemos que entre $a_e$ y el comienzo de la dominación por radiación $a_{RD}$ la ecuación de estado es la autosimilar, $w = (n-2)/(n+2)$, y que después se conserva la entropía. Entonces
+            \begin{equation}
+                \rho_{RD} = \rho_e \left( \frac{a_e}{a_{RD}} \right)^{3(1+w)} = \frac{\pi^2}{30} g_* T_{RD}^4 \, ,
+                \hspace{1cm}
+                \frac{a_{RD}}{a_0} = \left( \frac{g_{s0}}{g_{s*}} \right)^{1/3} \frac{T_0}{T_{RD}} \, .
+            \end{equation}
+            Combinándolas (y usando $a_e/a_{RD} = (\rho_{RD}/\rho_e)^{1/4} \epsilon^{1/4}$),
+            \begin{equation}
+                \frac{a_e}{a_0} = \frac{\epsilon^{1/4}}{\rho_e^{1/4}} \, T_0 \left( \frac{\pi^2 g_*}{30} \right)^{1/4} \left( \frac{g_{s0}}{g_{s*}} \right)^{1/3} \, ,
+                \hspace{1cm}
+                \epsilon \equiv \left( \frac{a_e}{a_{RD}} \right)^{1 - 3w} = \left( \frac{a_e}{a_{RD}} \right)^{\frac{2(4-n)}{n+2}} \, .
+            \end{equation}
+            \paragraph{Frecuencia.} Un modo comóvil $k$ tiene hoy $f_0 = k/(2\pi a_0)$. Escribiendo $k = \tilde k \, \omega_*$ y $\rho_e = \tilde\rho_e f_*^2 \omega_*^2$,
+            \begin{equation}
+                \boxed{
+                f_0 = \frac{\tilde k}{a_e \, \tilde\rho_e^{1/4}} \left( \frac{\omega_*}{f_*} \right)^{1/2} \epsilon^{1/4} \; C_f \, ,
+                \hspace{1cm}
+                C_f = \frac{T_0}{2\pi} \left( \frac{\pi^2 g_*}{30} \right)^{1/4} \left( \frac{g_{s0}}{g_{s*}} \right)^{1/3} = 4.59 \times 10^{10}\,\text{Hz}
+                }
+            \end{equation}
+            para el Modelo Estándar ($g_* = g_{s*} = 106.75$, $g_{s0} = 3.909$, $T_0 = 2.7255$\,K). La dependencia en el modelo entra por $\omega_*/f_*$ y por $n$ (a través de $\epsilon$):
+            \begin{equation}
+                \frac{\omega_*}{f_*} = \sqrt{nA} \, \phi_0^{\frac{n-4}{2}} \;\; \text{(monomial)} \, ,
+                \hspace{1cm}
+                \frac{\omega_*}{f_*} = \sqrt{nA} \, M^{-n/2} \, \phi_0^{\frac{n-4}{2}} \;\; \text{(T y E)} \, .
+            \end{equation}
+            Para $n = 4$ no dependen de $\phi_0$: $\omega_*/f_* = \sqrt{4A}/M^2 = \sqrt{\lambda_{\text{eff}}}$ (T/E) y $\sqrt{\lambda}$ en \texttt{lphi4}.
+            \paragraph{Amplitud.} Las GWs se diluyen como radiación, $\rho_{GW} \propto a^{-4}$, así que $\Omega_{GW,0} = \Omega_{GW,e} \, \rho_e (a_e/a_0)^4 / \rho_{c,0}$. Escribiendo $\rho_{c,0} = \rho_{\gamma,0}/\Omega_{\gamma,0}$ con $\rho_{\gamma,0} = (\pi^2/30) \, 2 \, T_0^4$,
+            \begin{equation}
+                \boxed{
+                h^2 \Omega_{GW,0}(f_0) = C_\Omega \; \epsilon \; \Omega_{GW,e}(\tilde k) \, ,
+                \hspace{1cm}
+                C_\Omega = h^2 \Omega_{\gamma,0} \, \frac{g_*}{2} \left( \frac{g_{s0}}{g_{s*}} \right)^{4/3} = 1.61 \times 10^{-5}
+                }
+            \end{equation}
+            con $h^2\Omega_{\gamma,0} = 2.474 \times 10^{-5}$. La amplitud no depende de $\omega_*$: sólo de $n$, a través de $\epsilon$.
+            \paragraph{El caso cuártico.} Para $n = 4$ se tiene $1 - 3w = 0$, y entonces $\epsilon = 1$ exactamente, sin importar cuándo empieza la dominación por radiación: el resultado no depende de la historia de reheating, igual que el $N_*$ de la Sec.~\ref{sec:parametros-cuarticos}. Así,
+            \begin{equation}
+                f_0 = \frac{\tilde k \sqrt{\lambda_{\text{eff}}}}{a_e \, \tilde\rho_e^{1/4}} \times 4.59 \times 10^{10}\,\text{Hz} \, ,
+                \hspace{1cm}
+                h^2\Omega_{GW,0} = 1.61 \times 10^{-5} \; \Omega_{GW,e} \, .
+            \end{equation}
+            Para $n \ne 4$ hay que dar $a_e/a_{RD}$ (opción \texttt{--a\_e\_sobre\_a\_RD}). Si el inflatón se fragmenta, $w \to 1/3$ antes y $\epsilon \to 1$ (Sec.~VII.B de Ellis \emph{et al.}).
+
+        \subsection{Comparación con la literatura}
+
+            \begin{itemize}
+                \item \textbf{Dufaux \emph{et al.}\ 2007} (arXiv:0707.0875, Ecs.~45--47) escriben $f = k/(a_j\rho_j^{1/4}) \times 4 \times 10^{10}$\,Hz y $\Omega_{gw}h^2 = \Omega_{\text{rad}}h^2 (g_*/g_0)^{-1/3} \, \epsilon \, \Omega_{GW,e}$, con $g_*/g_0 = 100$, $g = g_s$ y $\Omega_{\text{rad}}h^2 = 4.3 \times 10^{-5}$ (lo que da $9.3 \times 10^{-6}$). Nuestras fórmulas se reducen exactamente a las suyas con $g_s = g$ (verificado con sympy). Con sus mismas hipótesis dan $C_f = 3.97 \times 10^{10}$\,Hz, y $C_\Omega = 9.26 \times 10^{-6}$ si se usa su $\Omega_{\text{rad}}h^2$ (con el nuestro, $4.16 \times 10^{-5}$, da $8.96 \times 10^{-6}$).
+                \item \textbf{Figueroa \& Torrentí 2017} (arXiv:1707.04533, Ecs.~2.24--2.27) usan la misma cadena de factores de escala y el mismo $\epsilon = (a/a_{RD})^{1-3w}$. Para la amplitud, $h^2\Omega_{\text{rad}}(g_o/g_{RD})^{1/3}$ coincide con nuestro $C_\Omega$ salvo un factor $(g_{s0}/g_0)^{4/3} = 1.22$, porque ellos toman $g_s = g$ también hoy. Para la frecuencia escriben $8 \times 10^9$\,Hz, mientras que su propia expresión con $\rho_o = 2 \times 10^{-15}\,\text{eV}^4$ da $\rho_o^{1/4}/(2\pi) = 5.1 \times 10^{10}$\,Hz, un factor $6.4 \approx 2\pi$ mayor. No pudimos reconciliar ese factor a partir del texto; nuestro $C_f$ coincide con el de Dufaux \emph{et al.}
+                \item \textbf{Prueba de punta a punta}: corrimos \texttt{lphi4} con los parámetros de Dufaux \emph{et al.}\ ($q = g^2/\lambda = 120$, hasta $\tilde t = 240$; $N = 64$, $\tilde k_{\text{IR}} = 0.7$, \texttt{withGWs = true}) y la analizamos con el script. El fondo sigue a la radiación: $\langle w\rangle = 0.334$ en los dos últimos períodos. El error de Friedmann queda por debajo de $4.0 \times 10^{-4}$, y $k_{\text{IR}}/(aH) = 162$ al final, así que todos los modos de GWs están dentro del horizonte. El pico final da $h^2\Omega_{GW,0} = 7.0 \times 10^{-11}$ en $f_0 = 1.09 \times 10^8$\,Hz, contra $h^2\Omega_{gw} \sim 3 \times 10^{-11}$ en $f \sim 7 \times 10^7$\,Hz del paper (su Fig.~4). Pasado a sus constantes ($9.3 \times 10^{-6}$ y $4 \times 10^{10}$\,Hz) nuestro pico queda en $4.1 \times 10^{-11}$ y $9.5 \times 10^7$\,Hz: un factor $\sim 1.4$ en ambos. Es una concordancia razonable, porque el espectro es ancho (varía menos de un factor 2 en $1 \lesssim \tilde k \lesssim 10$), nuestra caja es chica ($\Delta \tilde k / \tilde k = 20\%$ en el pico) y el código y las condiciones iniciales son distintos. No es una reproducción fina.
+            \end{itemize}
+
+        \subsection{Uso}
+
+            {\footnotesize\begin{verbatim}
+python3 code/analisis_cosmolattice.py DIR_DE_LA_CORRIDA [--gstar 106.75] [--a_e_sobre_a_RD 1]
+python3 code/verificar_reescaleo.py      # sympy + comparación con la literatura
+            \end{verbatim}}
+            Para que haya espectro de GWs hay que correr con \texttt{withGWs = true}.
+
+    \section{Corridas cuárticas: archivos y requisitos de memoria y tiempo}
+        \label{sec:recursos}
+
+        \subsection{Los \texttt{.in}}
+
+            Los tres casos de la Tabla~\ref{tab:parametros-cuarticos} quedaron en \texttt{models/parameter-files/}: \texttt{gentmodel\_cuartico.in} (T, $\alpha_K = 1$), \texttt{genemodel\_cuartico.in} (E, $\alpha_K = 1$) y \texttt{genemodel\_cuartico\_aK5.in} (E, $\alpha_K = 5$); el monomial de control \texttt{genmonomial\_cuartico.in} se describe en la Sec.~\ref{sec:control}. Los tres usan \texttt{withGWs = true}, $n = 4$, $q = 120$ (el de Dufaux \emph{et al.}, con el que se comparó el analizador en la Sec.~5.5), $N = 64$, $\tilde k_{\text{IR}} = 0.7$, $\delta\tilde t = 0.01$ y \texttt{VV2}. \texttt{code/parametros\_cuarticos.py} comprueba que $M$, $A$, $\phi_0$ y $\dot\phi_0$ coinciden con la tabla (diferencia relativa $\le 1.3 \times 10^{-5}$, por el redondeo).
+
+            Con $N = 32$ los tres corren hasta el final, con $\langle w\rangle \to 1/3$ y error de Friedmann $\le 5 \times 10^{-4}$. Al comienzo $a'/a = 0.44$ (T), $0.16$ (E, $\alpha_K = 1$) y $0.32$ (E, $\alpha_K = 5$), todos menores que $\tilde k_{\text{IR}}$, así que ningún modo arranca fuera del horizonte. El campo hijo crece por resonancia y $\rho_{GW}/\rho$ llega a $\sim 10^{-5}$, pero lo hace lentamente: alcanza el $90\%$ de su valor final en $\tilde t \simeq 270$ (T), $360$ (E, $\alpha_K = 5$) y $420$ (E, $\alpha_K = 1$, que en $\tilde t = 500$ todavía crece un $10\%$). Por eso $\tilde t_{\max} = 500$, y $600$ para el E-model con $\alpha_K = 1$.
+
+        \subsection{Memoria}
+
+            Medida como el máximo de memoria residente (\texttt{/usr/bin/time}) en corridas de pocos pasos con dos escalares:
+            \begin{equation}
+                \text{RSS} \simeq 10\,\text{MB} + b \, N^3 \, ,
+                \hspace{1cm}
+                b \simeq
+                \begin{cases}
+                    148\,\text{B/sitio} & \text{con GWs} \\
+                    63\,\text{B/sitio} & \text{sin GWs}
+                \end{cases}
+            \end{equation}
+            Con GWs se midieron 13, 48, 310, 592 y 1011\,MB para $N = 32$, 64, 128, 160 y 192; la estimación que imprime \CosmoLattice al empezar queda un $\sim 30\%$ por debajo. Los $148$\,B son unos 18 números de doble precisión por sitio: $\phi$, $\pi$ de los dos escalares, las 6 componentes de $h_{ij}$ y sus 6 momentos, más temporarios. La máquina tiene 3.7\,GB de RAM, con $\sim 2$\,GB libres en uso normal, de modo que:
+            \begin{itemize}
+                \item $N \le 192$ (1.06\,GB) entra. Para $N = 192$ conviene cerrar el navegador.
+                \item $N = 224$ (1.7\,GB) queda al límite.
+                \item $N = 256$ (2.5\,GB con GWs) no entra: pasaría a swap y el tiempo se dispara. Sin GWs (1.1\,GB) sí entraría.
+            \end{itemize}
+
+        \subsection{Tiempo}
+
+            El costo por paso escala como $N^3$: $\simeq 140$\,ns por sitio con GWs y $84$\,ns sin GWs, con 8 hilos (medido restando dos corridas de distinta duración, para descontar la inicialización). En números: $N = 64$, 32\,ms/paso; $N = 128$, 0.30\,s/paso; $N = 192$, 1.0\,s/paso. Con 4 hilos (los núcleos físicos) es un $\sim 13\%$ más lento, así que conviene \texttt{OMP\_NUM\_THREADS=8}. Cada espectro (\texttt{tOutputInfreq}) cuesta lo mismo que $\sim 3$ pasos, despreciable con \texttt{tOutputInfreq = 10}. El tiempo total es
+            \begin{equation}
+                t_{\text{total}} \simeq 140\,\text{ns} \times N^3 \times \frac{\tilde t_{\max}}{\delta\tilde t} \, .
+            \end{equation}
+
+        \subsection{El paso temporal}
+
+            En variables de programa con $n = 4$ y $\alpha = 1$, la frecuencia más alta de la grilla no crece con $a$ (Sec.~\ref{sec:estabilidad}):
+            \begin{equation}
+                \tilde\omega_{\max}^2 \simeq \left( \frac{2\sqrt 3}{\delta\tilde x} \right)^2 + q \, (a\tilde\phi)^2 \, ,
+                \hspace{1cm}
+                \delta \tilde x = \frac{2\pi}{N \tilde k_{\text{IR}}} \, ,
+            \end{equation}
+            con $a\tilde\phi \lesssim 1$. \texttt{VV2} es estable si $\tilde\omega_{\max}\delta\tilde t < 2$. Comprobamos tres cosas:
+            \begin{itemize}
+                \item \textbf{Barrido en $\delta\tilde t$} ($N = 32$, $\tilde t_{\max} = 300$; $\delta\tilde t = 0.04$, 0.02, 0.01, 0.005): el error máximo de Friedmann da $9.9 \times 10^{-3}$, $2.2 \times 10^{-3}$, $5.6 \times 10^{-4}$ y $1.4 \times 10^{-4}$, es decir $\simeq 5.6\,\delta\tilde t^{\,2}$, como corresponde a un integrador de segundo orden. En la etapa no lineal ese error crece con $N$, porque se pueblan más modos: con $\delta\tilde t = 0.01$ el máximo pasa de $5.6 \times 10^{-4}$ ($N = 32$) a $1.3 \times 10^{-3}$ ($N = 64$, corrida completa). Si para $N \ge 128$ se quiere mantenerlo por debajo de $10^{-3}$, conviene bajar a $\delta\tilde t = 0.007$, lo que alarga el tiempo un $40\%$. El $\rho_{GW}/\rho$ final varía un $\pm 10\%$ sin tendencia con $\delta\tilde t$: es la sensibilidad propia de la dinámica no lineal, y conviene tomarla como la incerteza de una sola corrida.
+                \item \textbf{¿Hace falta bajar $\delta\tilde t$ al subir $N$?} Corrimos $N = 32$ con $\tilde k_{\text{IR}} = 2.8$ y $4.2$, que tienen la misma $\delta\tilde x$ que $N = 128$ y $192$ con $\tilde k_{\text{IR}} = 0.7$ (y sin \texttt{kCutOff}, para poblar el UV). Con $\delta\tilde t = 0.01$ ($\tilde\omega_{\max}\delta\tilde t$ hasta $0.75$) contra $0.005$, $\rho_{GW}/\rho$ cambia menos de un $1\%$. Por lo tanto $\delta\tilde t = 0.01$ sirve hasta $N = 192$ y no hace falta la regla $\delta\tilde t \propto 1/N$.
+                \item \textbf{Regla adoptada}: $\delta\tilde t = \min(0.01, \; 0.75/\tilde\omega_{\max})$. Con $\tilde k_{\text{IR}} = 0.7$ sólo empieza a bajar a partir de $N \simeq 210$.
+            \end{itemize}
+
+        \subsection{Recomendación}
+
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{ccccccc}
+                    \toprule
+                    $N$ & $\tilde k_{\text{IR}}$ & $\tilde k_{\max}$ & $\delta\tilde t$ & memoria & s/paso & $\tilde t_{\max} = 500$ \\
+                    \midrule
+                    32  & 0.7   & 19  & 0.01 & 0.01\,GB & 0.005 & 4\,min \\
+                    64  & 0.7   & 39  & 0.01 & 0.05\,GB & 0.037 & 0.5\,h \\
+                    128 & 0.35  & 39  & 0.01 & 0.32\,GB & 0.29  & 4.1\,h \\
+                    192 & 0.233 & 39  & 0.01 & 1.06\,GB & 0.99  & 14\,h \\
+                    256 & --    & --  & --   & 2.5\,GB  & 2.3   & no entra \\
+                    \bottomrule
+                \end{tabular}
+                \caption{Costo con GWs y 8 hilos (estimado con \texttt{code/recursos\_cosmolattice.py}, a partir de las mediciones de arriba).}
+                \label{tab:recursos}
+            \end{table}
+
+            Con $N = 64$ la cola UV de los espectros ya es chica ($\Delta(\tilde k_{\max})/\max\Delta \lesssim 10^{-7}$ para los campos), pero el pico de GWs cae en $\tilde k \sim 3$--$11$, donde los bins de $\tilde k_{\text{IR}} = 0.7$ son anchos. Por eso, al subir $N$ conviene \textbf{mantener $\tilde k_{\max}$ y bajar $\tilde k_{\text{IR}}$ como $0.7 \times 64/N$}. Así se agranda la caja y se resuelve mejor el pico, sin cambiar $\delta\tilde t$, y el costo sigue escalando como $N^3$. Con $\tilde k_{\text{IR}} = 0.35$ el T-model arranca con los modos más IR fuera del horizonte ($a'/a = 0.44$), pero salen enseguida, porque $aH$ cae como $1/\tilde t$. El chequeo $aH/k_{\text{IR}} < 1$ del analizador lo verifica al final.
+
+            Pasos sugeridos:
+            \begin{enumerate}
+                \item Explorar con $N = 64$ (media hora por corrida).
+                \item Correr las de producción con $N = 128$, $\tilde k_{\text{IR}} = 0.35$ (unas 4\,h, por ejemplo de noche).
+                \item Reservar $N = 192$ para una única corrida de convergencia (14\,h, con la máquina descargada).
+            \end{enumerate}
+            Como es una notebook (i7-8565U), en corridas largas puede bajar la frecuencia por temperatura, así que los tiempos son una cota inferior. Por ejemplo:
+            {\footnotesize\begin{verbatim}
+python3 code/recursos_cosmolattice.py --kmax-fijo --N 64 128 192 --tMax 500
+OMP_NUM_THREADS=8 ./gentmodel input=../models/parameter-files/gentmodel_cuartico.in N=128 kIR=0.35
+            \end{verbatim}}
+            Para correr los tres casos en secuencia (compila los ejecutables si faltan, verifica antes de empezar que la memoria alcance, saltea las corridas ya terminadas y analiza cada una al terminar):
+            {\footnotesize\begin{verbatim}
+nohup code/correr_cuarticos.sh 128 > corridas_N128.log 2>&1 &   # kIR = 0.7*64/N por defecto
+DT=0.007 MODELOS="gentmodel_cuartico" code/correr_cuarticos.sh 128
+            \end{verbatim}}
+            Las salidas quedan en \texttt{build\_corridas/<caso>\_N<N>\_kIR<kIR>/}.
+            \paragraph{Validación con $N = 64$.} Corrimos \texttt{gentmodel\_cuartico.in} tal como está (N = 64, $\tilde t_{\max} = 500$). Tardó 28\,min (33.5\,ms/paso; la estimación era 30\,min), y el analizador da:
+            \begin{itemize}
+                \item fondo: $\langle w\rangle = 0.333$, error máximo de Friedmann $1.3 \times 10^{-3}$, colas UV $\le 10^{-8}$ y $k_{\text{IR}}/(aH) = 344$ al final;
+                \item GWs: $\rho_{GW}/\rho = 1.1 \times 10^{-5}$, que llega al $90\%$ de su valor final en $\tilde t \simeq 260$ (con $N = 32$ era $270$), y un pico hoy de $h^2\Omega_{GW,0} = 8.7 \times 10^{-11}$ en $f_0 = 4.1 \times 10^8$\,Hz.
+            \end{itemize}
+            Con $N = 32$ el $\rho_{GW}/\rho$ final era $1.8 \times 10^{-5}$: un $40\%$ de diferencia entre las dos resoluciones. Es una razón más para hacer las corridas de producción con $N = 128$ y comparar.
+
+    \section{Guía de uso: los cuatro casos, sus parámetros y cómo correrlos}
+        \label{sec:guia}
+
+        \subsection{Los cuatro casos}
+
+            \begin{table}[H]
+                \centering
+                \footnotesize
+                \setlength{\tabcolsep}{3pt}
+                \begin{tabular}{lcccc}
+                    \toprule
+                    & T, $\alpha_K = 1$ & E, $\alpha_K = 5$ & E, $\alpha_K = 1$ & monomial (control) \\
+                    \midrule
+                    archivo \texttt{.in} & \texttt{gentmodel\_cuartico} & \texttt{genemodel\_cuartico\_aK5} & \texttt{genemodel\_cuartico} & \texttt{genmonomial\_cuartico} \\
+                    ejecutable & \texttt{gentmodel} & \texttt{genemodel} & \texttt{genemodel} & \texttt{genmonomial} \\
+                    $V(\phi)$ & $A\tanh^4(\phi/M)$ & $A(1-e^{-\phi/M})^4$ & $A(1-e^{-\phi/M})^4$ & $A\phi^4$ \\
+                    \texttt{M} [GeV] & $5.96451 \times 10^{18}$ & $6.66852 \times 10^{18}$ & $2.98225 \times 10^{18}$ & -- \\
+                    \texttt{A} [GeV$^4$ o adim.] & $4.21854 \times 10^{63}$ & $1.87750 \times 10^{64}$ & $4.02858 \times 10^{63}$ & $3.33322 \times 10^{-12}$ \\
+                    $\phi_0 = f_*$ [GeV] & $4.69413 \times 10^{18}$ & $4.73073 \times 10^{18}$ & $3.56906 \times 10^{18}$ & $6.88722 \times 10^{18}$ \\
+                    $\dot\phi_0$ [GeV$^2$] & $-2.0345 \times 10^{31}$ & $-2.5689 \times 10^{31}$ & $-2.2449 \times 10^{31}$ & $-6.2899 \times 10^{31}$ \\
+                    $\omega_*$ [GeV] & $1.714 \times 10^{13}$ & $2.915 \times 10^{13}$ & $5.094 \times 10^{13}$ & $2.515 \times 10^{13}$ \\
+                    $\omega_*/f_* = \sqrt{\lambda_{\text{eff}}}$ & $3.651 \times 10^{-6}$ & $6.163 \times 10^{-6}$ & $1.427 \times 10^{-5}$ & $3.651 \times 10^{-6}$ \\
+                    $q$ & 120 & 120 & 120 & 120 \\
+                    \texttt{tMax} & 500 & 500 & 600 & 500 \\
+                    $n_s$, $r$ & 0.964, 0.004 & 0.965, 0.015 & 0.965, 0.004 & 0.946, 0.29 (excluido) \\
+                    \bottomrule
+                \end{tabular}
+                \caption{Los cuatro casos cuárticos ($n = 4$, por lo tanto $\alpha = 1$ en \CosmoLattice). En los tres primeros, \texttt{A} está en GeV$^4$ porque multiplica una función adimensional; en el monomial es adimensional ($V = A\phi^4$). Todos los valores los recalcula \texttt{code/parametros\_cuarticos.py}, que además comprueba que coinciden con los \texttt{.in}.}
+                \label{tab:casos}
+            \end{table}
+
+        \subsection{El monomial de control}
+            \label{sec:control}
+
+            \texttt{genmonomial\_cuartico.in} \textbf{no es un modelo del paper}: $\lambda\phi^4/4$ como modelo de inflación predice $n_s = 1 - 3/(N_*+1) = 0.946$ y $r = 16/(N_*+1) = 0.29$ para $N_* = 55$ (slow-roll, con $\phi_*^2 = 8(N_*+1)\,m_p^2$), y la cota $r < 0.036$ lo excluye. Lo incluimos para separar qué parte de la señal viene del plateau de los $\alpha$-attractors:
+            \begin{itemize}
+                \item Usa el $\lambda_{\text{eff}} = 4A_T/M_T^4 = 1.333 \times 10^{-11}$ del T-model, con $A = \lambda_{\text{eff}}/4$. Así, cerca del mínimo tiene el mismo potencial físico que el T-model. Con el mismo $q$ tiene además el mismo acople físico, $g = \sqrt{q\lambda_{\text{eff}}}$, y el mismo $\omega_*/f_*$.
+                \item La condición inicial es la de las Secs.~1.4--1.5 ($\epsilon_V = 1$): $\phi_0 = 2\sqrt 2\, m_p$. Es mayor que la del T-model, porque sin plateau el slow-roll termina más arriba. En variables de programa los dos arrancan en $\tilde\phi = 1$, pero el monomial lo hace con más energía y más expansión inicial ($a'/a = 0.92$ contra $0.44$).
+                \item Es idéntico a \texttt{lphi4} con $\lambda = \lambda_{\text{eff}}$ (Sec.~1.2), así que también sirve como puente con la comparación con Dufaux \emph{et al.}\ de la Sec.~5.5.
+            \end{itemize}
+            Con $N = 32$ la resonancia llega antes que en el T-model: el campo hijo satura en $\tilde t \simeq 80$, contra $110$ en el T-model, y $\rho_{GW}/\rho$ alcanza el $90\%$ de su valor final en $\tilde t \simeq 230$. El valor final es $2.3 \times 10^{-5}$, contra $1.8 \times 10^{-5}$ en el T-model con la misma $N$. Hay dos cosas a tener en cuenta:
+            \begin{itemize}
+                \item Como $a'/a(0) = 0.92 > \tilde k_{\text{IR}} = 0.7$, los modos más IR arrancan fuera del horizonte (al final $k_{\text{IR}}/(aH) = 343$). Por lo tanto no conviene bajar $\tilde k_{\text{IR}}$ por debajo de $\sim 0.35$ en este caso.
+                \item Con $N = 32$ la cola UV del inflatón es $\sim 10^{-3}$, peor que en los T/E-models, así que hay que correrlo con $N \ge 64$.
+            \end{itemize}
+
+        \subsection{Cada parámetro de los \texttt{.in}}
+
+            Todos los \texttt{.in} cuárticos tienen las mismas claves. Las que no aparecen toman el valor por defecto de \CosmoLattice (\texttt{include/CosmoInterface/runparameters.h}). Cualquiera se puede cambiar desde la terminal sin editar el archivo, agregando \texttt{clave=valor} al comando (ver la Sec.~\ref{sec:terminal}).
+
+            \paragraph{Salida.}
+            \begin{description}
+                \item[\texttt{outputfile = ./}] Directorio donde se escriben los archivos de salida, relativo al directorio desde el que se lanza el ejecutable.
+                \item[\texttt{print\_headers = true}] Escribe una línea de encabezado con el nombre de cada columna. El analizador la usa para identificar las columnas.
+                \item[\texttt{overwriteFiles = false}] Si en el directorio ya hay una salida, \CosmoLattice se niega a pisarla. Para repetir una corrida, pasar \texttt{overwriteFiles=true} (el script lo hace solo).
+            \end{description}
+
+            \paragraph{Evolución.}
+            \begin{description}
+                \item[\texttt{expansion = true}] Expansión autoconsistente: $a(\tilde t)$ se evoluciona con las ecuaciones de Friedmann, usando la energía de los campos.
+                \item[\texttt{evolver = VV2}] Velocity-Verlet de segundo orden para los escalares. Las GWs se evolucionan con leapfrog (\texttt{doLFforGWs = true} por defecto). Error de Friedmann $\propto \delta\tilde t^{\,2}$ (Sec.~6.4).
+            \end{description}
+
+            \paragraph{Grilla.}
+            \begin{description}
+                \item[\texttt{N = 64}] Puntos por lado; hay $N^3$ sitios. Fija la memoria ($\simeq 10\,\text{MB} + 148\,\text{B} \times N^3$) y el tiempo ($\propto N^3$). Ver la Tabla~\ref{tab:recursos}.
+                \item[\texttt{dt = 0.01}] Paso temporal en tiempo de programa $\tilde t$. Es estable y está convergido hasta $N = 192$ (Sec.~6.4).
+                \item[\texttt{kIR = 0.7}] Momento más chico de la caja, en unidades de $\omega_*$. El lado de la caja es $\tilde L = 2\pi/\tilde k_{\text{IR}} \simeq 9$, el momento máximo es $\tilde k_{\max} = \sqrt 3 N \tilde k_{\text{IR}}/2$ (39 para $N = 64$) y el ancho de los bins de los espectros es $\tilde k_{\text{IR}}$. Al subir $N$, conviene bajarlo como $0.7 \times 64/N$.
+            \end{description}
+
+            \paragraph{Tiempos de salida} (en $\tilde t$).
+            \begin{description}
+                \item[\texttt{tOutputFreq = 0.2}] Cada cuánto se escriben los promedios (\texttt{average\_*.txt}: fondo, campos, energías, Friedmann). Tiene que resolver la oscilación del inflatón (período $\tilde T \simeq 6$--$10$), porque el analizador promedia $w$ por períodos y deriva con splines.
+                \item[\texttt{tOutputInfreq = 10}] Cada cuánto se escriben los espectros de los campos y de GWs (\texttt{spectra\_*.txt}). Cada uno cuesta $\sim 3$ pasos, así que bajarlo a 5 es barato si se quieren más curvas.
+                \item[\texttt{tOutputRareFreq = 50}] Cada cuánto se toman instantáneas 3D de la energía. Sólo actúa si se piden instantáneas (claves \texttt{snapshots}, que no usamos).
+                \item[\texttt{tMax}] Tiempo final. Es 500 o 600 (Tabla~\ref{tab:casos}), elegido para que $\rho_{GW}/\rho$ haya saturado (Sec.~6.1).
+            \end{description}
+
+            \paragraph{Espectros.}
+            \begin{description}
+                \item[\texttt{PS\_type = 1}] Espectro de tipo~I: suma sobre los modos de cada bin con su multiplicidad exacta. Captura mejor la cola UV que el tipo~II (nota técnica~II de \CosmoLattice, Sec.~4.1).
+                \item[\texttt{PS\_version = 1}] Reescalea cada bin por su valor central.
+            \end{description}
+
+            \paragraph{Condiciones iniciales.}
+            \begin{description}
+                \item[\texttt{kCutOff = 18}] Las fluctuaciones cuánticas iniciales se siembran sólo en $\tilde k < 18$. Así se evita que el ruido de vacío de los modos UV, que no tiene significado físico en la grilla, genere GWs espurias. La resonancia está en $\tilde k \sim 1$--$10$.
+                \item[\texttt{initial\_amplitudes = $\phi_0$ 0}] Valor homogéneo inicial de $\phi$ y de $\chi$ en GeV. El primero fija $f_* = \phi_0$. Viene de $\epsilon_V = 1$ (Secs.~1.4, 2.3, 3.3).
+                \item[\texttt{initial\_momenta = $\dot\phi_0$ 0}] Velocidades homogéneas iniciales en GeV$^2$: slow-roll con $H$ autoconsistente (Sec.~1.5).
+                \item[\texttt{baseSeed}] (no está en los \texttt{.in}) Semilla de las fluctuaciones iniciales. Si no se da, es aleatoria y cada corrida es una realización distinta: de ahí la dispersión de $\pm 10\%$ en $\rho_{GW}/\rho$ de la Sec.~6.4. Para comparar corridas que difieren en un solo parámetro conviene fijarla (\texttt{baseSeed=1234}).
+            \end{description}
+
+            \paragraph{Modelo.}
+            \begin{description}
+                \item[\texttt{n = 4}] Potencia del potencial. Fija $\alpha = 3(n-2)/(n+2) = 1$ y la ecuación de estado $w = 1/3$.
+                \item[\texttt{M}] Escala del T/E-model en GeV: $\sqrt{6\alpha_K}\,m_p$ (T) o $\sqrt{3\alpha_K/2}\,m_p$ (E). No aparece en el monomial.
+                \item[\texttt{A}] Altura del potencial, $A = \tfrac34 \lambda m_p^4$ con $\lambda$ normalizado al CMB (Sec.~4). En el monomial, $A = \lambda_{\text{eff}}/4$.
+                \item[\texttt{q = 120}] Parámetro de resonancia $q = g^2\phi_0^2/\omega_*^2 = g^2/\lambda_{\text{eff}}$ para el acople $\tfrac12 g^2\phi^2\chi^2$. El paper no lo fija: 120 es el valor de Dufaux \emph{et al.}
+            \end{description}
+
+            \paragraph{GWs.}
+            \begin{description}
+                \item[\texttt{withGWs = true}] Evoluciona las perturbaciones tensoriales $h_{ij}$, que duplica la memoria y suma $\sim 70\%$ al tiempo por paso, y escribe \texttt{spectra\_energy\_gws.txt} y \texttt{average\_energies\_gws.txt}.
+                \item[\texttt{GWprojectorType = 1}] Proyector transverso-sin-traza construido con el momento de red $k_L = k_L^0$ (derivada centrada). Las tres opciones dan espectros casi idénticos salvo en la cola UV (nota técnica~II, Sec.~4.1).
+            \end{description}
+
+        \subsection{Cómo correrlo desde la terminal}
+            \label{sec:terminal}
+
+            Todos los comandos se escriben desde la raíz del repositorio (\texttt{CL\_GWs/}).
+
+            \paragraph{1. Estimar memoria y tiempo antes de lanzar.}
+            {\footnotesize\begin{verbatim}
+python3 code/recursos_cosmolattice.py --kmax-fijo --N 64 128 192 --tMax 500
+            \end{verbatim}}
+            Imprime $\delta\tilde t$, memoria, segundos por paso y horas totales, y avisa si no entra en la memoria libre.
+
+            \paragraph{2a. Correr los casos con el script (recomendado).}
+            {\footnotesize\begin{verbatim}
+code/correr_cuarticos.sh                 # los 3 del paper, N = 64 (~1.5 h)
+code/correr_cuarticos.sh 128             # N = 128, kIR = 0.35 (~13 h)
+CONTROL=1 code/correr_cuarticos.sh 64    # los 3 + el monomial de control (~2 h)
+MODELOS="genmonomial_cuartico" code/correr_cuarticos.sh 64   # sólo el control
+nohup code/correr_cuarticos.sh 128 > corridas_N128.log 2>&1 &  # sigue al cerrar la terminal
+            \end{verbatim}}
+            El script compila los ejecutables que falten y verifica la memoria antes de empezar. Después corre los casos uno por uno: cada uno usa los 8 hilos, así que correrlos a la vez no ahorra tiempo. Saltea los que ya terminaron (\texttt{FORZAR=1} para repetirlos) y analiza cada uno al terminar. Otras opciones: un segundo argumento para \texttt{kIR}, \texttt{DT=0.007}, \texttt{NTHREADS=4} y \texttt{EXTRA\_ARGS="baseSeed=1234 tMax=300"}. Las salidas quedan en \texttt{build\_corridas/<caso>\_N<N>\_kIR<kIR>/}, y los tiempos reales en \texttt{build\_corridas/tiempos.txt}.
+
+            \paragraph{2b. Correr un caso a mano.}
+            {\footnotesize\begin{verbatim}
+# compilar (una vez por modelo)
+mkdir -p build_genmonomial && cd build_genmonomial
+cmake .. -DMODEL=genmonomial -DCMAKE_BUILD_TYPE=Release && make -j4
+# correr (desde un directorio propio, porque escribe la salida en ./)
+mkdir -p corrida_N64 && cd corrida_N64
+OMP_NUM_THREADS=8 ../genmonomial input=../../models/parameter-files/genmonomial_cuartico.in
+# cualquier parámetro del .in se puede pisar en la línea de comandos:
+OMP_NUM_THREADS=8 ../genmonomial input=../../models/parameter-files/genmonomial_cuartico.in \
+    N=128 kIR=0.35 baseSeed=1234 overwriteFiles=true
+            \end{verbatim}}
+
+            \paragraph{3. Seguir una corrida en curso.}
+            {\footnotesize\begin{verbatim}
+tail -f build_corridas/gentmodel_cuartico_N64_kIR0.7/salida.log   # "Step ... Current time: t~"
+tail -f corridas_N128.log                                         # progreso del script
+free -h                                                           # memoria libre
+            \end{verbatim}}
+
+            \paragraph{4. Analizar.}
+            {\footnotesize\begin{verbatim}
+python3 code/analisis_cosmolattice.py build_corridas/gentmodel_cuartico_N64_kIR0.7
+            \end{verbatim}}
+            Los gráficos y el \texttt{resumen.txt} quedan en \texttt{analisis/} dentro de cada corrida (Sec.~\ref{sec:analisis}). Para comparar el control con el T-model, hay que mirar los \texttt{05\_gws.png} y \texttt{06\_energias.png} de las dos corridas con la misma $N$ y \texttt{kIR}, idealmente con la misma \texttt{baseSeed}.
+
+\end{document}

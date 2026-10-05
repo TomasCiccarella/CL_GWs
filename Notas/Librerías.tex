@@ -1,0 +1,204 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. CONFIGURACIÓN DEL DOCUMENTO, IDIOMA Y CODIFICACIÓN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- Codificación y Geometría ---
+% \usepackage[utf8]{inputenc} % (Recomendado si usas pdfLaTeX)
+% \usepackage[T1]{fontenc}    % (Recomendado para fuentes y guiones)
+
+\usepackage[spanish,es-tabla]{babel} % Soporte para idioma español, separación silábica y nombres
+\usepackage{csquotes}                % Soporte avanzado para comillas y citas (funciona con babel)
+\usepackage[a4paper, margin=2cm, marginparwidth=3cm]{geometry} % Configura márgenes y tamaño de página
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. PAQUETES DE MATEMÁTICA Y FÍSICA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}   % Comandos avanzados para entornos matemáticos
+\usepackage{amssymb}   % Símbolos matemáticos extendidos (como \mathbb)
+\usepackage{bbold}     % Fuentes "Blackboard" (para números 0, 1)
+\usepackage{bigints}   % Símbolos de integrales más grandes
+\usepackage{physics}   % Notación común en física (derivadas, \bra, \ket, etc.)
+\usepackage{cancel}    % Para tachar expresiones matemáticas
+\usepackage{bm}        % Para usar negrita en modo matemática
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. GRÁFICOS, FIGURAS, COLORES Y DIBUJO (TIKZ)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[table,xcdraw,x11names]{xcolor}      % Gestión avanzada de colores (usado por TikZ, listings, etc.)
+\usepackage{graphicx}                           % Para incluir imágenes (.png, .jpg, .pdf)
+\usepackage[export]{adjustbox}                  % Herramientas extra para imágenes (recortar, enmarcar)
+\usepackage{float}                              % Mejor control sobre la posición de flotantes [H]
+\usepackage[font=small, labelfont=bf]{caption}  % Personalización de los pies de foto/tabla
+\usepackage{subcaption}                         % Para crear subfiguras y subtables
+\usepackage{tikz}                               % Potente sistema para crear gráficos vectoriales
+\usepackage{circuitikz}                         % Extensión de TikZ para dibujar circuitos eléctricos
+
+% --- Librerías y definiciones de TikZ ---
+\usetikzlibrary{patterns, decorations.markings, arrows.meta}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\definecolor{ForestGreen}{rgb}{0.13, 0.55, 0.13}    % Define un color personalizado
+\definecolor{Yellow}{HTML}{91760D}                  % Define un color personalizado
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4. FORMATO DE PÁGINA, SECCIONES Y LISTAS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{titlesec}     % Personalización avanzada de títulos de sección
+\usepackage{multicol}     % Para crear texto en múltiples columnas
+\usepackage{enumitem}     % Personalización avanzada de listas (enumerate, itemize)
+\usepackage{wrapfig}      % Para que el texto fluya alrededor de una figura
+\usepackage{booktabs}     % Crea tablas con aspecto profesional (mejores líneas)
+\usepackage{setspace}     % Permite cambiar el interlineado (ej. \onehalfspacing)
+\usepackage{yfonts}       % Permite usar fuentes góticas (\textfrak)
+\usepackage{fontawesome}  % Íconos de Font Awesome
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 5. UTILIDADES Y ENTORNOS ESPECIALES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{todonotes}          % Añade notas (TODOs) en el margen o en línea
+\usepackage[most]{tcolorbox}    % Crea cajas de texto coloreadas y personalizables
+\usepackage{listings}           % Para insertar bloques de código fuente (Syntax Highlighting)
+\usepackage{pdfpages}           % Para incluir páginas de otros documentos PDF
+\usepackage{lipsum}             % Genera texto de relleno (Lorem Ipsum)
+\usepackage{bm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 6. ENCABEZADOS, PIES DE PÁGINA E ÍNDICES (TOC)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tocloft}      % Personalización de la Tabla de Contenidos (ToC)
+\usepackage{fancyhdr}     % Para personalizar encabezados y pies de página
+\usepackage{lastpage}     % Provee una referencia a la última página (para "Pág X de Y")
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 7. HIPERVÍNCULOS (IMPORTANTE: Cargar casi al final)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Generalmente es mejor cargar hyperref al final, ya que modifica
+% muchos comandos de LaTeX.
+\usepackage[colorlinks=true, allcolors=black]{hyperref} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 8. CONFIGURACIONES Y COMANDOS PERSONALIZADOS
+% (Deben ir después de cargar sus paquetes correspondientes)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- Config. Mates (amsmath) ---
+% Numera las ecuaciones como (sección.numero)
+\numberwithin{equation}{section} 
+
+% --- Config. Secciones y TOC (titlesec, babel) ---
+% Formato para párrafos como si fueran subtítulos
+\titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\setcounter{secnumdepth}{4} % Profundidad de numeración de secciones
+\setcounter{tocdepth}{4}    % Profundidad del índice (TOC)
+
+% --- Config. Encabezados (fancyhdr) ---
+\pagestyle{fancy}                                   % Activa el estilo personalizado
+\fancyhf{}                                          % Limpia todos los campos de encabezado y pie
+\setlength{\headheight}{16pt}                       % Aumenta el espacio para el encabezado
+\fancyhead[R]{\rightmark}                           % Pone el nombre de la sección/subsección a la derecha
+\cfoot{\thepage \hspace{1pt} de \pageref{LastPage}} % Pie de página centrado "Página X de Y"
+
+% Asegura que las subsecciones actualicen \rightmark (para el encabezado)
+\addto\captionsspanish{\renewcommand{\subsectionmark}[1]{\markright{#1}}}
+
+% --- Config. Layout (multicol) ---
+\setlength\columnsep{18pt}          % Separación entre columnas
+
+% --- Config. Utilidades (todonotes) ---
+\setuptodonotes{inline, size=\footnotesize, color=blue!20, bordercolor=none}
+
+% --- Config. Código (listings) ---
+\lstdefinelanguage{custombash}{
+    language=bash,
+    morekeywords={conda, activate, mkdir, cd, cmake, make, git, sudo},
+    sensitive=true
+}
+
+\lstdefinestyle{bashStyle}{
+    language=custombash,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{teal}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{orange},
+    identifierstyle=\color{black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=10pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    captionpos=b
+}
+
+\lstdefinestyle{pythonStyle}{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{orange},
+    identifierstyle=\color{black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=10pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    captionpos=b
+}
+
+\lstdefinestyle{cppStyle}{
+    language=C++,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=10pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    captionpos=b
+}
+
+% --- Comandos Personalizados ---
+
+% Comando para texto en un círculo (requiere TikZ)
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1.5pt] (char) {#1};}}
+
+% Comando para tachar con color (requiere cancel y xcolor)
+\newcommand{\colorcancel}[2]{\textcolor{#1}{\cancel{\textcolor{black}{#2}}}}
+
+% --- Entornos Personalizados (tcolorbox) ---
+\newtcolorbox{infobox}[2][blue]{
+    colback=#1!5!white,
+    colframe=#1!75!black,
+    title={#2},
+    fonttitle=\bfseries,
+    coltitle=black,
+    boxrule=0.8pt,
+    arc=4pt,
+    left=6pt,
+    right=6pt,
+    top=6pt,
+    bottom=6pt,
+    breakable
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

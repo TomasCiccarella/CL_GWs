@@ -1,0 +1,1559 @@
+{
+  "derivadas_max_diff": {
+    "value": 1.7e-16,
+    "statement": "Máxima diferencia entre las derivadas primera y segunda del potencial de programa escritas en genmonomial.h, gentmodel.h y genemodel.h y la derivada simbólica, sobre n en {1.5, 2, 2.5, 3, 4, 6} y phi~ en {0.3, 1, 2.5}, con M~ = 0.7.",
+    "produced_by": "code/verificar_genmodels.py::chequear_derivadas",
+    "from_scratch": "La transcripción a sympy de las expresiones de los .h (rama phi~ > 0) y la grilla de puntos.",
+    "from_library": "sympy (diff, subs).",
+    "choices": [
+      "Comparar en una grilla numérica en vez de simplificar simbólicamente la diferencia: con n simbólico y tanh/exp, sympy no siempre reduce a 0 aunque sean iguales.",
+      "Sólo la rama phi~ > 0: para phi~ < 0 el código usa x|x|^(n-2), que es la misma función extendida de forma impar/par."
+    ]
+  },
+  "phi0_genmonomial": {
+    "value": 1.03308e+19,
+    "statement": "phi_0 en GeV de genmonomial.in: epsilon_V = 1 con n = 6, phi_0 = n m_p/sqrt(2).",
+    "produced_by": "code/verificar_genmodels.py::condiciones_iniciales",
+    "from_scratch": "La fórmula cerrada de Notas.tex Sec. 1.4.",
+    "from_library": "numpy.",
+    "choices": [
+      "m_p = 2.435e18 GeV, la masa de Planck reducida que usan los .in de CosmoLattice.",
+      "epsilon_V = 1 en vez de epsilon_H = 1, por consistencia con tanh2.in."
+    ]
+  },
+  "phi0_gentmodel": {
+    "value": 4.21953e+18,
+    "statement": "phi_0 en GeV de gentmodel.in: epsilon_V = 1 con n = 2.5, M = 10 m_p, phi_0 = (M/2) arcsinh(sqrt(2) n m_p/M).",
+    "produced_by": "code/verificar_genmodels.py::condiciones_iniciales",
+    "from_scratch": "La fórmula cerrada de Notas.tex Sec. 2.3.",
+    "from_library": "numpy.",
+    "choices": [
+      "Mismas que phi0_genmonomial."
+    ]
+  },
+  "phi0_genemodel": {
+    "value": 3.96367e+18,
+    "statement": "phi_0 en GeV de genemodel.in: epsilon_V = 1 con n = 2.5, M = 10 m_p, phi_0 = M ln(1 + n m_p/(sqrt(2) M)).",
+    "produced_by": "code/verificar_genmodels.py::condiciones_iniciales",
+    "from_scratch": "La fórmula cerrada de Notas.tex Sec. 3.3.",
+    "from_library": "numpy.",
+    "choices": [
+      "Mismas que phi0_genmonomial."
+    ]
+  },
+  "pi0_genmonomial": {
+    "value": -3.0632e+31,
+    "statement": "Momento inicial en GeV^2 de genmonomial.in: phi'_0 = -sqrt((sqrt(7/3) - 1) V(phi_0)).",
+    "produced_by": "code/verificar_genmodels.py::momento_inicial",
+    "from_scratch": "La derivación de Notas.tex Sec. 1.5 (slow-roll con H autoconsistente evaluado en epsilon_V = 1).",
+    "from_library": "numpy.",
+    "choices": [
+      "H autoconsistente (incluye phi'^2/2) en vez de H^2 = V/(3 m_p^2): con H sólo potencial, para tanh2.in da -3.40e31 en lugar de -3.02e31, más lejos del -3.07e31 que trae CosmoLattice.",
+      "Signo negativo: phi_0 > 0 y el campo rueda hacia el mínimo."
+    ]
+  },
+  "pi0_gentmodel": {
+    "value": -1.9143e+31,
+    "statement": "Momento inicial en GeV^2 de gentmodel.in con la misma fórmula que pi0_genmonomial.",
+    "produced_by": "code/verificar_genmodels.py::momento_inicial",
+    "from_scratch": "Notas.tex Sec. 2.4.",
+    "from_library": "numpy.",
+    "choices": [
+      "Mismas que pi0_genmonomial."
+    ]
+  },
+  "pi0_genemodel": {
+    "value": -1.6213e+31,
+    "statement": "Momento inicial en GeV^2 de genemodel.in con la misma fórmula que pi0_genmonomial.",
+    "produced_by": "code/verificar_genmodels.py::momento_inicial",
+    "from_scratch": "Notas.tex Sec. 3.4.",
+    "from_library": "numpy.",
+    "choices": [
+      "Mismas que pi0_genmonomial."
+    ]
+  },
+  "pi0_tanh2_formula": {
+    "value": -3.019e+31,
+    "statement": "La fórmula de momento inicial aplicada a tanh2.in (Lambda4 = 1.7966e65, M = 2.435e19, phi_0 = 3.39928e18), contra el -3.0714e31 que trae ese .in.",
+    "produced_by": "code/verificar_genmodels.py::momento_inicial",
+    "from_scratch": "V(phi_0) = (Lambda4/2) tanh^2(phi_0/M) y la fórmula de Notas.tex Sec. 1.5.",
+    "from_library": "numpy.",
+    "choices": []
+  },
+  "phi_fin_exacto_genmonomial": {
+    "value": 9.0371e+18,
+    "statement": "phi en GeV donde epsilon_H = 1 en el fondo homogéneo exacto de genmonomial.in (contra phi_0 = 1.03308e19 de epsilon_V = 1).",
+    "produced_by": "code/verificar_genmodels.py::fin_exacto",
+    "from_scratch": "Las ecuaciones de fondo (Klein-Gordon + Friedmann) y el evento epsilon_H = (3/2) phi'^2/rho = 1.",
+    "from_library": "scipy.integrate.solve_ivp (RK45, rtol 1e-10).",
+    "choices": [
+      "Arrancar en 3 phi_0 con velocidad de slow-roll; el atractor borra la condición inicial mucho antes del final."
+    ]
+  },
+  "phi_fin_exacto_gentmodel": {
+    "value": 3.1754e+18,
+    "statement": "phi en GeV donde epsilon_H = 1 en el fondo exacto de gentmodel.in.",
+    "produced_by": "code/verificar_genmodels.py::fin_exacto",
+    "from_scratch": "Idem phi_fin_exacto_genmonomial.",
+    "from_library": "scipy.integrate.solve_ivp.",
+    "choices": [
+      "Arrancar en phi_0 + 3M, en la meseta."
+    ]
+  },
+  "phi_fin_exacto_genemodel": {
+    "value": 2.9485e+18,
+    "statement": "phi en GeV donde epsilon_H = 1 en el fondo exacto de genemodel.in.",
+    "produced_by": "code/verificar_genmodels.py::fin_exacto",
+    "from_scratch": "Idem phi_fin_exacto_genmonomial.",
+    "from_library": "scipy.integrate.solve_ivp.",
+    "choices": [
+      "Arrancar en phi_0 + 3M, en la meseta."
+    ]
+  },
+  "a_max_gradiente_n6": {
+    "value": 357,
+    "statement": "Factor de escala a partir del cual el término de gradiente vuelve inestable a VV2 en genmonomial.in (n = 6, N = 64, kIR = 3, dt = 0.001).",
+    "produced_by": "code/verificar_genmodels.py::cotas_estabilidad",
+    "from_scratch": "La cota de Notas.tex Sec. 1.6: k_max dt a^((2n-8)/(n+2)) < 2, k_max = 2 sqrt(3) N kIR/(2 pi).",
+    "from_library": "numpy.",
+    "choices": [
+      "k_max del laplaciano de segundo orden en la esquina de la zona de Brillouin (2 sqrt(3)/dx) y criterio de leapfrog omega dt < 2."
+    ]
+  },
+  "a_max_hija_n6": {
+    "value": 1170,
+    "statement": "Estimación del factor de escala a partir del cual la masa efectiva del campo hijo vuelve inestable a VV2 en genmonomial.in (q = 100, dt = 0.001).",
+    "produced_by": "code/verificar_genmodels.py::cotas_estabilidad",
+    "from_scratch": "sqrt(q) dt a^(3(n-4)/(n+2)) < 2, con la envolvente phi~ ~ a^(-6/(n+2)) normalizada a 1 en a = 1.",
+    "from_library": "numpy.",
+    "choices": [
+      "Envolvente autosimilar en lugar de la amplitud real, que al principio decae más lento; por eso es sólo una estimación."
+    ]
+  },
+  "a_nan_n6_q100": {
+    "value": 290,
+    "statement": "Factor de escala en el que la corrida de genmonomial (n = 6, N = 64, kIR = 3, dt = 0.001, q = 100) da NaN (a = 283 en t = 27.1, NaN en t = 27.3).",
+    "produced_by": "code/probar_genmodels.sh (corrida con EXTRA_ARGS=\"tMax=30\")",
+    "from_scratch": "Nada: es la salida de CosmoLattice (average_scale_factor.txt).",
+    "from_library": "CosmoLattice + TempLat v1.0.2, evolver VV2.",
+    "choices": [
+      "Corrida exploratoria hasta tMax = 30 para encontrar el punto de quiebre, antes de fijar tMax = 20 en el .in."
+    ]
+  },
+  "t_nan_n6_original": {
+    "value": 0.5,
+    "statement": "Tiempo de programa en el que genmonomial con los parámetros originales (q = 4e4, dt = 0.005, N = 16) da NaN.",
+    "produced_by": "code/probar_genmodels.sh (corrida con EXTRA_ARGS=\"N=16 q=4e4 dt=0.005\" y initial_momenta = 0 0, como estaba el .in original)",
+    "from_scratch": "Nada: salida de CosmoLattice.",
+    "from_library": "CosmoLattice + TempLat v1.0.2.",
+    "choices": [
+      "N = 16 para que sea rápida; el modo del campo hijo que explota es homogéneo en la práctica, así que N no cambia el resultado de forma apreciable."
+    ]
+  },
+  "a_final_genmonomial": {
+    "value": 189.2,
+    "statement": "Factor de escala al final (t = 19.9) de la corrida de genmonomial.in corregido, que termina sin NaN.",
+    "produced_by": "code/probar_genmodels.sh",
+    "from_scratch": "Nada: salida de CosmoLattice.",
+    "from_library": "CosmoLattice + TempLat v1.0.2.",
+    "choices": [
+      "tMax = 20 para quedar por debajo de a ~ 290 con margen."
+    ]
+  },
+  "friedmann_max_rel": {
+    "value": 6.2e-06,
+    "statement": "Máximo error relativo de la ecuación de Friedmann (average_energy_conservation.txt) en las tres corridas con los .in corregidos (genmonomial 1.3e-6, gentmodel 5.6e-6, genemodel 6.2e-6).",
+    "produced_by": "code/probar_genmodels.sh",
+    "from_scratch": "El máximo sobre la columna rel_diff_friedmann.",
+    "from_library": "CosmoLattice.",
+    "choices": []
+  },
+  "cuartico_E1_ns": {
+    "value": 0.9647,
+    "statement": "índice espectral escalar (slow-roll): E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_r": {
+    "value": 0.00359,
+    "statement": "cociente tensor-escalar (slow-roll): E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_lam": {
+    "value": 1.5279e-10,
+    "statement": "normalización lambda del paper fijada por A_s: E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_H_star": {
+    "value": 14860000000000.0,
+    "statement": "Hubble en GeV en phi_*: E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_M": {
+    "value": 2.98225e+18,
+    "statement": "M en GeV para el .in: E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_A": {
+    "value": 4.02858e+63,
+    "statement": "A en GeV^4 para el .in: E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_phi0": {
+    "value": 3.56906e+18,
+    "statement": "initial_amplitudes[0] en GeV (epsilon_V = 1): E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_pi0": {
+    "value": -2.2449e+31,
+    "statement": "initial_momenta[0] en GeV^2: E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_omega_star": {
+    "value": 50941000000000.0,
+    "statement": "omega_* en GeV: E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_lam_eff": {
+    "value": 2.037e-10,
+    "statement": "lambda_eff = 4A/M^4, coeficiente cuártico efectivo cerca del mínimo: E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E1_phi0_sobre_M": {
+    "value": 1.2,
+    "statement": "phi_0/M: E-model, alpha_K = 1, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_ns": {
+    "value": 0.9641,
+    "statement": "índice espectral escalar (slow-roll): T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_r": {
+    "value": 0.00376,
+    "statement": "cociente tensor-escalar (slow-roll): T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_lam": {
+    "value": 1.5999e-10,
+    "statement": "normalización lambda del paper fijada por A_s: T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_H_star": {
+    "value": 15200000000000.0,
+    "statement": "Hubble en GeV en phi_*: T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_M": {
+    "value": 5.96451e+18,
+    "statement": "M en GeV para el .in: T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_A": {
+    "value": 4.21854e+63,
+    "statement": "A en GeV^4 para el .in: T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_phi0": {
+    "value": 4.69413e+18,
+    "statement": "initial_amplitudes[0] en GeV (epsilon_V = 1): T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_pi0": {
+    "value": -2.0345e+31,
+    "statement": "initial_momenta[0] en GeV^2: T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_omega_star": {
+    "value": 17140000000000.0,
+    "statement": "omega_* en GeV: T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_lam_eff": {
+    "value": 1.333e-11,
+    "statement": "lambda_eff = 4A/M^4, coeficiente cuártico efectivo cerca del mínimo: T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_T1_phi0_sobre_M": {
+    "value": 0.79,
+    "statement": "phi_0/M: T-model, alpha_K = 1, k = 4, N_* = 55.8.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_ns": {
+    "value": 0.9652,
+    "statement": "índice espectral escalar (slow-roll): E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_r": {
+    "value": 0.01527,
+    "statement": "cociente tensor-escalar (slow-roll): E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_lam": {
+    "value": 7.1207e-10,
+    "statement": "normalización lambda del paper fijada por A_s: E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_H_star": {
+    "value": 30630000000000.0,
+    "statement": "Hubble en GeV en phi_*: E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_M": {
+    "value": 6.66852e+18,
+    "statement": "M en GeV para el .in: E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_A": {
+    "value": 1.8775e+64,
+    "statement": "A en GeV^4 para el .in: E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_phi0": {
+    "value": 4.73073e+18,
+    "statement": "initial_amplitudes[0] en GeV (epsilon_V = 1): E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_pi0": {
+    "value": -2.5689e+31,
+    "statement": "initial_momenta[0] en GeV^2: E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_omega_star": {
+    "value": 29153000000000.0,
+    "statement": "omega_* en GeV: E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_lam_eff": {
+    "value": 3.798e-11,
+    "statement": "lambda_eff = 4A/M^4, coeficiente cuártico efectivo cerca del mínimo: E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_E5_phi0_sobre_M": {
+    "value": 0.71,
+    "statement": "phi_0/M: E-model, alpha_K = 5, k = 4, N_* = 55.7.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "A_s = 2.1e-9, el valor que usa el paper (Sec. I).",
+      "N_* = 55.7 (E) y 55.8 (T) tomados de la Ec. B15 del paper para alpha_K = 1 con g_RH del MSSM; se usa 55.7 también para E con alpha_K = 5 (para k = 4 N_* depende de alpha_K sólo vía V_*/V_end, débilmente).",
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C).",
+      "Condiciones iniciales en epsilon_V = 1 con m_p = 2.435e18 GeV, por consistencia con los otros .in del repo."
+    ]
+  },
+  "cuartico_tablaII_E_ns": {
+    "value": 0.9643,
+    "statement": "n_s slow-roll para E-model k = 4, alpha_K = 1, N_* = 55, a comparar con la Tabla II del paper.",
+    "produced_by": "code/parametros_cuarticos.py::chequeo_tabla_II",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C)."
+    ]
+  },
+  "cuartico_tablaII_E_r": {
+    "value": 0.00368,
+    "statement": "r slow-roll para E-model k = 4, alpha_K = 1, N_* = 55, a comparar con la Tabla II del paper.",
+    "produced_by": "code/parametros_cuarticos.py::chequeo_tabla_II",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C)."
+    ]
+  },
+  "cuartico_tablaII_T_ns": {
+    "value": 0.9636,
+    "statement": "n_s slow-roll para T-model k = 4, alpha_K = 1, N_* = 55, a comparar con la Tabla II del paper.",
+    "produced_by": "code/parametros_cuarticos.py::chequeo_tabla_II",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C)."
+    ]
+  },
+  "cuartico_tablaII_T_r": {
+    "value": 0.00387,
+    "statement": "r slow-roll para T-model k = 4, alpha_K = 1, N_* = 55, a comparar con la Tabla II del paper.",
+    "produced_by": "code/parametros_cuarticos.py::chequeo_tabla_II",
+    "from_scratch": "Mapeo de la convención del paper (Ecs. 39-40) a A, M, n; phi_end por epsilon_H = 1 en el fondo exacto; phi_* por la Ec. 18; normalización de lam con A_s; fórmulas de condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate (quad, solve_ivp); scipy.optimize.brentq.",
+    "choices": [
+      "lam normalizado exactamente en phi_* (A_s = V/(24 pi^2 eps_V)) en vez de la Ec. 38 aproximada.",
+      "n_s y r en slow-roll (no el cálculo exacto de perturbaciones del paper, Apéndice C)."
+    ]
+  },
+  "cuartico_E1_lam_eq38": {
+    "value": 1.603e-10,
+    "statement": "lambda de la Ec. 38 del paper (24 alpha_K pi^2 A_s/N_*^2) para E-model, alpha_K = 1, k = 4, N_* = 55.7; difiere en ~5% del normalizado exactamente.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Evaluación de la Ec. 38.",
+    "from_library": "numpy.",
+    "choices": []
+  },
+  "cuartico_T1_lam_eq38": {
+    "value": 1.598e-10,
+    "statement": "lambda de la Ec. 38 del paper (24 alpha_K pi^2 A_s/N_*^2) para T-model, alpha_K = 1, k = 4, N_* = 55.8; difiere en ~0% del normalizado exactamente.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Evaluación de la Ec. 38.",
+    "from_library": "numpy.",
+    "choices": []
+  },
+  "cuartico_E5_lam_eq38": {
+    "value": 8.017e-10,
+    "statement": "lambda de la Ec. 38 del paper (24 alpha_K pi^2 A_s/N_*^2) para E-model, alpha_K = 5, k = 4, N_* = 55.7; difiere en ~13% del normalizado exactamente.",
+    "produced_by": "code/parametros_cuarticos.py::calcular",
+    "from_scratch": "Evaluación de la Ec. 38.",
+    "from_library": "numpy.",
+    "choices": []
+  },
+  "C_f_SM": {
+    "value": 45909000000.0,
+    "statement": "Constante de frecuencia de hoy C_f [Hz] con g_* = g_s* = 106.75: f_0 = k~ (omega_*/f_*)^(1/2) eps^(1/4) C_f/(a_e rho~_e^(1/4)).",
+    "produced_by": "code/reescaleo_gws.py::C_f",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "C_Omega_SM": {
+    "value": 1.6055e-05,
+    "statement": "Constante de amplitud C_Omega con g_* = g_s* = 106.75: h^2 Omega_GW,0 = C_Omega eps Omega_GW,e.",
+    "produced_by": "code/reescaleo_gws.py::C_Omega",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "omega_gamma_h2": {
+    "value": 2.4736e-05,
+    "statement": "h^2 Omega_gamma,0 = (pi^2/15) T_0^4/(3 m_p^2 H_100^2).",
+    "produced_by": "code/reescaleo_gws.py::omega_gamma_h2",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "Omega_rad_h2": {
+    "value": 4.159e-05,
+    "statement": "h^2 Omega_rad,0 = h^2 Omega_gamma,0 g_0/2.",
+    "produced_by": "code/verificar_reescaleo.py::comparar_literatura",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "C_f_dufaux": {
+    "value": 39680000000.0,
+    "statement": "C_f con las hipótesis de Dufaux et al. 2007 (g_*/g_0 = 100, g = g_s); el paper da 4e10 Hz.",
+    "produced_by": "code/verificar_reescaleo.py::comparar_literatura",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "C_Omega_dufaux": {
+    "value": 8.96e-06,
+    "statement": "C_Omega con las hipótesis de Dufaux et al. y nuestro Omega_rad h^2; el paper da 9.3e-6 con Omega_rad h^2 = 4.3e-5.",
+    "produced_by": "code/verificar_reescaleo.py::comparar_literatura",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "C_Omega_dufaux_su_Orad": {
+    "value": 9.264e-06,
+    "statement": "C_Omega con las hipótesis de Dufaux et al. y su Omega_rad h^2 = 4.3e-5 (paper: 9.3e-6).",
+    "produced_by": "code/verificar_reescaleo.py::comparar_literatura",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "C_f_FT_sin_g": {
+    "value": 51130000000.0,
+    "statement": "rho_0^(1/4)/(2 pi) en Hz con rho_0 = 2e-15 eV^4 de Figueroa & Torrenti 2017 Ec. 2.26, que escriben 8e9 Hz (factor 6.4 ~ 2 pi).",
+    "produced_by": "code/verificar_reescaleo.py::comparar_literatura",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "cociente_FT": {
+    "value": 1.222,
+    "statement": "Cociente entre nuestro C_Omega(g=100) y h^2 Omega_rad (g_o/g_RD)^(1/3) de Figueroa & Torrenti Ec. 2.27; es (g_s0/g_0)^(4/3).",
+    "produced_by": "code/verificar_reescaleo.py::comparar_literatura",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "T_0 = 2.7255 K, H_100 en unidades naturales con hbar = 6.582119569e-25 GeV s.",
+      "g_s0 = 2 + (7/8) 6 (4/11) = 3.909 y g_0 = 3.363 (tres neutrinos sin masa); se distingue g de g_s, a diferencia de Dufaux et al. y Figueroa & Torrenti.",
+      "Modelo Estándar g_* = g_s* = 106.75 por defecto (el paper de Ellis et al. usa MSSM, 228.75, para N_*)."
+    ]
+  },
+  "T_osc_lphi4": {
+    "value": 6.5248,
+    "statement": "Período de <phi~> en tiempo de programa medido en la corrida de prueba lphi4 (N = 32), de los cruces por cero; el de amplitud 1 es 7.4163.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "Período de los últimos cruces por cero en vez del teórico, porque depende de la amplitud."
+    ]
+  },
+  "w_final_lphi4": {
+    "value": 0.3306,
+    "statement": "<w> sobre los dos últimos períodos en la corrida de prueba lphi4 (N = 32, t~ = 40); el autosimilar es 1/3.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "Promedio sobre períodos enteros de <phi~> medidos de los cruces por cero."
+    ]
+  },
+  "residuo_continuidad_lphi4": {
+    "value": 0.000403,
+    "statement": "Mediana del residuo relativo de la ecuación de continuidad en programa, corrida de prueba lphi4 N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "Derivadas por spline cúbico (con diferencias centradas el residuo era ~2e-2, limitado por tOutputFreq = 0.2).",
+      "Se descartan 3 puntos en cada borde."
+    ]
+  },
+  "residuo_app_lphi4": {
+    "value": 0.000261,
+    "statement": "Mediana del residuo relativo de la 2da ec. de Friedmann en programa, corrida de prueba lphi4 N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": [
+      "Igual que residuo_continuidad_lphi4."
+    ]
+  },
+  "friedmann_lphi4_test": {
+    "value": 0.000404,
+    "statement": "Máximo |rel_diff_friedmann| de CosmoLattice en la corrida de prueba lphi4 N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Derivación de la cadena de factores de escala (Notas.tex Sec. 5.4) e implementación en reescaleo_gws.py.",
+    "from_library": "numpy",
+    "choices": []
+  },
+  "q120_Omega_pico": {
+    "value": 7.0298e-11,
+    "statement": "h^2 Omega_GW,0 en el pico del último espectro de la corrida q = 120.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice y reescaleo de reescaleo_gws.py.",
+    "from_library": "numpy, scipy (CubicSpline), matplotlib.",
+    "choices": [
+      "Corrida lphi4 de este repo con q = 120, N = 64, kIR = 0.7, dt = 0.01, tMax = 240, withGWs = true (build_analisis/run_q120), para comparar con Dufaux et al. 2007 Fig. 4.",
+      "g_* = g_s* = 106.75 y eps = 1 (n = 4)."
+    ]
+  },
+  "q120_f_pico": {
+    "value": 109450000.0,
+    "statement": "f_0 [Hz] del pico del último espectro de GWs de la corrida q = 120 (k~ = 3.5).",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice y reescaleo de reescaleo_gws.py.",
+    "from_library": "numpy, scipy (CubicSpline), matplotlib.",
+    "choices": [
+      "Corrida lphi4 de este repo con q = 120, N = 64, kIR = 0.7, dt = 0.01, tMax = 240, withGWs = true (build_analisis/run_q120), para comparar con Dufaux et al. 2007 Fig. 4.",
+      "g_* = g_s* = 106.75 y eps = 1 (n = 4)."
+    ]
+  },
+  "q120_w_final": {
+    "value": 0.334,
+    "statement": "<w> sobre los dos últimos períodos en la corrida q = 120.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice y reescaleo de reescaleo_gws.py.",
+    "from_library": "numpy, scipy (CubicSpline), matplotlib.",
+    "choices": [
+      "Corrida lphi4 de este repo con q = 120, N = 64, kIR = 0.7, dt = 0.01, tMax = 240, withGWs = true (build_analisis/run_q120), para comparar con Dufaux et al. 2007 Fig. 4.",
+      "g_* = g_s* = 106.75 y eps = 1 (n = 4)."
+    ]
+  },
+  "q120_kIR_aH": {
+    "value": 162,
+    "statement": "k_IR/(aH) al final de la corrida q = 120.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice y reescaleo de reescaleo_gws.py.",
+    "from_library": "numpy, scipy (CubicSpline), matplotlib.",
+    "choices": [
+      "Corrida lphi4 de este repo con q = 120, N = 64, kIR = 0.7, dt = 0.01, tMax = 240, withGWs = true (build_analisis/run_q120), para comparar con Dufaux et al. 2007 Fig. 4.",
+      "g_* = g_s* = 106.75 y eps = 1 (n = 4)."
+    ]
+  },
+  "q120_friedmann": {
+    "value": 0.000404,
+    "statement": "Máximo |rel_diff_friedmann| en la corrida q = 120.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice y reescaleo de reescaleo_gws.py.",
+    "from_library": "numpy, scipy (CubicSpline), matplotlib.",
+    "choices": [
+      "Corrida lphi4 de este repo con q = 120, N = 64, kIR = 0.7, dt = 0.01, tMax = 240, withGWs = true (build_analisis/run_q120), para comparar con Dufaux et al. 2007 Fig. 4.",
+      "g_* = g_s* = 106.75 y eps = 1 (n = 4)."
+    ]
+  },
+  "q120_Omega_pico_const_dufaux": {
+    "value": 4.07e-11,
+    "statement": "Pico de la corrida q = 120 con las constantes de Dufaux et al. (7.03e-11 x 9.3e-6/1.6055e-5); el paper da ~3e-11.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice y reescaleo de reescaleo_gws.py.",
+    "from_library": "numpy, scipy (CubicSpline), matplotlib.",
+    "choices": [
+      "Corrida lphi4 de este repo con q = 120, N = 64, kIR = 0.7, dt = 0.01, tMax = 240, withGWs = true (build_analisis/run_q120), para comparar con Dufaux et al. 2007 Fig. 4.",
+      "g_* = g_s* = 106.75 y eps = 1 (n = 4)."
+    ]
+  },
+  "q120_f_pico_const_dufaux": {
+    "value": 95000000.0,
+    "statement": "Frecuencia del pico con la constante de Dufaux et al. (1.0945e8 x 4e10/4.591e10); el paper da ~7e7 Hz.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice y reescaleo de reescaleo_gws.py.",
+    "from_library": "numpy, scipy (CubicSpline), matplotlib.",
+    "choices": [
+      "Corrida lphi4 de este repo con q = 120, N = 64, kIR = 0.7, dt = 0.01, tMax = 240, withGWs = true (build_analisis/run_q120), para comparar con Dufaux et al. 2007 Fig. 4.",
+      "g_* = g_s* = 106.75 y eps = 1 (n = 4)."
+    ]
+  },
+  "q120_cociente_espectro_1_10": {
+    "value": 1.67,
+    "statement": "max/min de h^2 Omega_GW,0 final para 1 <= k~ <= 10 en la corrida q = 120 (7.03e-11/4.20e-11).",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida de CosmoLattice y reescaleo de reescaleo_gws.py.",
+    "from_library": "numpy, scipy (CubicSpline), matplotlib.",
+    "choices": [
+      "Corrida lphi4 de este repo con q = 120, N = 64, kIR = 0.7, dt = 0.01, tMax = 240, withGWs = true (build_analisis/run_q120), para comparar con Dufaux et al. 2007 Fig. 4.",
+      "g_* = g_s* = 106.75 y eps = 1 (n = 4)."
+    ]
+  },
+  "rss_gw_N32": {
+    "value": 13,
+    "statement": "Memoria residente máxima [MB] con GWs, N = 32.",
+    "produced_by": "medición manual con /usr/bin/time (build_analisis/bench, build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Máximo de memoria residente con /usr/bin/time -f %M, corridas de lphi4 (2 escalares) de pocos pasos; gentmodel da los mismos valores (48 MB N=64, 310 MB N=128, 1011 MB N=192).",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "rss_gw_N64": {
+    "value": 48,
+    "statement": "Memoria residente máxima [MB] con GWs, N = 64.",
+    "produced_by": "medición manual con /usr/bin/time (build_analisis/bench, build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Máximo de memoria residente con /usr/bin/time -f %M, corridas de lphi4 (2 escalares) de pocos pasos; gentmodel da los mismos valores (48 MB N=64, 310 MB N=128, 1011 MB N=192).",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "rss_gw_N128": {
+    "value": 310,
+    "statement": "Memoria residente máxima [MB] con GWs, N = 128.",
+    "produced_by": "medición manual con /usr/bin/time (build_analisis/bench, build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Máximo de memoria residente con /usr/bin/time -f %M, corridas de lphi4 (2 escalares) de pocos pasos; gentmodel da los mismos valores (48 MB N=64, 310 MB N=128, 1011 MB N=192).",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "rss_gw_N160": {
+    "value": 592,
+    "statement": "Memoria residente máxima [MB] con GWs, N = 160.",
+    "produced_by": "medición manual con /usr/bin/time (build_analisis/bench, build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Máximo de memoria residente con /usr/bin/time -f %M, corridas de lphi4 (2 escalares) de pocos pasos; gentmodel da los mismos valores (48 MB N=64, 310 MB N=128, 1011 MB N=192).",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "rss_gw_N192": {
+    "value": 1011,
+    "statement": "Memoria residente máxima [MB] con GWs, N = 192.",
+    "produced_by": "medición manual con /usr/bin/time (build_analisis/bench, build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Máximo de memoria residente con /usr/bin/time -f %M, corridas de lphi4 (2 escalares) de pocos pasos; gentmodel da los mismos valores (48 MB N=64, 310 MB N=128, 1011 MB N=192).",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "bytes_por_sitio_gw": {
+    "value": 148,
+    "statement": "Bytes por sitio de la memoria residente con GWs ((310-10) MB / 128^3, coincide con N = 192).",
+    "produced_by": "code/recursos_cosmolattice.py (constante B_GW)",
+    "from_scratch": "Ajuste a mano de las mediciones rss_gw_N*.",
+    "from_library": "-",
+    "choices": [
+      "Máximo de memoria residente con /usr/bin/time -f %M, corridas de lphi4 (2 escalares) de pocos pasos; gentmodel da los mismos valores (48 MB N=64, 310 MB N=128, 1011 MB N=192).",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "bytes_por_sitio_sin_gw": {
+    "value": 63,
+    "statement": "Bytes por sitio sin GWs ((142-10) MB / 128^3).",
+    "produced_by": "code/recursos_cosmolattice.py (constante B_SIN)",
+    "from_scratch": "Ajuste a mano.",
+    "from_library": "-",
+    "choices": [
+      "Máximo de memoria residente con /usr/bin/time -f %M, corridas de lphi4 (2 escalares) de pocos pasos; gentmodel da los mismos valores (48 MB N=64, 310 MB N=128, 1011 MB N=192).",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "t_paso_N64": {
+    "value": 32.0,
+    "statement": "ms por paso, gentmodel con GWs, N = 64.",
+    "produced_by": "medición manual (build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Diferencia entre dos corridas de distinta tMax con tOutputInfreq = 100, para descontar inicialización y espectros.",
+      "OMP_NUM_THREADS = 8.",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "t_paso_N128": {
+    "value": 295.3,
+    "statement": "ms por paso, gentmodel con GWs, N = 128.",
+    "produced_by": "medición manual (build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Diferencia entre dos corridas de distinta tMax con tOutputInfreq = 100, para descontar inicialización y espectros.",
+      "OMP_NUM_THREADS = 8.",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "t_paso_N192": {
+    "value": 995.0,
+    "statement": "ms por paso, gentmodel con GWs, N = 192.",
+    "produced_by": "medición manual (build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Diferencia entre dos corridas de distinta tMax con tOutputInfreq = 100, para descontar inicialización y espectros.",
+      "OMP_NUM_THREADS = 8.",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "t_paso_sin_gw_N128": {
+    "value": 175.5,
+    "statement": "ms por paso, gentmodel sin GWs, N = 128 (84 ns/sitio).",
+    "produced_by": "medición manual (build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Diferencia entre dos corridas de distinta tMax con tOutputInfreq = 100, para descontar inicialización y espectros.",
+      "OMP_NUM_THREADS = 8.",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "ns_por_sitio_gw": {
+    "value": 140,
+    "statement": "ns por sitio y por paso con GWs (N = 128 y 192).",
+    "produced_by": "medición manual (build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Diferencia entre dos corridas de distinta tMax con tOutputInfreq = 100, para descontar inicialización y espectros.",
+      "OMP_NUM_THREADS = 8.",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "hilos_4_vs_8": {
+    "value": 1.138,
+    "statement": "Cociente de tiempos con 4 y 8 hilos, N = 128 (33.34 s / 29.29 s).",
+    "produced_by": "medición manual (build_gentmodel/bench)",
+    "from_scratch": "Comando de medición.",
+    "from_library": "GNU time.",
+    "choices": [
+      "Diferencia entre dos corridas de distinta tMax con tOutputInfreq = 100, para descontar inicialización y espectros.",
+      "OMP_NUM_THREADS = 8.",
+      "i7-8565U (4 núcleos/8 hilos), 3.7 GB RAM; CosmoLattice de este repo compilado en Release."
+    ]
+  },
+  "dt_scan_friedmann_0.04": {
+    "value": 0.009855,
+    "statement": "Máximo error de Friedmann con dt = 0.04, N = 32.",
+    "produced_by": "build_gentmodel/dt_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "gentmodel_cuartico.in con N = 32, tMax = 300.",
+      "Error de Friedmann = máximo de |rel_diff_friedmann|."
+    ]
+  },
+  "dt_scan_rhogw_0.04": {
+    "value": 1.658e-05,
+    "statement": "rho_GW/rho final con dt = 0.04, N = 32, t~ = 300.",
+    "produced_by": "build_gentmodel/dt_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "gentmodel_cuartico.in con N = 32, tMax = 300.",
+      "Error de Friedmann = máximo de |rel_diff_friedmann|."
+    ]
+  },
+  "dt_scan_friedmann_0.02": {
+    "value": 0.002238,
+    "statement": "Máximo error de Friedmann con dt = 0.02, N = 32.",
+    "produced_by": "build_gentmodel/dt_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "gentmodel_cuartico.in con N = 32, tMax = 300.",
+      "Error de Friedmann = máximo de |rel_diff_friedmann|."
+    ]
+  },
+  "dt_scan_rhogw_0.02": {
+    "value": 1.466e-05,
+    "statement": "rho_GW/rho final con dt = 0.02, N = 32, t~ = 300.",
+    "produced_by": "build_gentmodel/dt_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "gentmodel_cuartico.in con N = 32, tMax = 300.",
+      "Error de Friedmann = máximo de |rel_diff_friedmann|."
+    ]
+  },
+  "dt_scan_friedmann_0.01": {
+    "value": 0.0005595,
+    "statement": "Máximo error de Friedmann con dt = 0.01, N = 32.",
+    "produced_by": "build_gentmodel/dt_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "gentmodel_cuartico.in con N = 32, tMax = 300.",
+      "Error de Friedmann = máximo de |rel_diff_friedmann|."
+    ]
+  },
+  "dt_scan_rhogw_0.01": {
+    "value": 1.372e-05,
+    "statement": "rho_GW/rho final con dt = 0.01, N = 32, t~ = 300.",
+    "produced_by": "build_gentmodel/dt_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "gentmodel_cuartico.in con N = 32, tMax = 300.",
+      "Error de Friedmann = máximo de |rel_diff_friedmann|."
+    ]
+  },
+  "dt_scan_friedmann_0.005": {
+    "value": 0.0001392,
+    "statement": "Máximo error de Friedmann con dt = 0.005, N = 32.",
+    "produced_by": "build_gentmodel/dt_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "gentmodel_cuartico.in con N = 32, tMax = 300.",
+      "Error de Friedmann = máximo de |rel_diff_friedmann|."
+    ]
+  },
+  "dt_scan_rhogw_0.005": {
+    "value": 1.571e-05,
+    "statement": "rho_GW/rho final con dt = 0.005, N = 32, t~ = 300.",
+    "produced_by": "build_gentmodel/dt_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "gentmodel_cuartico.in con N = 32, tMax = 300.",
+      "Error de Friedmann = máximo de |rel_diff_friedmann|."
+    ]
+  },
+  "rhogw_uv_k2.8_dt0.01": {
+    "value": 2.5539e-15,
+    "statement": "rho_GW/rho final en la prueba UV uv_k2.8_dt0.01.",
+    "produced_by": "build_gentmodel/uv_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "N = 32 con kIR = 2.8 y 4.2 (misma dx que N = 128 y 192 con kIR = 0.7), kCutOff = -1, tMax = 300."
+    ]
+  },
+  "rhogw_uv_k2.8_dt0.005": {
+    "value": 2.5768e-15,
+    "statement": "rho_GW/rho final en la prueba UV uv_k2.8_dt0.005.",
+    "produced_by": "build_gentmodel/uv_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "N = 32 con kIR = 2.8 y 4.2 (misma dx que N = 128 y 192 con kIR = 0.7), kCutOff = -1, tMax = 300."
+    ]
+  },
+  "rhogw_uv_k4.2_dt0.01": {
+    "value": 3.3701e-14,
+    "statement": "rho_GW/rho final en la prueba UV uv_k4.2_dt0.01.",
+    "produced_by": "build_gentmodel/uv_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "N = 32 con kIR = 2.8 y 4.2 (misma dx que N = 128 y 192 con kIR = 0.7), kCutOff = -1, tMax = 300."
+    ]
+  },
+  "rhogw_uv_k4.2_dt0.005": {
+    "value": 3.3459e-14,
+    "statement": "rho_GW/rho final en la prueba UV uv_k4.2_dt0.005.",
+    "produced_by": "build_gentmodel/uv_* (corridas manuales)",
+    "from_scratch": "-",
+    "from_library": "CosmoLattice.",
+    "choices": [
+      "N = 32 con kIR = 2.8 y 4.2 (misma dx que N = 128 y 192 con kIR = 0.7), kCutOff = -1, tMax = 300."
+    ]
+  },
+  "t90_T": {
+    "value": 270,
+    "statement": "t~ en que rho_GW/rho llega al 90% del valor en t~ = 500, T-model alpha_K = 1, N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
+    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
+    "from_library": "numpy.",
+    "choices": [
+      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
+    ]
+  },
+  "t90_E1": {
+    "value": 420,
+    "statement": "Idem E-model alpha_K = 1.",
+    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
+    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
+    "from_library": "numpy.",
+    "choices": [
+      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
+    ]
+  },
+  "t90_E5": {
+    "value": 360,
+    "statement": "Idem E-model alpha_K = 5.",
+    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
+    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
+    "from_library": "numpy.",
+    "choices": [
+      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
+    ]
+  },
+  "aH0_T": {
+    "value": 0.4356,
+    "statement": "a'/a inicial (programa), T-model.",
+    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
+    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
+    "from_library": "numpy.",
+    "choices": [
+      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
+    ]
+  },
+  "aH0_E1": {
+    "value": 0.1617,
+    "statement": "a'/a inicial, E-model alpha_K = 1.",
+    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
+    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
+    "from_library": "numpy.",
+    "choices": [
+      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
+    ]
+  },
+  "aH0_E5": {
+    "value": 0.3234,
+    "statement": "a'/a inicial, E-model alpha_K = 5.",
+    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
+    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
+    "from_library": "numpy.",
+    "choices": [
+      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
+    ]
+  },
+  "in_cuarticos_max_diff": {
+    "value": 1.3e-05,
+    "statement": "Máxima diferencia relativa entre M, A, phi_0, phi'_0 de los .in cuárticos y parametros_cuarticos.py.",
+    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
+    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
+    "from_library": "numpy.",
+    "choices": [
+      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
+    ]
+  },
+  "n64_tiempo_total": {
+    "value": 1676.4,
+    "statement": "Tiempo de pared [s] de la corrida completa N = 64 de gentmodel_cuartico.in (estimación 30 min).",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "n64_friedmann": {
+    "value": 0.00125,
+    "statement": "Máximo |rel_diff_friedmann| en la corrida N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "n64_w": {
+    "value": 0.3328,
+    "statement": "<w> en los dos últimos períodos, corrida N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "n64_rhogw": {
+    "value": 1.1138e-05,
+    "statement": "rho_GW/rho final, corrida N = 64 (con N = 32 era 1.787e-5).",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "n64_t90": {
+    "value": 260,
+    "statement": "t~ en que rho_GW/rho llega al 90% del final, corrida N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "n64_Omega_pico": {
+    "value": 8.6909e-11,
+    "statement": "h^2 Omega_GW,0 del pico final, corrida N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "n64_f_pico": {
+    "value": 414950000.0,
+    "statement": "f_0 [Hz] del pico final, corrida N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "n64_kIR_aH": {
+    "value": 344,
+    "statement": "k_IR/(aH) final, corrida N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "rhogw_N32_t500_T": {
+    "value": 1.787e-05,
+    "statement": "rho_GW/rho final del T-model con N = 32 y t~ = 500.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida completa de models/parameter-files/gentmodel_cuartico.in sin cambios (N = 64, tMax = 500), build_gentmodel/run_gentmodel_cuartico_N64.",
+      "Analizada con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "mono_A": {
+    "value": 3.33322e-12,
+    "statement": "A del monomial de control = lambda_eff/4.",
+    "produced_by": "code/parametros_cuarticos.py::monomial_control",
+    "from_scratch": "Fórmulas de Notas.tex Secs. 1.4-1.5 y slow-roll de phi^4.",
+    "from_library": "numpy",
+    "choices": [
+      "lambda_eff del T-model alpha_K = 1, para que cerca del mínimo el potencial físico y el acople g coincidan con el T-model.",
+      "Condición inicial epsilon_V = 1 como en los demás .in (en vez del mismo phi_0 que el T-model)."
+    ]
+  },
+  "mono_lam_eff": {
+    "value": 1.33329e-11,
+    "statement": "lambda_eff = 4A_T/M_T^4 del T-model.",
+    "produced_by": "code/parametros_cuarticos.py::monomial_control",
+    "from_scratch": "Fórmulas de Notas.tex Secs. 1.4-1.5 y slow-roll de phi^4.",
+    "from_library": "numpy",
+    "choices": [
+      "lambda_eff del T-model alpha_K = 1, para que cerca del mínimo el potencial físico y el acople g coincidan con el T-model.",
+      "Condición inicial epsilon_V = 1 como en los demás .in (en vez del mismo phi_0 que el T-model)."
+    ]
+  },
+  "mono_phi0": {
+    "value": 6.88722e+18,
+    "statement": "phi_0 [GeV] del monomial de control (epsilon_V = 1).",
+    "produced_by": "code/parametros_cuarticos.py::monomial_control",
+    "from_scratch": "Fórmulas de Notas.tex Secs. 1.4-1.5 y slow-roll de phi^4.",
+    "from_library": "numpy",
+    "choices": [
+      "lambda_eff del T-model alpha_K = 1, para que cerca del mínimo el potencial físico y el acople g coincidan con el T-model.",
+      "Condición inicial epsilon_V = 1 como en los demás .in (en vez del mismo phi_0 que el T-model)."
+    ]
+  },
+  "mono_pi0": {
+    "value": -6.2899e+31,
+    "statement": "phi'_0 [GeV^2] del monomial de control.",
+    "produced_by": "code/parametros_cuarticos.py::monomial_control",
+    "from_scratch": "Fórmulas de Notas.tex Secs. 1.4-1.5 y slow-roll de phi^4.",
+    "from_library": "numpy",
+    "choices": [
+      "lambda_eff del T-model alpha_K = 1, para que cerca del mínimo el potencial físico y el acople g coincidan con el T-model.",
+      "Condición inicial epsilon_V = 1 como en los demás .in (en vez del mismo phi_0 que el T-model)."
+    ]
+  },
+  "mono_omega": {
+    "value": 25148100000000.0,
+    "statement": "omega_* [GeV] del monomial de control.",
+    "produced_by": "code/parametros_cuarticos.py::monomial_control",
+    "from_scratch": "Fórmulas de Notas.tex Secs. 1.4-1.5 y slow-roll de phi^4.",
+    "from_library": "numpy",
+    "choices": [
+      "lambda_eff del T-model alpha_K = 1, para que cerca del mínimo el potencial físico y el acople g coincidan con el T-model.",
+      "Condición inicial epsilon_V = 1 como en los demás .in (en vez del mismo phi_0 que el T-model)."
+    ]
+  },
+  "mono_ns": {
+    "value": 0.9464,
+    "statement": "n_s de phi^4 en slow-roll con N_* = 55: 1 - 3/(N_*+1).",
+    "produced_by": "code/parametros_cuarticos.py::monomial_control",
+    "from_scratch": "Fórmulas de Notas.tex Secs. 1.4-1.5 y slow-roll de phi^4.",
+    "from_library": "numpy",
+    "choices": [
+      "lambda_eff del T-model alpha_K = 1, para que cerca del mínimo el potencial físico y el acople g coincidan con el T-model.",
+      "Condición inicial epsilon_V = 1 como en los demás .in (en vez del mismo phi_0 que el T-model)."
+    ]
+  },
+  "mono_r": {
+    "value": 0.2857,
+    "statement": "r de phi^4 en slow-roll con N_* = 55: 16/(N_*+1).",
+    "produced_by": "code/parametros_cuarticos.py::monomial_control",
+    "from_scratch": "Fórmulas de Notas.tex Secs. 1.4-1.5 y slow-roll de phi^4.",
+    "from_library": "numpy",
+    "choices": [
+      "lambda_eff del T-model alpha_K = 1, para que cerca del mínimo el potencial físico y el acople g coincidan con el T-model.",
+      "Condición inicial epsilon_V = 1 como en los demás .in (en vez del mismo phi_0 que el T-model)."
+    ]
+  },
+  "mono_N32_tchi": {
+    "value": 80,
+    "statement": "t~ del máximo de rms(chi), monomial N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  },
+  "mono_N32_t90": {
+    "value": 230,
+    "statement": "t~ en que rho_GW/rho llega al 90% del final, monomial N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  },
+  "mono_N32_rhogw": {
+    "value": 2.3183e-05,
+    "statement": "rho_GW/rho final, monomial N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  },
+  "mono_aH0": {
+    "value": 0.9179,
+    "statement": "a'/a inicial (programa), monomial.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  },
+  "mono_N32_cola_uv": {
+    "value": 0.000962,
+    "statement": "Cola UV final del inflatón, monomial N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  },
+  "mono_N32_kIR_aH": {
+    "value": 343,
+    "statement": "k_IR/(aH) final, monomial N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  },
+  "T_N32_tchi": {
+    "value": 110,
+    "statement": "t~ del máximo de rms(chi), T-model N = 32.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  },
+  "gw_mem_factor": {
+    "value": 2.18,
+    "statement": "Cociente de memoria con y sin GWs en N = 128 (310/142 MB).",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  },
+  "gw_time_factor": {
+    "value": 1.68,
+    "statement": "Cociente de tiempo por paso con y sin GWs en N = 128 (295.3/175.5 ms).",
+    "produced_by": "code/analisis_cosmolattice.py::analizar / mediciones de bench",
+    "from_scratch": "Lectura de la salida.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida N = 32 de genmonomial_cuartico.in hasta t~ = 500 (build_genmonomial/run_N32_t500)."
+    ]
+  }
+}
