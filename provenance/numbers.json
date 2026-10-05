@@ -1512,5 +1512,217 @@
       "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
       "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
     ]
+  },
+  "N64_T_Hz_por_k": {
+    "value": 118550000.0,
+    "statement": "Hz de f_0 por unidad de k~ al final, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_T_banda_kmin": {
+    "value": 1.4,
+    "statement": "k~ mínimo con h^2 Omega_GW,0 >= pico/2, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_T_banda_kmax": {
+    "value": 11.2,
+    "statement": "k~ máximo con h^2 Omega_GW,0 >= pico/2, gentmodel_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_E1_Hz_por_k": {
+    "value": 340340000.0,
+    "statement": "Hz de f_0 por unidad de k~ al final, genemodel_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_E1_banda_kmin": {
+    "value": 1.4,
+    "statement": "k~ mínimo con h^2 Omega_GW,0 >= pico/2, genemodel_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_E1_banda_kmax": {
+    "value": 6.3,
+    "statement": "k~ máximo con h^2 Omega_GW,0 >= pico/2, genemodel_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_E5_Hz_por_k": {
+    "value": 175860000.0,
+    "statement": "Hz de f_0 por unidad de k~ al final, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_E5_banda_kmin": {
+    "value": 1.4,
+    "statement": "k~ mínimo con h^2 Omega_GW,0 >= pico/2, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_E5_banda_kmax": {
+    "value": 8.4,
+    "statement": "k~ máximo con h^2 Omega_GW,0 >= pico/2, genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_mono_Hz_por_k": {
+    "value": 88721000.0,
+    "statement": "Hz de f_0 por unidad de k~ al final, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_mono_banda_kmin": {
+    "value": 2.1,
+    "statement": "k~ mínimo con h^2 Omega_GW,0 >= pico/2, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_mono_banda_kmax": {
+    "value": 16.8,
+    "statement": "k~ máximo con h^2 Omega_GW,0 >= pico/2, genmonomial_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_IR_factor": {
+    "value": 1.47,
+    "statement": "Máximo cociente max/min entre los cuatro Omega_GW,e finales en cada bin con k~ <= 2.8 (N = 64).",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta).",
+      "Corte en k~ <= 3 elegido a ojo de la Fig. corridas_N64a."
+    ]
+  },
+  "N64_aRho_mono_T_inicial": {
+    "value": 1.2,
+    "statement": "a rho~^(1/4) del monomial sobre el del T-model en t~ = 0 (N = 64).",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_aRho_mono_T_final": {
+    "value": 1.34,
+    "statement": "a_e rho~_e^(1/4) del monomial sobre el del T-model al final (N = 64); es el cociente de sus Hz por k~.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Pico, banda a media altura y factor Hz por k~ sobre el último espectro de GWs; lectura de average_*.txt.",
+    "from_library": "numpy; reescaleo con code/reescaleo_gws.py",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Banda: bins donde h^2 Omega_GW,0 >= pico/2 (en vez de un ajuste o de la frecuencia del pico, que con bins de 20-25% no es robusta)."
+    ]
+  },
+  "N64_integral_max": {
+    "value": 4.2e-15,
+    "statement": "Mayor |integral del espectro de GWs / (rho_GW/rho) - 1| final entre las cuatro corridas N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Suma de Omega_GW Delta k/k sobre bins.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), salidas en build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4)."
+    ]
+  },
+  "N64_E1_tchi": {
+    "value": 186,
+    "statement": "t~ del máximo de rms(chi), genemodel_cuartico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "argmax de rms(phi) en average_scalar_1.txt.",
+    "from_library": "numpy",
+    "choices": [
+      "Máximo de rms(chi) como marca de saturación de la resonancia (alternativa: cuando rho_GW/rho deja de crecer exponencialmente)."
+    ]
+  },
+  "N64_E5_tchi": {
+    "value": 146,
+    "statement": "t~ del máximo de rms(chi), genemodel_cuartico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "argmax de rms(phi) en average_scalar_1.txt.",
+    "from_library": "numpy",
+    "choices": [
+      "Máximo de rms(chi) como marca de saturación de la resonancia (alternativa: cuando rho_GW/rho deja de crecer exponencialmente)."
+    ]
   }
 }

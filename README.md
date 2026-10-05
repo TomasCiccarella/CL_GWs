@@ -75,7 +75,7 @@ Para trabajar con un modelo: `git checkout t-model` (o `e-model`, `monomial`). L
 | carpeta / archivo | qué tiene |
 |---|---|
 | `code/` | herramientas del estudio (ver la tabla de abajo) |
-| `Notas/` | notas en LaTeX: `Notas.tex` (documento principal), `Librerías.tex` (paquetes y estilo), `Notas.pdf` (compilado, notas generales) y, en cada rama de modelo, `modelos/<modelo>.tex` con la sección de su modelo y `Notas_<rama>.pdf` con las notas completas |
+| `Notas/` | notas en LaTeX: `Notas.tex` (documento principal), `Librerías.tex` (paquetes y estilo), `Notas.pdf` (compilado, notas generales), `figuras/` (figuras de resultados) y, en cada rama de modelo, `modelos/<modelo>.tex` con la sección de su modelo y `Notas_<rama>.pdf` con las notas completas |
 | `provenance/` | registro de procedencia: `numbers.json` (cada número: qué código lo produjo, qué se hizo a mano, qué elecciones) y `claims.yaml` (cada afirmación: evidencia y cómo se verificó) |
 | `models/gen*.h`, `models/parameter-files/gen*.in` | modelos generalizados y sus archivos de parámetros (sólo en las ramas de modelo) |
 | `MODELO.md` | descripción de la rama y cómo correr su modelo (sólo en las ramas de modelo) |
@@ -87,6 +87,7 @@ Contenido de `code/`:
 | archivo | qué hace |
 |---|---|
 | `analisis_cosmolattice.py` | analiza una corrida: fondo, campos, espectros, errores, GWs y energías, con los espectros reescalados a hoy; deja gráficos y un `resumen.txt` en `analisis/` |
+| `comparar_corridas.py` | compara varias corridas (por defecto, las cuatro cuárticas con $N = 64$): figura `Notas/figuras/corridas_N64.pdf` y tabla de picos, bandas y tiempos |
 | `reescaleo_gws.py` | fórmulas del reescaleo a hoy (frecuencia y amplitud) y variables de programa de cada modelo |
 | `verificar_reescaleo.py` | verificación con sympy de las ecuaciones de fondo y del reescaleo, y comparación con la literatura |
 | `parametros_cuarticos.py` | traduce los parámetros de Ellis *et al.* a los `.in` y comprueba los `.in` presentes |
