@@ -1,20 +1,25 @@
 #!/usr/bin/env bash
-# Corre en secuencia los tres .in cuárticos (Notas.tex Secs. 4 y 6) y analiza cada corrida.
+# Corre en secuencia los .in cuárticos de los modelos presentes en esta rama y analiza cada corrida
+# (Notas.tex, «Parámetros cosmológicos para modelos cuárticos» y «Corridas cuárticas»).
+#
+# En main no hay modelos: cada rama (monomial, t-model, e-model) agrega los suyos. El script busca los
+# casos conocidos cuyo .in exista en models/parameter-files/.
 #
 # Uso:  code/correr_cuarticos.sh [N] [kIR]
 #   N     tamaño de la grilla (por defecto 64)
-#   kIR   por defecto 0.7*64/N: mantiene k_max de N = 64 y agranda la caja (Notas.tex Sec. 6.5)
+#   kIR   por defecto 0.7*64/N: mantiene k_max de N = 64 y agranda la caja
+#         (Notas.tex, «Corridas cuárticas», Recomendación)
 #
 # Variables opcionales:
 #   DT=0.007           paso temporal (por defecto el del .in, 0.01)
-#   CONTROL=1          agrega al final el monomial cuártico de control (genmonomial_cuartico, Notas.tex
-#                      Sec. 7.2): mismo lambda_eff y q que el T-model, sin plateau. No es un modelo del paper.
-#   MODELOS="..."      subconjunto y orden de los casos (por defecto los tres del paper, del más corto al
-#                      más largo): gentmodel_cuartico genemodel_cuartico_aK5 genemodel_cuartico
-#                      (y genmonomial_cuartico si CONTROL=1)
+#   MODELOS="..."      subconjunto y orden de los casos (por defecto, los presentes de esta lista, del
+#                      más corto al más largo): gentmodel_cuartico genemodel_cuartico_aK5 genemodel_cuartico
+#   CONTROL=1          agrega el monomial cuártico de control (genmonomial_cuartico, rama monomial;
+#                      Notas.tex, «El monomial de control»). No es un modelo del paper. En la rama
+#                      monomial es el único caso, así que se corre siempre.
 #   NTHREADS=8         hilos de OpenMP
 #   FORZAR=1           volver a correr aunque la corrida ya haya terminado
-#   EXTRA_ARGS="..."   argumentos extra para CosmoLattice (p. ej. "tMax=100")
+#   EXTRA_ARGS="..."   argumentos extra para CosmoLattice (p. ej. "tMax=100 baseSeed=1234")
 #
 # Para que siga corriendo al cerrar la terminal:
 #   nohup code/correr_cuarticos.sh 128 > corridas_N128.log 2>&1 &
@@ -27,8 +32,24 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 N=${1:-64}
 KIR=${2:-$(python3 -c "print(f'{0.7 * 64 / $N:.4g}')")}
 NTHREADS=${NTHREADS:-8}
-MODELOS=${MODELOS:-"gentmodel_cuartico genemodel_cuartico_aK5 genemodel_cuartico"}
-[ -n "${CONTROL:-}" ] && [[ " $MODELOS " != *" genmonomial_cuartico "* ]] && MODELOS="$MODELOS genmonomial_cuartico"
+PARS=$ROOT/models/parameter-files
+if [ -z "${MODELOS:-}" ]; then
+  MODELOS=""
+  for c in gentmodel_cuartico genemodel_cuartico_aK5 genemodel_cuartico; do
+    [ -f "$PARS/$c.in" ] && MODELOS="$MODELOS $c"
+  done
+  if [ -f "$PARS/genmonomial_cuartico.in" ] && { [ -n "${CONTROL:-}" ] || [ -z "$MODELOS" ]; }; then
+    MODELOS="$MODELOS genmonomial_cuartico"
+  fi
+fi
+MODELOS=$(echo $MODELOS)
+if [ -z "$MODELOS" ]; then
+  echo "No hay .in cuárticos en esta rama. Cambiá a la rama de un modelo (git checkout t-model, e-model o monomial)."
+  exit 1
+fi
+for c in $MODELOS; do
+  [ -f "$PARS/$c.in" ] || { echo "Falta $PARS/$c.in (¿estás en la rama de ese modelo?)"; exit 1; }
+done
 SALIDA=$ROOT/build_corridas
 mkdir -p "$SALIDA"
 
@@ -56,23 +77,25 @@ compilar() {  # compila el modelo si no está el ejecutable
 
 # --- Chequeo de memoria y tiempo antes de empezar (code/recursos_cosmolattice.py) ---------
 python3 -c "
-import sys; sys.path.insert(0, '$ROOT/code')
+import re, sys; sys.path.insert(0, '$ROOT/code')
 import recursos_cosmolattice as r
 N, kIR, dt = $N, $KIR, ${DT:-0.01}
-tmax = {'gentmodel_cuartico': 500, 'genemodel_cuartico_aK5': 500, 'genemodel_cuartico': 600,
-        'genmonomial_cuartico': 500}
+def leer(caso, clave):  # valor de una clave en el .in
+    txt = open('$PARS/' + caso + '.in', encoding='utf-8').read()
+    return float(re.search(r'^' + clave + r'\s*=\s*(\S+)', txt, re.M).group(1))
 total = 0
 for caso in '$MODELOS'.split():
-    x = r.recursos(N, kIR, 120, tmax[caso], dt=dt)
+    tmax = leer(caso, 'tMax')
+    x = r.recursos(N, kIR, leer(caso, 'q'), tmax, dt=dt)
     total += x['t_total_h']
-    print(f'  {caso:24s} tMax = {tmax[caso]}: ~{x[\"t_total_h\"]:.1f} h')
+    print(f'  {caso:24s} tMax = {tmax:g}: ~{x[\"t_total_h\"]:.1f} h')
     if not x['estable']:
         sys.exit(f'dt = {dt} es inestable para N = {N}, kIR = {kIR} (omega_max dt > 2)')
 libre = r.memoria_libre()
 print(f'N = {N}, kIR = {kIR}, dt = {dt}: memoria ~{x[\"mem_GB\"]:.2f} GB por corrida '
       f'(libre ahora: {libre/1e9:.2f} GB); total estimado ~{total:.1f} h')
 if libre and x['mem_GB'] * 1e9 > 0.8 * libre:
-    sys.exit('No entra en la memoria libre: bajá N o cerrá programas (Notas.tex Sec. 6.2).')
+    sys.exit('No entra en la memoria libre: bajá N o cerrá programas (Notas.tex, «Corridas cuárticas», Memoria).')
 "
 
 echo "Inicio: $(date)"
@@ -88,7 +111,7 @@ for caso in $MODELOS; do
   echo "$caso: corriendo en $dir ($(date +%H:%M))"
   t0=$(date +%s)
   if (cd "$dir" && OMP_NUM_THREADS=$NTHREADS "$ROOT/build_$m/$m" \
-        input="$ROOT/models/parameter-files/$caso.in" overwriteFiles=true \
+        input="$PARS/$caso.in" overwriteFiles=true \
         N="$N" kIR="$KIR" ${DT:+dt=$DT} ${EXTRA_ARGS:-} > salida.log 2>&1); then
     t1=$(date +%s)
     echo "$caso N=$N kIR=$KIR ${DT:+dt=$DT} $(( (t1 - t0) / 60 )) min ($(date))" >> "$SALIDA/tiempos.txt"

@@ -1,117 +1,84 @@
-# CosmoLattice
+# Ondas gravitacionales del preheating en modelos de inflación favorecidos por las observaciones
 
-## *A modern code for lattice simulations of scalar and gauge field dynamics in an expanding universe*
+Este repositorio estudia el **fondo estocástico de ondas gravitacionales (GWs) que se produce al final de la inflación**, durante el *preheating*, mediante simulaciones en la red con [CosmoLattice](https://cosmolattice.net). El objetivo es obtener el espectro de GWs **reescalado a hoy**, es decir la amplitud $h^2\Omega_{GW}(f)$ en función de la frecuencia $f$, para modelos de inflación que siguen siendo compatibles con las observaciones del CMB y para sus generalizaciones.
 
-[![CosmoLattice Logo](https://cosmolattice.net/assets/CL_Icon.svg)](https://cosmolattice.net)
+## La idea
 
-### Documentation
+Después de la inflación, el inflatón $\phi$ oscila alrededor del mínimo de su potencial. Si está acoplado a otro campo $\chi$ (acá, con $\tfrac12 g^2\phi^2\chi^2$), las oscilaciones amplifican exponencialmente las fluctuaciones de $\chi$ (**resonancia paramétrica**). Las inhomogeneidades resultantes son una fuente de ondas gravitacionales. Ese fondo de GWs queda como una huella de la física del final de la inflación, a frecuencias altas ($f \sim 10^8$–$10^9$ Hz).
 
-To learn how to install and execute the code, as well as how it works, please visit **the official webpage of CosmoLattice at [cosmolattice.net](https://cosmolattice.net)**. Besides that, you will find there in-depth pedagogical explanations about the underlying theoretical framework, as well as a user manual and developer informations.
+Estudiamos potenciales que cerca del mínimo se comportan como $|\phi|^n$:
 
-The underlying theoretical framework has been also described in <a href=https://arxiv.org/pdf/2006.15122.pdf target="_blank" rel="noopener noreferrer" > arXiv:2006.15122</a> and <a href=https://arxiv.org/abs/2512.15627 target="_blank" rel="noopener noreferrer" > arXiv:2512.15627</a>.
+| modelo | potencial | comentario |
+|---|---|---|
+| monomial generalizado | $V = A\,\lvert\phi\rvert^n$ | caso de referencia; con $n = 4$ es el `lphi4` de CosmoLattice |
+| T-model | $V = A\tanh^n(\phi/M)$ | $\alpha$-attractor con plateau |
+| E-model | $V = A\,(1 - e^{-\phi/M})^n$ | $\alpha$-attractor ($\alpha$-Starobinsky generalizado) |
 
-### Citing CosmoLattice
-If you use CosmoLattice in your research, no matter how much (or little), please cite it as explained [on the official webpage](https://cosmolattice.net/CLcitation.html).
+**Modelos favorecidos por las observaciones.** Los parámetros de referencia salen de Ellis, Garcia, Olive & Verner, *Phys. Rev. D* **113**, 063571 (2026) ([doi:10.1103/d35r-7bn8](https://doi.org/10.1103/d35r-7bn8)). Ese trabajo contrasta los T- y E-models generalizados con Planck, BICEP/Keck, ACT DR6 y SPT-3G. Nos concentramos en el **caso cuártico ($n = 4$)** por dos razones:
 
+- **Es compatible con el CMB:** para $\alpha_K = 1$ da $n_s \simeq 0.965$ y $r \simeq 0.004$.
+- **El resultado no depende del reheating:** el inflatón oscilando se comporta como radiación ($w = 1/3$). Por eso tanto el número de e-folds $N_*$ como el espectro de GWs de hoy no dependen de la temperatura de reheating, que es desconocida.
 
-### Basic installation
+Los casos que se simulan son el T-model con $\alpha_K = 1$ y el E-model con $\alpha_K = 1$ y $5$. Se agrega un monomial $\phi^4$ de control (excluido por $r$, pero con el mismo mínimo que el T-model) para aislar el efecto del plateau.
 
-*Minimal requirements:* 
-- `CMake` version 3.16 or above
-- `clang++`, `g++` or another compiler with support for C++20
+**Del lattice a hoy.** El espectro que da CosmoLattice se lleva a hoy con
 
-```bash
-git clone https://github.com/cosmolattice/cosmolattice.git
-cd cosmolattice   
-mkdir build                     
-cd build                        
-cmake -DMODEL=lphi4 ../
-make cosmolattice
+$$
+f_0 = \frac{\tilde k}{a_e\,\tilde\rho_e^{1/4}}\left(\frac{\omega_*}{f_*}\right)^{1/2}\epsilon^{1/4}\times 4.59\times10^{10}\,\text{Hz},
+\qquad
+h^2\Omega_{GW,0} = 1.61\times10^{-5}\;\epsilon\;\Omega_{GW,e},
+$$
+
+con $\epsilon = (a_e/a_{RD})^{2(4-n)/(n+2)}$, que vale exactamente $1$ para $n = 4$. La derivación está verificada con sympy y comparada con Dufaux *et al.* (2007) y Figueroa & Torrentí (2017).
+
+## Organización del repositorio
+
+Todo lo general está en `main`, y cada tipo de modelo tiene su rama, que es `main` más lo propio de ese modelo:
+
+| rama | qué agrega a `main` |
+|---|---|
+| `main` | CosmoLattice, el código de análisis, las notas generales y este README |
+| `monomial` | `models/genmonomial.h`, `genmonomial.in` ($n = 6$, exploratorio), `genmonomial_cuartico.in` (control $\phi^4$) y su sección de las notas |
+| `t-model` | `models/gentmodel.h`, `gentmodel.in` ($n = 2.5$, exploratorio), `gentmodel_cuartico.in` (caso del paper) y su sección de las notas |
+| `e-model` | `models/genemodel.h`, `genemodel.in` ($n = 2.5$), `genemodel_cuartico.in` y `genemodel_cuartico_aK5.in` (casos del paper) y su sección de las notas |
+
+Para trabajar con un modelo: `git checkout t-model` (o `e-model`, `monomial`). Los cambios generales se hacen en `main` y después se llevan a cada rama con `git merge main`.
+
+### Qué hay en `main`
+
+```
+code/
+  analisis_cosmolattice.py   análisis de una corrida: fondo, campos, espectros, errores, GWs y energías,
+                             con los espectros reescalados a hoy
+  reescaleo_gws.py           fórmulas del reescaleo a hoy (frecuencia y amplitud)
+  verificar_reescaleo.py     verificación con sympy y comparación con la literatura
+  parametros_cuarticos.py    traducción de los parámetros de Ellis et al. a los .in (y chequeo de los .in)
+  recursos_cosmolattice.py   memoria y tiempo de cómputo según N
+  correr_cuarticos.sh        corre en secuencia los casos cuárticos de la rama y los analiza
+  verificar_genmodels.py     derivadas, condiciones iniciales y cotas de estabilidad de los modelos de la rama
+  probar_genmodels.sh        compila y prueba los modelos de la rama
+Notas/                       notas en LaTeX (en cada rama se agrega la sección de su modelo)
+provenance/                  de dónde sale cada número y cada afirmación de las notas
+models/, include/, source/   CosmoLattice (sin modificar) y sus modelos originales
 ```
 
-This will compile the ``lphi4`` model. To run it with the default input file, you can do
+## Cómo usarlo
+
+Requisitos: lo que pide CosmoLattice (CMake ≥ 3.16 y un compilador C++20), Python 3 con `numpy`, `scipy`, `sympy`, `matplotlib` y `pyyaml`, y LaTeX (`latexmk`) para las notas.
 
 ```bash
-./lphi4 input=../models/parameter-files/lphi4.in
+git checkout t-model                                   # elegir el modelo
+python3 code/recursos_cosmolattice.py --kmax-fijo --N 64 128 192   # memoria y tiempo según N
+code/correr_cuarticos.sh 64                            # compila si hace falta, corre y analiza (~30 min por caso)
+nohup code/correr_cuarticos.sh 128 > corridas_N128.log 2>&1 &      # producción, en segundo plano
+python3 code/analisis_cosmolattice.py build_corridas/gentmodel_cuartico_N64_kIR0.7   # análisis de una corrida
+cd Notas && latexmk -pdf Notas.tex                     # compilar las notas
 ```
 
-The above commands just represent a very brief guide for the installation and execution of CosmoLattice. 
-For further information, see the in-detail explanations on [the webpage](https://cosmolattice.net/Quick%20installation%20and%20execution.html).
+Con 3.7 GB de RAM entra hasta $N = 192$ con GWs (~1 GB). $N = 256$ necesita ~2.5 GB. Los detalles están en las notas, en las secciones «Corridas cuárticas» y «Guía de uso». Todos los parámetros de los `.in` se explican ahí, y cualquiera se puede cambiar desde la terminal, por ejemplo `N=128 kIR=0.35 baseSeed=1234`.
 
-## Backend
+## Créditos
 
-CosmoLattice uses
-
-<a href="https://cosmolattice.github.io/templat/"><img src="https://github.com/cosmolattice/templat/raw/refs/heads/main/docs/logo/logo_red_nobg.svg" alt="TempLat" style="width: 200px; height: 100px;"></a>
-
- as a backend for the lattice and field operations. [TempLat](https://cosmolattice.github.io/templat/) is a C++ template library that provides a high-level interface for lattice computations, allowing for efficient and flexible implementations of various models.
-
-We briefly explain some core configuration steps and refer to the [cosmolattice webpage](https://cosmolattice.net/Quick%20installation%20and%20execution.html) and the [TempLat repository](https://github.com/cosmolattice/templat) for further information.
-
-### Choosing the device
-
-By default, CosmoLattice will attempt to detect what devices are available on a given machine.
-In that case, it will first check for GPU support, checking first CUDA and then HIP. 
-On the CPU side, it will first check for OpenMP support and then for C++ threads. If none of these are available, it will fall back to a serial implementation.
-If you want to force the use of a specific device, you can do so by setting the appropriate flag when configuring the project with CMake.
-The available options are `-DCUDA=ON`, `HIP=ON`, `-DOPENMP=ON`, `-DPTHREADS=ON` and `-DNOTHREADING=ON`. To force serial for example, you can do
-```bash
-cmake -DMODEL=lphi4 -DNOTHREADING=ON ../
-```
-
-#### CUDA
-
-Using Nvidia GPUs requires that you have the CUDA toolkit, or the NVIDIA HPC SDK installed on your machine, or loaded as a module on your cluster. To compile for NVIDIA GPUs using CUDA, you can enable the CUDA backend by setting
-```bash
-cmake -DMODEL=lphi4 -DCUDA=ON ../
-```
-Specifying the architecture is optional for CUDA, as Kokkos can usually detect it correctly. However, if you want to specify it manually, you can do so by passing the appropriate flag to Kokkos as described in the section [Offline compilation (Kokkos)](#offline-compilation-kokkos) below.
-
-#### HIP
-
-Using AMD GPUs requires that you have the ROCm toolkit installed on your machine, or loaded as a module on your cluster.
-To compile for AMD GPUs using HIP, you can enable the HIP backend by setting
-```bash
-export CXX=hipcc
-cmake -DMODEL=lphi4 -DHIP=ON ..
-```
-Specifying the HIP compiler (`hipcc`) is necessary for the correct detection of the HIP toolkit.
-Specifying the architecture is optional for HIP, as Kokkos can usually detect it correctly. However, if you want to specify it manually, you can do so by passing the appropriate flag to Kokkos as described in the section [Offline compilation (Kokkos)](#offline-compilation-kokkos) below.
-
-### Offline compilation (Kokkos)
-
-To compile an application to be run on a different architecture, you can directly pass the target architecture to Kokkos. For a list of supported architectures, see [the Kokkos documentation](https://kokkos.org/kokkos-core-wiki/get-started/configuration-guide.html#gpu-architectures). For example, for an RTX 4070, you would pass 
-```bash
-cmake -DMODEL=lphi4 -DKokkos_ARCH_ADA89=ON ../
-```
-If no architecture is specified, Kokkos will attempt to detect the architecture of the machine. However, as compilation for GPU can take up to an hour, it is recommended on a cluster to queue the compilation separately on a node without a GPU, which requires offline compilation as described here.
-
-### CMake Configuration Options
-
-All custom CMake flags can be passed when configuring the project, e.g. `cmake -DMODEL=lphi4 -DMPI=ON -DHDF5=ON ../`.
-
-| Flag                  | Description                             | Default                                       |
-| --------------------- | --------------------------------------- | --------------------------------------------- |
-| `MODEL`               | The model to compile                    | `lphi4`                                       |
-| `COSMOINTERFACE_TEST` | Compile CosmoInterface tests            | `OFF`                                         |
-| `NPROCESSES`          | MPI ranks used to run the tests         | `4`                                           |
-| `PARAFAFT`            | ParaFaFT support for parallel FFTs      | `ON` when `MPI=ON`, else `OFF`                |
-| `MPI`                 | MPI support                             | `OFF`                                         |
-| `HDF5`                | HDF5 support                            | `OFF`                                         |
-| `AUTOBUILD_HDF5`      | Build HDF5 from source if not found     | `OFF`                                         |
-| `AUTOBUILD_FFTW`      | Build FFTW from source if not found     | `OFF`                                         |
-| `FLOAT`               | Single-precision (float) FFTW support   | `OFF`                                         |
-| `TEMPLAT_TEST`        | Enable TempLat's tests                  | `OFF`                                         |
-| `TEMPLAT_BENCH`       | Build TempLat's benchmarks              | `OFF`                                         |
-| `DEVICE_PROVIDER`     | Backend for parallelization             | `Kokkos`                                      |
-| `CUDA`                | CUDA support for NVIDIA GPUs            | `OFF`                                         |
-| `HIP`                 | HIP support for AMD GPUs                | `OFF`                                         |
-| `OPENMP`              | OpenMP CPU parallelization              | `OFF`                                         |
-| `PTHREADS`            | C++ threads CPU parallelization         | `OFF`                                         |
-| `NOTHREADING`         | No parallelization                      | `OFF`                                         |
-| `NATIVE`              | Pass `--march=native` to compiler       | `ON` (non-macOS), `OFF` (macOS)               |
-| `KOKKOSFFT`           | KokkosFFT for single-node GPU FFTs      | `ON` when CUDA/HIP enabled, else `OFF`        |
-| `TEMPLAT_REPO`        | TempLat repository, e.g. your fork      | `https://github.com/cosmolattice/templat.git` |
-| `TEMPLAT_BRANCH`      | TempLat branch or tag to use (for devs) | `v1.0.0`                                      |
-
-`PARAFAFT` requires `MPI=ON`; if it is requested without MPI, TempLat warns and disables it.
+- **CosmoLattice**: D. G. Figueroa, A. Florio, F. Torrentí y W. Valkenburg, [arXiv:2006.15122](https://arxiv.org/abs/2006.15122) y [arXiv:2512.15627](https://arxiv.org/abs/2512.15627); módulo de GWs en la nota técnica II. Si usás este código, citá CosmoLattice como se indica en [cosmolattice.net](https://cosmolattice.net/CLcitation.html). El README original está en [`README_CosmoLattice.md`](README_CosmoLattice.md).
+- **Parámetros de los modelos**: J. Ellis, M. A. G. Garcia, K. A. Olive y S. Verner, *Phys. Rev. D* **113**, 063571 (2026).
+- **Reescaleo a hoy**: J.-F. Dufaux *et al.*, [arXiv:0707.0875](https://arxiv.org/abs/0707.0875); D. G. Figueroa y F. Torrentí, [arXiv:1707.04533](https://arxiv.org/abs/1707.04533).

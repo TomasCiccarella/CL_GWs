@@ -1,66 +1,11 @@
 claims:
-  - id: derivadas-correctas
-    statement: >
-      Las derivadas primera y segunda del potencial de programa escritas a mano en genmonomial.h,
-      gentmodel.h y genemodel.h coinciden con las derivadas de los potenciales de Notas.tex.
-    verificacion: >
-      Comparación numérica contra la derivada simbólica de sympy en una grilla de n y phi~; además,
-      para n = 2 la V' de gentmodel.h coincide término a término con la de tanh2.h. Firme.
-    evidence:
-      - code/verificar_genmodels.py::chequear_derivadas
-      - models/tanh2.h::potDeriv
-    numbers: [derivadas_max_diff]
-
-  - id: condiciones-iniciales
-    statement: >
-      Los phi_0 y momentos iniciales de los tres .in corresponden a epsilon_V = 1 con la velocidad de
-      slow-roll autoconsistente, phi'_0 = -sqrt((sqrt(7/3) - 1) V(phi_0)), igual en los tres modelos.
-    verificacion: >
-      El script recalcula los valores desde los parámetros de cada .in y los compara con lo escrito.
-      La fórmula aplicada a tanh2.in da -3.02e31 contra el -3.07e31 de CosmoLattice (2 por ciento).
-      El fondo exacto muestra que epsilon_V = 1 queda antes del final exacto (epsilon_H = 1); es una
-      convención, la misma que usa tanh2.in.
-    evidence:
-      - code/verificar_genmodels.py::condiciones_iniciales
-      - code/verificar_genmodels.py::fin_exacto
-      - Notas/Notas.tex Secs. 1.4, 1.5, 2.3, 2.4, 3.3, 3.4
-      - models/parameter-files/tanh2.in (initial_amplitudes, initial_momenta)
-    numbers: [phi0_genmonomial, phi0_gentmodel, phi0_genemodel, pi0_genmonomial, pi0_gentmodel,
-              pi0_genemodel, pi0_tanh2_formula, phi_fin_exacto_genmonomial,
-              phi_fin_exacto_gentmodel, phi_fin_exacto_genemodel]
-
-  - id: inestabilidad-n-mayor-4
-    statement: >
-      Para n > 4 el término de gradiente y la masa efectiva del campo hijo crecen en tiempo de
-      programa (como a^(2(n-4)/(n+2)) y a^(3(n-4)/(n+2))), así que con dt fijo toda simulación termina
-      siendo inestable; con n = 6, q = 4e4 y dt = 0.005 (el .in original) eso ocurre ya en t ~ 0.5.
-    verificacion: >
-      La cota analítica del gradiente (a ~ 357) es del mismo orden que el punto donde la corrida
-      exploratoria explota (a ~ 290); con q = 0 la corrida a N = 16 también explota, en a ~ 240,
-      contra una cota de gradiente de 228 para esa grilla, lo que aísla el gradiente como causa.
-    evidence:
-      - code/verificar_genmodels.py::cotas_estabilidad
-      - code/probar_genmodels.sh
-      - Notas/Notas.tex Sec. 1.6
-      - Figueroa, Florio, Torrenti & Valkenburg, arXiv:2006.15122, ecuaciones de movimiento en variables de programa
-    numbers: [a_max_gradiente_n6, a_max_hija_n6, a_nan_n6_q100, t_nan_n6_original]
-
-  - id: in-corregidos-corren
-    statement: >
-      Con los .in corregidos (momento inicial y, para n = 6, q = 1e2, dt = 1e-3, tMax = 20), las tres
-      simulaciones corren hasta tMax sin NaN y conservan la ecuación de Friedmann a 1e-5.
-    verificacion: >
-      Corrida completa de los tres modelos con N = 64 y los .in tal como quedan en el repo.
-    evidence:
-      - code/probar_genmodels.sh
-    numbers: [a_final_genmonomial, friedmann_max_rel]
-
   - id: parametros-cuarticos
     statement: >
-      Para n = 4, los casos E-model alpha_K = 1, T-model alpha_K = 1 y E-model alpha_K = 5 de
-      Ellis, Garcia, Olive y Verner (2026) corresponden, en la convención de genemodel/gentmodel,
-      a los M, A, phi_0 y phi'_0 de la Tabla de Notas.tex Sec. 4, con lambda normalizado a
-      A_s = 2.1e-9 y n_s ~ 0.965, r < 0.02, compatibles con Planck 2018 según el paper.
+      Para n = 4, los casos E-model alpha_K = 1, T-model alpha_K = 1 y E-model alpha_K = 5 de Ellis,
+      Garcia, Olive y Verner (2026) corresponden, en la convención de genemodel/gentmodel, a los M, A,
+      phi_0 y phi'_0 de la Tabla de Notas.tex «Parámetros cosmológicos para modelos cuárticos», con
+      lambda normalizado a A_s = 2.1e-9 y n_s ~ 0.965, r < 0.02, compatibles con Planck 2018 según el
+      paper.
     verificacion: >
       El mismo código con alpha_K = 1 y N_* = 55 reproduce la Tabla II del paper: n_s idéntico a 4
       cifras para E y T, r a menos de 1 por ciento (slow-roll contra perturbaciones exactas). El lambda
@@ -71,7 +16,7 @@ claims:
       - code/parametros_cuarticos.py::calcular
       - code/parametros_cuarticos.py::chequeo_tabla_II
       - Ellis, Garcia, Olive & Verner, PRD 113, 063571 (2026), Ecs. 18, 38-40, B15, Tabla II, Sec. VII.B, Figs. 5-6
-      - Notas/Notas.tex Sec. 4 (Tabla tab:parametros-cuarticos)
+      - Notas/Notas.tex «Parámetros cosmológicos para modelos cuárticos» (Tabla tab:parametros-cuarticos)
     numbers: [cuartico_E1_ns, cuartico_E1_r, cuartico_E1_lam, cuartico_E1_H_star, cuartico_E1_M,
               cuartico_E1_A, cuartico_E1_phi0, cuartico_E1_pi0, cuartico_E1_omega_star,
               cuartico_E1_lam_eff, cuartico_E1_phi0_sobre_M, cuartico_T1_ns, cuartico_T1_r,
@@ -79,24 +24,25 @@ claims:
               cuartico_T1_pi0, cuartico_T1_omega_star, cuartico_T1_lam_eff, cuartico_T1_phi0_sobre_M,
               cuartico_E5_ns, cuartico_E5_r, cuartico_E5_lam, cuartico_E5_H_star, cuartico_E5_M,
               cuartico_E5_A, cuartico_E5_phi0, cuartico_E5_pi0, cuartico_E5_omega_star,
-              cuartico_E5_lam_eff, cuartico_E5_phi0_sobre_M, cuartico_tablaII_E_ns,
-              cuartico_tablaII_E_r, cuartico_tablaII_T_ns, cuartico_tablaII_T_r,
-              cuartico_E1_lam_eq38, cuartico_T1_lam_eq38, cuartico_E5_lam_eq38]
+              cuartico_E5_lam_eff, cuartico_E5_phi0_sobre_M, cuartico_tablaII_E_ns, cuartico_tablaII_E_r,
+              cuartico_tablaII_T_ns, cuartico_tablaII_T_r, cuartico_E1_lam_eq38, cuartico_T1_lam_eq38,
+              cuartico_E5_lam_eq38]
 
   - id: reescaleo-a-hoy
     statement: >
       El espectro de GWs de CosmoLattice se lleva a hoy con f_0 = k~ (omega_*/f_*)^(1/2) eps^(1/4)
-      C_f/(a_e rho~_e^(1/4)) y h^2 Omega_GW,0 = C_Omega eps Omega_GW,e, con eps = (a_e/a_RD)^(2(4-n)/(n+2)),
-      C_f = 4.59e10 Hz y C_Omega = 1.61e-5 (Modelo Estándar); para n = 4, eps = 1 y omega_*/f_* = sqrt(lambda_eff).
+      C_f/(a_e rho~_e^(1/4)) y h^2 Omega_GW,0 = C_Omega eps Omega_GW,e, con eps =
+      (a_e/a_RD)^(2(4-n)/(n+2)), C_f = 4.59e10 Hz y C_Omega = 1.61e-5 (Modelo Estándar); para n = 4, eps
+      = 1 y omega_*/f_* = sqrt(lambda_eff).
     verificacion: >
-      Derivación verificada con sympy partiendo de rho ~ a^(-3(1+w)), conservación de entropía y
-      rho_GW ~ a^-4. Con g = g_s se reduce exactamente a Dufaux et al. 2007 Ecs. 45-47 (C_f = 3.97e10 contra
-      4e10 Hz; C_Omega = 9.26e-6 contra 9.3e-6 con su Omega_rad). Contra Figueroa & Torrenti 2017 la amplitud
-      difiere en (g_s0/g_0)^(4/3) = 1.22 (ellos toman g_s = g hoy) y la frecuencia en un factor 6.4 ~ 2 pi que
-      no se pudo reconciliar desde el texto. Prueba de punta a punta: lphi4 con q = 120 da un pico 7.0e-11 en
-      1.09e8 Hz; con las constantes de Dufaux, 4.1e-11 en 9.5e7 Hz contra ~3e-11 en ~7e7 Hz del paper
-      (factor ~1.4, con código, condiciones iniciales y caja distintos). Firme para las fórmulas; la prueba
-      de punta a punta es sólo de orden de magnitud.
+      Derivación verificada con sympy partiendo de rho ~ a^(-3(1+w)), conservación de entropía y rho_GW
+      ~ a^-4. Con g = g_s se reduce exactamente a Dufaux et al. 2007 Ecs. 45-47 (C_f = 3.97e10 contra
+      4e10 Hz; C_Omega = 9.26e-6 contra 9.3e-6 con su Omega_rad). Contra Figueroa & Torrenti 2017 la
+      amplitud difiere en (g_s0/g_0)^(4/3) = 1.22 (ellos toman g_s = g hoy) y la frecuencia en un factor
+      6.4 ~ 2 pi que no se pudo reconciliar desde el texto. Prueba de punta a punta: lphi4 con q = 120
+      da un pico 7.0e-11 en 1.09e8 Hz; con las constantes de Dufaux, 4.1e-11 en 9.5e7 Hz contra ~3e-11
+      en ~7e7 Hz del paper (factor ~1.4, con código, condiciones iniciales y caja distintos). Firme para
+      las fórmulas; la prueba de punta a punta es sólo de orden de magnitud.
     evidence:
       - code/verificar_reescaleo.py::sympy_reescaleo
       - code/verificar_reescaleo.py::comparar_literatura
@@ -104,7 +50,7 @@ claims:
       - code/reescaleo_gws.py::omega_gw_hoy
       - Dufaux, Bergman, Felder, Kofman & Uzan, arXiv:0707.0875, Ecs. 44-47 y Fig. 4
       - Figueroa & Torrenti, arXiv:1707.04533, Ecs. 2.24-2.27
-      - Notas/Notas.tex Sec. 5.4-5.5
+      - Notas/Notas.tex «Reescaleo a hoy» y «Comparación con la literatura»
     numbers: [C_f_SM, C_Omega_SM, omega_gamma_h2, Omega_rad_h2, C_f_dufaux, C_Omega_dufaux,
               C_Omega_dufaux_su_Orad, C_f_FT_sin_g, cociente_FT, q120_Omega_pico, q120_f_pico,
               q120_Omega_pico_const_dufaux, q120_f_pico_const_dufaux, q120_cociente_espectro_1_10]
@@ -112,13 +58,13 @@ claims:
   - id: chequeos-del-analisis
     statement: >
       Las ecuaciones de fondo en variables de programa que usa el analizador (Friedmann 1 y 2,
-      continuidad, w autosimilar y envolvente a^(-6/(n+2))) son correctas, y en las corridas de lphi4 los
-      residuos de continuidad y de a'' quedan al nivel del error de Friedmann de CosmoLattice.
+      continuidad, w autosimilar y envolvente a^(-6/(n+2))) son correctas, y en las corridas de lphi4
+      los residuos de continuidad y de a'' quedan al nivel del error de Friedmann de CosmoLattice.
     verificacion: >
-      sympy desde las ecuaciones en tiempo cósmico con d t~ = omega_* a^(-alpha) dt. En lphi4 N = 32: Friedmann
-      4.0e-4, continuidad 4.0e-4, a'' 2.6e-4 (con diferencias centradas eran ~2e-2, limitadas por tOutputFreq);
-      <w> = 0.331 y 0.334 (N = 64, q = 120), contra 1/3. En la corrida q = 120 los residuos suben a ~2-3e-3 en la
-      etapa no lineal, todavía limitados por el muestreo.
+      sympy desde las ecuaciones en tiempo cósmico con d t~ = omega_* a^(-alpha) dt. En lphi4 N = 32:
+      Friedmann 4.0e-4, continuidad 4.0e-4, a'' 2.6e-4 (con diferencias centradas eran ~2e-2, limitadas
+      por tOutputFreq); <w> = 0.331 y 0.334 (N = 64, q = 120), contra 1/3. En la corrida q = 120 los
+      residuos suben a ~2-3e-3 en la etapa no lineal, todavía limitados por el muestreo.
     evidence:
       - code/verificar_reescaleo.py::sympy_programa
       - code/verificar_reescaleo.py::sympy_autosimilar
@@ -129,16 +75,16 @@ claims:
   - id: requisitos-memoria-tiempo
     statement: >
       En esta máquina (3.7 GB, i7-8565U) una corrida con 2 escalares y GWs ocupa ~10 MB + 148 B x N^3 y
-      cuesta ~140 ns por sitio y por paso con 8 hilos; N <= 192 (1.06 GB) entra en la memoria libre,
-      N = 256 (2.5 GB) no. Con tMax = 500 y dt = 0.01: N = 64 ~0.5 h, N = 128 ~4 h, N = 192 ~14 h.
+      cuesta ~140 ns por sitio y por paso con 8 hilos; N <= 192 (1.06 GB) entra en la memoria libre, N =
+      256 (2.5 GB) no. Con tMax = 500 y dt = 0.01: N = 64 ~0.5 h, N = 128 ~4 h, N = 192 ~14 h.
     verificacion: >
       Mediciones directas de memoria residente para N = 32-192 (la ley N^3 predice 1.06 GB para N = 192,
       medido 1.01 GB) y de tiempo por paso por diferencia de corridas para N = 64, 128, 192 (122-141
-      ns/sitio). La corrida completa de gentmodel_cuartico.in con N = 64 confirma el tiempo total
-      (ver numbers: n64_tiempo_total). N = 256 está extrapolado, no medido, para no forzar el swap.
+      ns/sitio). La corrida completa de gentmodel_cuartico.in con N = 64 confirma el tiempo total (ver
+      numbers: n64_tiempo_total). N = 256 está extrapolado, no medido, para no forzar el swap.
     evidence:
       - code/recursos_cosmolattice.py
-      - Notas/Notas.tex Sec. 6 (Tabla tab:recursos)
+      - Notas/Notas.tex «Corridas cuárticas» (Tabla tab:recursos)
     numbers: [rss_gw_N32, rss_gw_N64, rss_gw_N128, rss_gw_N160, rss_gw_N192, bytes_por_sitio_gw,
               bytes_por_sitio_sin_gw, t_paso_N64, t_paso_N128, t_paso_N192, t_paso_sin_gw_N128,
               ns_por_sitio_gw, hilos_4_vs_8, n64_tiempo_total]
@@ -155,44 +101,8 @@ claims:
       integración de los modos UV, no la etapa no lineal con N grande.
     evidence:
       - code/recursos_cosmolattice.py::dt_recomendado
-      - Notas/Notas.tex Sec. 6.4
+      - Notas/Notas.tex «Corridas cuárticas», El paso temporal
     numbers: [dt_scan_friedmann_0.04, dt_scan_friedmann_0.02, dt_scan_friedmann_0.01,
               dt_scan_friedmann_0.005, dt_scan_rhogw_0.04, dt_scan_rhogw_0.02, dt_scan_rhogw_0.01,
               dt_scan_rhogw_0.005, rhogw_uv_k2.8_dt0.01, rhogw_uv_k2.8_dt0.005, rhogw_uv_k4.2_dt0.01,
               rhogw_uv_k4.2_dt0.005, n64_friedmann]
-
-  - id: in-cuarticos
-    statement: >
-      Los .in gentmodel_cuartico, genemodel_cuartico y genemodel_cuartico_aK5 tienen los parámetros de
-      la Tabla de Notas.tex Sec. 4, corren con withGWs = true y su tMax (500, 600) cubre la saturación
-      de rho_GW/rho.
-    verificacion: >
-      chequear_in compara los valores con parametros_cuarticos.py. Corridas completas con N = 32 hasta
-      t~ = 500 de los tres; el E-model con alpha_K = 1 todavía crece ~10% en t~ = 500, de ahí tMax = 600.
-      Los tiempos de saturación se midieron con N = 32 y pueden cambiar con N.
-    evidence:
-      - code/parametros_cuarticos.py::chequear_in
-      - code/analisis_cosmolattice.py::analizar
-      - models/parameter-files/gentmodel_cuartico.in
-      - models/parameter-files/genemodel_cuartico.in
-      - models/parameter-files/genemodel_cuartico_aK5.in
-    numbers: [in_cuarticos_max_diff, t90_T, t90_E1, t90_E5, aH0_T, aH0_E1, aH0_E5, n64_w, n64_rhogw,
-              n64_t90, n64_Omega_pico, n64_f_pico, n64_kIR_aH, rhogw_N32_t500_T]
-
-  - id: monomial-de-control
-    statement: >
-      genmonomial_cuartico.in es un phi^4 con el lambda_eff y el q del T-model (mismo acople físico g y
-      mismo omega_*/f_*); no es un modelo del paper (n_s = 0.946, r = 0.29 para N_* = 55) y sirve como
-      control del efecto del plateau. Con N = 32 resuena antes que el T-model y da rho_GW/rho = 2.3e-5.
-    verificacion: >
-      chequear_in compara A, phi_0 y phi'_0 del .in con monomial_control (diferencia <= 1.3e-5). omega_*/f_*
-      del análisis coincide con el del T-model (3.6514e-6 en ambos). Corrida N = 32 hasta t~ = 500 sin NaN,
-      <w> = 0.333; la comparación con el T-model es con N = 32 y semillas distintas, así que es cualitativa.
-    evidence:
-      - code/parametros_cuarticos.py::monomial_control
-      - code/parametros_cuarticos.py::chequear_in
-      - models/parameter-files/genmonomial_cuartico.in
-      - Notas/Notas.tex Sec. 7.2
-    numbers: [mono_A, mono_lam_eff, mono_phi0, mono_pi0, mono_omega, mono_ns, mono_r, mono_N32_tchi,
-              mono_N32_t90, mono_N32_rhogw, mono_aH0, mono_N32_cola_uv, mono_N32_kIR_aH, T_N32_tchi,
-              rhogw_N32_t500_T, gw_mem_factor, gw_time_factor]

@@ -130,7 +130,7 @@ def monomial_control(Nst=55.0):
 
     No es un modelo del paper (phi^4 puro está excluido por r): sirve para aislar el efecto del
     plateau, porque cerca del mínimo tiene el mismo potencial de programa y, con el mismo q, el mismo
-    acople físico g = sqrt(q lambda_eff). Condición inicial: epsilon_V = 1 (Notas.tex Secs. 1.4-1.5).
+    acople físico g = sqrt(q lambda_eff). Condición inicial: epsilon_V = 1 (Notas.tex «Condiciones iniciales» y «Momento inicial»).
     n_s y r de phi^4 en slow-roll: phi_*^2 = 8(N_* + 1) m_p^2, n_s = 1 - 3/(N_*+1), r = 16/(N_*+1).
     """
     dT = calcular("T", 1.0, 55.8)
@@ -153,18 +153,29 @@ def chequear_in():
     import re
     pars = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "models", "parameter-files")
     peor = 0.0
+    revisados = []
     for mod, al, Nst in CASOS:
+        ruta = os.path.join(pars, IN_CUARTICOS[(mod, al)])
+        if not os.path.exists(ruta):  # el .in está en la rama de su modelo
+            continue
+        revisados.append(IN_CUARTICOS[(mod, al)])
         d = calcular(mod, al, Nst)
-        txt = open(os.path.join(pars, IN_CUARTICOS[(mod, al)]), encoding="utf-8").read()
+        txt = open(ruta, encoding="utf-8").read()
         leer = lambda k: float(re.search(rf"^{k}\s*=\s*(\S+)", txt, re.M).group(1))  # noqa: E731
         for k, v in (("M", d["M"]), ("A", d["A"]), ("initial_amplitudes", d["phi0"]),
                      ("initial_momenta", d["pi0"])):
             peor = max(peor, abs(leer(k) / v - 1))
+    ruta = os.path.join(pars, "genmonomial_cuartico.in")
     d = monomial_control()
-    txt = open(os.path.join(pars, "genmonomial_cuartico.in"), encoding="utf-8").read()
-    for k, v in (("A", d["A"]), ("initial_amplitudes", d["phi0"]), ("initial_momenta", d["pi0"])):
+    txt = open(ruta, encoding="utf-8").read() if os.path.exists(ruta) else ""
+    if txt:
+        revisados.append("genmonomial_cuartico.in")
+    for k, v in ([] if not txt else (("A", d["A"]), ("initial_amplitudes", d["phi0"]), ("initial_momenta", d["pi0"]))):
         peor = max(peor, abs(float(re.search(rf"^{k}\s*=\s*(\S+)", txt, re.M).group(1)) / v - 1))
-    print(f".in cuárticos vs este script: máxima diferencia relativa = {peor:.1e}")
+    if not revisados:
+        print(".in cuárticos: ninguno en esta rama (están en t-model, e-model y monomial)")
+        return None
+    print(f".in cuárticos ({', '.join(revisados)}) vs este script: máxima diferencia relativa = {peor:.1e}")
     assert peor < 1e-4
     return peor
 

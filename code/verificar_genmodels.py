@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Verificación de los modelos genmonomial, gentmodel y genemodel (ver Notas/Notas.tex).
 
+En main no hay modelos; cada rama (monomial, t-model, e-model) agrega el suyo, y el script verifica
+sólo los que tengan .h y .in en el árbol.
+
 Uso: python3 code/verificar_genmodels.py
 
 Tres bloques, cada uno independiente de CosmoLattice:
@@ -15,6 +18,7 @@ Tres bloques, cada uno independiente de CosmoLattice:
 """
 
 import os
+import sys
 import re
 
 import numpy as np
@@ -24,7 +28,9 @@ from scipy.integrate import solve_ivp
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PARS = os.path.join(ROOT, "models", "parameter-files")
 MP = 2.435e18  # masa de Planck reducida en GeV, la misma que usan los .in de CosmoLattice
-MODELOS = ("genmonomial", "gentmodel", "genemodel")
+TODOS = ("genmonomial", "gentmodel", "genemodel")
+MODELOS = tuple(m for m in TODOS if os.path.exists(os.path.join(PARS, m + ".in"))
+                and os.path.exists(os.path.join(ROOT, "models", m + ".h")))
 
 
 def leer_in(modelo):
@@ -127,6 +133,8 @@ def chequear_derivadas():
     }
     peor = 0.0
     for modelo, (Vt, d1, d2) in casos.items():
+        if modelo not in MODELOS:
+            continue
         for nv in (1.5, 2, 2.5, 3, 4, 6):
             for xv in (0.3, 1.0, 2.5):
                 s = {n: nv, Mt: 0.7, x: xv}
@@ -158,6 +166,9 @@ def condiciones_iniciales():
 
 
 def cotas_estabilidad(modelo="genmonomial"):
+    if modelo not in MODELOS:
+        print(f"{modelo}: no está en esta rama")
+        return None
     """Factor de escala máximo estable para n > 4 (Notas.tex, 'Estabilidad numérica').
 
     Gradiente: k_max dt a^((2n-8)/(n+2)) < 2, con k_max = 2 sqrt(3)/dx, dx = 2 pi/(N kIR).
@@ -177,6 +188,9 @@ def cotas_estabilidad(modelo="genmonomial"):
 
 
 if __name__ == "__main__":
+    if not MODELOS:
+        sys.exit("No hay modelos en esta rama (git checkout monomial, t-model o e-model).")
+    print("Modelos en esta rama:", ", ".join(MODELOS))
     chequear_derivadas()
     condiciones_iniciales()
     cotas_estabilidad()

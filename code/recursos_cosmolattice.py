@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Memoria y tiempo de cómputo de una corrida de CosmoLattice en función de N (ver Notas.tex Sec. 6).
+"""Memoria y tiempo de cómputo de una corrida de CosmoLattice en función de N (ver Notas.tex «Corridas cuárticas»).
 
 Uso:
     python3 code/recursos_cosmolattice.py                      # tabla para N = 32 ... 256

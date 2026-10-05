@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Compila genmonomial, gentmodel y genemodel y corre cada uno con su .in de models/parameter-files/,
+# Compila los modelos generalizados presentes en esta rama (genmonomial, gentmodel, genemodel) y corre
+# cada uno con su .in de models/parameter-files/,
 # para comprobar que la simulación termina sin NaN.
 #
 # Uso: code/probar_genmodels.sh [directorio_de_build]   (por defecto ./build_genmodels)
@@ -21,6 +22,7 @@ CMAKE_ARGS=(-DCMAKE_BUILD_TYPE=Release)
 
 estado=0
 for m in genmonomial gentmodel genemodel; do
+  [ -f "$ROOT/models/$m.h" ] && [ -f "$ROOT/models/parameter-files/$m.in" ] || continue  # sólo los de esta rama
   cmake "$ROOT" -DMODEL=$m "${CMAKE_ARGS[@]}" > cmake_$m.log 2>&1
   make -j"${NTHREADS:-8}" > make_$m.log 2>&1
   mkdir -p run_$m
