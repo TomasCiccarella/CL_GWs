@@ -1,26 +1,4 @@
 {
-  "derivadas_max_diff": {
-    "value": 1.7e-16,
-    "statement": "Máxima diferencia entre las derivadas primera y segunda del potencial de programa escritas en genmonomial.h, gentmodel.h y genemodel.h y la derivada simbólica, sobre n en {1.5, 2, 2.5, 3, 4, 6} y phi~ en {0.3, 1, 2.5}, con M~ = 0.7.",
-    "produced_by": "code/verificar_genmodels.py::chequear_derivadas",
-    "from_scratch": "La transcripción a sympy de las expresiones de los .h (rama phi~ > 0) y la grilla de puntos.",
-    "from_library": "sympy (diff, subs).",
-    "choices": [
-      "Comparar en una grilla numérica en vez de simplificar simbólicamente la diferencia: con n simbólico y tanh/exp, sympy no siempre reduce a 0 aunque sean iguales.",
-      "Sólo la rama phi~ > 0: para phi~ < 0 el código usa x|x|^(n-2), que es la misma función extendida de forma impar/par."
-    ]
-  },
-  "phi0_genmonomial": {
-    "value": 1.03308e+19,
-    "statement": "phi_0 en GeV de genmonomial.in: epsilon_V = 1 con n = 6, phi_0 = n m_p/sqrt(2).",
-    "produced_by": "code/verificar_genmodels.py::condiciones_iniciales",
-    "from_scratch": "La fórmula cerrada de Notas.tex «Modelo monomial», condiciones iniciales.",
-    "from_library": "numpy.",
-    "choices": [
-      "m_p = 2.435e18 GeV, la masa de Planck reducida que usan los .in de CosmoLattice.",
-      "epsilon_V = 1 en vez de epsilon_H = 1, por consistencia con tanh2.in."
-    ]
-  },
   "phi0_gentmodel": {
     "value": 4.21953e+18,
     "statement": "phi_0 en GeV de gentmodel.in: epsilon_V = 1 con n = 2.5, M = 10 m_p, phi_0 = (M/2) arcsinh(sqrt(2) n m_p/M).",
@@ -31,42 +9,11 @@
       "Mismas que phi0_genmonomial."
     ]
   },
-  "phi0_genemodel": {
-    "value": 3.96367e+18,
-    "statement": "phi_0 en GeV de genemodel.in: epsilon_V = 1 con n = 2.5, M = 10 m_p, phi_0 = M ln(1 + n m_p/(sqrt(2) M)).",
-    "produced_by": "code/verificar_genmodels.py::condiciones_iniciales",
-    "from_scratch": "La fórmula cerrada de Notas.tex «E-models», condiciones iniciales.",
-    "from_library": "numpy.",
-    "choices": [
-      "Mismas que phi0_genmonomial."
-    ]
-  },
-  "pi0_genmonomial": {
-    "value": -3.0632e+31,
-    "statement": "Momento inicial en GeV^2 de genmonomial.in: phi'_0 = -sqrt((sqrt(7/3) - 1) V(phi_0)).",
-    "produced_by": "code/verificar_genmodels.py::momento_inicial",
-    "from_scratch": "La derivación de Notas.tex «Momento inicial» (slow-roll con H autoconsistente evaluado en epsilon_V = 1).",
-    "from_library": "numpy.",
-    "choices": [
-      "H autoconsistente (incluye phi'^2/2) en vez de H^2 = V/(3 m_p^2): con H sólo potencial, para tanh2.in da -3.40e31 en lugar de -3.02e31, más lejos del -3.07e31 que trae CosmoLattice.",
-      "Signo negativo: phi_0 > 0 y el campo rueda hacia el mínimo."
-    ]
-  },
   "pi0_gentmodel": {
     "value": -1.9143e+31,
     "statement": "Momento inicial en GeV^2 de gentmodel.in con la misma fórmula que pi0_genmonomial.",
     "produced_by": "code/verificar_genmodels.py::momento_inicial",
     "from_scratch": "Notas.tex «T-models», momento inicial.",
-    "from_library": "numpy.",
-    "choices": [
-      "Mismas que pi0_genmonomial."
-    ]
-  },
-  "pi0_genemodel": {
-    "value": -1.6213e+31,
-    "statement": "Momento inicial en GeV^2 de genemodel.in con la misma fórmula que pi0_genmonomial.",
-    "produced_by": "code/verificar_genmodels.py::momento_inicial",
-    "from_scratch": "Notas.tex «E-models», momento inicial.",
     "from_library": "numpy.",
     "choices": [
       "Mismas que pi0_genmonomial."
@@ -80,16 +27,6 @@
     "from_library": "numpy.",
     "choices": []
   },
-  "phi_fin_exacto_genmonomial": {
-    "value": 9.0371e+18,
-    "statement": "phi en GeV donde epsilon_H = 1 en el fondo homogéneo exacto de genmonomial.in (contra phi_0 = 1.03308e19 de epsilon_V = 1).",
-    "produced_by": "code/verificar_genmodels.py::fin_exacto",
-    "from_scratch": "Las ecuaciones de fondo (Klein-Gordon + Friedmann) y el evento epsilon_H = (3/2) phi'^2/rho = 1.",
-    "from_library": "scipy.integrate.solve_ivp (RK45, rtol 1e-10).",
-    "choices": [
-      "Arrancar en 3 phi_0 con velocidad de slow-roll; el atractor borra la condición inicial mucho antes del final."
-    ]
-  },
   "phi_fin_exacto_gentmodel": {
     "value": 3.1754e+18,
     "statement": "phi en GeV donde epsilon_H = 1 en el fondo exacto de gentmodel.in.",
@@ -98,26 +35,6 @@
     "from_library": "scipy.integrate.solve_ivp.",
     "choices": [
       "Arrancar en phi_0 + 3M, en la meseta."
-    ]
-  },
-  "phi_fin_exacto_genemodel": {
-    "value": 2.9485e+18,
-    "statement": "phi en GeV donde epsilon_H = 1 en el fondo exacto de genemodel.in.",
-    "produced_by": "code/verificar_genmodels.py::fin_exacto",
-    "from_scratch": "Idem phi_fin_exacto_genmonomial.",
-    "from_library": "scipy.integrate.solve_ivp.",
-    "choices": [
-      "Arrancar en phi_0 + 3M, en la meseta."
-    ]
-  },
-  "a_final_genmonomial": {
-    "value": 189.2,
-    "statement": "Factor de escala al final (t = 19.9) de la corrida de genmonomial.in corregido, que termina sin NaN.",
-    "produced_by": "code/probar_genmodels.sh",
-    "from_scratch": "Nada: salida de CosmoLattice.",
-    "from_library": "CosmoLattice + TempLat v1.0.2.",
-    "choices": [
-      "tMax = 20 para quedar por debajo de a ~ 290 con margen."
     ]
   },
   "friedmann_max_rel": {
@@ -1190,59 +1107,9 @@
       "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
     ]
   },
-  "t90_E1": {
-    "value": 420,
-    "statement": "Idem E-model alpha_K = 1.",
-    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
-    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
-    "from_library": "numpy.",
-    "choices": [
-      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
-    ]
-  },
-  "t90_E5": {
-    "value": 360,
-    "statement": "Idem E-model alpha_K = 5.",
-    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
-    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
-    "from_library": "numpy.",
-    "choices": [
-      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
-    ]
-  },
   "aH0_T": {
     "value": 0.4356,
     "statement": "a'/a inicial (programa), T-model.",
-    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
-    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
-    "from_library": "numpy.",
-    "choices": [
-      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
-    ]
-  },
-  "aH0_E1": {
-    "value": 0.1617,
-    "statement": "a'/a inicial, E-model alpha_K = 1.",
-    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
-    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
-    "from_library": "numpy.",
-    "choices": [
-      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
-    ]
-  },
-  "aH0_E5": {
-    "value": 0.3234,
-    "statement": "a'/a inicial, E-model alpha_K = 5.",
-    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
-    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
-    "from_library": "numpy.",
-    "choices": [
-      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
-    ]
-  },
-  "in_cuarticos_max_diff": {
-    "value": 1.3e-05,
-    "statement": "Máxima diferencia relativa entre M, A, phi_0, phi'_0 de los .in cuárticos y parametros_cuarticos.py.",
     "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
     "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
     "from_library": "numpy.",
@@ -1787,6 +1654,27 @@
     "choices": [
       "code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01, semillas aleatorias), en las ramas de cada modelo; salidas en build_corridas/<caso>_N64_kIR0.7.",
       "Analizadas con code/analisis_cosmolattice.py, g_* = 106.75."
+    ]
+  },
+  "derivadas_max_diff_gentmodel": {
+    "value": 1.7e-16,
+    "statement": "Máxima diferencia entre las derivadas primera y segunda del potencial de programa de gentmodel.h y la derivada simbólica, sobre n en {1.5, 2, 2.5, 3, 4, 6} y phi~ en {0.3, 1, 2.5}, con M~ = 0.7.",
+    "produced_by": "code/verificar_genmodels.py::chequear_derivadas",
+    "from_scratch": "La transcripción a sympy de las expresiones de los .h (rama phi~ > 0) y la grilla de puntos.",
+    "from_library": "sympy (diff, subs).",
+    "choices": [
+      "Comparar en una grilla numérica en vez de simplificar simbólicamente la diferencia: con n simbólico y tanh/exp, sympy no siempre reduce a 0 aunque sean iguales.",
+      "Sólo la rama phi~ > 0: para phi~ < 0 el código usa x|x|^(n-2), que es la misma función extendida de forma impar/par."
+    ]
+  },
+  "in_cuarticos_max_diff_T": {
+    "value": 1.1e-05,
+    "statement": "Máxima diferencia relativa entre M, A, phi_0, phi'_0 de gentmodel_cuartico.in y parametros_cuarticos.py.",
+    "produced_by": "code/analisis_cosmolattice.py / code/parametros_cuarticos.py::chequear_in",
+    "from_scratch": "Lectura de average_energies_gws.txt / average_scale_factor.txt.",
+    "from_library": "numpy.",
+    "choices": [
+      "Corridas N = 32 de los .in tal como quedan, con tMax = 500 (build_*/run_*_N32_t500)."
     ]
   }
 }
