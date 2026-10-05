@@ -14,7 +14,7 @@ Uso, desde la raíz del repositorio y con el merge en conflicto:
 numbers.json: conserva las claves de la rama y agrega las que sólo están en main; si una clave está
 en los dos lados con valores distintos, se detiene (eso no es un conflicto de formato y hay que
 mirarlo a mano). claims.yaml: conserva el texto de la rama y agrega al final las afirmaciones de
-main cuyo id no está en la rama. Al final comprueba que no haya ids repetidos y que todo número
+main cuyo id no está en la rama; en la sección figures: hace lo mismo con las figuras, por file. Al final comprueba que no haya ids repetidos y que todo número
 citado por una afirmación exista.
 """
 
@@ -33,6 +33,26 @@ def show(etapa, ruta):
     return r.stdout
 
 
+def separar(txt):
+    """claims.yaml -> (texto de 'claims:', texto de los ítems de 'figures:' o '')."""
+    partes = txt.split("\nfigures:\n", 1)
+    return partes[0], partes[1] if len(partes) > 1 else ""
+
+
+def unir_bloques(txt_rama, txt_otra, marca):
+    """Los ítems de txt_rama más los de txt_otra cuya clave (id o file) no está en la rama.
+    Devuelve el texto completo de la unión si marca es la de figuras, y sólo los nuevos si es la
+    de afirmaciones (que se agregan al final del texto de la rama)."""
+    def items(txt):
+        return [marca + b.rstrip("\n") + "\n" for b in ("\n" + txt).split("\n" + marca)[1:]]
+    def clave(item):
+        return item[len(marca):].split("\n")[0].strip()
+    de_rama = items(txt_rama)
+    vistos = {clave(i) for i in de_rama}
+    nuevos = [i for i in items(txt_otra) if clave(i) not in vistos]
+    return "".join(de_rama + nuevos) if "file" in marca else "".join(nuevos)
+
+
 def main():
     rama = json.loads(show(":2", "provenance/numbers.json"))
     otra = json.loads(show(":3", "provenance/numbers.json"))
@@ -44,11 +64,13 @@ def main():
     with open("provenance/numbers.json", "w", encoding="utf-8") as fh:
         json.dump(rama, fh, indent=2, ensure_ascii=False)
 
-    txt_rama, txt_otra = show(":2", "provenance/claims.yaml"), show(":3", "provenance/claims.yaml")
-    ids_rama = {c["id"] for c in yaml.safe_load(txt_rama)["claims"]}
-    bloques = ("\n" + txt_otra).split("\n  - id: ")[1:]
-    nuevos = ["  - id: " + b.rstrip("\n") + "\n" for b in bloques if b.split("\n")[0].strip() not in ids_rama]
-    txt = txt_rama.rstrip("\n") + "\n" + "".join(nuevos)
+    cl_rama, fig_rama = separar(show(":2", "provenance/claims.yaml"))
+    cl_otra, fig_otra = separar(show(":3", "provenance/claims.yaml"))
+    nuevos = unir_bloques(cl_rama, cl_otra, "  - id: ")
+    figs = unir_bloques(fig_rama, fig_otra, "  - file: ")
+    txt = cl_rama.rstrip("\n") + "\n" + "".join(nuevos)
+    if figs.strip():
+        txt += "\nfigures:\n" + figs.lstrip("\n")
     with open("provenance/claims.yaml", "w", encoding="utf-8") as fh:
         fh.write(txt)
 

@@ -344,6 +344,7 @@ python3 code/verificar_reescaleo.py      # sympy + comparación con la literatur
             \end{itemize}
 
         \subsection{Recomendación}
+            \label{sec:recomendacion}
 
             \begin{table}[H]
                 \centering
@@ -387,6 +388,43 @@ DT=0.007 MODELOS="gentmodel_cuartico" code/correr_cuarticos.sh 128
                 \item GWs: $\rho_{GW}/\rho = 1.1 \times 10^{-5}$, que llega al $90\%$ de su valor final en $\tilde t \simeq 260$ (con $N = 32$ era $270$), y un pico hoy de $h^2\Omega_{GW,0} = 8.7 \times 10^{-11}$ en $f_0 = 4.1 \times 10^8$\,Hz.
             \end{itemize}
             Con $N = 32$ el $\rho_{GW}/\rho$ final era $1.8 \times 10^{-5}$: un $40\%$ de diferencia entre las dos resoluciones. Es una razón más para hacer las corridas de producción con $N = 128$ y comparar.
+
+        \subsection{Resultados con $N = 64$}
+            \label{sec:resultados-N64}
+
+            Corrimos los cuatro casos de la Tabla~\ref{tab:casos} con \texttt{code/correr\_cuarticos.sh 64} ($N = 64$, $\tilde k_{\text{IR}} = 0.7$, $\delta\tilde t = 0.01$, el $\tilde t_{\max}$ de cada \texttt{.in}): entre 19 y 30\,min cada uno. La Fig.~\ref{fig:corridas-N64} los compara y la Tabla~\ref{tab:resultados-N64} resume los números; las figuras de cada caso están en la sección de su modelo, en su rama. Ambas las regenera \texttt{code/comparar\_corridas.py}.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/corridas_N64.pdf}
+                \caption{Los cuatro casos cuárticos con $N = 64$. (a) Espectro de GWs al final de la simulación, en unidades de programa. (b) El mismo espectro llevado a hoy (Sec.~\ref{sec:reescaleo}); el punto marca el máximo. (c) Fracción de la energía en GWs; la línea punteada marca el máximo de rms$(\tilde\chi)$, es decir, cuándo la resonancia satura.}
+                \label{fig:corridas-N64}
+            \end{figure}
+
+            \begin{table}[H]
+                \centering
+                \small
+                \begin{tabular}{lcccccccc}
+                    \toprule
+                    caso & $f_{\text{pico}}$ [Hz] & $\tilde k_{\text{pico}}$ & $h^2\Omega_{GW,0}^{\text{pico}}$ & $\tilde k$ con $> \frac12$ pico & Hz por $\tilde k$ & $\rho_{GW}/\rho$ & $\tilde t_\chi$ & $\tilde t_{90}$ \\
+                    \midrule
+                    T, $\alpha_K = 1$ & $4.1 \times 10^8$ & 3.5 & $8.7 \times 10^{-11}$ & 1.4--11 & $1.19 \times 10^8$ & $1.12 \times 10^{-5}$ & 121 & 270 \\
+                    E, $\alpha_K = 1$ & $9.5 \times 10^8$ & 2.8 & $6.3 \times 10^{-11}$ & 1.4--6.3 & $3.40 \times 10^8$ & $0.79 \times 10^{-5}$ & 186 & 380 \\
+                    E, $\alpha_K = 5$ & $4.9 \times 10^8$ & 2.8 & $8.4 \times 10^{-11}$ & 1.4--8.4 & $1.76 \times 10^8$ & $0.99 \times 10^{-5}$ & 146 & 340 \\
+                    $\phi^4$ (control) & $9.9 \times 10^8$ & 11.2 & $8.8 \times 10^{-11}$ & 2.1--17 & $0.89 \times 10^8$ & $1.36 \times 10^{-5}$ & 80 & 230 \\
+                    \bottomrule
+                \end{tabular}
+                \caption{Resultados con $N = 64$. $\tilde t_\chi$: máximo de rms$(\tilde\chi)$; $\tilde t_{90}$: cuándo $\rho_{GW}/\rho$ llega al $90\%$ de su valor final. La columna «Hz por $\tilde k$» es el factor que lleva $\tilde k$ a $f_0$ (Sec.~\ref{sec:reescaleo}).}
+                \label{tab:resultados-N64}
+            \end{table}
+
+            \paragraph{Las corridas son confiables.} En las cuatro, $\langle w\rangle$ queda a menos de $0.5\%$ de $1/3$ y el error de Friedmann es $\le 2.4 \times 10^{-3}$ (el mayor es el del monomial, que es el que más se expande). Todos los modos de GWs terminan dentro del horizonte ($k_{\text{IR}}/(aH) \ge 343$), y la integral del espectro de GWs reproduce el $\rho_{GW}/\rho$ de \CosmoLattice a $10^{-14}$. La producción está saturada: $\rho_{GW}/\rho$ crece menos de un $5\%$ en los últimos 100 de $\tilde t$. La corrida T es la de validación con otra semilla, y da el mismo $\rho_{GW}/\rho$ a un $0.2\%$ ($1.116 \times 10^{-5}$ contra $1.114 \times 10^{-5}$).
+
+            \paragraph{En la red, los cuatro espectros son casi iguales en el IR y difieren en el UV.} Para $\tilde k \lesssim 3$ los cuatro espectros finales coinciden dentro de un factor $1.5$ ($\Omega_{GW,e} \simeq 1$--$5 \times 10^{-6}$; Fig.~\ref{fig:corridas-N64}a). Esto es lo esperable, porque en variables de programa los cuatro casos tienen el mismo potencial cerca del mínimo ($\tilde\phi^4/4$) y el mismo $q = 120$. La diferencia está en el UV: el espectro se extiende más cuanto antes satura la resonancia. El orden es el mismo en $\tilde t_\chi$ y en el corte UV: monomial ($\tilde t_\chi = 80$, el espectro supera la mitad del pico hasta $\tilde k \simeq 17$), T (121; 11), E con $\alpha_K = 5$ (146; 8.4) y E con $\alpha_K = 1$ (186; 6.3). Una explicación posible es que, al saturar antes, la cascada no lineal tiene más tiempo para llevar energía al UV; con estas cuatro corridas no lo podemos separar de otros efectos. Que la resonancia llegue antes o después tiene que ver con cuánto se aparta el arranque del régimen cuártico, pero no sólo a través de $\phi_0/M$: el E-model con $\alpha_K = 1$ ($\phi_0/M = 1.2$) es el más tardío, pero el E-model con $\alpha_K = 5$ ($\phi_0/M = 0.71$) resuena después que el T-model ($\phi_0/M = 0.79$), así que también importa la forma del potencial.
+
+            \paragraph{Hoy, las amplitudes son parecidas y las frecuencias se separan.} Como $\epsilon = 1$ (Sec.~\ref{sec:reescaleo}), la amplitud de hoy es el $\Omega_{GW,e}$ de la red por la misma constante en los cuatro casos. Por eso los máximos quedan todos entre $6$ y $9 \times 10^{-11}$. La frecuencia, en cambio, se reescala con un factor distinto en cada caso, $\propto (\omega_*/f_*)^{1/2}/(a_e\tilde\rho_e^{1/4})$, que va de $0.89 \times 10^8$\,Hz (monomial) a $3.4 \times 10^8$\,Hz (E, $\alpha_K = 1$) por unidad de $\tilde k$. Ese factor es lo que separa las curvas de la Fig.~\ref{fig:corridas-N64}b. El T-model y el monomial tienen el mismo $\omega_*/f_*$, pero el monomial arranca con más energía en unidades de programa y se expande más antes de llegar a $w = 1/3$: su $a\tilde\rho^{1/4}$ es $1.20$ veces el del T-model al principio y $1.34$ veces al final (en radiación, $a\tilde\rho^{1/4}$ es constante). Por eso sus frecuencias quedan $1.34$ veces más bajas.
+
+            \paragraph{La frecuencia del pico no es robusta.} Los cuatro espectros son anchos: el de hoy supera la mitad del máximo en una década de $\tilde k$ (en el monomial, de $\tilde k = 2.1$ a 17). Además, con $\tilde k_{\text{IR}} = 0.7$ los bins tienen un ancho de $20$--$25\%$ en el pico. Por eso el máximo puede caer en bins muy distintos. Por ejemplo, el monomial y el E-model con $\alpha_K = 1$ tienen el pico casi en la misma frecuencia ($\simeq 10^9$\,Hz) por razones opuestas: el monomial tiene un factor de reescaleo chico y el pico en $\tilde k = 11.2$, porque su espectro sigue plano hasta ahí, y el E-model un factor grande y el pico en $\tilde k = 2.8$. Para comparar modelos conviene usar la banda en la que el espectro supera la mitad del máximo, no la frecuencia del pico. Las corridas con $N = 128$ y $\tilde k_{\text{IR}} = 0.35$ (Sec.~\ref{sec:recomendacion}) van a resolver mejor esa zona.
 
     \section{Guía de uso: los cuatro casos, sus parámetros y cómo correrlos}
         \label{sec:guia}

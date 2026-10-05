@@ -200,3 +200,40 @@ claims:
               N64_mono_friedmann, N64_mono_w, N64_mono_t90, N64_mono_ult100, N64_T_minutos,
               N64_E5_minutos, N64_E1_minutos, N64_mono_minutos, N64_T_k3.5, N64_T_k11.2, N64_T_k22.4,
               N64_mono_k3.5, N64_mono_k11.2, N64_mono_k22.4, N64_T_tchi, N64_mono_tchi]
+  - id: comparacion-N64
+    statement: >
+      Con N = 64, en la red los cuatro espectros finales de GWs coinciden a un factor 1.5 para k~ <= 3 y
+      difieren en el UV, que se extiende más cuanto antes satura la resonancia (monomial, T, E aK=5, E aK=1).
+      Hoy los picos quedan entre 6 y 9e-11 y las frecuencias se separan sólo por el factor de reescaleo
+      (0.89e8 a 3.4e8 Hz por k~). La frecuencia del pico no es robusta: los espectros superan la mitad del
+      máximo en casi una década de k~.
+    verificacion: >
+      Recalculado de las salidas crudas por code/comparar_corridas.py, independiente de
+      analisis_cosmolattice.py (picos, rho_GW/rho, t~_90 y t~_chi coinciden con los registrados en
+      corridas-N64). El orden UV contra t~_chi es una correlación con cuatro corridas y una semilla cada
+      una; la explicación por la cascada no lineal queda como hipótesis en las notas. N = 128 pendiente.
+    evidence:
+      - code/comparar_corridas.py::cargar
+      - code/comparar_corridas.py::main
+      - Notas/Notas.tex «Resultados con N = 64» (Fig. fig:corridas-N64, Tabla tab:resultados-N64)
+    numbers: [N64_T_Hz_por_k, N64_E1_Hz_por_k, N64_E5_Hz_por_k, N64_mono_Hz_por_k, N64_T_banda_kmin,
+              N64_T_banda_kmax, N64_E1_banda_kmin, N64_E1_banda_kmax, N64_E5_banda_kmin,
+              N64_E5_banda_kmax, N64_mono_banda_kmin, N64_mono_banda_kmax, N64_IR_factor,
+              N64_aRho_mono_T_inicial, N64_aRho_mono_T_final, N64_integral_max, N64_T_tchi,
+              N64_mono_tchi, N64_E1_tchi, N64_E5_tchi, N64_T_f_pico, N64_E1_f_pico, N64_E5_f_pico, N64_mono_f_pico,
+              cuartico_E1_phi0_sobre_M, cuartico_T1_phi0_sobre_M, cuartico_E5_phi0_sobre_M]
+
+figures:
+  - file: Notas/figuras/corridas_N64.pdf
+    produced_by: code/comparar_corridas.py::main
+    shows: >
+      (a) Omega_GW,e(k~) final en la red, (b) h^2 Omega_GW,0(f) hoy con su máximo, (c) rho_GW/rho(t~)
+      con el máximo de rms(chi~) punteado, para T aK=1, E aK=1, E aK=5 y el monomial de control con
+      N = 64. Se lee que el IR coincide en la red, el UV se extiende más cuanto antes satura la
+      resonancia, y hoy las curvas se separan en frecuencia por el factor de reescaleo.
+    from_scratch: Lectura de las salidas, pico y reescaleo por corrida.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Último espectro de cada corrida (t~_max distinto: 600 en E aK=1, 500 en el resto; todos saturados).",
+              "rho_GW/rho contra t~ (unidades de 1/omega_*, el período de oscilación) y no contra a.",
+              "Colores categóricos en orden fijo de la paleta del analizador; leyenda en (a)."]
+    supports: [comparacion-N64]
