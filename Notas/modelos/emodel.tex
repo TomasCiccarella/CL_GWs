@@ -1,0 +1,73 @@
+    \section{E-models: $V = A(1 - e^{-\phi/M})^n$}
+        \label{sec:emodel}
+
+        Implementado en \texttt{models/genemodel.h}; los \texttt{.in} son \texttt{genemodel.in} ($n = 2.5$, exploratorio), \texttt{genemodel\_cuartico.in} y \texttt{genemodel\_cuartico\_aK5.in} (casos del paper, Sec.~\ref{sec:parametros-cuarticos}).
+
+        \subsection{Derivadas}
+
+            Consideremos que los potenciales de tipo E-model generales son de la forma
+            \begin{equation}
+                V(\phi) = A \left( 1 - e^{-\phi/M} \right)^n
+            \end{equation}
+
+            Para la implementación de estos modelos en \CosmoLattice debemos calcular sus derivadas primera y segunda. Definiendo $u \equiv 1 - e^{-\phi/M}$ (de modo que $1 - u = e^{-\phi/M}$ y $u^\prime = (1-u)/M$), tenemos
+            \begin{equation*}
+                \begin{split}
+                    V^\prime (\phi) &= A n \, u^{n-1} \, u^\prime = \frac{An}{M} \, u^{n-1} (1-u)
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                V^\prime (\phi) = \frac{A n}{M} \left( 1 - e^{-\phi/M} \right)^{n-1} e^{-\phi/M}
+            \end{equation}
+            y derivando nuevamente
+            \begin{equation*}
+                \begin{split}
+                    \frac{d}{d\phi} \left[ u^{n-1} (1-u) \right] &= u^\prime \, u^{n-2} \left[ (n-1)(1-u) - u \right] = u^\prime \, u^{n-2} \left[ (n-1) - n u \right]\\
+                    V^{\prime\prime} (\phi) &= \frac{An}{M^2} \, u^{n-2} (1-u) \left[ (n-1) - n u \right]
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                V^{\prime \prime} (\phi) = \frac{A n}{M^2} \, e^{-\phi/M} \left( 1 - e^{-\phi/M} \right)^{n-2} \left[ n \, e^{-\phi/M} - 1 \right]
+            \end{equation}
+
+        \subsection{Variables computacionales}
+
+            El potencial de los E-models está acotado por un lado: satura en $A$ para $\phi \gg M$ (aunque no del lado $\phi \ll -M$, donde crece exponencialmente, lo que vuelve asimétricas las oscilaciones posteriores; para $n$ no entero, en $\phi<0$ usamos $|1 - e^{-\phi/M}|^n$, igual que el código). Con el criterio de la Sec.~\ref{sec:variables}, $\omega_*$ y $q$ salen del comportamiento local cerca de $\phi = 0$, la región relevante durante el reheating, y no de la altura global $A$:
+            \begin{equation}
+                V(\phi) = A \left( 1 - e^{-\phi/M} \right)^n \underset{|\phi| \ll M}{\simeq} \frac{A}{M^n} \, |\phi|^n \, ,
+            \end{equation}
+            de modo que $A_{\text{eff}} = A/M^n$ y
+            \begin{equation}
+                \omega_*^2 = A_{\text{eff}} \, n \, \phi_0^{n-2} = \frac{A n}{M^n} \, \phi_0^{n-2}
+                \hspace{1cm} \Longrightarrow \hspace{1cm}
+                \begin{cases}
+                    \omega_* = \sqrt{A n} \, M^{-n/2} \, \phi_0^{n/2 - 1} \\
+                    \displaystyle q = \frac{g^2 \phi_0^2}{\omega_*^2} = \frac{g^2 \phi_0^{4-n} M^n}{n A}
+                \end{cases}
+            \end{equation}
+            Son los mismos $\omega_*$ y $q$ que en los T-models, porque ambos potenciales tienen el mismo comportamiento cerca de $\phi = 0$. Definiendo nuevamente $\tilde{M} \equiv M/\phi_0$, el potencial de programa resulta
+            \begin{equation}
+                \tilde{V} \left( \tilde{\phi}, \tilde{\chi} \right) = \frac{1}{n} \left| \tilde{M} \left( 1 - e^{-\tilde{\phi}/\tilde{M}} \right) \right|^n + \frac{1}{2} \, q \, \tilde{\phi}^2 \tilde{\chi}^2 \, ,
+            \end{equation}
+            que también se reduce correctamente al caso monomial en el límite $\tilde M \to \infty$.
+
+        \subsection{Condiciones iniciales}
+
+            La condición $\epsilon_V = 1$ (Sec.~\ref{sec:ci}) para este potencial:
+            \begin{equation*}
+                \begin{split}
+                    \epsilon &= \frac{m_p^2}{2} \left[ \frac{V^\prime (\phi)}{V(\phi)} \right]^2\\
+                    \frac{V^\prime (\phi)}{V(\phi)} &= \frac{n}{M} \frac{1-u}{u} = \frac{n}{M} \frac{e^{-\phi/M}}{1 - e^{-\phi/M}} = \frac{n}{M} \frac{1}{e^{\phi/M} - 1}\\
+                    1 &= \frac{m_p^2}{2} \left[ \frac{n}{M} \frac{1}{e^{\phi_0/M} - 1} \right]^2\\
+                    \left( e^{\phi_0/M} - 1 \right)^2 &= \frac{n^2 m_p^2}{2 M^2}\\
+                    e^{\phi_0/M} &= 1 + \frac{n \, m_p}{\sqrt{2} \, M}
+                \end{split}
+            \end{equation*}
+            \begin{equation}
+                \phi_0 = M \ln \left( 1 + \frac{\sqrt{2}}{2} \frac{n \, m_p}{M} \right)
+            \end{equation}
+
+        \subsection{Momento inicial}
+            \label{sec:momento-inicial-E}
+
+            Por el argumento de la Sec.~\ref{sec:momento-inicial}, $\dot{\phi}_0 = -\sqrt{(\sqrt{7/3} - 1) \, A \left(1 - e^{-\phi_0/M}\right)^n}$. Con los parámetros de \texttt{genemodel.in} ($n = 2.5$, $M = 10\,m_p$) da $\dot\phi_0 = -1.621 \times 10^{31}\,\text{GeV}^2$. El final exacto de la inflación ($\epsilon_H = 1$) cae en $\phi = 2.95 \times 10^{18}\,\text{GeV}$, contra $\phi_0 = 3.96 \times 10^{18}\,\text{GeV}$.

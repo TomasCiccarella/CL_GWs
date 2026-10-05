@@ -1,0 +1,55 @@
+# E-model cuártico (n = 4), alpha_K = 1: caso de referencia de Notas.tex «Parámetros cosmológicos para modelos cuárticos»
+# (Ellis, Garcia, Olive & Verner, PRD 113, 063571 (2026)): n_s = 0.9647, r = 0.0036, lambda = 1.528e-10.
+# Parámetros recalculados por code/parametros_cuarticos.py. omega_* = 5.09e13 GeV.
+# Elección de la grilla y de los tiempos: Notas.tex «Corridas cuárticas» ("Requisitos de memoria y tiempo").
+
+#Output
+outputfile = ./
+print_headers = true
+overwriteFiles = false
+
+#Evolution
+expansion = true
+evolver = VV2
+
+#Lattice
+# N = 64 es el caso por defecto (~50 MB con GWs). Para subir N conviene bajar kIR como 0.7*64/N
+# (misma k_max, caja más grande, mejor resolución del pico) y dejar dt = 0.01, que se probó estable y
+# convergido hasta la dx de N = 192. Memoria ~ 10 MB + 148 B x N^3: N = 128 -> 0.32 GB (~4 h),
+# N = 192 -> 1.06 GB (~14 h); N = 256 necesita ~2.5 GB y no entra en 3.7 GB de RAM (Notas.tex «Corridas cuárticas»,
+# code/recursos_cosmolattice.py).
+N = 64
+dt = 0.01
+kIR = 0.7
+
+#Times
+# Con N = 32, rho_GW/rho llega al 90% de su valor final en t~ ~ 420 (y sigue creciendo ~10% en t~ = 500); tMax = 600 cubre la
+# saturación (Notas.tex «Corridas cuárticas»). Con N = 64 y dt = 0.01 son 60000 pasos, ~36 min con 8 hilos.
+tOutputFreq = 0.2
+tOutputInfreq = 10
+tOutputRareFreq = 50
+tMax = 600
+
+#Power spectrum options
+PS_type = 1
+PS_version = 1
+
+#IC
+kCutOff = 18
+# initial_amplitudes[0] = phi_0 = M ln(1 + (sqrt(2)/2) n m_p/M) (epsilon_V = 1, Notas.tex «E-models», condiciones iniciales)
+# initial_momenta[0] = -sqrt((sqrt(7/3) - 1) * V(phi_0)) (slow-roll, Notas.tex «E-models», momento inicial)
+initial_amplitudes = 3.56906e18 0  # homogeneous amplitudes in GeV
+initial_momenta = -2.2449e31 0    # homogeneous momenta in GeV^2
+
+#Model Parameters
+# V(phi) = A |1 - exp(-phi/M)|^n, A = (3/4) lambda m_p^4, M = sqrt(3 alpha_K/2) m_p, m_p = 2.435e18 GeV.
+# q = g^2/lambda_eff con lambda_eff = 4A/M^4: cerca del mínimo el potencial de programa es el de lphi4.
+# q = 120 es el valor de Dufaux et al. 2007, con el que se comparó el analizador (Notas.tex «Comparación con la literatura»).
+n = 4
+M = 2.98225e18
+A = 4.02858e63
+q = 120
+
+#GWs
+withGWs = true
+GWprojectorType = 1
