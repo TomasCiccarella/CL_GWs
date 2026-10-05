@@ -62,3 +62,24 @@
                 \item Con $N = 32$ la cola UV del inflatón es $\sim 10^{-3}$, peor que en los T/E-models, así que hay que correrlo con $N \ge 64$.
             \end{itemize}
 
+        \subsection{Resultados con $N = 64$}
+            \label{sec:monomial-N64}
+
+            La comparación con los otros casos está en la Sec.~\ref{sec:resultados-N64}; acá van las figuras de la corrida \texttt{genmonomial\_cuartico.in}, que salen de \texttt{code/analisis\_cosmolattice.py} (las cuatro restantes, \texttt{01\_fondo}, \texttt{03\_espectros\_campos}, \texttt{04\_errores} y \texttt{06\_energias}, quedan en \texttt{build\_corridas/<caso>\_N64\_kIR0.7/analisis/}).
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genmonomial_cuartico_N64_campos.png}
+                \caption{Monomial de control ($\phi^4$), $N = 64$. Izquierda: $\langle\tilde\phi\rangle$ multiplicado por $a^{6/(n+2)} = a$, que sería una oscilación de amplitud constante sin resonancia. Derecha: rms de cada campo y $|\langle\tilde\phi\rangle|$.}
+                \label{fig:genmonomial_cuartico-campos}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genmonomial_cuartico_N64_gws.png}
+                \caption{Monomial de control ($\phi^4$), $N = 64$. Espectro de GWs en la red (izquierda) y llevado a hoy (derecha), a cada tiempo de salida (claro = temprano).}
+                \label{fig:genmonomial_cuartico-gws}
+            \end{figure}
+
+            Con $N = 64$ se confirma lo que se vio con $N = 32$ (Sec.~\ref{sec:control}): sin plateau la resonancia llega antes que en cualquier $\alpha$-attractor. El rms del campo hijo es máximo en $\tilde t = 80$ (T-model: 121), y $\rho_{GW}/\rho$ llega al $90\%$ de su valor final en $\tilde t = 230$. Antes de la resonancia, $\langle\tilde\phi\rangle a$ oscila con amplitud $\simeq 1.4$ (Fig.~\ref{fig:genmonomial_cuartico-campos}), mayor que en el T-model. Es la amplitud que corresponde a arrancar con más energía cinética ($a'/a = 0.92$ contra $0.44$).
+
+            El valor final es $\rho_{GW}/\rho = 1.36 \times 10^{-5}$, contra $2.3 \times 10^{-5}$ con $N = 32$: baja un $40\%$, igual que en el T-model. Es el caso con más potencia UV: el espectro supera la mitad del máximo de $\tilde k = 2.1$ a $17$, y por eso el máximo cae en $\tilde k = 11.2$ (Fig.~\ref{fig:genmonomial_cuartico-gws}). Como el espectro es casi plano en esa banda, la posición del máximo no es robusta (Sec.~\ref{sec:resultados-N64}). Hoy da $h^2\Omega_{GW,0} = 8.8 \times 10^{-11}$ en $9.9 \times 10^8$\,Hz, con más de la mitad del máximo entre $1.9 \times 10^8$ y $1.5 \times 10^9$\,Hz. Es la misma banda que el T-model, aunque el monomial tiene más potencia en $\tilde k$ alto, porque su factor de reescaleo es $1.34$ veces menor. La cola UV de las GWs es $6 \times 10^{-7}$ del máximo, la peor de los cuatro casos pero todavía chica; con $N = 32$ la del inflatón era $\sim 10^{-3}$.

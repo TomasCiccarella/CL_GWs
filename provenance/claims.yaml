@@ -222,6 +222,23 @@ claims:
               N64_aRho_mono_T_inicial, N64_aRho_mono_T_final, N64_integral_max, N64_T_tchi,
               N64_mono_tchi, N64_E1_tchi, N64_E5_tchi, N64_T_f_pico, N64_E1_f_pico, N64_E5_f_pico, N64_mono_f_pico,
               cuartico_E1_phi0_sobre_M, cuartico_T1_phi0_sobre_M, cuartico_E5_phi0_sobre_M]
+  - id: monomial-N64
+    statement: >
+      Con N = 64 el monomial de control resuena antes que todos los alpha-attractors (t~_chi = 80) y tiene
+      el espectro más extendido en k~ (2.1 a 17 sobre la mitad del máximo); rho_GW/rho baja de 2.3e-5
+      (N = 32) a 1.36e-5, como en el T-model. Hoy ocupa la misma banda que el T-model (1.9e8-1.5e9 Hz)
+      porque su factor de reescaleo es 1.34 veces menor.
+    verificacion: >
+      Números recalculados de las salidas por dos scripts; la cola UV de GWs (6e-7) muestra que N = 64
+      resuelve el espectro. La caída de 40% con N es igual a la del T-model, lo que sugiere un efecto de
+      resolución común; falta N = 128 para confirmarlo.
+    evidence:
+      - code/comparar_corridas.py::cargar
+      - code/analisis_cosmolattice.py::analizar
+      - Notas/modelos/monomial.tex «Resultados con N = 64»
+    numbers: [N64_mono_banda_Hz_min, N64_mono_banda_Hz_max, N64_mono_amp_previa, N64_mono_cola_gw,
+              N64_mono_tchi, N64_mono_t90, N64_mono_rhogw, N64_mono_f_pico, N64_mono_Omega_pico,
+              N64_mono_banda_kmin, N64_mono_banda_kmax, N64_aRho_mono_T_final]
 
 figures:
   - file: Notas/figuras/corridas_N64.pdf
@@ -237,3 +254,19 @@ figures:
               "rho_GW/rho contra t~ (unidades de 1/omega_*, el período de oscilación) y no contra a.",
               "Colores categóricos en orden fijo de la paleta del analizador; leyenda en (a)."]
     supports: [comparacion-N64]
+  - file: Notas/figuras/genmonomial_cuartico_N64_campos.png
+    produced_by: code/analisis_cosmolattice.py::analizar
+    shows: >
+      Monomial de control, N = 64. <phi~> por a y rms de cada campo contra t~: cuándo crece y satura el campo hijo y cómo se fragmenta el condensado.
+    from_scratch: Reescaleo a hoy y lectura de las salidas de CosmoLattice.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Copia de build_corridas/genmonomial_cuartico_N64_kIR0.7/analisis/02_campos.png (PNG a 150 dpi, como la escribe el analizador)."]
+    supports: [monomial-N64]
+  - file: Notas/figuras/genmonomial_cuartico_N64_gws.png
+    produced_by: code/analisis_cosmolattice.py::analizar
+    shows: >
+      Monomial de control, N = 64. Omega_GW(k~) en la red y h^2 Omega_GW,0(f) hoy a cada tiempo de salida: primero crece la banda resonante, después la cascada llena el UV y el espectro satura.
+    from_scratch: Reescaleo a hoy y lectura de las salidas de CosmoLattice.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Copia de build_corridas/genmonomial_cuartico_N64_kIR0.7/analisis/05_gws.png (PNG a 150 dpi, como la escribe el analizador)."]
+    supports: [monomial-N64]

@@ -2011,5 +2011,50 @@
     "choices": [
       "Máximo de rms(chi) como marca de saturación de la resonancia (alternativa: cuando rho_GW/rho deja de crecer exponencialmente)."
     ]
+  },
+  "N64_mono_banda_Hz_min": {
+    "value": 186000000.0,
+    "statement": "f_0 mínima con h^2 Omega_GW,0 >= pico/2, monomial de control N = 64 (k~ = 2.1).",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Banda a media altura del último espectro, por el factor Hz por k~.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4)."
+    ]
+  },
+  "N64_mono_banda_Hz_max": {
+    "value": 1490000000.0,
+    "statement": "f_0 máxima con h^2 Omega_GW,0 >= pico/2, monomial de control N = 64 (k~ = 16.8).",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Banda a media altura del último espectro, por el factor Hz por k~.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4)."
+    ]
+  },
+  "N64_mono_amp_previa": {
+    "value": 1.4,
+    "statement": "Amplitud de a <phi~> antes de la resonancia, monomial de control N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt (lo que grafica analisis_cosmolattice.py::analizar en 02_campos.png)",
+    "from_scratch": "max |a <phi~>| para 20 < t~ < 60.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4).",
+      "Ventana 20 < t~ < 60: después del primer período y antes de la resonancia en los cuatro casos."
+    ]
+  },
+  "N64_mono_cola_gw": {
+    "value": 5.8e-07,
+    "statement": "Cola UV final del espectro de GWs (Delta(k~_max)/max), monomial N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Cociente del último bin y el máximo.",
+    "from_library": "numpy",
+    "choices": [
+      "Corrida de code/correr_cuarticos.sh 64 (N = 64, kIR = 0.7, dt = 0.01), build_corridas/<caso>_N64_kIR0.7.",
+      "g_* = g_s* = 106.75, eps = 1 (n = 4)."
+    ]
   }
 }
