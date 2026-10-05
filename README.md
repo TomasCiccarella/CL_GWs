@@ -4,15 +4,15 @@ Este repositorio estudia el **fondo estocástico de ondas gravitacionales (GWs) 
 
 ## La idea
 
-Después de la inflación, el inflatón $\phi$ oscila alrededor del mínimo de su potencial. Si está acoplado a otro campo $\chi$ (acá, con $\tfrac12 g^2\phi^2\chi^2$), las oscilaciones amplifican exponencialmente las fluctuaciones de $\chi$ (**resonancia paramétrica**). Las inhomogeneidades resultantes son una fuente de ondas gravitacionales. Ese fondo de GWs queda como una huella de la física del final de la inflación, a frecuencias altas ($f \sim 10^8$–$10^9$ Hz).
+Después de la inflación, el inflatón $\phi$ oscila alrededor del mínimo de su potencial. Si está acoplado a otro campo $\chi$ (acá, con $\tfrac12 g^2\phi^2\chi^2$), las oscilaciones amplifican exponencialmente las fluctuaciones de $\chi$ (**resonancia paramétrica**). Las inhomogeneidades resultantes son una fuente de ondas gravitacionales. Ese fondo de GWs queda como una huella de la física del final de la inflación, a frecuencias altas (entre $10^8$ y $10^9$ Hz).
 
 Estudiamos potenciales que cerca del mínimo se comportan como $|\phi|^n$:
 
 | modelo | potencial | comentario |
 |---|---|---|
-| monomial generalizado | $V = A\,\lvert\phi\rvert^n$ | caso de referencia; con $n = 4$ es el `lphi4` de CosmoLattice |
+| monomial generalizado | $V = A\lvert\phi\rvert^n$ | caso de referencia; con $n = 4$ es el `lphi4` de CosmoLattice |
 | T-model | $V = A\tanh^n(\phi/M)$ | $\alpha$-attractor con plateau |
-| E-model | $V = A\,(1 - e^{-\phi/M})^n$ | $\alpha$-attractor ($\alpha$-Starobinsky generalizado) |
+| E-model | $V = A(1 - e^{-\phi/M})^n$ | $\alpha$-attractor ($\alpha$-Starobinsky generalizado) |
 
 **Modelos favorecidos por las observaciones.** Los parámetros de referencia salen de Ellis, Garcia, Olive & Verner, *Phys. Rev. D* **113**, 063571 (2026) ([doi:10.1103/d35r-7bn8](https://doi.org/10.1103/d35r-7bn8)). Ese trabajo contrasta los T- y E-models generalizados con Planck, BICEP/Keck, ACT DR6 y SPT-3G. Nos concentramos en el **caso cuártico ($n = 4$)** por dos razones:
 
@@ -23,11 +23,11 @@ Los casos que se simulan son el T-model con $\alpha_K = 1$ y el E-model con $\al
 
 **Del lattice a hoy.** El espectro que da CosmoLattice se lleva a hoy con
 
-$$
+```math
 f_0 = \frac{\tilde k}{a_e\,\tilde\rho_e^{1/4}}\left(\frac{\omega_*}{f_*}\right)^{1/2}\epsilon^{1/4}\times 4.59\times10^{10}\,\text{Hz},
 \qquad
 h^2\Omega_{GW,0} = 1.61\times10^{-5}\;\epsilon\;\Omega_{GW,e},
-$$
+```
 
 con $\epsilon = (a_e/a_{RD})^{2(4-n)/(n+2)}$, que vale exactamente $1$ para $n = 4$. La derivación está verificada con sympy y comparada con Dufaux *et al.* (2007) y Figueroa & Torrentí (2017).
 
