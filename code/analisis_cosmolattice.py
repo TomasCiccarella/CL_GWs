@@ -150,6 +150,12 @@ def promedio_movil(t, y, ventana):
     return out
 
 
+def positivo(v):
+    """v con los ceros exactos como NaN: en escala log, un cero (p. ej. el error de Friedmann en
+    t~ = 0, o una coincidencia exacta en punto flotante) estiraría el eje hasta 1e-300."""
+    return np.where(v > 0, v, np.nan)
+
+
 def cruces_por_cero(t, x):
     """Tiempos (interpolados linealmente) en que x cambia de signo."""
     i = np.where(np.diff(np.sign(x)) != 0)[0]
@@ -294,7 +300,7 @@ def analizar(d, args):
 
     # ---------------------------------------------------------------- 04 errores
     fig, ax = plt.subplots(2, 2, figsize=(10.5, 7.5), constrained_layout=True)
-    ax[0, 0].semilogy(C["t"], np.abs(C["rel_diff_friedmann"]) + 1e-300, color=CAT[0])
+    ax[0, 0].semilogy(C["t"], positivo(np.abs(C["rel_diff_friedmann"])), color=CAT[0])
     ax[0, 0].set(xlabel=r"$\tilde t$", ylabel=r"$|(\mathcal{L}-\mathcal{R})/(\mathcal{L}+\mathcal{R})|$",
                  title=r"1ra ec. de Friedmann: $a'^2$ vs $a^{2\alpha+2}(f_*/m_p)^2\tilde\rho/3$")
     # Continuidad: d rho~/dt~ + 3 (a'/a) (rho~ + p~) = 0 (vale para cualquier alpha).
@@ -307,8 +313,8 @@ def analizar(d, args):
     res_app = np.abs(app_num - app_teo) / (pref * (np.abs((2 * alpha - 1) * rho) + 3 * np.abs(pr)))
     interior = slice(3, -3)  # el spline es peor en los bordes
     t_in, res_cont, res_app = t[interior], res_cont[interior], res_app[interior]
-    ax[0, 1].semilogy(t_in, res_cont + 1e-300, color=CAT[0], label="continuidad")
-    ax[0, 1].semilogy(t_in, res_app + 1e-300, color=CAT[1], label=r"$a''$ (2da Friedmann)")
+    ax[0, 1].semilogy(t_in, positivo(res_cont), color=CAT[0], label="continuidad")
+    ax[0, 1].semilogy(t_in, positivo(res_app), color=CAT[1], label=r"$a''$ (2da Friedmann)")
     ax[0, 1].set(xlabel=r"$\tilde t$", ylabel="residuo relativo",
                  title=f"Derivadas por spline (limitadas por tOutputFreq = {np.median(np.diff(t)):.3g})")
     ax[0, 1].legend()
@@ -329,7 +335,7 @@ def analizar(d, args):
         integ = np.array([np.sum(b[:, 1] * dk / b[:, 0]) for b in esp_gw[:m]])
         ref = np.interp(t_esp, EGW["t"], EGW["rhoGW_over_rho"])
         ok = ref > 0
-        ax[1, 1].semilogy(t_esp[ok], np.abs(integ[ok] / ref[ok] - 1) + 1e-300, "o-", ms=4, color=CAT[0],
+        ax[1, 1].semilogy(t_esp[ok], positivo(np.abs(integ[ok] / ref[ok] - 1)), "o-", ms=4, color=CAT[0],
                           label=r"$|\sum \Omega_{GW}\,\Delta k/k \,/\, (\rho_{GW}/\rho) - 1|$")
         # Modos de GWs fuera del horizonte: k~/(a^{1-alpha} H~) < 1 no redshiftean como radiación.
         kH = kIR / (a_esp ** (1 - alpha) * np.interp(t_esp, t, Hp))
