@@ -78,6 +78,7 @@ Para trabajar con un modelo: `git checkout t-model` (o `e-model`, `monomial`). L
 |---|---|
 | `code/` | herramientas del estudio (ver la tabla de abajo) |
 | `Notas/` | notas en LaTeX: `Notas.tex` (documento principal), `Librerías.tex` (paquetes y estilo), `Notas.pdf` (compilado, notas generales), `figuras/` (figuras de resultados) y, en cada rama de modelo, `modelos/<modelo>.tex` con la sección de su modelo y `Notas_<rama>.pdf` con las notas completas |
+| `Bibliografia/` | bibliografía del proyecto por tema: `README.md` (qué aporta cada trabajo y dónde se usa), `referencias.bib` y `descargar.sh`, que baja los PDFs de arXiv a `Bibliografia/pdf/` (no se versionan) |
 | `provenance/` | registro de procedencia: `numbers.json` (cada número: qué código lo produjo, qué se hizo a mano, qué elecciones) y `claims.yaml` (cada afirmación: evidencia y cómo se verificó) |
 | `models/gen*.h`, `models/parameter-files/gen*.in` | modelos generalizados y sus archivos de parámetros (sólo en las ramas de modelo) |
 | `MODELO.md` | descripción de la rama y cómo correr su modelo (sólo en las ramas de modelo) |
@@ -139,6 +140,7 @@ Con 3.7 GB de RAM entra hasta $N = 192$ con GWs (~1 GB). $N = 256$ necesita ~2.5
 
 ## Créditos
 
-- **CosmoLattice**: D. G. Figueroa, A. Florio, F. Torrentí y W. Valkenburg, [arXiv:2006.15122](https://arxiv.org/abs/2006.15122) y [arXiv:2512.15627](https://arxiv.org/abs/2512.15627); módulo de GWs en la nota técnica II. Si usás este código, citá CosmoLattice como se indica en [cosmolattice.net](https://cosmolattice.net/CLcitation.html). El README original está en [`README_CosmoLattice.md`](README_CosmoLattice.md).
+- **CosmoLattice**: D. G. Figueroa, A. Florio, F. Torrentí y W. Valkenburg, [arXiv:2102.01031](https://arxiv.org/abs/2102.01031) (el código) y [arXiv:2006.15122](https://arxiv.org/abs/2006.15122) (los métodos); J. Baeza-Ballesteros *et al.*, [arXiv:2512.15627](https://arxiv.org/abs/2512.15627) (métodos, parte II); módulo de GWs en la nota técnica II. Si usás este código, citá CosmoLattice como se indica en [cosmolattice.net](https://cosmolattice.net/CLcitation.html). El README original está en [`README_CosmoLattice.md`](README_CosmoLattice.md).
 - **Parámetros de los modelos**: J. Ellis, M. A. G. Garcia, K. A. Olive y S. Verner, *Phys. Rev. D* **113**, 063571 (2026).
+- **Bibliografía completa**: [`Bibliografia/README.md`](Bibliografia/README.md).
 - **Reescaleo a hoy**: J.-F. Dufaux *et al.*, [arXiv:0707.0875](https://arxiv.org/abs/0707.0875); D. G. Figueroa y F. Torrentí, [arXiv:1707.04533](https://arxiv.org/abs/1707.04533).
