@@ -3379,5 +3379,317 @@
     "choices": [
       "N = 32, kIR = 3 (no se guardó la salida)."
     ]
+  },
+  "cuad_T_w_20_50": {
+    "value": 0.0282,
+    "statement": "<w> promediado en 20 <= t~ < 50, gentmodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_T_w_100_150": {
+    "value": 0.1489,
+    "statement": "<w> promediado en 100 <= t~ < 150, gentmodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_T_w_200_250": {
+    "value": 0.2388,
+    "statement": "<w> promediado en 200 <= t~ < 250, gentmodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_T_w_350_400": {
+    "value": 0.2654,
+    "statement": "<w> promediado en 350 <= t~ < 400, gentmodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_T_frac_grad": {
+    "value": 0.366,
+    "statement": "fracción de la energía total en gradientes al final, gentmodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_energies.txt",
+    "from_scratch": "Suma de E^grad de los dos campos sobre E_tot.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005)."
+    ]
+  },
+  "cuad_T_p_sobre_m_phi": {
+    "value": 2.14,
+    "statement": "k~/a_e del bin que divide en dos mitades la energía de gradiente de phi (k~^2 Delta) al final, gentmodel_cuadratico: p/m con la masa desnuda.",
+    "produced_by": "cálculo ad hoc sobre spectra_scalar_i.txt y average_scale_factor.txt",
+    "from_scratch": "Mediana acumulada de k~^2 Delta(k~); p = k~ omega_*/a con omega_* = m.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
+      "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
+    ]
+  },
+  "cuad_T_p_sobre_m_chi": {
+    "value": 1.65,
+    "statement": "k~/a_e del bin que divide en dos mitades la energía de gradiente de chi (k~^2 Delta) al final, gentmodel_cuadratico: p/m con la masa desnuda.",
+    "produced_by": "cálculo ad hoc sobre spectra_scalar_i.txt y average_scale_factor.txt",
+    "from_scratch": "Mediana acumulada de k~^2 Delta(k~); p = k~ omega_*/a con omega_* = m.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
+      "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
+    ]
+  },
+  "cuad_E1_w_20_50": {
+    "value": 0.0159,
+    "statement": "<w> promediado en 20 <= t~ < 50, genemodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_E1_w_100_150": {
+    "value": 0.1305,
+    "statement": "<w> promediado en 100 <= t~ < 150, genemodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_E1_w_200_250": {
+    "value": 0.2189,
+    "statement": "<w> promediado en 200 <= t~ < 250, genemodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_E1_w_350_400": {
+    "value": 0.2801,
+    "statement": "<w> promediado en 350 <= t~ < 400, genemodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_E1_frac_grad": {
+    "value": 0.38,
+    "statement": "fracción de la energía total en gradientes al final, genemodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_energies.txt",
+    "from_scratch": "Suma de E^grad de los dos campos sobre E_tot.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005)."
+    ]
+  },
+  "cuad_E1_p_sobre_m_phi": {
+    "value": 2.55,
+    "statement": "k~/a_e del bin que divide en dos mitades la energía de gradiente de phi (k~^2 Delta) al final, genemodel_cuadratico: p/m con la masa desnuda.",
+    "produced_by": "cálculo ad hoc sobre spectra_scalar_i.txt y average_scale_factor.txt",
+    "from_scratch": "Mediana acumulada de k~^2 Delta(k~); p = k~ omega_*/a con omega_* = m.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
+      "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
+    ]
+  },
+  "cuad_E1_p_sobre_m_chi": {
+    "value": 1.96,
+    "statement": "k~/a_e del bin que divide en dos mitades la energía de gradiente de chi (k~^2 Delta) al final, genemodel_cuadratico: p/m con la masa desnuda.",
+    "produced_by": "cálculo ad hoc sobre spectra_scalar_i.txt y average_scale_factor.txt",
+    "from_scratch": "Mediana acumulada de k~^2 Delta(k~); p = k~ omega_*/a con omega_* = m.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
+      "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
+    ]
+  },
+  "cuad_E5_w_20_50": {
+    "value": 0.0256,
+    "statement": "<w> promediado en 20 <= t~ < 50, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_E5_w_100_150": {
+    "value": 0.1251,
+    "statement": "<w> promediado en 100 <= t~ < 150, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_E5_w_200_250": {
+    "value": 0.2251,
+    "statement": "<w> promediado en 200 <= t~ < 250, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_E5_w_350_400": {
+    "value": 0.2683,
+    "statement": "<w> promediado en 350 <= t~ < 400, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_E5_frac_grad": {
+    "value": 0.361,
+    "statement": "fracción de la energía total en gradientes al final, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_energies.txt",
+    "from_scratch": "Suma de E^grad de los dos campos sobre E_tot.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005)."
+    ]
+  },
+  "cuad_E5_p_sobre_m_phi": {
+    "value": 2.23,
+    "statement": "k~/a_e del bin que divide en dos mitades la energía de gradiente de phi (k~^2 Delta) al final, genemodel_cuadratico_aK5: p/m con la masa desnuda.",
+    "produced_by": "cálculo ad hoc sobre spectra_scalar_i.txt y average_scale_factor.txt",
+    "from_scratch": "Mediana acumulada de k~^2 Delta(k~); p = k~ omega_*/a con omega_* = m.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
+      "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
+    ]
+  },
+  "cuad_E5_p_sobre_m_chi": {
+    "value": 1.69,
+    "statement": "k~/a_e del bin que divide en dos mitades la energía de gradiente de chi (k~^2 Delta) al final, genemodel_cuadratico_aK5: p/m con la masa desnuda.",
+    "produced_by": "cálculo ad hoc sobre spectra_scalar_i.txt y average_scale_factor.txt",
+    "from_scratch": "Mediana acumulada de k~^2 Delta(k~); p = k~ omega_*/a con omega_* = m.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
+      "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
+    ]
+  },
+  "cuad_mono_w_20_50": {
+    "value": 0.0292,
+    "statement": "<w> promediado en 20 <= t~ < 50, genmonomial_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_mono_w_100_150": {
+    "value": 0.0434,
+    "statement": "<w> promediado en 100 <= t~ < 150, genmonomial_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_mono_w_200_250": {
+    "value": 0.2376,
+    "statement": "<w> promediado en 200 <= t~ < 250, genmonomial_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_mono_w_350_400": {
+    "value": 0.2498,
+    "statement": "<w> promediado en 350 <= t~ < 400, genmonomial_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc con code/analisis_cosmolattice.py::presion sobre average_energies.txt",
+    "from_scratch": "Promedio de p/rho en la ventana.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Promedio simple de w = p/rho en ventanas de 30-50 de t~ (no sobre un número entero de oscilaciones)."
+    ]
+  },
+  "cuad_mono_frac_grad": {
+    "value": 0.325,
+    "statement": "fracción de la energía total en gradientes al final, genmonomial_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_energies.txt",
+    "from_scratch": "Suma de E^grad de los dos campos sobre E_tot.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005)."
+    ]
+  },
+  "cuad_mono_p_sobre_m_phi": {
+    "value": 1.87,
+    "statement": "k~/a_e del bin que divide en dos mitades la energía de gradiente de phi (k~^2 Delta) al final, genmonomial_cuadratico: p/m con la masa desnuda.",
+    "produced_by": "cálculo ad hoc sobre spectra_scalar_i.txt y average_scale_factor.txt",
+    "from_scratch": "Mediana acumulada de k~^2 Delta(k~); p = k~ omega_*/a con omega_* = m.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
+      "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
+    ]
+  },
+  "cuad_mono_p_sobre_m_chi": {
+    "value": 1.48,
+    "statement": "k~/a_e del bin que divide en dos mitades la energía de gradiente de chi (k~^2 Delta) al final, genmonomial_cuadratico: p/m con la masa desnuda.",
+    "produced_by": "cálculo ad hoc sobre spectra_scalar_i.txt y average_scale_factor.txt",
+    "from_scratch": "Mediana acumulada de k~^2 Delta(k~); p = k~ omega_*/a con omega_* = m.",
+    "from_library": "numpy",
+    "choices": [
+      "Corridas de code/correr_cuadraticos.sh 64 (N = 64, kIR = 3, dt = 0.003, baseSeed = 20261005).",
+      "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
+      "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
+    ]
   }
 }

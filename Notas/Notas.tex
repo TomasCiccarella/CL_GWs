@@ -329,7 +329,7 @@
                 \hspace{1cm}
                 f_0 \propto \epsilon^{1/4} \, ,
             \end{equation}
-            y la señal se diluye tanto más cuanto más bajo es $T_{\text{RH}}$. El analizador lo calcula con \texttt{--TRH} (y con \texttt{--w\_post} se puede usar otra ecuación de estado entre $a_e$ y $a_{RD}$). Esta suposición es la más pesimista: en las corridas, al final de la simulación $\langle w\rangle$ todavía vale $\simeq 0.2$, no $0$, porque parte de la energía está en partículas relativistas del campo hijo. Por eso damos también la cota opuesta, $\epsilon = 1$ (radiación desde el final de la simulación). Con $T_{\text{RH}} = 10^{10}$\,GeV los dos casos difieren en unos cinco órdenes de magnitud en la amplitud (Sec.~\ref{sec:resultados-cuadraticos}).
+            y la señal se diluye tanto más cuanto más bajo es $T_{\text{RH}}$. El analizador lo calcula con \texttt{--TRH} (y con \texttt{--w\_post} se puede usar otra ecuación de estado entre $a_e$ y $a_{RD}$). Es el mismo factor que dan Dufaux \emph{et al.}\ (arXiv:0707.0875, nota al pie~4 de la Sec.~III.D y Sec.~VIII) para una etapa intermedia de materia que va de $a_1$ a $a_2$: la amplitud baja en $a_1/a_2$ y la frecuencia en $(a_1/a_2)^{1/4}$. Esta suposición es la más pesimista: en las corridas, al final de la simulación $\langle w\rangle \simeq 0.25$--$0.29$, no $0$, porque buena parte de la energía está en fluctuaciones semirrelativistas de los dos campos (Sec.~\ref{sec:resultados-cuadraticos}, «Por qué $\langle w\rangle$ no es 0»). Por eso damos también la cota opuesta, $\epsilon = 1$ (radiación desde el final de la simulación). Con $T_{\text{RH}} = 10^{10}$\,GeV los dos casos difieren en unos cinco órdenes de magnitud en la amplitud (Sec.~\ref{sec:resultados-cuadraticos}).
 
         \subsection{Comparación con la literatura}
             \label{sec:literatura}
@@ -515,7 +515,33 @@ DT=0.007 MODELOS="gentmodel_cuartico" code/correr_cuarticos.sh 128
 
             \paragraph{Las corridas son numéricamente buenas.} El error de Friedmann es $\le 9 \times 10^{-5}$ en las cuatro, la integral del espectro de GWs reproduce $\rho_{GW}/\rho$ a $10^{-14}$ y todos los modos terminan dentro del horizonte ($k_{\text{IR}}/(aH) \ge 39$).
 
-            \paragraph{El condensado se fragmenta casi por completo.} En los cuatro casos, $\langle\tilde\phi\rangle a^{3/2}$ (que sin resonancia oscilaría con amplitud constante) cae a la mitad entre $\tilde t \simeq 108$ y $140$. Al final queda entre el $0.2\%$ y el $3\%$ de su amplitud inicial. Por eso la ecuación de estado ya no es la de materia: $\langle w\rangle = 0.25$--$0.29$ al final.
+            \paragraph{El condensado se fragmenta casi por completo.} En los cuatro casos, $\langle\tilde\phi\rangle a^{3/2}$ (que sin resonancia oscilaría con amplitud constante) cae a la mitad entre $\tilde t \simeq 108$ y $140$. Al final queda entre el $0.2\%$ y el $3\%$ de su amplitud inicial.
+
+            \paragraph{Por qué $\langle w\rangle$ no es 0.} Para un potencial cuadrático, $w = 0$ vale para el condensado homogéneo oscilando: por el teorema del virial, la presión promediada en una oscilación se anula. En las corridas eso se cumple antes de la resonancia, pero deja de valer cuando el condensado se fragmenta:
+            \begin{table}[H]
+                \centering
+                \small
+                \begin{tabular}{lccccc}
+                    \toprule
+                    caso & $\tilde t = 20$--$50$ & $100$--$150$ & $200$--$250$ & $350$--$400$ & gradientes / total (final) \\
+                    \midrule
+                    T, $\alpha_K = 1$ & $0.028$ & $0.149$ & $0.239$ & $0.265$ & $37\%$ \\
+                    E, $\alpha_K = 1$ & $0.016$ & $0.130$ & $0.219$ & $0.280$ & $38\%$ \\
+                    E, $\alpha_K = 5$ & $0.026$ & $0.125$ & $0.225$ & $0.268$ & $36\%$ \\
+                    $\phi^2$ (control) & $0.029$ & $0.043$ & $0.238$ & $0.250$ & $33\%$ \\
+                    \bottomrule
+                \end{tabular}
+                \caption{$\langle w\rangle$ promediado en ventanas de $\tilde t$, y fracción de la energía total que está en gradientes al final de cada corrida cuadrática.}
+                \label{tab:w-cuadraticos}
+            \end{table}
+            Antes de la resonancia $\langle w\rangle \simeq 0.02$--$0.03$. Lo esperable es 0; la diferencia probablemente viene de que la ventana no abarca un número entero de oscilaciones y de que al principio la expansión no es despreciable frente a la frecuencia de oscilación. Después, $w$ sube hasta $0.25$--$0.29$, en el monomial más tarde porque resuena más tarde. El mecanismo es el siguiente:
+            \begin{itemize}
+                \item \textbf{La energía pasa a modos con momento alto.} La resonancia y la cascada no lineal que la sigue pasan la energía del condensado ($k = 0$) a fluctuaciones de $\chi$ y de $\phi$ con momentos comparables o mayores que la masa. Al final, la mitad de la energía de gradiente de cada campo está en $\tilde k \gtrsim 60$--$100$, es decir, con momento físico $p/m = \tilde k/a \simeq 1.5$--$2.5$ (con la masa desnuda $m = \omega_*$). Esas partículas son semirrelativistas y su presión se acerca a la de la radiación.
+                \item \textbf{No llega a $1/3$} porque parte de la energía sigue en modos no relativistas (restos del condensado y partículas con $p \lesssim m$) y porque las masas efectivas inducidas por la interacción ($g^2\langle\chi^2\rangle$ para $\phi$, $g^2\langle\phi^2\rangle$ para $\chi$) son apreciables.
+            \end{itemize}
+            Es lo mismo que encontraron Podolsky, Felder, Kofman \& Peloso para $m^2\phi^2/2 + g^2\phi^2\chi^2/2$ en simulaciones en la red (Phys.\ Rev.\ D \textbf{73}, 023501 (2006), arXiv:hep-ph/0507096, Sec.~III.B y Fig.~1): $w$ pasa bruscamente de $0$ a $\sim 0.2$--$0.3$ al final del preheating, en $t \sim 100$--$150/m$, y no llega enseguida a $1/3$. Según los autores, esto se debe en parte a que justo después del preheating el campo liviano todavía tiene una masa efectiva inducida importante, y en parte a la contribución residual del inflatón homogéneo. Dufaux \emph{et al.}\ (arXiv:0707.0875, Sec.~III.D) toman ese mismo resultado como punto de partida del reescaleo a hoy.
+
+            \paragraph{Qué pasa después de la simulación.} El valor $w \simeq 0.25$ no debería mantenerse. El momento físico de cada partícula cae como $1/a$, así que, si el inflatón no decae antes, sus partículas se vuelven no relativistas cuando el universo se expande otro factor $\sim 2$--$3$ (con las estimaciones de arriba) y $w$ vuelve a bajar hacia 0. Podolsky \emph{et al.}\ (Sec.~III.B, punto iii) lo argumentan así para un inflatón masivo: aun en minoría al final del preheating, sus partículas terminan dominando y el universo vuelve a estar dominado por materia. Lozanov \& Amin (Phys.\ Rev.\ Lett.\ \textbf{119}, 061301 (2017), arXiv:1608.01213) encuentran lo mismo en simulaciones de la fragmentación del inflatón sin campo hijo: para $V \propto |\phi|^{2n}$ cerca del mínimo, a tiempos largos $w \to 0$ si $n = 1$ y $w \to 1/3$ para $n$ mayores (modelos de un solo campo, con simulaciones en la red). Para el caso cuártico ($n = 2$ en su notación) esto es consistente con $w = 1/3$ y con que $\epsilon = 1$ (Sec.~\ref{sec:reescaleo}). La evolución completa de $w$ requiere simular más tiempo o seguir fuera de la red la energía de cada modo, $\sqrt{p^2 + m^2}$ con $p \propto 1/a$. Hasta tener eso, el resultado de hoy queda acotado entre $w = 0$ desde $a_e$ y $w \simeq 0.25$ constante.
 
             \paragraph{El orden es el inverso del caso cuártico.} Las GWs empiezan a crecer ($\rho_{GW}/\rho = 10^{-8}$) en $\tilde t \simeq 70$ (E, $\alpha_K = 1$), $75$ (T y E con $\alpha_K = 5$) y $120$ (monomial). En el caso cuártico el monomial era el primero en resonar (Sec.~\ref{sec:resultados-N64}). Aun así, el monomial termina con más GWs: $\rho_{GW}/\rho = 2.5 \times 10^{-5}$, el doble que el T-model, con más potencia en el IR ($\Omega_{GW,e} \simeq 0.9 \times 10^{-5}$ en $\tilde k = 3$, contra $1.4$--$2.6 \times 10^{-6}$). Con una sola semilla por caso no podemos decir si esa diferencia es mayor que la variación entre realizaciones.
 

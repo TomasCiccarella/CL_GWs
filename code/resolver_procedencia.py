@@ -26,11 +26,14 @@ import yaml
 
 
 def show(etapa, ruta):
-    """Contenido de un archivo en una etapa del índice durante un merge (:2 rama, :3 main)."""
+    """Contenido de un archivo en una etapa del índice durante un merge (:2 rama, :3 main). Si git
+    ya mezcló ese archivo sin conflicto, las dos versiones son la del árbol de trabajo."""
     r = subprocess.run(["git", "show", f"{etapa}:{ruta}"], capture_output=True, text=True)
-    if r.returncode != 0:
-        sys.exit(f"No hay conflicto de merge en {ruta} (¿corriste git merge main?): {r.stderr.strip()}")
-    return r.stdout
+    if r.returncode == 0:
+        return r.stdout
+    if subprocess.run(["git", "rev-parse", "-q", "--verify", "MERGE_HEAD"], capture_output=True).returncode:
+        sys.exit("No hay un merge en curso (¿corriste git merge main?)")
+    return open(ruta, encoding="utf-8").read()
 
 
 def separar(txt):
