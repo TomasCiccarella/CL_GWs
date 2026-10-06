@@ -81,3 +81,25 @@
             El campo hijo crece exponencialmente desde $\tilde t \simeq 25$ y su rms es máximo en $\tilde t = 121$. Ahí la resonancia satura: el condensado $\langle\tilde\phi\rangle$ deja de oscilar con amplitud constante (Fig.~\ref{fig:gentmodel_cuartico-campos}) y la energía pasa a las fluctuaciones de los dos campos. Las GWs siguen ese mismo orden (Fig.~\ref{fig:gentmodel_cuartico-gws}). Primero crece la banda de la resonancia, $\tilde k \simeq 1$--$3$; después la cascada no lineal llena el espectro hasta $\tilde k \sim 20$. A partir de $\tilde t \simeq 270$ el espectro sólo cambia de forma ($\rho_{GW}/\rho$ crece un $4\%$ en los últimos 100 de $\tilde t$).
 
             Hoy, el espectro final tiene el máximo en $h^2\Omega_{GW,0} = 8.7 \times 10^{-11}$, en $f_0 = 4.1 \times 10^8$\,Hz, y supera la mitad del máximo entre $1.7 \times 10^8$ y $1.3 \times 10^9$\,Hz ($\tilde k = 1.4$--$11$). La corrida repite la de validación de la Sec.~\ref{sec:recomendacion} con otra semilla, y $\rho_{GW}/\rho$ coincide a un $0.2\%$.
+
+        \subsection{Corridas cuadráticas con $N = 64$}
+            \label{sec:tmodel-cuadratico}
+
+            La comparación de los cuatro casos cuadráticos (misma grilla, mismo $q$ y misma semilla) y sus limitaciones (el UV no está resuelto y la producción no terminó del todo) están en la Sec.~\ref{sec:resultados-cuadraticos}. Acá van las figuras de \texttt{gentmodel\_cuadratico.in}.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/gentmodel_cuadratico_N64_campos.png}
+                \caption{T-model cuadrático, $\alpha_K = 1$, $N = 64$. Izquierda: $\langle\tilde\phi\rangle$ multiplicado por $a^{6/(n+2)} = a^{3/2}$, que sin resonancia oscilaría con amplitud constante. Derecha: rms de cada campo y $|\langle\tilde\phi\rangle|$.}
+                \label{fig:gentmodel_cuadratico-campos}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/gentmodel_cuadratico_N64_gws.png}
+                \caption{T-model cuadrático, $\alpha_K = 1$, $N = 64$. Espectro de GWs en la red (izquierda) y llevado a hoy con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$ hasta el reheating (derecha), a cada tiempo de salida (claro = temprano).}
+                \label{fig:gentmodel_cuadratico-gws}
+            \end{figure}
+
+            Las GWs empiezan a crecer en $\tilde t \simeq 75$ ($\rho_{GW}/\rho = 10^{-8}$). La amplitud de $a^{3/2}\langle\tilde\phi\rangle$ cae a la mitad en $\tilde t \simeq 108$, y al final queda el $0.2\%$ de la inicial: es el caso con la fragmentación más completa de los cuatro (Fig.~\ref{fig:gentmodel_cuadratico-campos}). Al final, $\rho_{GW}/\rho = 1.23 \times 10^{-5}$, que todavía crece un $10\%$ en los últimos 100 de $\tilde t$, y $\langle w\rangle = 0.27$.
+
+            En la red, el espectro final es plano entre $\tilde k \simeq 6$ y $108$ (Fig.~\ref{fig:gentmodel_cuadratico-gws}). Con $N = 32$ ($\tilde k_{\max} = 83$), la misma configuración daba el máximo en $\tilde k \simeq 50$ y $\rho_{GW}/\rho = 1.7 \times 10^{-5}$, así que la forma por encima de $\tilde k \sim 50$ depende de la resolución. Hoy, con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$, la meseta da un máximo de $h^2\Omega_{GW,0} = 2.4 \times 10^{-16}$ y supera la mitad del máximo entre $1.4 \times 10^7$ y $2.6 \times 10^8$\,Hz. Con $\epsilon = 1$ daría $7.3 \times 10^{-11}$ en $8.3 \times 10^8$\,Hz, del orden del T-model cuártico ($8.7 \times 10^{-11}$, Sec.~\ref{sec:tmodel-N64}).
