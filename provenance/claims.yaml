@@ -187,6 +187,24 @@ claims:
       - code/reescaleo_gws.py::a_sobre_a_RD
       - Notas/Notas.tex «Corridas cuadráticas» (Fig. fig:corridas-cuadraticos, Tabla tab:resultados-cuadraticos)
     numbers: [cuad_T_rhogw, cuad_T_ult100, cuad_T_w, cuad_T_friedmann, cuad_T_Om_w0, cuad_T_banda_Hz_min, cuad_T_banda_Hz_max, cuad_T_Om_eps1, cuad_T_f_eps1, cuad_T_eps, cuad_T_Om_w025, cuad_T_eps_w025, cuad_T_t_onset, cuad_T_t_condensado, cuad_T_amp_final, cuad_T_minutos, cuad_T_Om_e_k3, cuad_E1_rhogw, cuad_E1_ult100, cuad_E1_w, cuad_E1_friedmann, cuad_E1_Om_w0, cuad_E1_banda_Hz_min, cuad_E1_banda_Hz_max, cuad_E1_Om_eps1, cuad_E1_f_eps1, cuad_E1_eps, cuad_E1_Om_w025, cuad_E1_eps_w025, cuad_E1_t_onset, cuad_E1_t_condensado, cuad_E1_amp_final, cuad_E1_minutos, cuad_E1_Om_e_k3, cuad_E5_rhogw, cuad_E5_ult100, cuad_E5_w, cuad_E5_friedmann, cuad_E5_Om_w0, cuad_E5_banda_Hz_min, cuad_E5_banda_Hz_max, cuad_E5_Om_eps1, cuad_E5_f_eps1, cuad_E5_eps, cuad_E5_Om_w025, cuad_E5_eps_w025, cuad_E5_t_onset, cuad_E5_t_condensado, cuad_E5_amp_final, cuad_E5_minutos, cuad_E5_Om_e_k3, cuad_mono_rhogw, cuad_mono_ult100, cuad_mono_w, cuad_mono_friedmann, cuad_mono_Om_w0, cuad_mono_banda_Hz_min, cuad_mono_banda_Hz_max, cuad_mono_Om_eps1, cuad_mono_f_eps1, cuad_mono_eps, cuad_mono_Om_w025, cuad_mono_eps_w025, cuad_mono_t_onset, cuad_mono_t_condensado, cuad_mono_amp_final, cuad_mono_minutos, cuad_mono_Om_e_k3, cuad_T_N32_rhogw, cuad_T_N32_k_pico]
+  - id: w-cuadraticos
+    statement: >
+      En las corridas cuadráticas <w> ~ 0.02-0.03 antes de la resonancia y sube a 0.25-0.29 al final
+      porque la energía pasa a fluctuaciones semirrelativistas (p/m ~ 1.5-2.5, 33-38% de la energía en
+      gradientes); después de la simulación w debería volver hacia 0 cuando esas partículas masivas se
+      vuelvan no relativistas, así que el reescaleo a hoy queda acotado entre w = 0 y w ~ 0.25.
+    verificacion: >
+      La subida de w coincide con Podolsky, Felder, Kofman y Peloso (2006) para el mismo tipo de modelo
+      (w de 0 a 0.2-0.3 en t ~ 100-150/m, sin llegar a 1/3). La vuelta a w -> 0 no se simuló: se apoya en
+      el argumento de Podolsky et al. (Sec. III.B, iii) y en Lozanov y Amin (2017) para n = 1 sin campo
+      hijo. El factor de dilución por una etapa de materia es el de Dufaux et al. (2007), nota 4.
+    evidence:
+      - code/analisis_cosmolattice.py::presion
+      - Podolsky, Felder, Kofman & Peloso, PRD 73, 023501 (2006), arXiv:hep-ph/0507096, Sec. III.B y Fig. 1
+      - Lozanov & Amin, PRL 119, 061301 (2017), arXiv:1608.01213, resumen
+      - Dufaux et al., arXiv:0707.0875, Sec. III.D (nota 4) y Sec. VIII
+      - Notas/Notas.tex «Corridas cuadráticas», «Por qué <w> no es 0» (Tabla tab:w-cuadraticos)
+    numbers: [cuad_T_w_20_50, cuad_T_w_100_150, cuad_T_w_200_250, cuad_T_w_350_400, cuad_T_frac_grad, cuad_T_p_sobre_m_phi, cuad_T_p_sobre_m_chi, cuad_E1_w_20_50, cuad_E1_w_100_150, cuad_E1_w_200_250, cuad_E1_w_350_400, cuad_E1_frac_grad, cuad_E1_p_sobre_m_phi, cuad_E1_p_sobre_m_chi, cuad_E5_w_20_50, cuad_E5_w_100_150, cuad_E5_w_200_250, cuad_E5_w_350_400, cuad_E5_frac_grad, cuad_E5_p_sobre_m_phi, cuad_E5_p_sobre_m_chi, cuad_mono_w_20_50, cuad_mono_w_100_150, cuad_mono_w_200_250, cuad_mono_w_350_400, cuad_mono_frac_grad, cuad_mono_p_sobre_m_phi, cuad_mono_p_sobre_m_chi]
 
 figures:
   - file: Notas/figuras/corridas_N64.pdf
