@@ -1,0 +1,55 @@
+# Monomial cuadrático de CONTROL (n = 2): V(phi) = A phi^2 = m^2 phi^2/2, con la masa del T-model
+# cuadrático (alpha_K = 1, T_RH = 1e10 GeV). No es un modelo favorecido: m^2 phi^2 predice n_s = 0.9617 y
+# r = 0.153 con N_* = 51.8, excluido por r < 0.036. Sirve para aislar el efecto del plateau: cerca
+# del mínimo tiene el mismo potencial de programa (phi~^2/2 + q phi~^2 chi~^2/2) que los T/E-models.
+# Parámetros recalculados por code/parametros_cuadraticos.py::monomial_control. omega_* = m = 1.6529e+13 GeV.
+
+#Output
+outputfile = ./
+print_headers = true
+overwriteFiles = false
+
+#Evolution
+expansion = true
+evolver = VV2
+
+#Lattice
+# Iguales en los cuatro casos cuadráticos, con la misma semilla, para que las fluctuaciones iniciales
+# sean la misma realización (Notas.tex «Corridas cuadráticas»). Con q = 4e4 la resonancia está en
+# k~ ~ q^(1/4) ~ 14 y el pico de GWs en k~ ~ 50: kIR = 3 y N = 64 dan k~_max = 166. dt = 0.003 cumple
+# omega~_max dt ~ 0.6 (code/recursos_cosmolattice.py) y da un error de Friedmann ~ 1e-4 con N = 32.
+# Memoria ~ 50 MB con N = 64; ~70 min con 8 hilos.
+N = 64
+dt = 0.003
+kIR = 3
+baseSeed = 20261005
+
+#Times
+# Con N = 32 rho_GW/rho llega al 90% de su valor final en t~ ~ 280 (T y E, alpha_K = 1). Con N = 64 todavía
+# crece entre 4% y 26% en los últimos 100 de t~ (Notas.tex «Corridas cuadráticas»). tMax = 400 para todos.
+tOutputFreq = 0.2
+tOutputInfreq = 5
+tOutputRareFreq = 50
+tMax = 400
+
+#Power spectrum options
+PS_type = 1
+PS_version = 1
+
+#IC
+kCutOff = 40
+# initial_amplitudes[0] = phi_0 = (sqrt(2)/2) n m_p (epsilon_V = 1, Notas.tex «Modelo monomial», condiciones iniciales)
+# initial_momenta[0] = -sqrt((sqrt(7/3) - 1) * A phi_0^2) (slow-roll, Notas.tex «Momento inicial»)
+initial_amplitudes = 3.44361e+18 0  # homogeneous amplitudes in GeV
+initial_momenta = -2.9233e+31 0     # homogeneous momenta in GeV^2
+
+#Model Parameters
+# A = m^2/2 con m^2 = 2 A_T/M_T^2 (T-model cuadrático, alpha_K = 1); en GeV^2 porque V = A phi^2.
+# q = g^2 phi_0^2/m^2 = 4e4, el de tanh2.in de CosmoLattice (el paper no fija g); igual en los cuatro casos.
+n = 2
+A = 1.36605e+26
+q = 4e4
+
+#GWs
+withGWs = true
+GWprojectorType = 1

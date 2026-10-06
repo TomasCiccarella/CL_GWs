@@ -277,6 +277,18 @@ claims:
       - code/reescaleo_gws.py::a_sobre_a_RD
       - Notas/Notas.tex «Corridas cuadráticas» (Fig. fig:corridas-cuadraticos, Tabla tab:resultados-cuadraticos)
     numbers: [cuad_T_rhogw, cuad_T_ult100, cuad_T_w, cuad_T_friedmann, cuad_T_Om_w0, cuad_T_banda_Hz_min, cuad_T_banda_Hz_max, cuad_T_Om_eps1, cuad_T_f_eps1, cuad_T_eps, cuad_T_Om_w025, cuad_T_eps_w025, cuad_T_t_onset, cuad_T_t_condensado, cuad_T_amp_final, cuad_T_minutos, cuad_T_Om_e_k3, cuad_E1_rhogw, cuad_E1_ult100, cuad_E1_w, cuad_E1_friedmann, cuad_E1_Om_w0, cuad_E1_banda_Hz_min, cuad_E1_banda_Hz_max, cuad_E1_Om_eps1, cuad_E1_f_eps1, cuad_E1_eps, cuad_E1_Om_w025, cuad_E1_eps_w025, cuad_E1_t_onset, cuad_E1_t_condensado, cuad_E1_amp_final, cuad_E1_minutos, cuad_E1_Om_e_k3, cuad_E5_rhogw, cuad_E5_ult100, cuad_E5_w, cuad_E5_friedmann, cuad_E5_Om_w0, cuad_E5_banda_Hz_min, cuad_E5_banda_Hz_max, cuad_E5_Om_eps1, cuad_E5_f_eps1, cuad_E5_eps, cuad_E5_Om_w025, cuad_E5_eps_w025, cuad_E5_t_onset, cuad_E5_t_condensado, cuad_E5_amp_final, cuad_E5_minutos, cuad_E5_Om_e_k3, cuad_mono_rhogw, cuad_mono_ult100, cuad_mono_w, cuad_mono_friedmann, cuad_mono_Om_w0, cuad_mono_banda_Hz_min, cuad_mono_banda_Hz_max, cuad_mono_Om_eps1, cuad_mono_f_eps1, cuad_mono_eps, cuad_mono_Om_w025, cuad_mono_eps_w025, cuad_mono_t_onset, cuad_mono_t_condensado, cuad_mono_amp_final, cuad_mono_minutos, cuad_mono_Om_e_k3, cuad_T_N32_rhogw, cuad_T_N32_k_pico]
+  - id: monomial-cuadratico
+    statement: >
+      Con N = 64 el monomial cuadrático de control resuena después que los alpha-attractors (GWs desde t~ ~ 120, contra 70-75), al revés que en el caso cuártico, pero produce el doble de GWs que el T-model (rho_GW/rho = 2.46e-5) y más potencia IR; hoy 4.8e-16 con T_RH = 1e10 GeV y w = 0, y 1.5e-10 con eps = 1.
+    verificacion: >
+      Números recalculados de las salidas por analisis_cosmolattice.py y comparar_corridas.py. Mismas
+      limitaciones que resultados-cuadraticos: UV no resuelto con N = 64, producción no terminada, una
+      sola semilla, y la amplitud de hoy depende del supuesto sobre w hasta el reheating.
+    evidence:
+      - code/comparar_corridas.py::cargar
+      - code/analisis_cosmolattice.py::analizar
+      - Notas/modelos/monomial.tex «Corridas cuadráticas con N = 64»
+    numbers: [cuad_mono_t_onset, cuad_T_t_onset, cuad_mono_t_condensado, cuad_T_t_condensado, cuad_mono_rhogw, cuad_T_rhogw, cuad_mono_ult100, cuad_mono_Om_e_k3, cuad_T_Om_e_k3, cuad_mono_Om_w0, cuad_mono_banda_Hz_min, cuad_mono_banda_Hz_max, cuad_mono_Om_eps1, cuad_mono_f_eps1, cuadratico_mono_r]
 
 figures:
   - file: Notas/figuras/corridas_N64.pdf
@@ -321,3 +333,19 @@ figures:
               "Mitad del máximo de rms(chi~) en vez del máximo, porque para n = 2 rms(chi~) sigue oscilando al final.",
               "Colores categóricos en orden fijo, como en corridas_N64.pdf."]
     supports: [resultados-cuadraticos]
+  - file: Notas/figuras/genmonomial_cuadratico_N64_campos.png
+    produced_by: code/analisis_cosmolattice.py::analizar
+    shows: >
+      Monomial cuadrático de control, N = 64. a^(3/2) <phi~> y rms de cada campo contra t~: cuándo se fragmenta el condensado y cómo crece y satura el campo hijo.
+    from_scratch: Reescaleo a hoy y lectura de las salidas de CosmoLattice.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Copia de build_corridas/genmonomial_cuadratico_N64_kIR3/analisis/02_campos.png, analizada con --TRH 1e10 (w = 0 hasta el reheating, el supuesto más pesimista)."]
+    supports: [monomial-cuadratico]
+  - file: Notas/figuras/genmonomial_cuadratico_N64_gws.png
+    produced_by: code/analisis_cosmolattice.py::analizar
+    shows: >
+      Monomial cuadrático de control, N = 64. Omega_GW(k~) en la red y h^2 Omega_GW,0(f) hoy con T_RH = 1e10 GeV y w = 0, a cada tiempo de salida: el espectro final es plano hasta k~ ~ 100.
+    from_scratch: Reescaleo a hoy y lectura de las salidas de CosmoLattice.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Copia de build_corridas/genmonomial_cuadratico_N64_kIR3/analisis/05_gws.png, analizada con --TRH 1e10 (w = 0 hasta el reheating, el supuesto más pesimista)."]
+    supports: [monomial-cuadratico]

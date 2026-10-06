@@ -83,3 +83,27 @@
             Con $N = 64$ se confirma lo que se vio con $N = 32$ (Sec.~\ref{sec:control}): sin plateau la resonancia llega antes que en cualquier $\alpha$-attractor. El rms del campo hijo es máximo en $\tilde t = 80$ (T-model: 121), y $\rho_{GW}/\rho$ llega al $90\%$ de su valor final en $\tilde t = 230$. Antes de la resonancia, $\langle\tilde\phi\rangle a$ oscila con amplitud $\simeq 1.4$ (Fig.~\ref{fig:genmonomial_cuartico-campos}), mayor que en el T-model. Es la amplitud que corresponde a arrancar con más energía cinética ($a'/a = 0.92$ contra $0.44$).
 
             El valor final es $\rho_{GW}/\rho = 1.36 \times 10^{-5}$, contra $2.3 \times 10^{-5}$ con $N = 32$: baja un $40\%$, igual que en el T-model. Es el caso con más potencia UV: el espectro supera la mitad del máximo de $\tilde k = 2.1$ a $17$, y por eso el máximo cae en $\tilde k = 11.2$ (Fig.~\ref{fig:genmonomial_cuartico-gws}). Como el espectro es casi plano en esa banda, la posición del máximo no es robusta (Sec.~\ref{sec:resultados-N64}). Hoy da $h^2\Omega_{GW,0} = 8.8 \times 10^{-11}$ en $9.9 \times 10^8$\,Hz, con más de la mitad del máximo entre $1.9 \times 10^8$ y $1.5 \times 10^9$\,Hz. Es la misma banda que el T-model, aunque el monomial tiene más potencia en $\tilde k$ alto, porque su factor de reescaleo es $1.34$ veces menor. La cola UV de las GWs es $6 \times 10^{-7}$ del máximo, la peor de los cuatro casos pero todavía chica; con $N = 32$ la del inflatón era $\sim 10^{-3}$.
+
+        \subsection{Corridas cuadráticas con $N = 64$}
+            \label{sec:monomial-cuadratico}
+
+            La comparación de los cuatro casos cuadráticos (misma grilla, mismo $q$ y misma semilla) y sus limitaciones (el UV no está resuelto y la producción no terminó del todo) están en la Sec.~\ref{sec:resultados-cuadraticos}. Acá van las figuras de \texttt{genmonomial\_cuadratico.in}.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genmonomial_cuadratico_N64_campos.png}
+                \caption{Monomial cuadrático de control ($m^2\phi^2/2$), $N = 64$. Izquierda: $\langle\tilde\phi\rangle$ multiplicado por $a^{6/(n+2)} = a^{3/2}$, que sin resonancia oscilaría con amplitud constante. Derecha: rms de cada campo y $|\langle\tilde\phi\rangle|$.}
+                \label{fig:genmonomial_cuadratico-campos}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genmonomial_cuadratico_N64_gws.png}
+                \caption{Monomial cuadrático de control ($m^2\phi^2/2$), $N = 64$. Espectro de GWs en la red (izquierda) y llevado a hoy con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$ hasta el reheating (derecha), a cada tiempo de salida (claro = temprano).}
+                \label{fig:genmonomial_cuadratico-gws}
+            \end{figure}
+
+            \texttt{genmonomial\_cuadratico.in} es $V = m^2\phi^2/2$ con la masa del T-model cuadrático ($\alpha_K = 1$), así que cerca del mínimo tiene el mismo potencial de programa. Está excluido por $r$ ($r = 0.15$ con $N_* = 51.8$). Arranca en $\phi_0 = \sqrt 2\,m_p$, con $a^{3/2}\langle\tilde\phi\rangle$ oscilando con amplitud $\simeq 1.2$, contra $1.09$ en el T-model (Fig.~\ref{fig:genmonomial_cuadratico-campos}).
+
+            Al revés que en el caso cuártico (Sec.~\ref{sec:monomial-N64}), el monomial es el último en resonar: las GWs empiezan a crecer en $\tilde t \simeq 120$, contra $70$--$75$ en los $\alpha$-attractors, y la amplitud del condensado cae a la mitad en $\tilde t \simeq 140$ (T-model: 108). Aun así, es el que más GWs produce: $\rho_{GW}/\rho = 2.46 \times 10^{-5}$, el doble que el T-model, y el más saturado (crece un $4\%$ en los últimos 100 de $\tilde t$). Además tiene más potencia en el IR: $\Omega_{GW,e} \simeq 0.9 \times 10^{-5}$ en $\tilde k = 3$, contra $1.4 \times 10^{-6}$ en el T-model. Como todas las corridas parten de la misma realización de las fluctuaciones, la diferencia viene del potencial; lo que no sabemos, con una sola semilla, es cuánto cambiaría con otra realización.
+
+            Hoy, con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$, el máximo es $h^2\Omega_{GW,0} = 4.8 \times 10^{-16}$ en el primer bin ($5.8 \times 10^6$\,Hz), y más de la mitad del máximo cae hasta $1.9 \times 10^8$\,Hz (Fig.~\ref{fig:genmonomial_cuadratico-gws}). Con $\epsilon = 1$ daría $1.5 \times 10^{-10}$ en $1.4 \times 10^8$\,Hz.
