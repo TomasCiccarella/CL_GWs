@@ -30,6 +30,8 @@ Estudiamos potenciales que cerca del mínimo se comportan como $|\phi|^n$:
 
 Los casos que se simulan son el T-model con $\alpha_K = 1$ y el E-model con $\alpha_K = 1$ y $5$. Se agrega un monomial $\phi^4$ de control (excluido por $r$, pero con el mismo mínimo que el T-model) para aislar el efecto del plateau.
 
+**Comparación con $n = 2$.** También se simulan los mismos modelos con mínimo cuadrático (T y E con $\alpha_K = 1$, E con $\alpha_K = 5$ y el monomial $m^2\phi^2$ de control), todos con la misma semilla. Para $n = 2$ el inflatón oscila como materia y tanto $N_*$ como el espectro de hoy dependen de la temperatura de reheating; se toma $T_{RH} = 10^{10}$ GeV.
+
 **Del lattice a hoy.** El espectro que da CosmoLattice se lleva a hoy con
 
 ```math
@@ -91,8 +93,10 @@ Contenido de `code/`:
 | `reescaleo_gws.py` | fórmulas del reescaleo a hoy (frecuencia y amplitud) y variables de programa de cada modelo |
 | `verificar_reescaleo.py` | verificación con sympy de las ecuaciones de fondo y del reescaleo, y comparación con la literatura |
 | `parametros_cuarticos.py` | traduce los parámetros de Ellis *et al.* a los `.in` y comprueba los `.in` presentes |
+| `parametros_cuadraticos.py` | lo mismo para $n = 2$, donde $N_*$ depende de $T_{RH}$ (por defecto $10^{10}$ GeV), más el monomial $m^2\phi^2$ de control |
 | `recursos_cosmolattice.py` | estima memoria y tiempo de cómputo según `N` |
 | `correr_cuarticos.sh` | corre en secuencia los casos cuárticos de la rama, verificando antes la memoria, y analiza cada uno |
+| `correr_cuadraticos.sh` | lo mismo para los casos cuadráticos (`FAMILIA=cuadratico`, con el monomial de control y el reescaleo con $T_{RH}$) |
 | `verificar_genmodels.py` | derivadas, condiciones iniciales y cotas de estabilidad de los modelos de la rama |
 | `probar_genmodels.sh` | compila y prueba los modelos de la rama |
 | `resolver_procedencia.py` | resuelve el conflicto de `provenance/` al hacer `git merge main` en una rama |

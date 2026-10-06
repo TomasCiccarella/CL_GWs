@@ -16,7 +16,7 @@
 
     \section*{Introducción y organización}
 
-        Estudiamos el fondo de ondas gravitacionales (GWs) que produce el \emph{preheating} después de la inflación, simulado en la red con \CosmoLattice, para modelos de inflación cuyo potencial se comporta como $|\phi|^n$ cerca del mínimo: monomiales generalizados $A|\phi|^n$, T-models $A\tanh^n(\phi/M)$ y E-models $A(1-e^{-\phi/M})^n$. El caso de referencia es $n = 4$ con los parámetros que favorecen las observaciones del CMB según Ellis, Garcia, Olive \& Verner (2026) (Sec.~\ref{sec:parametros-cuarticos}). Para $n = 4$ el espectro de hoy no depende de la historia de reheating (Sec.~\ref{sec:reescaleo}).
+        Estudiamos el fondo de ondas gravitacionales (GWs) que produce el \emph{preheating} después de la inflación, simulado en la red con \CosmoLattice, para modelos de inflación cuyo potencial se comporta como $|\phi|^n$ cerca del mínimo: monomiales generalizados $A|\phi|^n$, T-models $A\tanh^n(\phi/M)$ y E-models $A(1-e^{-\phi/M})^n$. El caso de referencia es $n = 4$ con los parámetros que favorecen las observaciones del CMB según Ellis, Garcia, Olive \& Verner (2026) (Sec.~\ref{sec:parametros-cuarticos}). Para $n = 4$ el espectro de hoy no depende de la historia de reheating (Sec.~\ref{sec:reescaleo}). Como comparación corremos también los casos cuadráticos ($n = 2$, Sec.~\ref{sec:parametros-cuadraticos}), cuyo espectro de hoy sí depende de la temperatura de reheating (Sec.~\ref{sec:resultados-cuadraticos}).
 
         El repositorio está organizado en ramas:
         \begin{itemize}
@@ -183,6 +183,56 @@
 
             Dos observaciones. Primero, $\phi_0/M = 1.20$ (E, $\alpha_K = 1$), $0.79$ (T) y $0.71$ (E, $\alpha_K = 5$): al principio el campo no está en la región cuártica, y $\omega_*$ (calculado con la aproximación local $A/M^n$) es sólo una escala de referencia hasta que la amplitud cae por debajo de $M$. Segundo, el paper no fija el acople $g$, de modo que $q$ sigue siendo una elección nuestra. Cerca del mínimo el potencial de programa es $\tilde\phi^4/4 + \tfrac12 q \tilde\phi^2\tilde\chi^2$, igual que en \texttt{lphi4}, con $q = g^2/\lambda_{\text{eff}}$; un punto de partida razonable es el $q = 300$ de \texttt{lphi4.in}.
 
+    \section{Parámetros cosmológicos para modelos cuadráticos ($n = 2$)}
+        \label{sec:parametros-cuadraticos}
+
+        \subsection{El número de e-folds depende de $T_{\text{RH}}$}
+
+            Para $k = 2$ (el T-model y el E-model canónicos, que con $\alpha_K = 1$ es Starobinsky) el inflatón oscila como materia, $w = 0$, hasta que decae. Entonces el último término de la Ec.~27 del paper no se anula, como pasaba para $k = 4$, y $N_*$ depende de la temperatura de reheating. Con $w_{\text{int}} = 0$,
+            \begin{equation}
+                N_* = 61.49 - \frac{1}{12}\ln g_{\text{RH}} + \frac14 \ln\frac{V_*^2}{m_p^4\,\rho_{\text{end}}} + \frac{1}{12}\ln\frac{\rho_{\text{RH}}}{\rho_{\text{end}}} \, ,
+                \hspace{1cm}
+                \rho_{\text{RH}} = \frac{\pi^2}{30} g_{\text{RH}} T_{\text{RH}}^4 \, ,
+            \end{equation}
+            con $g_{\text{RH}} = 915/4$ (MSSM, como el paper) y $\rho_{\text{end}}$ la densidad en $\epsilon_H = 1$, del fondo exacto. Como $\lambda$, y con ella $V_*$ y $\rho_{\text{end}}$, depende de $\phi_*$, la ecuación se resuelve en forma autoconsistente (\texttt{code/parametros\_cuadraticos.py}). Como chequeo, con $\alpha_K = 1$ el resultado queda $0.15$--$0.17$ e-folds por debajo de las aproximaciones analíticas B9 (E) y B10 (T) del paper, que según el mismo paper tienen un error de hasta $0.2\%$. Además reproduce su ejemplo de la Sec.~VII.A: $N_* = 50$ para $T_{\text{RH}} \simeq 5 \times 10^7$\,GeV, con $n_s = 0.961$.
+
+        \subsection{Qué valores elegir}
+
+            Según el paper (Sec.~VII.A y Fig.~2), con $\alpha_K = 1$ los dos modelos son compatibles con el límite inferior de $n_s$ de Planck 2018 (al $95\%$) para $220\,\text{GeV} \lesssim T_{\text{RH}} \lesssim 10^{10}$\,GeV (E) y $2 \times 10^4\,\text{GeV} \lesssim T_{\text{RH}} \lesssim 10^{10}$\,GeV (T). Ninguno entra en el $95\%$ de P-ACT-LB para ningún $T_{\text{RH}}$. Valores mayores de $\alpha_K$ reducen la tensión (la cota en $r$ da $\alpha_K \lesssim 25$ para E y $\lesssim 11$ para T). Elegimos:
+            \begin{itemize}
+                \item los mismos $\alpha_K$ que en el caso cuártico, para poder comparar: E y T con $\alpha_K = 1$, y E con $\alpha_K = 5$;
+                \item $T_{\text{RH}} = 10^{10}$\,GeV: es la cota de gravitinos, cae dentro de la ventana de Planck para los dos modelos y es la que da el $n_s$ más alto de esa ventana (el más cercano a ACT).
+            \end{itemize}
+            Ese $T_{\text{RH}}$ también entra en el reescaleo a hoy de las GWs (Sec.~\ref{sec:reescaleo}).
+
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{lcccc}
+                    \toprule
+                    & E, $\alpha_K = 1$ & T, $\alpha_K = 1$ & E, $\alpha_K = 5$ & $\phi^2$ (control) \\
+                    \midrule
+                    $N_*$ & $51.6$ & $51.8$ & $52.1$ & $51.8$ \\
+                    $n_s$ & $0.9626$ & $0.9615$ & $0.9645$ & $0.9617$ \\
+                    $r$ & $0.0040$ & $0.0043$ & $0.0151$ & $0.153$ \\
+                    $\lambda$ & $1.691 \times 10^{-10}$ & $1.843 \times 10^{-10}$ & $7.01 \times 10^{-10}$ & -- \\
+                    $H_*$ [GeV] & $1.56 \times 10^{13}$ & $1.63 \times 10^{13}$ & $3.04 \times 10^{13}$ & -- \\
+                    \midrule
+                    \texttt{M} [GeV] & $2.98225 \times 10^{18}$ & $5.96451 \times 10^{18}$ & $6.66852 \times 10^{18}$ & -- \\
+                    \texttt{A} & $4.45852 \times 10^{63}$ & $4.85975 \times 10^{63}$ & $1.84811 \times 10^{64}$ & $1.36605 \times 10^{26}$ \\
+                    \texttt{initial\_amplitudes} [GeV] & $2.28933 \times 10^{18}$ & $2.94243 \times 10^{18}$ & $2.77636 \times 10^{18}$ & $3.44361 \times 10^{18}$ \\
+                    \texttt{initial\_momenta} [GeV$^2$] & $-2.5990 \times 10^{31}$ & $-2.3131 \times 10^{31}$ & $-3.3625 \times 10^{31}$ & $-2.9233 \times 10^{31}$ \\
+                    $\omega_* = m$ [GeV] & $3.17 \times 10^{13}$ & $1.65 \times 10^{13}$ & $2.88 \times 10^{13}$ & $1.65 \times 10^{13}$ \\
+                    $\phi_0/M$ & $0.77$ & $0.49$ & $0.42$ & -- \\
+                    \bottomrule
+                \end{tabular}
+                \caption{Casos cuadráticos con $T_{\text{RH}} = 10^{10}$\,GeV. \texttt{A} está en GeV$^4$ en los T/E-models y en GeV$^2$ en el monomial ($V = A\phi^2$). $n_s$ y $r$ son de slow-roll (el paper da los exactos). Los recalcula \texttt{code/parametros\_cuadraticos.py}.}
+                \label{tab:parametros-cuadraticos}
+            \end{table}
+
+            Para $n = 2$, $\omega_* = \sqrt{2A}/M$ es la masa del inflatón en el mínimo, $\alpha = 0$ (el tiempo de programa es $\tilde t = m t$) y el potencial de programa cerca del mínimo es $\tilde\phi^2/2 + \tfrac12 q\tilde\phi^2\tilde\chi^2$, con $q = g^2\phi_0^2/m^2$. La masa del E-model con $\alpha_K = 1$, $3.2 \times 10^{13}$\,GeV, es la conocida de Starobinsky. El monomial de control, $V = m^2\phi^2/2$, usa la masa del T-model con $\alpha_K = 1$, así que tiene el mismo potencial cerca del mínimo; está excluido por $r$. Arranca en $\phi_0 = \sqrt 2\, m_p$ ($\epsilon_V = 1$).
+
+            El paper no fija el acople $g$. Usamos $q = 4 \times 10^4$, el de \texttt{tanh2.in} de \CosmoLattice, en los cuatro casos. Con ese $q$ la resonancia es ancha y las GWs salen en $\tilde k \sim 50$.
+
     \section{Análisis de las corridas y reescaleo a hoy}
         \label{sec:analisis}
 
@@ -273,6 +323,13 @@
                 h^2\Omega_{GW,0} = 1.61 \times 10^{-5} \; \Omega_{GW,e} \, .
             \end{equation}
             Para $n \ne 4$ hay que dar $a_e/a_{RD}$ (opción \texttt{--a\_e\_sobre\_a\_RD}). Si el inflatón se fragmenta, $w \to 1/3$ antes y $\epsilon \to 1$ (Sec.~VII.B de Ellis \emph{et al.}).
+            \paragraph{El caso cuadrático.} Para $n = 2$, $w = 0$ y $\epsilon = a_e/a_{RD}$. Si el universo se comporta como materia desde el final de la simulación hasta el reheating, $a_e/a_{RD} = (\rho_{RD}/\rho_e)^{1/3}$, con $\rho_{RD} = (\pi^2 g_*/30)\,T_{\text{RH}}^4$. Entonces
+            \begin{equation}
+                h^2\Omega_{GW,0} \propto \epsilon = \left(\frac{\rho_{RD}}{\rho_e}\right)^{1/3} \, ,
+                \hspace{1cm}
+                f_0 \propto \epsilon^{1/4} \, ,
+            \end{equation}
+            y la señal se diluye tanto más cuanto más bajo es $T_{\text{RH}}$. El analizador lo calcula con \texttt{--TRH} (y con \texttt{--w\_post} se puede usar otra ecuación de estado entre $a_e$ y $a_{RD}$). Esta suposición es la más pesimista: en las corridas, al final de la simulación $\langle w\rangle$ todavía vale $\simeq 0.2$, no $0$, porque parte de la energía está en partículas relativistas del campo hijo. Por eso damos también la cota opuesta, $\epsilon = 1$ (radiación desde el final de la simulación). Con $T_{\text{RH}} = 10^{10}$\,GeV los dos casos difieren en unos cinco órdenes de magnitud en la amplitud (Sec.~\ref{sec:resultados-cuadraticos}).
 
         \subsection{Comparación con la literatura}
             \label{sec:literatura}
@@ -389,7 +446,7 @@ DT=0.007 MODELOS="gentmodel_cuartico" code/correr_cuarticos.sh 128
             \end{itemize}
             Con $N = 32$ el $\rho_{GW}/\rho$ final era $1.8 \times 10^{-5}$: un $40\%$ de diferencia entre las dos resoluciones. Es una razón más para hacer las corridas de producción con $N = 128$ y comparar.
 
-        \subsection{Resultados con $N = 64$}
+        \subsection{Resultados cuárticos con $N = 64$}
             \label{sec:resultados-N64}
 
             Corrimos los cuatro casos de la Tabla~\ref{tab:casos} con \texttt{code/correr\_cuarticos.sh 64} ($N = 64$, $\tilde k_{\text{IR}} = 0.7$, $\delta\tilde t = 0.01$, el $\tilde t_{\max}$ de cada \texttt{.in}): entre 19 y 30\,min cada uno. La Fig.~\ref{fig:corridas-N64} los compara y la Tabla~\ref{tab:resultados-N64} resume los números; las figuras de cada caso están en la sección de su modelo, en su rama. Ambas las regenera \texttt{code/comparar\_corridas.py}.
@@ -425,6 +482,55 @@ DT=0.007 MODELOS="gentmodel_cuartico" code/correr_cuarticos.sh 128
             \paragraph{Hoy, las amplitudes son parecidas y las frecuencias se separan.} Como $\epsilon = 1$ (Sec.~\ref{sec:reescaleo}), la amplitud de hoy es el $\Omega_{GW,e}$ de la red por la misma constante en los cuatro casos. Por eso los máximos quedan todos entre $6$ y $9 \times 10^{-11}$. La frecuencia, en cambio, se reescala con un factor distinto en cada caso, $\propto (\omega_*/f_*)^{1/2}/(a_e\tilde\rho_e^{1/4})$, que va de $0.89 \times 10^8$\,Hz (monomial) a $3.4 \times 10^8$\,Hz (E, $\alpha_K = 1$) por unidad de $\tilde k$. Ese factor es lo que separa las curvas de la Fig.~\ref{fig:corridas-N64}b. El T-model y el monomial tienen el mismo $\omega_*/f_*$, pero el monomial arranca con más energía en unidades de programa y se expande más antes de llegar a $w = 1/3$: su $a\tilde\rho^{1/4}$ es $1.20$ veces el del T-model al principio y $1.34$ veces al final (en radiación, $a\tilde\rho^{1/4}$ es constante). Por eso sus frecuencias quedan $1.34$ veces más bajas.
 
             \paragraph{La frecuencia del pico no es robusta.} Los cuatro espectros son anchos: el de hoy supera la mitad del máximo en una década de $\tilde k$ (en el monomial, de $\tilde k = 2.1$ a 17). Además, con $\tilde k_{\text{IR}} = 0.7$ los bins tienen un ancho de $20$--$25\%$ en el pico. Por eso el máximo puede caer en bins muy distintos. Por ejemplo, el monomial y el E-model con $\alpha_K = 1$ tienen el pico casi en la misma frecuencia ($\simeq 10^9$\,Hz) por razones opuestas: el monomial tiene un factor de reescaleo chico y el pico en $\tilde k = 11.2$, porque su espectro sigue plano hasta ahí, y el E-model un factor grande y el pico en $\tilde k = 2.8$. Para comparar modelos conviene usar la banda en la que el espectro supera la mitad del máximo, no la frecuencia del pico. Las corridas con $N = 128$ y $\tilde k_{\text{IR}} = 0.35$ (Sec.~\ref{sec:recomendacion}) van a resolver mejor esa zona.
+
+    \section{Corridas cuadráticas: resultados con $N = 64$}
+        \label{sec:resultados-cuadraticos}
+
+            Corrimos los cuatro casos de la Tabla~\ref{tab:parametros-cuadraticos} con \texttt{code/correr\_cuadraticos.sh 64}. Para que sean comparables entre sí, los cuatro usan la misma grilla ($N = 64$, $\tilde k_{\text{IR}} = 3$, $\tilde k_{\max} = 166$), el mismo paso ($\delta\tilde t = 0.003$), el mismo $\tilde t_{\max} = 400$, el mismo $q = 4 \times 10^4$ y la misma semilla (\texttt{baseSeed = 20261005}). Así las fluctuaciones iniciales son la misma realización y las diferencias vienen sólo del potencial. Cada corrida tardó entre 51 y 70\,min. Los casos cuárticos de la Sec.~\ref{sec:resultados-N64} tenían semillas aleatorias distintas.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/corridas_N64_cuadraticos.pdf}
+                \caption{Los cuatro casos cuadráticos con $N = 64$ y la misma semilla. (a) Espectro de GWs al final de la simulación. (b) Llevado a hoy con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$ hasta el reheating (línea llena; el punto marca el máximo), y con $\epsilon = 1$, radiación desde el final de la simulación (línea cortada). (c) Fracción de la energía en GWs; la línea punteada marca cuándo rms$(\tilde\chi)$ llega a la mitad de su máximo.}
+                \label{fig:corridas-cuadraticos}
+            \end{figure}
+
+            \begin{table}[H]
+                \centering
+                \footnotesize
+                \setlength{\tabcolsep}{3pt}
+                \begin{tabular}{lccccccc}
+                    \toprule
+                    caso & $\rho_{GW}/\rho$ & crece & $\langle w\rangle_e$ & $h^2\Omega^{\max}_{GW,0}$ ($w{=}0$) & banda ($w{=}0$) [Hz] & $h^2\Omega^{\max}_{GW,0}$ ($\epsilon{=}1$) & $\epsilon$ \\
+                    \midrule
+                    T, $\alpha_K = 1$ & $1.23 \times 10^{-5}$ & $10\%$ & $0.27$ & $2.4 \times 10^{-16}$ & $1.4 \times 10^7$--$2.6 \times 10^8$ & $7.3 \times 10^{-11}$ & $3.3 \times 10^{-6}$ \\
+                    E, $\alpha_K = 1$ & $0.89 \times 10^{-5}$ & $26\%$ & $0.29$ & $0.9 \times 10^{-16}$ & $1.3 \times 10^7$--$4.3 \times 10^8$ & $4.2 \times 10^{-11}$ & $2.1 \times 10^{-6}$ \\
+                    E, $\alpha_K = 5$ & $1.02 \times 10^{-5}$ & $16\%$ & $0.26$ & $1.3 \times 10^{-16}$ & $1.9 \times 10^7$--$3.2 \times 10^8$ & $5.5 \times 10^{-11}$ & $2.3 \times 10^{-6}$ \\
+                    $\phi^2$ (control) & $2.46 \times 10^{-5}$ & $4\%$ & $0.25$ & $4.8 \times 10^{-16}$ & $5.8 \times 10^6$--$1.9 \times 10^8$ & $1.5 \times 10^{-10}$ & $3.3 \times 10^{-6}$ \\
+                    \bottomrule
+                \end{tabular}
+                \caption{Resultados cuadráticos con $N = 64$. «Crece»: aumento de $\rho_{GW}/\rho$ en los últimos 100 de $\tilde t$. $\langle w\rangle_e$: promedio en los dos últimos períodos. La banda es donde el espectro de hoy supera la mitad de su máximo. $\epsilon = a_e/a_{RD}$ para $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$.}
+                \label{tab:resultados-cuadraticos}
+            \end{table}
+
+            \paragraph{Las corridas son numéricamente buenas.} El error de Friedmann es $\le 9 \times 10^{-5}$ en las cuatro, la integral del espectro de GWs reproduce $\rho_{GW}/\rho$ a $10^{-14}$ y todos los modos terminan dentro del horizonte ($k_{\text{IR}}/(aH) \ge 39$).
+
+            \paragraph{El condensado se fragmenta casi por completo.} En los cuatro casos, $\langle\tilde\phi\rangle a^{3/2}$ (que sin resonancia oscilaría con amplitud constante) cae a la mitad entre $\tilde t \simeq 108$ y $140$. Al final queda entre el $0.2\%$ y el $3\%$ de su amplitud inicial. Por eso la ecuación de estado ya no es la de materia: $\langle w\rangle = 0.25$--$0.29$ al final.
+
+            \paragraph{El orden es el inverso del caso cuártico.} Las GWs empiezan a crecer ($\rho_{GW}/\rho = 10^{-8}$) en $\tilde t \simeq 70$ (E, $\alpha_K = 1$), $75$ (T y E con $\alpha_K = 5$) y $120$ (monomial). En el caso cuártico el monomial era el primero en resonar (Sec.~\ref{sec:resultados-N64}). Aun así, el monomial termina con más GWs: $\rho_{GW}/\rho = 2.5 \times 10^{-5}$, el doble que el T-model, con más potencia en el IR ($\Omega_{GW,e} \simeq 0.9 \times 10^{-5}$ en $\tilde k = 3$, contra $1.4$--$2.6 \times 10^{-6}$). Con una sola semilla por caso no podemos decir si esa diferencia es mayor que la variación entre realizaciones.
+
+            \paragraph{En la red, la producción es como la del caso cuártico.} $\rho_{GW}/\rho \simeq 1$--$2.5 \times 10^{-5}$, y el espectro final es plano ($\Omega_{GW,e} \simeq 1$--$5 \times 10^{-6}$) desde $\tilde k \simeq 3$ hasta $\tilde k \simeq 100$ (Fig.~\ref{fig:corridas-cuadraticos}a). Hay dos limitaciones:
+            \begin{itemize}
+                \item \textbf{El UV no está resuelto.} El espectro sigue plano hasta muy cerca de $\tilde k_{\max} = 166$, y la cola de GWs en $\tilde k_{\max}$ es $\sim 10^{-4}$ del máximo. Con $N = 32$ ($\tilde k_{\max} = 83$) el T-model daba un máximo en $\tilde k \simeq 50$, cerca de su propio corte, y $\rho_{GW}/\rho = 1.7 \times 10^{-5}$ ($28\%$ más). La forma del espectro por encima de $\tilde k \sim 50$ depende entonces de la resolución, y el máximo no tiene sentido: cae en el primer bin o en cualquier punto de la meseta. Para resolver el UV hace falta $N = 128$ con el mismo $\tilde k_{\text{IR}}$, unas 9\,h por corrida.
+                \item \textbf{La producción no terminó del todo.} $\rho_{GW}/\rho$ crece entre un $4\%$ y un $26\%$ en los últimos 100 de $\tilde t$. Con $w \simeq 0.25$, sin fuente ese cociente bajaría como $a^{-0.25}$, así que todavía se producen GWs. Los valores finales son entonces cotas inferiores, con un margen de $\sim 10$--$30\%$.
+            \end{itemize}
+
+            \paragraph{Hoy, lo que manda es la historia después de la simulación.} Con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$ hasta el reheating, $\epsilon = 2$--$3 \times 10^{-6}$. La meseta queda en $h^2\Omega_{GW,0} \sim 10^{-16}$ (máximos de $0.9$ a $4.8 \times 10^{-16}$), entre $6 \times 10^6$ y $4 \times 10^8$\,Hz. Con $\epsilon = 1$ los mismos espectros dan $4 \times 10^{-11}$--$1.5 \times 10^{-10}$ entre $10^8$ y $2 \times 10^{9}$\,Hz, del mismo orden que el caso cuártico. Si $w$ se quedara en el valor medido al final ($\simeq 0.25$) hasta el reheating, $\epsilon \simeq 0.07$--$0.08$ y los máximos serían $3$--$12 \times 10^{-12}$ (\texttt{--w\_post 0.25}). Ninguno de los extremos es realista:
+            \begin{itemize}
+                \item $w = 0$ desde $a_e$ ignora que el inflatón ya está fragmentado;
+                \item $w \simeq 0.25$ constante ignora que las partículas de $\phi$ y $\chi$, que tienen masa, se vuelven no relativistas a medida que el universo se expande, y entonces $w$ vuelve a bajar.
+            \end{itemize}
+            El valor real está entre los dos y requiere seguir la evolución de $w$ más allá de la simulación. Lo robusto es la comparación con el caso cuártico: la producción en la red es parecida, y lo que separa a los modelos cuadráticos (hasta cinco órdenes de magnitud abajo) es la expansión tipo materia hasta el reheating, que no existe para $n = 4$.
 
     \section{Guía de uso: los cuatro casos, sus parámetros y cómo correrlos}
         \label{sec:guia}
