@@ -111,3 +111,43 @@
                 \item $\alpha_K = 5$: máximo $8.4 \times 10^{-11}$ en $4.9 \times 10^8$\,Hz, y más de la mitad del máximo entre $2.5 \times 10^8$ y $1.5 \times 10^9$\,Hz.
             \end{itemize}
             Pasar de $\alpha_K = 1$ a $5$ (más cerca de ACT) baja las frecuencias un factor $\sim 2$ y sube la amplitud del máximo un $35\%$. Con una corrida por caso y bins de $20$--$25\%$, la diferencia de amplitud está al borde de la incerteza de una sola corrida ($\pm 10\%$ en $\rho_{GW}/\rho$, Sec.~\ref{sec:recomendacion}).
+
+        \subsection{Corridas cuadráticas con $N = 64$}
+            \label{sec:emodel-cuadratico}
+
+            La comparación de los cuatro casos cuadráticos (misma grilla, mismo $q$ y misma semilla) y sus limitaciones (el UV no está resuelto y la producción no terminó del todo) están en la Sec.~\ref{sec:resultados-cuadraticos}. Acá van las figuras de \texttt{genemodel\_cuadratico.in} ($\alpha_K = 1$, Starobinsky) y \texttt{genemodel\_cuadratico\_aK5.in} ($\alpha_K = 5$).
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genemodel_cuadratico_N64_campos.png}
+                \caption{E-model cuadrático (Starobinsky), $\alpha_K = 1$, $N = 64$. Izquierda: $\langle\tilde\phi\rangle$ multiplicado por $a^{6/(n+2)} = a^{3/2}$, que sin resonancia oscilaría con amplitud constante. Derecha: rms de cada campo y $|\langle\tilde\phi\rangle|$.}
+                \label{fig:genemodel_cuadratico-campos}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genemodel_cuadratico_N64_gws.png}
+                \caption{E-model cuadrático (Starobinsky), $\alpha_K = 1$, $N = 64$. Espectro de GWs en la red (izquierda) y llevado a hoy con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$ hasta el reheating (derecha), a cada tiempo de salida (claro = temprano).}
+                \label{fig:genemodel_cuadratico-gws}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genemodel_cuadratico_aK5_N64_campos.png}
+                \caption{E-model cuadrático, $\alpha_K = 5$, $N = 64$. Izquierda: $\langle\tilde\phi\rangle$ multiplicado por $a^{6/(n+2)} = a^{3/2}$, que sin resonancia oscilaría con amplitud constante. Derecha: rms de cada campo y $|\langle\tilde\phi\rangle|$.}
+                \label{fig:genemodel_cuadratico_aK5-campos}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/genemodel_cuadratico_aK5_N64_gws.png}
+                \caption{E-model cuadrático, $\alpha_K = 5$, $N = 64$. Espectro de GWs en la red (izquierda) y llevado a hoy con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$ hasta el reheating (derecha), a cada tiempo de salida (claro = temprano).}
+                \label{fig:genemodel_cuadratico_aK5-gws}
+            \end{figure}
+
+            Con $\alpha_K = 1$ (Starobinsky, $m = 3.2 \times 10^{13}$\,GeV) las GWs son las primeras en crecer de los cuatro casos ($\rho_{GW}/\rho = 10^{-8}$ en $\tilde t \simeq 70$). Con $\alpha_K = 5$ crecen en $\tilde t \simeq 75$, como en el T-model. La amplitud de $a^{3/2}\langle\tilde\phi\rangle$ cae a la mitad en $\tilde t \simeq 118$ y $114$, y al final queda el $2.4\%$ y el $3.1\%$ de la inicial (Figs.~\ref{fig:genemodel_cuadratico-campos} y \ref{fig:genemodel_cuadratico_aK5-campos}). Con $\alpha_K = 1$, rms$(\tilde\chi)$ no decae después de saturar: sigue oscilando alrededor de $\sim 4 \times 10^{-3}$ hasta el final.
+
+            Al final de la corrida:
+            \begin{itemize}
+                \item $\alpha_K = 1$: $\rho_{GW}/\rho = 0.89 \times 10^{-5}$, que todavía crece un $26\%$ en los últimos 100 de $\tilde t$ (es el caso menos saturado), y $\langle w\rangle = 0.29$. Hoy, con $T_{\text{RH}} = 10^{10}$\,GeV y $w = 0$, el máximo es $h^2\Omega_{GW,0} = 0.9 \times 10^{-16}$, y más de la mitad del máximo cae entre $1.3 \times 10^7$ y $4.3 \times 10^8$\,Hz. Con $\epsilon = 1$, $4.2 \times 10^{-11}$ en $3.3 \times 10^8$\,Hz.
+                \item $\alpha_K = 5$: $\rho_{GW}/\rho = 1.02 \times 10^{-5}$ (crece un $16\%$) y $\langle w\rangle = 0.26$. Hoy, $1.3 \times 10^{-16}$ entre $1.9 \times 10^7$ y $3.2 \times 10^8$\,Hz; con $\epsilon = 1$, $5.5 \times 10^{-11}$ en $2.2 \times 10^9$\,Hz.
+            \end{itemize}
+            Como en el caso cuártico, $\alpha_K = 5$ da algo más de GWs que $\alpha_K = 1$ ($15\%$ en $\rho_{GW}/\rho$), una diferencia del orden de la incerteza de una sola corrida. Los dos espectros de la red son planos hasta $\tilde k \simeq 100$, y la posición del máximo no significa nada: con $\alpha_K = 1$ cae en el primer bin ($\tilde k = 3$).

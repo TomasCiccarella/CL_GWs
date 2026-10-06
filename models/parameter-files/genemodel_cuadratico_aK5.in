@@ -1,0 +1,55 @@
+# E-model cuadrático (n = 2), alpha_K = 5: caso de Notas.tex «Parámetros cosmológicos para modelos cuadráticos»
+# (Ellis, Garcia, Olive & Verner, PRD 113, 063571 (2026)), con T_RH = 1e10 GeV (cota de gravitinos):
+# N_* = 52.14, n_s = 0.9645, r = 0.0151, lambda = 7.0092e-10.
+# Parámetros recalculados por code/parametros_cuadraticos.py. omega_* = m = 2.8830e+13 GeV.
+
+#Output
+outputfile = ./
+print_headers = true
+overwriteFiles = false
+
+#Evolution
+expansion = true
+evolver = VV2
+
+#Lattice
+# Iguales en los cuatro casos cuadráticos, con la misma semilla, para que las fluctuaciones iniciales
+# sean la misma realización (Notas.tex «Corridas cuadráticas»). Con q = 4e4 la resonancia está en
+# k~ ~ q^(1/4) ~ 14 y el pico de GWs en k~ ~ 50: kIR = 3 y N = 64 dan k~_max = 166. dt = 0.003 cumple
+# omega~_max dt ~ 0.6 (code/recursos_cosmolattice.py) y da un error de Friedmann ~ 1e-4 con N = 32.
+# Memoria ~ 50 MB con N = 64; ~70 min con 8 hilos.
+N = 64
+dt = 0.003
+kIR = 3
+baseSeed = 20261005
+
+#Times
+# Con N = 32 rho_GW/rho llega al 90% de su valor final en t~ ~ 280 (T y E, alpha_K = 1). Con N = 64 todavía
+# crece entre 4% y 26% en los últimos 100 de t~ (Notas.tex «Corridas cuadráticas»). tMax = 400 para todos.
+tOutputFreq = 0.2
+tOutputInfreq = 5
+tOutputRareFreq = 50
+tMax = 400
+
+#Power spectrum options
+PS_type = 1
+PS_version = 1
+
+#IC
+kCutOff = 40
+# initial_amplitudes[0] = phi_0 = M ln(1 + (sqrt(2)/2) n m_p/M) (epsilon_V = 1, Notas.tex «E-models», condiciones iniciales)
+# initial_momenta[0] = -sqrt((sqrt(7/3) - 1) * V(phi_0)) (slow-roll, Notas.tex «E-models», momento inicial)
+initial_amplitudes = 2.77636e+18 0  # homogeneous amplitudes in GeV
+initial_momenta = -3.3625e+31 0     # homogeneous momenta in GeV^2
+
+#Model Parameters
+# V(phi) = A |1 - exp(-phi/M)|^n, A = (3/4) lambda m_p^4, M = sqrt(3 alpha_K/2) m_p, m_p = 2.435e18 GeV.
+# q = g^2 phi_0^2/m^2 = 4e4, el de tanh2.in de CosmoLattice (el paper no fija g); igual en los cuatro casos.
+n = 2
+M = 6.66852e+18
+A = 1.84811e+64
+q = 4e4
+
+#GWs
+withGWs = true
+GWprojectorType = 1
