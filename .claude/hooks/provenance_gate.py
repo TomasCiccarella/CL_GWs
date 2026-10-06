@@ -70,7 +70,8 @@ def figures_in_tree():
         # notes still count.
         rel = "/" + os.path.relpath(p, ROOT)
         if os.path.isdir(p) or "/.claude/" in p or "/.codex/" in p \
-                or "/provenance/" in p or "/bibliografía/" in p \
+                or "/provenance/" in p \
+                or re.search(r"/bibliograf[ií]a/", p, re.IGNORECASE) \
                 or rel.startswith(("/include/", "/source/", "/tests/", "/cmake/", "/build")) \
                 or re.fullmatch(r"/Notas/Notas(_[\w-]+)?\.pdf", rel):
             continue
