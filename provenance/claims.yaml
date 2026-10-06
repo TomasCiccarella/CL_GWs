@@ -291,6 +291,30 @@ claims:
       - Dufaux et al., arXiv:0707.0875, Sec. III.D (nota 4) y Sec. VIII
       - Notas/Notas.tex «Corridas cuadráticas», «Por qué <w> no es 0» (Tabla tab:w-cuadraticos)
     numbers: [cuad_T_w_20_50, cuad_T_w_100_150, cuad_T_w_200_250, cuad_T_w_350_400, cuad_T_frac_grad, cuad_T_p_sobre_m_phi, cuad_T_p_sobre_m_chi, cuad_E1_w_20_50, cuad_E1_w_100_150, cuad_E1_w_200_250, cuad_E1_w_350_400, cuad_E1_frac_grad, cuad_E1_p_sobre_m_phi, cuad_E1_p_sobre_m_chi, cuad_E5_w_20_50, cuad_E5_w_100_150, cuad_E5_w_200_250, cuad_E5_w_350_400, cuad_E5_frac_grad, cuad_E5_p_sobre_m_phi, cuad_E5_p_sobre_m_chi, cuad_mono_w_20_50, cuad_mono_w_100_150, cuad_mono_w_200_250, cuad_mono_w_350_400, cuad_mono_frac_grad, cuad_mono_p_sobre_m_phi, cuad_mono_p_sobre_m_chi]
+  - id: w-post-simulacion
+    statement: >
+      Si después de la simulación los campos son partículas libres con masas de campo medio, w baja de
+      0.27-0.29 en a_s a menos de 0.1 en otro factor 4.6-6.3 de a, y con T_RH = 1e10 GeV el factor de
+      dilución de las GWs de los casos cuadráticos es eps = 1.3-1.8e-5 (4.5-6.4 veces el de w = 0). Hoy
+      los máximos quedan en h^2 Omega_GW,0 = 0.6-2.1e-15, entre 8e6 y 7e8 Hz.
+    verificacion: >
+      El modelo cumple d rho/d ln a = -3(rho + p) a 2e-7. Sin ajuste, su w(a_s) = 0.27-0.29 reproduce
+      el medido en la red al final (0.25-0.28, Tabla tab:w-cuadraticos). eps/eps(w=0) coincide con
+      exp((4/3) int 3w d ln a) calculado aparte sobre la curva w(a). Los máximos de hoy son los de la
+      Tabla tab:resultados-cuadraticos multiplicados por eps/eps(w=0). El paso a w ~ 0 coincide con lo
+      que argumentan Podolsky et al. (Sec. III.B, iii) y lo que encuentran Lozanov & Amin para n = 1.
+      Firme como consecuencia del modelo; lo que no se puede verificar son sus supuestos (sin
+      dispersión ni decaimiento hasta T_RH, reheating instantáneo, dispersión del continuo con el UV
+      sin resolver). Como la etapa con w > 0.1 dura un factor ~5 en a, un error del 10 por ciento en
+      w cambia eps en ~15 por ciento.
+    evidence:
+      - code/w_post_simulacion.py::evolucion
+      - code/w_post_simulacion.py::reheating
+      - code/w_post_simulacion.py::main
+      - Podolsky, Felder, Kofman & Peloso, PRD 73, 023501 (2006), arXiv:hep-ph/0507096, Sec. III.B
+      - Lozanov & Amin, PRL 119, 061301 (2017), arXiv:1608.01213
+      - Notas/Notas.tex «Corridas cuadráticas», «Qué pasa después de la simulación» (Fig. fig:w-post-cuadraticos) y «Hoy, lo que manda es la historia después de la simulación»
+    numbers: [wpost_E1_Om_max, wpost_E1_aRD, wpost_E1_a_w01, wpost_E1_banda_max, wpost_E1_banda_min, wpost_E1_eps, wpost_E1_eps_w0, wpost_E1_eps_w025, wpost_E1_f_max, wpost_E1_w_s, wpost_E5_Om_max, wpost_E5_aRD, wpost_E5_a_w01, wpost_E5_banda_max, wpost_E5_banda_min, wpost_E5_eps, wpost_E5_eps_w0, wpost_E5_eps_w025, wpost_E5_f_max, wpost_E5_w_s, wpost_T_Om_max, wpost_T_aRD, wpost_T_a_w01, wpost_T_banda_max, wpost_T_banda_min, wpost_T_eps, wpost_T_eps_w0, wpost_T_eps_w025, wpost_T_f_max, wpost_T_w_s, wpost_continuidad_max, wpost_mono_Om_max, wpost_mono_aRD, wpost_mono_a_w01, wpost_mono_banda_max, wpost_mono_banda_min, wpost_mono_eps, wpost_mono_eps_w0, wpost_mono_eps_w025, wpost_mono_f_max, wpost_mono_w_s]
 
 figures:
   - file: Notas/figuras/corridas_N64.pdf
@@ -383,3 +407,16 @@ figures:
     from_library: matplotlib, numpy; code/reescaleo_gws.py
     choices: ["Copia de build_corridas/genemodel_cuadratico_aK5_N64_kIR3/analisis/05_gws.png, analizada con --TRH 1e10 (w = 0 hasta el reheating, el supuesto más pesimista)."]
     supports: [emodel-cuadratico]
+  - file: Notas/figuras/w_post_cuadraticos.pdf
+    produced_by: code/w_post_simulacion.py::main
+    shows: >
+      w = p/rho contra a/a_s, desde el final de la simulación hasta a_RD (T_RH = 1e10 GeV), en el modelo
+      de partículas libres con masas de campo medio, para los cuatro casos cuadráticos con N = 64. Se lee
+      que w arranca cerca del valor medido en la red, baja de 0.1 en un factor ~5 de a y es ~0 durante
+      casi toda la expansión hasta el reheating.
+    from_scratch: Modelo de partículas libres a partir del último espectro de cada campo (code/w_post_simulacion.py::evolucion).
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Eje horizontal a/a_s logarítmico hasta a_RD, para que se vea la etapa corta con w > 0 frente a la larga con w ~ 0.",
+              "Líneas de referencia en w = 0 y w = 1/3.",
+              "Colores categóricos en el orden fijo de corridas_N64_cuadraticos.pdf."]
+    supports: [w-post-simulacion]
