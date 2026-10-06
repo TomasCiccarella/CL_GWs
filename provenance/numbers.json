@@ -1724,5 +1724,1328 @@
     "choices": [
       "Máximo de rms(chi) como marca de saturación de la resonancia (alternativa: cuando rho_GW/rho deja de crecer exponencialmente)."
     ]
+  },
+  "cuadratico_E1_N_star": {
+    "value": 51.6337,
+    "statement": "N_*, E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_ns": {
+    "value": 0.962629,
+    "statement": "n_s (slow-roll), E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_r": {
+    "value": 0.00397023,
+    "statement": "r (slow-roll), E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_lam": {
+    "value": 1.69096e-10,
+    "statement": "lambda, E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_H_star": {
+    "value": 15618900000000.0,
+    "statement": "H_* [GeV], E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_A": {
+    "value": 4.45852e+63,
+    "statement": "A [GeV^4], E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_phi0": {
+    "value": 2.28933e+18,
+    "statement": "phi_0 [GeV], E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_pi0": {
+    "value": -2.59896e+31,
+    "statement": "phi'_0 [GeV^2], E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_omega_star": {
+    "value": 31664000000000.0,
+    "statement": "omega_* = m [GeV], E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E1_phi0_sobre_M": {
+    "value": 0.767652,
+    "statement": "phi_0/M, E-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_N_star": {
+    "value": 51.7673,
+    "statement": "N_*, T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_ns": {
+    "value": 0.961502,
+    "statement": "n_s (slow-roll), T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_r": {
+    "value": 0.00432161,
+    "statement": "r (slow-roll), T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_lam": {
+    "value": 1.84313e-10,
+    "statement": "lambda, T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_H_star": {
+    "value": 16295500000000.0,
+    "statement": "H_* [GeV], T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_A": {
+    "value": 4.85975e+63,
+    "statement": "A [GeV^4], T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_phi0": {
+    "value": 2.94243e+18,
+    "statement": "phi_0 [GeV], T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_pi0": {
+    "value": -2.31314e+31,
+    "statement": "phi'_0 [GeV^2], T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_omega_star": {
+    "value": 16529000000000.0,
+    "statement": "omega_* = m [GeV], T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_T1_phi0_sobre_M": {
+    "value": 0.493323,
+    "statement": "phi_0/M, T-model k = 2, alpha_K = 1, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_N_star": {
+    "value": 52.1384,
+    "statement": "N_*, E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_ns": {
+    "value": 0.964542,
+    "statement": "n_s (slow-roll), E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_r": {
+    "value": 0.0150655,
+    "statement": "r (slow-roll), E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_lam": {
+    "value": 7.00923e-10,
+    "statement": "lambda, E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_H_star": {
+    "value": 30425300000000.0,
+    "statement": "H_* [GeV], E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_A": {
+    "value": 1.84811e+64,
+    "statement": "A [GeV^4], E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_phi0": {
+    "value": 2.77636e+18,
+    "statement": "phi_0 [GeV], E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_pi0": {
+    "value": -3.36246e+31,
+    "statement": "phi'_0 [GeV^2], E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_omega_star": {
+    "value": 28830300000000.0,
+    "statement": "omega_* = m [GeV], E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_E5_phi0_sobre_M": {
+    "value": 0.416338,
+    "statement": "phi_0/M, E-model k = 2, alpha_K = 5, T_RH = 1e10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::calcular",
+    "from_scratch": "N_* autoconsistente de la Ec. 27 del paper; phi_end exacto; normalización de lambda con A_s; condiciones iniciales de Notas.tex.",
+    "from_library": "numpy; scipy.integrate.quad, solve_ivp; scipy.optimize.brentq",
+    "choices": [
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo).",
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo).",
+      "n_s y r en slow-roll (el paper usa perturbaciones exactas)."
+    ]
+  },
+  "cuadratico_mono_A": {
+    "value": 1.36605e+26,
+    "statement": "A [GeV^2] del monomial m^2 phi^2/2 de control (m del T-model).",
+    "produced_by": "code/parametros_cuadraticos.py::monomial_control",
+    "from_scratch": "m^2 = 2 A_T/M_T^2; phi_0 = sqrt(2) m_p (epsilon_V = 1); slow-roll de phi^2.",
+    "from_library": "numpy",
+    "choices": [
+      "Misma masa que el T-model alpha_K = 1 (alternativa: la del E-model).",
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo)."
+    ]
+  },
+  "cuadratico_mono_phi0": {
+    "value": 3.44361e+18,
+    "statement": "phi_0 [GeV] del monomial cuadrático.",
+    "produced_by": "code/parametros_cuadraticos.py::monomial_control",
+    "from_scratch": "m^2 = 2 A_T/M_T^2; phi_0 = sqrt(2) m_p (epsilon_V = 1); slow-roll de phi^2.",
+    "from_library": "numpy",
+    "choices": [
+      "Misma masa que el T-model alpha_K = 1 (alternativa: la del E-model).",
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo)."
+    ]
+  },
+  "cuadratico_mono_pi0": {
+    "value": -2.92326e+31,
+    "statement": "phi'_0 [GeV^2] del monomial cuadrático.",
+    "produced_by": "code/parametros_cuadraticos.py::monomial_control",
+    "from_scratch": "m^2 = 2 A_T/M_T^2; phi_0 = sqrt(2) m_p (epsilon_V = 1); slow-roll de phi^2.",
+    "from_library": "numpy",
+    "choices": [
+      "Misma masa que el T-model alpha_K = 1 (alternativa: la del E-model).",
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo)."
+    ]
+  },
+  "cuadratico_mono_ns": {
+    "value": 0.961735,
+    "statement": "n_s de m^2 phi^2 con el N_* del T-model.",
+    "produced_by": "code/parametros_cuadraticos.py::monomial_control",
+    "from_scratch": "m^2 = 2 A_T/M_T^2; phi_0 = sqrt(2) m_p (epsilon_V = 1); slow-roll de phi^2.",
+    "from_library": "numpy",
+    "choices": [
+      "Misma masa que el T-model alpha_K = 1 (alternativa: la del E-model).",
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo)."
+    ]
+  },
+  "cuadratico_mono_r": {
+    "value": 0.153059,
+    "statement": "r de m^2 phi^2 con el N_* del T-model.",
+    "produced_by": "code/parametros_cuadraticos.py::monomial_control",
+    "from_scratch": "m^2 = 2 A_T/M_T^2; phi_0 = sqrt(2) m_p (epsilon_V = 1); slow-roll de phi^2.",
+    "from_library": "numpy",
+    "choices": [
+      "Misma masa que el T-model alpha_K = 1 (alternativa: la del E-model).",
+      "T_RH = 1e10 GeV: cota de gravitinos, dentro de la ventana de Planck para E y T con alpha_K = 1 y el n_s más alto de esa ventana (alternativas: 100 GeV o reheating instantáneo)."
+    ]
+  },
+  "cuadratico_chequeo_E_TRH1e+02": {
+    "value": -0.167,
+    "statement": "N_*(Ec. 27, nuestro) - N_*(Ec. B9 del paper), E-model alpha_K = 1, T_RH = 1e+02 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::chequeo_B9_B10",
+    "from_scratch": "Iteración de punto fijo de B9/B10.",
+    "from_library": "numpy",
+    "choices": [
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo)."
+    ]
+  },
+  "cuadratico_chequeo_E_TRH5e+07": {
+    "value": -0.164,
+    "statement": "N_*(Ec. 27, nuestro) - N_*(Ec. B9 del paper), E-model alpha_K = 1, T_RH = 5e+07 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::chequeo_B9_B10",
+    "from_scratch": "Iteración de punto fijo de B9/B10.",
+    "from_library": "numpy",
+    "choices": [
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo)."
+    ]
+  },
+  "cuadratico_chequeo_E_TRH1e+10": {
+    "value": -0.164,
+    "statement": "N_*(Ec. 27, nuestro) - N_*(Ec. B9 del paper), E-model alpha_K = 1, T_RH = 1e+10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::chequeo_B9_B10",
+    "from_scratch": "Iteración de punto fijo de B9/B10.",
+    "from_library": "numpy",
+    "choices": [
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo)."
+    ]
+  },
+  "cuadratico_chequeo_T_TRH1e+02": {
+    "value": -0.151,
+    "statement": "N_*(Ec. 27, nuestro) - N_*(Ec. B10 del paper), T-model alpha_K = 1, T_RH = 1e+02 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::chequeo_B9_B10",
+    "from_scratch": "Iteración de punto fijo de B9/B10.",
+    "from_library": "numpy",
+    "choices": [
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo)."
+    ]
+  },
+  "cuadratico_chequeo_T_TRH5e+07": {
+    "value": -0.15,
+    "statement": "N_*(Ec. 27, nuestro) - N_*(Ec. B10 del paper), T-model alpha_K = 1, T_RH = 5e+07 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::chequeo_B9_B10",
+    "from_scratch": "Iteración de punto fijo de B9/B10.",
+    "from_library": "numpy",
+    "choices": [
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo)."
+    ]
+  },
+  "cuadratico_chequeo_T_TRH1e+10": {
+    "value": -0.149,
+    "statement": "N_*(Ec. 27, nuestro) - N_*(Ec. B10 del paper), T-model alpha_K = 1, T_RH = 1e+10 GeV.",
+    "produced_by": "code/parametros_cuadraticos.py::chequeo_B9_B10",
+    "from_scratch": "Iteración de punto fijo de B9/B10.",
+    "from_library": "numpy",
+    "choices": [
+      "g_RH = 915/4 (MSSM) para N_*, como el paper.",
+      "w_int = 0 en la Ec. 27 (inflatón cuadrático oscilando hasta el reheating perturbativo)."
+    ]
+  },
+  "cuad_T_rhogw": {
+    "value": 1.229e-05,
+    "statement": "rho_GW/rho final, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_ult100": {
+    "value": 9.495,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_w": {
+    "value": 0.2669,
+    "statement": "<w> en los dos últimos períodos, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_friedmann": {
+    "value": 8.7e-05,
+    "statement": "máximo error relativo de Friedmann, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_Om_w0": {
+    "value": 2.404e-16,
+    "statement": "máximo de h^2 Omega_GW,0 con T_RH = 1e10 GeV y w = 0, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_banda_Hz_min": {
+    "value": 14220000.0,
+    "statement": "f_0 mínima con h^2 Omega_GW,0 >= máximo/2 (w = 0), gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_banda_Hz_max": {
+    "value": 256000000.0,
+    "statement": "f_0 máxima con h^2 Omega_GW,0 >= máximo/2 (w = 0), gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_Om_eps1": {
+    "value": 7.263e-11,
+    "statement": "máximo de h^2 Omega_GW,0 con eps = 1 (radiación desde el final), gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_f_eps1": {
+    "value": 833500000.0,
+    "statement": "f_0 del máximo con eps = 1, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_eps": {
+    "value": 3.31e-06,
+    "statement": "eps = a_e/a_RD con T_RH = 1e10 GeV y w = 0, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_Om_w025": {
+    "value": 5.822e-12,
+    "statement": "máximo de h^2 Omega_GW,0 con T_RH = 1e10 GeV y w = 0.25 hasta el reheating, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_eps_w025": {
+    "value": 0.08016,
+    "statement": "eps con T_RH = 1e10 GeV y w = 0.25, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_t_onset": {
+    "value": 75.02,
+    "statement": "t~ en que rho_GW/rho llega a 1e-8, gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Umbral 1e-8 para marcar el comienzo del crecimiento (alternativa: el mínimo de rms(chi))."
+    ]
+  },
+  "cuad_T_t_condensado": {
+    "value": 108.0,
+    "statement": "t~ en que la amplitud de a^(3/2)<phi~> cae a la mitad, gentmodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt (lo que grafica analisis_cosmolattice.py en 02_campos.png)",
+    "from_scratch": "Envolvente: máximo de |a^(3/2)<phi~>| en ventanas de 8 en t~, comparado con su máximo en 10 < t~ < 40.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Ventanas de 8 en t~ (~2 períodos)."
+    ]
+  },
+  "cuad_T_amp_final": {
+    "value": 0.001773,
+    "statement": "amplitud final de a^(3/2)<phi~> (t~ > 380) sobre la inicial (10 < t~ < 40), gentmodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt",
+    "from_scratch": "Cociente de máximos.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3."
+    ]
+  },
+  "cuad_T_minutos": {
+    "value": 70.0,
+    "statement": "minutos de la corrida, gentmodel_cuadratico con N = 64 (8 hilos).",
+    "produced_by": "code/correr_cuarticos.sh (build_corridas/tiempos.txt)",
+    "from_scratch": "Tiempo real.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3."
+    ]
+  },
+  "cuad_T_Om_e_k3": {
+    "value": 1.429e-06,
+    "statement": "Omega_GW,e en k~ = 3 (primer bin), gentmodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_rhogw": {
+    "value": 8.859e-06,
+    "statement": "rho_GW/rho final, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_ult100": {
+    "value": 25.89,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_w": {
+    "value": 0.2853,
+    "statement": "<w> en los dos últimos períodos, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_friedmann": {
+    "value": 8.75e-05,
+    "statement": "máximo error relativo de Friedmann, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_Om_w0": {
+    "value": 8.991e-17,
+    "statement": "máximo de h^2 Omega_GW,0 con T_RH = 1e10 GeV y w = 0, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_banda_Hz_min": {
+    "value": 12550000.0,
+    "statement": "f_0 mínima con h^2 Omega_GW,0 >= máximo/2 (w = 0), genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_banda_Hz_max": {
+    "value": 426600000.0,
+    "statement": "f_0 máxima con h^2 Omega_GW,0 >= máximo/2 (w = 0), genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_Om_eps1": {
+    "value": 4.195e-11,
+    "statement": "máximo de h^2 Omega_GW,0 con eps = 1 (radiación desde el final), genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_f_eps1": {
+    "value": 327900000.0,
+    "statement": "f_0 del máximo con eps = 1, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_eps": {
+    "value": 2.143e-06,
+    "statement": "eps = a_e/a_RD con T_RH = 1e10 GeV y w = 0, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_Om_w025": {
+    "value": 3.083e-12,
+    "statement": "máximo de h^2 Omega_GW,0 con T_RH = 1e10 GeV y w = 0.25 hasta el reheating, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_eps_w025": {
+    "value": 0.07349,
+    "statement": "eps con T_RH = 1e10 GeV y w = 0.25, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E1_t_onset": {
+    "value": 70.01,
+    "statement": "t~ en que rho_GW/rho llega a 1e-8, genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Umbral 1e-8 para marcar el comienzo del crecimiento (alternativa: el mínimo de rms(chi))."
+    ]
+  },
+  "cuad_E1_t_condensado": {
+    "value": 118.0,
+    "statement": "t~ en que la amplitud de a^(3/2)<phi~> cae a la mitad, genemodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt (lo que grafica analisis_cosmolattice.py en 02_campos.png)",
+    "from_scratch": "Envolvente: máximo de |a^(3/2)<phi~>| en ventanas de 8 en t~, comparado con su máximo en 10 < t~ < 40.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Ventanas de 8 en t~ (~2 períodos)."
+    ]
+  },
+  "cuad_E1_amp_final": {
+    "value": 0.02382,
+    "statement": "amplitud final de a^(3/2)<phi~> (t~ > 380) sobre la inicial (10 < t~ < 40), genemodel_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt",
+    "from_scratch": "Cociente de máximos.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3."
+    ]
+  },
+  "cuad_E1_minutos": {
+    "value": 70.0,
+    "statement": "minutos de la corrida, genemodel_cuadratico con N = 64 (8 hilos).",
+    "produced_by": "code/correr_cuarticos.sh (build_corridas/tiempos.txt)",
+    "from_scratch": "Tiempo real.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3."
+    ]
+  },
+  "cuad_E1_Om_e_k3": {
+    "value": 2.613e-06,
+    "statement": "Omega_GW,e en k~ = 3 (primer bin), genemodel_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_rhogw": {
+    "value": 1.015e-05,
+    "statement": "rho_GW/rho final, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_ult100": {
+    "value": 15.99,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_w": {
+    "value": 0.2561,
+    "statement": "<w> en los dos últimos períodos, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_friedmann": {
+    "value": 8.63e-05,
+    "statement": "máximo error relativo de Friedmann, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_Om_w0": {
+    "value": 1.257e-16,
+    "statement": "máximo de h^2 Omega_GW,0 con T_RH = 1e10 GeV y w = 0, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_banda_Hz_min": {
+    "value": 19040000.0,
+    "statement": "f_0 mínima con h^2 Omega_GW,0 >= máximo/2 (w = 0), genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_banda_Hz_max": {
+    "value": 323600000.0,
+    "statement": "f_0 máxima con h^2 Omega_GW,0 >= máximo/2 (w = 0), genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_Om_eps1": {
+    "value": 5.529e-11,
+    "statement": "máximo de h^2 Omega_GW,0 con eps = 1 (radiación desde el final), genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_f_eps1": {
+    "value": 2206000000.0,
+    "statement": "f_0 del máximo con eps = 1, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_eps": {
+    "value": 2.274e-06,
+    "statement": "eps = a_e/a_RD con T_RH = 1e10 GeV y w = 0, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_Om_w025": {
+    "value": 4.112e-12,
+    "statement": "máximo de h^2 Omega_GW,0 con T_RH = 1e10 GeV y w = 0.25 hasta el reheating, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_eps_w025": {
+    "value": 0.07436,
+    "statement": "eps con T_RH = 1e10 GeV y w = 0.25, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_E5_t_onset": {
+    "value": 75.02,
+    "statement": "t~ en que rho_GW/rho llega a 1e-8, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Umbral 1e-8 para marcar el comienzo del crecimiento (alternativa: el mínimo de rms(chi))."
+    ]
+  },
+  "cuad_E5_t_condensado": {
+    "value": 114.0,
+    "statement": "t~ en que la amplitud de a^(3/2)<phi~> cae a la mitad, genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt (lo que grafica analisis_cosmolattice.py en 02_campos.png)",
+    "from_scratch": "Envolvente: máximo de |a^(3/2)<phi~>| en ventanas de 8 en t~, comparado con su máximo en 10 < t~ < 40.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Ventanas de 8 en t~ (~2 períodos)."
+    ]
+  },
+  "cuad_E5_amp_final": {
+    "value": 0.03097,
+    "statement": "amplitud final de a^(3/2)<phi~> (t~ > 380) sobre la inicial (10 < t~ < 40), genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt",
+    "from_scratch": "Cociente de máximos.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3."
+    ]
+  },
+  "cuad_E5_minutos": {
+    "value": 67.0,
+    "statement": "minutos de la corrida, genemodel_cuadratico_aK5 con N = 64 (8 hilos).",
+    "produced_by": "code/correr_cuarticos.sh (build_corridas/tiempos.txt)",
+    "from_scratch": "Tiempo real.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3."
+    ]
+  },
+  "cuad_E5_Om_e_k3": {
+    "value": 1.467e-06,
+    "statement": "Omega_GW,e en k~ = 3 (primer bin), genemodel_cuadratico_aK5 con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_rhogw": {
+    "value": 2.46e-05,
+    "statement": "rho_GW/rho final, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_ult100": {
+    "value": 4.278,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_w": {
+    "value": 0.2498,
+    "statement": "<w> en los dos últimos períodos, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_friedmann": {
+    "value": 7.74e-05,
+    "statement": "máximo error relativo de Friedmann, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_Om_w0": {
+    "value": 4.767e-16,
+    "statement": "máximo de h^2 Omega_GW,0 con T_RH = 1e10 GeV y w = 0, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_banda_Hz_min": {
+    "value": 5787000.0,
+    "statement": "f_0 mínima con h^2 Omega_GW,0 >= máximo/2 (w = 0), genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_banda_Hz_max": {
+    "value": 191000000.0,
+    "statement": "f_0 máxima con h^2 Omega_GW,0 >= máximo/2 (w = 0), genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_Om_eps1": {
+    "value": 1.458e-10,
+    "statement": "máximo de h^2 Omega_GW,0 con eps = 1 (radiación desde el final), genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_f_eps1": {
+    "value": 136100000.0,
+    "statement": "f_0 del máximo con eps = 1, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_eps": {
+    "value": 3.269e-06,
+    "statement": "eps = a_e/a_RD con T_RH = 1e10 GeV y w = 0, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_Om_w025": {
+    "value": 1.166e-11,
+    "statement": "máximo de h^2 Omega_GW,0 con T_RH = 1e10 GeV y w = 0.25 hasta el reheating, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_eps_w025": {
+    "value": 0.07996,
+    "statement": "eps con T_RH = 1e10 GeV y w = 0.25, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_mono_t_onset": {
+    "value": 120.0,
+    "statement": "t~ en que rho_GW/rho llega a 1e-8, genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Umbral 1e-8 para marcar el comienzo del crecimiento (alternativa: el mínimo de rms(chi))."
+    ]
+  },
+  "cuad_mono_t_condensado": {
+    "value": 140.0,
+    "statement": "t~ en que la amplitud de a^(3/2)<phi~> cae a la mitad, genmonomial_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt (lo que grafica analisis_cosmolattice.py en 02_campos.png)",
+    "from_scratch": "Envolvente: máximo de |a^(3/2)<phi~>| en ventanas de 8 en t~, comparado con su máximo en 10 < t~ < 40.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Ventanas de 8 en t~ (~2 períodos)."
+    ]
+  },
+  "cuad_mono_amp_final": {
+    "value": 0.02332,
+    "statement": "amplitud final de a^(3/2)<phi~> (t~ > 380) sobre la inicial (10 < t~ < 40), genmonomial_cuadratico con N = 64.",
+    "produced_by": "cálculo ad hoc sobre average_scalar_0.txt y average_scale_factor.txt",
+    "from_scratch": "Cociente de máximos.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3."
+    ]
+  },
+  "cuad_mono_minutos": {
+    "value": 51.0,
+    "statement": "minutos de la corrida, genmonomial_cuadratico con N = 64 (8 hilos).",
+    "produced_by": "code/correr_cuarticos.sh (build_corridas/tiempos.txt)",
+    "from_scratch": "Tiempo real.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3."
+    ]
+  },
+  "cuad_mono_Om_e_k3": {
+    "value": 9.084e-06,
+    "statement": "Omega_GW,e en k~ = 3 (primer bin), genmonomial_cuadratico con N = 64.",
+    "produced_by": "code/comparar_corridas.py::cargar",
+    "from_scratch": "Lectura de las salidas y reescaleo a hoy.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "code/correr_cuadraticos.sh 64: N = 64, kIR = 3, dt = 0.003, tMax = 400, q = 4e4, baseSeed = 20261005 en los cuatro casos; salidas en build_corridas/<caso>_N64_kIR3.",
+      "Reescaleo con T_RH = 1e10 GeV, g_* = 106.75 y w = 0 entre el final de la simulación y el reheating (lo más pesimista; alternativas: w medido, eps = 1).",
+      "Banda: bins con h^2 Omega_GW,0 >= máximo/2."
+    ]
+  },
+  "cuad_T_N32_rhogw": {
+    "value": 1.699e-05,
+    "statement": "rho_GW/rho final del T-model cuadrático con N = 32 (exploratoria, misma configuración salvo N).",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Corrida exploratoria en el directorio temporal de la sesión.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "N = 32, kIR = 3, dt = 0.003, tMax = 400, baseSeed = 12345 (no se guardó la salida)."
+    ]
+  },
+  "cuad_T_N32_k_pico": {
+    "value": 51.0,
+    "statement": "k~ del máximo del espectro de GWs del T-model cuadrático con N = 32 (k~_max = 83).",
+    "produced_by": "code/analisis_cosmolattice.py::analizar",
+    "from_scratch": "Corrida exploratoria.",
+    "from_library": "numpy; code/reescaleo_gws.py",
+    "choices": [
+      "N = 32, kIR = 3 (no se guardó la salida)."
+    ]
   }
 }
