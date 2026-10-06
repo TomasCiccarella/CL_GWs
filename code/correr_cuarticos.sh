@@ -26,6 +26,8 @@
 #   NTHREADS=8         hilos de OpenMP
 #   FORZAR=1           volver a correr aunque la corrida ya haya terminado
 #   EXTRA_ARGS="..."   argumentos extra para CosmoLattice (p. ej. "tMax=100 baseSeed=1234")
+#   SEMILLA=1234       fija baseSeed y agrega _s1234 al directorio de salida (para comparar semillas
+#                      sin pisar otras corridas)
 #
 # Para que siga corriendo al cerrar la terminal:
 #   nohup code/correr_cuarticos.sh 128 > corridas_N128.log 2>&1 &
@@ -115,7 +117,7 @@ echo "Inicio: $(date)"
 for caso in $MODELOS; do
   m=$(ejecutable "$caso")
   compilar "$m"
-  dir=$SALIDA/${caso}_N${N}_kIR${KIR}${DT:+_dt$DT}
+  dir=$SALIDA/${caso}_N${N}_kIR${KIR}${DT:+_dt$DT}${SEMILLA:+_s$SEMILLA}
   if [ -z "${FORZAR:-}" ] && grep -qs "finished" "$dir/$m.infos"; then
     echo "$caso: ya terminada en $dir (FORZAR=1 para repetir)"
     continue
@@ -125,9 +127,9 @@ for caso in $MODELOS; do
   t0=$(date +%s)
   if (cd "$dir" && OMP_NUM_THREADS=$NTHREADS "$CL_BUILD/build_$m/$m" \
         input="$PARS/$caso.in" overwriteFiles=true \
-        N="$N" kIR="$KIR" ${DT:+dt=$DT} ${EXTRA_ARGS:-} > salida.log 2>&1); then
+        N="$N" kIR="$KIR" ${DT:+dt=$DT} ${SEMILLA:+baseSeed=$SEMILLA} ${EXTRA_ARGS:-} > salida.log 2>&1); then
     t1=$(date +%s)
-    echo "$caso N=$N kIR=$KIR ${DT:+dt=$DT} $(( (t1 - t0) / 60 )) min ($(date))" >> "$SALIDA/tiempos.txt"
+    echo "$caso N=$N kIR=$KIR ${DT:+dt=$DT} ${SEMILLA:+seed=$SEMILLA} $(( (t1 - t0) / 60 )) min ($(date))" >> "$SALIDA/tiempos.txt"
     echo "$caso: terminó en $(( (t1 - t0) / 60 )) min; analizando..."
     python3 "$ROOT/code/analisis_cosmolattice.py" "$dir" ${ANALISIS_ARGS:-} | grep -E "Pico|Friedmann|<w>|k_IR" || true
   else
