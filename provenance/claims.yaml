@@ -239,6 +239,44 @@ claims:
     numbers: [N64_mono_banda_Hz_min, N64_mono_banda_Hz_max, N64_mono_amp_previa, N64_mono_cola_gw,
               N64_mono_tchi, N64_mono_t90, N64_mono_rhogw, N64_mono_f_pico, N64_mono_Omega_pico,
               N64_mono_banda_kmin, N64_mono_banda_kmax, N64_aRho_mono_T_final]
+  - id: parametros-cuadraticos
+    statement: >
+      Para k = 2 y T_RH = 1e10 GeV, los casos E alpha_K = 1, T alpha_K = 1 y E alpha_K = 5 de Ellis,
+      Garcia, Olive y Verner (2026) tienen N_* = 51.6-52.1, n_s = 0.962-0.965 y los M, A, phi_0 y phi'_0
+      de la Tabla tab:parametros-cuadraticos de Notas.tex; con alpha_K = 1 están dentro de la ventana de
+      T_RH que Planck 2018 permite según el paper.
+    verificacion: >
+      N_*(T_RH) queda 0.15-0.17 e-folds por debajo de las Ecs. B9-B10 del paper (aproximaciones con
+      error de hasta 0.2% según el paper) para T_RH = 1e2, 5e7 y 1e10 GeV, y reproduce N_* = 50 con
+      n_s = 0.961 en T_RH ~ 5e7 GeV (Sec. VII.A). La masa del E-model alpha_K = 1 (3.2e13 GeV) es la de
+      Starobinsky. La ventana de T_RH y las cotas en alpha_K se toman del paper, no se recalculan.
+    evidence:
+      - code/parametros_cuadraticos.py::calcular
+      - code/parametros_cuadraticos.py::chequeo_B9_B10
+      - Ellis, Garcia, Olive & Verner, PRD 113, 063571 (2026), Ecs. 27-32, B9-B10, Sec. VII.A, Fig. 2
+      - Notas/Notas.tex «Parámetros cosmológicos para modelos cuadráticos»
+    numbers: [cuadratico_E1_N_star, cuadratico_E1_ns, cuadratico_E1_r, cuadratico_E1_lam, cuadratico_E1_H_star, cuadratico_E1_A, cuadratico_E1_phi0, cuadratico_E1_pi0, cuadratico_E1_omega_star, cuadratico_E1_phi0_sobre_M, cuadratico_T1_N_star, cuadratico_T1_ns, cuadratico_T1_r, cuadratico_T1_lam, cuadratico_T1_H_star, cuadratico_T1_A, cuadratico_T1_phi0, cuadratico_T1_pi0, cuadratico_T1_omega_star, cuadratico_T1_phi0_sobre_M, cuadratico_E5_N_star, cuadratico_E5_ns, cuadratico_E5_r, cuadratico_E5_lam, cuadratico_E5_H_star, cuadratico_E5_A, cuadratico_E5_phi0, cuadratico_E5_pi0, cuadratico_E5_omega_star, cuadratico_E5_phi0_sobre_M, cuadratico_mono_A, cuadratico_mono_phi0, cuadratico_mono_pi0, cuadratico_mono_ns, cuadratico_mono_r, cuadratico_chequeo_E_TRH1e+02, cuadratico_chequeo_E_TRH5e+07, cuadratico_chequeo_E_TRH1e+10, cuadratico_chequeo_T_TRH1e+02, cuadratico_chequeo_T_TRH5e+07, cuadratico_chequeo_T_TRH1e+10]
+  - id: resultados-cuadraticos
+    statement: >
+      Con N = 64 y la misma semilla, los cuatro casos cuadráticos (T y E con alpha_K = 1, E con alpha_K = 5
+      y m^2 phi^2 de control) producen rho_GW/rho ~ 1-2.5e-5 con un espectro plano en 3 < k~ < 100, como
+      el caso cuártico; el condensado se fragmenta y <w> ~ 0.25-0.29 al final. El monomial empieza a
+      producir GWs más tarde (t~ ~ 120 contra ~70-75), al revés que en el caso cuártico. Hoy, con
+      T_RH = 1e10 GeV y w = 0 hasta el reheating, la meseta queda en h^2 Omega_GW,0 ~ 1e-16 entre 6e6 y
+      4e8 Hz; con eps = 1 en 4e-11 a 1.5e-10, del orden del caso cuártico: lo que separa a n = 2 es la
+      expansión tipo materia hasta el reheating.
+    verificacion: >
+      Friedmann <= 9e-5, integral del espectro contra rho_GW/rho a 1e-14, modos dentro del horizonte.
+      Limitaciones explícitas en las notas: el UV no está resuelto (la meseta llega cerca de k~_max y con
+      N = 32 rho_GW/rho daba 28% más y el máximo en k~ ~ 50), la producción no terminó (crece 4-26% en
+      los últimos 100 de t~) y una sola semilla por caso. La banda entre w = 0 y eps = 1 es un rango de
+      supuestos, no una incerteza estadística.
+    evidence:
+      - code/comparar_corridas.py::cargar
+      - code/analisis_cosmolattice.py::analizar
+      - code/reescaleo_gws.py::a_sobre_a_RD
+      - Notas/Notas.tex «Corridas cuadráticas» (Fig. fig:corridas-cuadraticos, Tabla tab:resultados-cuadraticos)
+    numbers: [cuad_T_rhogw, cuad_T_ult100, cuad_T_w, cuad_T_friedmann, cuad_T_Om_w0, cuad_T_banda_Hz_min, cuad_T_banda_Hz_max, cuad_T_Om_eps1, cuad_T_f_eps1, cuad_T_eps, cuad_T_Om_w025, cuad_T_eps_w025, cuad_T_t_onset, cuad_T_t_condensado, cuad_T_amp_final, cuad_T_minutos, cuad_T_Om_e_k3, cuad_E1_rhogw, cuad_E1_ult100, cuad_E1_w, cuad_E1_friedmann, cuad_E1_Om_w0, cuad_E1_banda_Hz_min, cuad_E1_banda_Hz_max, cuad_E1_Om_eps1, cuad_E1_f_eps1, cuad_E1_eps, cuad_E1_Om_w025, cuad_E1_eps_w025, cuad_E1_t_onset, cuad_E1_t_condensado, cuad_E1_amp_final, cuad_E1_minutos, cuad_E1_Om_e_k3, cuad_E5_rhogw, cuad_E5_ult100, cuad_E5_w, cuad_E5_friedmann, cuad_E5_Om_w0, cuad_E5_banda_Hz_min, cuad_E5_banda_Hz_max, cuad_E5_Om_eps1, cuad_E5_f_eps1, cuad_E5_eps, cuad_E5_Om_w025, cuad_E5_eps_w025, cuad_E5_t_onset, cuad_E5_t_condensado, cuad_E5_amp_final, cuad_E5_minutos, cuad_E5_Om_e_k3, cuad_mono_rhogw, cuad_mono_ult100, cuad_mono_w, cuad_mono_friedmann, cuad_mono_Om_w0, cuad_mono_banda_Hz_min, cuad_mono_banda_Hz_max, cuad_mono_Om_eps1, cuad_mono_f_eps1, cuad_mono_eps, cuad_mono_Om_w025, cuad_mono_eps_w025, cuad_mono_t_onset, cuad_mono_t_condensado, cuad_mono_amp_final, cuad_mono_minutos, cuad_mono_Om_e_k3, cuad_T_N32_rhogw, cuad_T_N32_k_pico]
 
 figures:
   - file: Notas/figuras/corridas_N64.pdf
@@ -270,3 +308,16 @@ figures:
     from_library: matplotlib, numpy; code/reescaleo_gws.py
     choices: ["Copia de build_corridas/genmonomial_cuartico_N64_kIR0.7/analisis/05_gws.png (PNG a 150 dpi, como la escribe el analizador)."]
     supports: [monomial-N64]
+  - file: Notas/figuras/corridas_N64_cuadraticos.pdf
+    produced_by: code/comparar_corridas.py::main
+    shows: >
+      (a) Omega_GW,e(k~) final en la red, (b) h^2 Omega_GW,0(f) hoy con T_RH = 1e10 GeV y w = 0 (llena) y
+      con eps = 1 (cortada), (c) rho_GW/rho(t~) con la mitad del máximo de rms(chi~) punteada, para los
+      cuatro casos cuadráticos con N = 64 y la misma semilla. Se lee que la producción en la red es
+      parecida y que hoy la señal depende de la historia hasta el reheating en unos cinco órdenes.
+    from_scratch: Lectura de las salidas, reescaleo con T_RH y w.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Dos supuestos extremos en (b) (w = 0 y eps = 1) en vez de uno solo, porque difieren en ~5 órdenes.",
+              "Mitad del máximo de rms(chi~) en vez del máximo, porque para n = 2 rms(chi~) sigue oscilando al final.",
+              "Colores categóricos en orden fijo, como en corridas_N64.pdf."]
+    supports: [resultados-cuadraticos]
