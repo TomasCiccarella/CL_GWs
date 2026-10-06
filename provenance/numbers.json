@@ -3359,5 +3359,575 @@
       "Masa desnuda m en vez de la efectiva (que incluye g^2<chi^2>, g^2<phi^2>): subestima la masa, sobreestima cuán relativistas son.",
       "El UV no está resuelto con N = 64, así que la mediana puede estar sesgada."
     ]
+  },
+  "wpost_T_w_s": {
+    "value": 0.281,
+    "statement": "w del modelo en a_s, al final de la simulación (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_a_w01": {
+    "value": 5.495,
+    "statement": "a/a_s en que w del modelo baja de 0.1 (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_aRD": {
+    "value": 198200.0,
+    "statement": "a_RD/a_s (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_eps": {
+    "value": 1.833e-05,
+    "statement": "factor de dilución de las GWs eps = (rho_s/rho_RD)(a_s/a_RD)^4 (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_eps_w0": {
+    "value": 3.281e-06,
+    "statement": "eps con w = 0 constante y el mismo rho_RD (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_eps_w025": {
+    "value": 0.08002,
+    "statement": "eps con w = 0.25 constante y el mismo rho_RD (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_Om_max": {
+    "value": 1.331e-15,
+    "statement": "máximo de h^2 Omega_GW,0 hoy con el eps del modelo (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_f_max": {
+    "value": 54560000.0,
+    "statement": "frecuencia [Hz] del máximo de h^2 Omega_GW,0 hoy (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_banda_min": {
+    "value": 21820000.0,
+    "statement": "frecuencia mínima [Hz] donde h^2 Omega_GW,0 supera la mitad del máximo (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_T_banda_max": {
+    "value": 392800000.0,
+    "statement": "frecuencia máxima [Hz] donde h^2 Omega_GW,0 supera la mitad del máximo (T, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_w_s": {
+    "value": 0.286,
+    "statement": "w del modelo en a_s, al final de la simulación (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_a_w01": {
+    "value": 6.31,
+    "statement": "a/a_s en que w del modelo baja de 0.1 (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_aRD": {
+    "value": 295700.0,
+    "statement": "a_RD/a_s (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_eps": {
+    "value": 1.364e-05,
+    "statement": "factor de dilución de las GWs eps = (rho_s/rho_RD)(a_s/a_RD)^4 (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_eps_w0": {
+    "value": 2.124e-06,
+    "statement": "eps con w = 0 constante y el mismo rho_RD (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_eps_w025": {
+    "value": 0.07336,
+    "statement": "eps con w = 0.25 constante y el mismo rho_RD (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_Om_max": {
+    "value": 5.721e-16,
+    "statement": "máximo de h^2 Omega_GW,0 hoy con el eps del modelo (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_f_max": {
+    "value": 19930000.0,
+    "statement": "frecuencia [Hz] del máximo de h^2 Omega_GW,0 hoy (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_banda_min": {
+    "value": 19930000.0,
+    "statement": "frecuencia mínima [Hz] donde h^2 Omega_GW,0 supera la mitad del máximo (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E1_banda_max": {
+    "value": 677600000.0,
+    "statement": "frecuencia máxima [Hz] donde h^2 Omega_GW,0 supera la mitad del máximo (E1, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_w_s": {
+    "value": 0.2803,
+    "statement": "w del modelo en a_s, al final de la simulación (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_a_w01": {
+    "value": 5.754,
+    "statement": "a/a_s en que w del modelo baja de 0.1 (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_aRD": {
+    "value": 287800.0,
+    "statement": "a_RD/a_s (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_eps": {
+    "value": 1.272e-05,
+    "statement": "factor de dilución de las GWs eps = (rho_s/rho_RD)(a_s/a_RD)^4 (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_eps_w0": {
+    "value": 2.254e-06,
+    "statement": "eps con w = 0 constante y el mismo rho_RD (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_eps_w025": {
+    "value": 0.07423,
+    "statement": "eps con w = 0.25 constante y el mismo rho_RD (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_Om_max": {
+    "value": 7.035e-16,
+    "statement": "máximo de h^2 Omega_GW,0 hoy con el eps del modelo (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_f_max": {
+    "value": 131800000.0,
+    "statement": "frecuencia [Hz] del máximo de h^2 Omega_GW,0 hoy (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_banda_min": {
+    "value": 29290000.0,
+    "statement": "frecuencia mínima [Hz] donde h^2 Omega_GW,0 supera la mitad del máximo (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_E5_banda_max": {
+    "value": 497900000.0,
+    "statement": "frecuencia máxima [Hz] donde h^2 Omega_GW,0 supera la mitad del máximo (E5, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_w_s": {
+    "value": 0.2682,
+    "statement": "w del modelo en a_s, al final de la simulación (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_a_w01": {
+    "value": 4.571,
+    "statement": "a/a_s en que w del modelo baja de 0.1 (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_aRD": {
+    "value": 212400.0,
+    "statement": "a_RD/a_s (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_eps": {
+    "value": 1.444e-05,
+    "statement": "factor de dilución de las GWs eps = (rho_s/rho_RD)(a_s/a_RD)^4 (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_eps_w0": {
+    "value": 3.24e-06,
+    "statement": "eps con w = 0 constante y el mismo rho_RD (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_eps_w025": {
+    "value": 0.07982,
+    "statement": "eps con w = 0.25 constante y el mismo rho_RD (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_Om_max": {
+    "value": 2.106e-15,
+    "statement": "máximo de h^2 Omega_GW,0 hoy con el eps del modelo (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_f_max": {
+    "value": 8394000.0,
+    "statement": "frecuencia [Hz] del máximo de h^2 Omega_GW,0 hoy (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_banda_min": {
+    "value": 8394000.0,
+    "statement": "frecuencia mínima [Hz] donde h^2 Omega_GW,0 supera la mitad del máximo (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_mono_banda_max": {
+    "value": 277000000.0,
+    "statement": "frecuencia máxima [Hz] donde h^2 Omega_GW,0 supera la mitad del máximo (mono, N = 64, T_RH = 1e10 GeV, modelo de partículas libres).",
+    "produced_by": "code/w_post_simulacion.py::main",
+    "from_scratch": "Modelo de partículas libres con masas de campo medio a partir del último espectro (n_k adiabático, omega_k(a), punto fijo de las varianzas, rho = sum n omega - U, p = sum n k^2/(3 a^2 omega) + U); a_RD por rho = (pi^2 g_*/30) T_RH^4; eps = (rho_s/rho_RD)(a_s/a_RD)^4.",
+    "from_library": "numpy, matplotlib; code/analisis_cosmolattice.py (lectura); code/reescaleo_gws.py (variables de programa, G_SM, frecuencia_hoy, omega_gw_hoy).",
+    "choices": [
+      "Masas efectivas de campo medio (Hartree) en lugar de simular más tiempo en la red: N = 64 no alcanza para tiempos mucho mayores y la extrapolación cubre ~5 órdenes en a.",
+      "Sin dispersión ni decaimiento entre a_s y a_RD, y reheating instantáneo en a_RD, como en el reescaleo con w constante.",
+      "Relación de dispersión del continuo k~^2 y no la de la red, porque después de la simulación no hay red.",
+      "Se normaliza rho del modelo a la energía total de la simulación en a_s y se usa sólo su forma.",
+      "T_RH = 1e10 GeV y g_* del Modelo Estándar, como en la Tabla tab:resultados-cuadraticos."
+    ]
+  },
+  "wpost_continuidad_max": {
+    "value": 2.1e-07,
+    "statement": "máximo de |d ln rho/d ln a + 3(1 + w)| del modelo entre a_s y 1000 a_s, sobre los cuatro casos cuadráticos.",
+    "produced_by": "code/w_post_simulacion.py::evolucion",
+    "from_scratch": "Derivada numérica (np.gradient) de ln rho del modelo en 3001 puntos log-equiespaciados, comparada con -3(1+p/rho).",
+    "from_library": "numpy",
+    "choices": [
+      "Rango a_s-1000 a_s, donde w cambia; más allá w ~ 0 y la comprobación es trivial."
+    ]
   }
 }
