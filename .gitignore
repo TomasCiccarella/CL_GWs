@@ -13,3 +13,4 @@ Notas/*.synctex.gz
 
 # Registros de corridas lanzadas con nohup
 corridas_*.log
+Bibliografia/pdf/
