@@ -425,7 +425,7 @@ python3 code/verificar_reescaleo.py      # sympy + comparación con la literatur
             Pasos sugeridos:
             \begin{enumerate}
                 \item Explorar con $N = 64$ (media hora por corrida).
-                \item Correr las de producción con $N = 128$, $\tilde k_{\text{IR}} = 0.35$ (unas 4\,h, por ejemplo de noche).
+                \item Correr las de producción con $N = 128$, $\tilde k_{\text{IR}} = 0.35$ (unas 4\,h, por ejemplo de noche). Ya están hechas para los cuatro casos: entre 2.9 y 4.3\,h cada una (Sec.~\ref{sec:semillas-N128}). Como con $N = 128$ la forma del espectro no cambia y la amplitud se mueve tanto como entre semillas, para seguir bajando la incertidumbre conviene correr más semillas antes que subir $N$.
                 \item Reservar $N = 192$ para una única corrida de convergencia (14\,h, con la máquina descargada).
             \end{enumerate}
             Como es una notebook (i7-8565U), en corridas largas puede bajar la frecuencia por temperatura, así que los tiempos son una cota inferior. Por ejemplo:
@@ -444,7 +444,7 @@ DT=0.007 MODELOS="gentmodel_cuartico" code/correr_cuarticos.sh 128
                 \item fondo: $\langle w\rangle = 0.333$, error máximo de Friedmann $1.3 \times 10^{-3}$, colas UV $\le 10^{-8}$ y $k_{\text{IR}}/(aH) = 344$ al final;
                 \item GWs: $\rho_{GW}/\rho = 1.1 \times 10^{-5}$, que llega al $90\%$ de su valor final en $\tilde t \simeq 260$ (con $N = 32$ era $270$), y un pico hoy de $h^2\Omega_{GW,0} = 8.7 \times 10^{-11}$ en $f_0 = 4.1 \times 10^8$\,Hz.
             \end{itemize}
-            Con $N = 32$ el $\rho_{GW}/\rho$ final era $1.8 \times 10^{-5}$: un $40\%$ de diferencia entre las dos resoluciones. Es una razón más para hacer las corridas de producción con $N = 128$ y comparar.
+            Con $N = 32$ el $\rho_{GW}/\rho$ final era $1.8 \times 10^{-5}$: un $40\%$ de diferencia entre las dos resoluciones. Es una razón más para hacer las corridas de producción con $N = 128$ y comparar. Con $N = 128$ ($\tilde k_{\text{IR}} = 0.35$, misma semilla) la diferencia con $N = 64$ baja a un $3\%$ (Sec.~\ref{sec:semillas-N128}).
 
         \subsection{Resultados cuárticos con $N = 64$}
             \label{sec:resultados-N64}
@@ -475,13 +475,78 @@ DT=0.007 MODELOS="gentmodel_cuartico" code/correr_cuarticos.sh 128
                 \label{tab:resultados-N64}
             \end{table}
 
-            \paragraph{Las corridas son confiables.} En las cuatro, $\langle w\rangle$ queda a menos de $0.5\%$ de $1/3$ y el error de Friedmann es $\le 2.4 \times 10^{-3}$ (el mayor es el del monomial, que es el que más se expande). Todos los modos de GWs terminan dentro del horizonte ($k_{\text{IR}}/(aH) \ge 343$), y la integral del espectro de GWs reproduce el $\rho_{GW}/\rho$ de \CosmoLattice a $10^{-14}$. La producción está saturada: $\rho_{GW}/\rho$ crece menos de un $5\%$ en los últimos 100 de $\tilde t$. La corrida T es la de validación con otra semilla, y da el mismo $\rho_{GW}/\rho$ a un $0.2\%$ ($1.116 \times 10^{-5}$ contra $1.114 \times 10^{-5}$).
+            \paragraph{Las corridas son confiables.} En las cuatro, $\langle w\rangle$ queda a menos de $0.5\%$ de $1/3$ y el error de Friedmann es $\le 2.4 \times 10^{-3}$ (el mayor es el del monomial, que es el que más se expande). Todos los modos de GWs terminan dentro del horizonte ($k_{\text{IR}}/(aH) \ge 343$), y la integral del espectro de GWs reproduce el $\rho_{GW}/\rho$ de \CosmoLattice a $10^{-14}$. La producción está saturada: $\rho_{GW}/\rho$ crece menos de un $5\%$ en los últimos 100 de $\tilde t$. La corrida T repite la de validación con otra semilla y da el mismo $\rho_{GW}/\rho$ a un $0.2\%$ ($1.116 \times 10^{-5}$ contra $1.114 \times 10^{-5}$), pero esa coincidencia fue casual: con cinco semillas la dispersión es del $6\%$ (Sec.~\ref{sec:semillas-N128}).
 
             \paragraph{En la red, los cuatro espectros son casi iguales en el IR y difieren en el UV.} Para $\tilde k \lesssim 3$ los cuatro espectros finales coinciden dentro de un factor $1.5$ ($\Omega_{GW,e} \simeq 1$--$5 \times 10^{-6}$; Fig.~\ref{fig:corridas-N64}a). Esto es lo esperable, porque en variables de programa los cuatro casos tienen el mismo potencial cerca del mínimo ($\tilde\phi^4/4$) y el mismo $q = 120$. La diferencia está en el UV: el espectro se extiende más cuanto antes satura la resonancia. El orden es el mismo en $\tilde t_\chi$ y en el corte UV: monomial ($\tilde t_\chi = 80$, el espectro supera la mitad del pico hasta $\tilde k \simeq 17$), T (121; 11), E con $\alpha_K = 5$ (146; 8.4) y E con $\alpha_K = 1$ (186; 6.3). Una explicación posible es que, al saturar antes, la cascada no lineal tiene más tiempo para llevar energía al UV; con estas cuatro corridas no lo podemos separar de otros efectos. Que la resonancia llegue antes o después tiene que ver con cuánto se aparta el arranque del régimen cuártico, pero no sólo a través de $\phi_0/M$: el E-model con $\alpha_K = 1$ ($\phi_0/M = 1.2$) es el más tardío, pero el E-model con $\alpha_K = 5$ ($\phi_0/M = 0.71$) resuena después que el T-model ($\phi_0/M = 0.79$), así que también importa la forma del potencial.
 
             \paragraph{Hoy, las amplitudes son parecidas y las frecuencias se separan.} Como $\epsilon = 1$ (Sec.~\ref{sec:reescaleo}), la amplitud de hoy es el $\Omega_{GW,e}$ de la red por la misma constante en los cuatro casos. Por eso los máximos quedan todos entre $6$ y $9 \times 10^{-11}$. La frecuencia, en cambio, se reescala con un factor distinto en cada caso, $\propto (\omega_*/f_*)^{1/2}/(a_e\tilde\rho_e^{1/4})$, que va de $0.89 \times 10^8$\,Hz (monomial) a $3.4 \times 10^8$\,Hz (E, $\alpha_K = 1$) por unidad de $\tilde k$. Ese factor es lo que separa las curvas de la Fig.~\ref{fig:corridas-N64}b. El T-model y el monomial tienen el mismo $\omega_*/f_*$, pero el monomial arranca con más energía en unidades de programa y se expande más antes de llegar a $w = 1/3$: su $a\tilde\rho^{1/4}$ es $1.20$ veces el del T-model al principio y $1.34$ veces al final (en radiación, $a\tilde\rho^{1/4}$ es constante). Por eso sus frecuencias quedan $1.34$ veces más bajas.
 
-            \paragraph{La frecuencia del pico no es robusta.} Los cuatro espectros son anchos: el de hoy supera la mitad del máximo en una década de $\tilde k$ (en el monomial, de $\tilde k = 2.1$ a 17). Además, con $\tilde k_{\text{IR}} = 0.7$ los bins tienen un ancho de $20$--$25\%$ en el pico. Por eso el máximo puede caer en bins muy distintos. Por ejemplo, el monomial y el E-model con $\alpha_K = 1$ tienen el pico casi en la misma frecuencia ($\simeq 10^9$\,Hz) por razones opuestas: el monomial tiene un factor de reescaleo chico y el pico en $\tilde k = 11.2$, porque su espectro sigue plano hasta ahí, y el E-model un factor grande y el pico en $\tilde k = 2.8$. Para comparar modelos conviene usar la banda en la que el espectro supera la mitad del máximo, no la frecuencia del pico. Las corridas con $N = 128$ y $\tilde k_{\text{IR}} = 0.35$ (Sec.~\ref{sec:recomendacion}) van a resolver mejor esa zona.
+            \paragraph{La frecuencia del pico no es robusta.} Los cuatro espectros son anchos: el de hoy supera la mitad del máximo en una década de $\tilde k$ (en el monomial, de $\tilde k = 2.1$ a 17). Además, con $\tilde k_{\text{IR}} = 0.7$ los bins tienen un ancho de $20$--$25\%$ en el pico. Por eso el máximo puede caer en bins muy distintos. Por ejemplo, el monomial y el E-model con $\alpha_K = 1$ tienen el pico casi en la misma frecuencia ($\simeq 10^9$\,Hz) por razones opuestas: el monomial tiene un factor de reescaleo chico y el pico en $\tilde k = 11.2$, porque su espectro sigue plano hasta ahí, y el E-model un factor grande y el pico en $\tilde k = 2.8$. Para comparar modelos conviene usar la banda en la que el espectro supera la mitad del máximo, no la frecuencia del pico. Las corridas con $N = 128$ y $\tilde k_{\text{IR}} = 0.35$ lo confirman (Sec.~\ref{sec:semillas-N128}). Con bins el doble de finos, el pico del monomial pasa de $\tilde k = 11.2$ a $4.55$ y el del E-model con $\alpha_K = 1$ de $2.8$ a $1.4$, mientras que la banda casi no cambia.
+
+        \subsection{Semillas y resolución: más realizaciones y $N = 128$}
+            \label{sec:semillas-N128}
+
+            Las corridas de la Sec.~\ref{sec:resultados-N64} usaron una semilla aleatoria distinta en cada caso, así que las diferencias entre modelos mezclaban la física con la variación entre realizaciones de las fluctuaciones iniciales. Para separarlas hicimos tres series:
+            \begin{itemize}
+                \item el T-model con $N = 64$ y otras cuatro semillas (\texttt{baseSeed} $= 20261005$, 1, 2 y 3);
+                \item los cuatro casos con $N = 64$ y la misma semilla ($20261005$);
+                \item los cuatro casos con $N = 128$, $\tilde k_{\text{IR}} = 0.35$ (mismo $\tilde k_{\max} = 39$, caja el doble de grande) y la misma semilla.
+            \end{itemize}
+            Todas se corrieron con \texttt{SEMILLA=<s> code/correr\_cuarticos.sh <N>} y se comparan con \texttt{code/comparar\_corridas.py} y \texttt{code/semillas\_resolucion.py} (que da las tablas de esta sección).
+
+            \begin{table}[H]
+                \centering
+                \small
+                \begin{tabular}{lccccc}
+                    \toprule
+                    semilla & $\rho_{GW}/\rho$ & $h^2\Omega_{GW,0}^{\text{pico}}$ & $\tilde k$ con $> \frac12$ pico & $\tilde t_\chi$ & $\tilde t_{90}$ \\
+                    \midrule
+                    original & $1.12 \times 10^{-5}$ & $8.7 \times 10^{-11}$ & 1.4--11 & 121 & 270 \\
+                    $20261005$ & $1.00 \times 10^{-5}$ & $7.7 \times 10^{-11}$ & 1.4--11 & 110 & 260 \\
+                    1 & $1.15 \times 10^{-5}$ & $7.6 \times 10^{-11}$ & 1.4--12 & 113 & 250 \\
+                    2 & $1.11 \times 10^{-5}$ & $8.8 \times 10^{-11}$ & 1.4--11 & 113 & 240 \\
+                    3 & $1.00 \times 10^{-5}$ & $7.7 \times 10^{-11}$ & 1.4--11 & 121 & 280 \\
+                    \midrule
+                    media $\pm$ desv. & $(1.07 \pm 0.07) \times 10^{-5}$ & $(8.1 \pm 0.6) \times 10^{-11}$ & & $116 \pm 5$ & \\
+                    \bottomrule
+                \end{tabular}
+                \caption{El T-model ($\alpha_K = 1$) con $N = 64$ y cinco semillas. El pico de hoy cae siempre en $\tilde k = 3.5$ ($4.1 \times 10^8$\,Hz).}
+                \label{tab:semillas-T}
+            \end{table}
+
+            \paragraph{La variación entre realizaciones es del $6$--$7\%$.} En el T-model, $\rho_{GW}/\rho$ varía un $6.4\%$ entre semillas (desviación estándar relativa), el máximo de hoy un $7.3\%$ y $\tilde t_\chi$ un $4\%$ (Tabla~\ref{tab:semillas-T}). La banda y el bin del pico son los mismos en las cinco. La dispersión está medida sólo para el T-model; en el E-model con $\alpha_K = 1$ podría ser mayor: con dos semillas, su $\tilde t_\chi$ va de 186 a 239.
+
+            \begin{table}[H]
+                \centering
+                \footnotesize
+                \setlength{\tabcolsep}{3pt}
+                \begin{tabular}{lccccccc}
+                    \toprule
+                    & \multicolumn{3}{c}{$\rho_{GW}/\rho$ [$10^{-5}$]} & $\tilde k_{\text{pico}}$ & $\tilde k$ con $> \frac12$ pico & \multicolumn{2}{c}{$N = 128$} \\
+                    caso & $N = 64$, orig. & $N = 64$ & $N = 128$ & $64 \to 128$ & $64 \to 128$ & $h^2\Omega_{GW,0}^{\text{pico}}$ & banda [Hz] \\
+                    \midrule
+                    T, $\alpha_K = 1$ & 1.12 & 1.00 & 0.97 & $3.5 \to 3.15$ & $1.4$--$11 \to 1.4$--$10$ & $7.9 \times 10^{-11}$ & $1.7 \times 10^8$--$1.2 \times 10^9$ \\
+                    E, $\alpha_K = 1$ & 0.79 & 0.72 & 0.59 & $2.8 \to 1.4$ & $1.4$--$6.3 \to 1.05$--$6.3$ & $4.5 \times 10^{-11}$ & $3.6 \times 10^8$--$2.1 \times 10^9$ \\
+                    E, $\alpha_K = 5$ & 0.99 & 0.93 & 0.84 & $2.8 \to 3.15$ & $1.4$--$8.4 \to 1.4$--$7.7$ & $7.4 \times 10^{-11}$ & $2.5 \times 10^8$--$1.4 \times 10^9$ \\
+                    $\phi^4$ (control) & 1.36 & 1.30 & 1.22 & $11.2 \to 4.55$ & $2.1$--$17 \to 1.75$--$16$ & $8.8 \times 10^{-11}$ & $1.55 \times 10^8$--$1.4 \times 10^9$ \\
+                    \bottomrule
+                \end{tabular}
+                \caption{Los cuatro casos con la semilla original de cada uno ($N = 64$, Tabla~\ref{tab:resultados-N64}) y con la misma semilla ($20261005$) para $N = 64$ y $N = 128$ ($\tilde k_{\text{IR}} = 0.35$). La banda es donde el espectro de hoy supera la mitad de su máximo.}
+                \label{tab:semillas-N128}
+            \end{table}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{figuras/corridas_N128.pdf}
+                \caption{Los cuatro casos cuárticos con $N = 128$, $\tilde k_{\text{IR}} = 0.35$ y la misma semilla. Paneles como en la Fig.~\ref{fig:corridas-N64}.}
+                \label{fig:corridas-N128}
+            \end{figure}
+
+            \paragraph{El orden entre modelos es robusto; la diferencia entre T y E con $\alpha_K = 5$, no.} Con las dos semillas y con las dos resoluciones, $\rho_{GW}/\rho$ sigue el orden monomial $>$ T $>$ E ($\alpha_K = 5$) $>$ E ($\alpha_K = 1$) (Tabla~\ref{tab:semillas-N128}). Con la misma semilla y $N = 64$, el monomial produce un $30\%$ más que el T-model y el E-model con $\alpha_K = 1$ un $28\%$ menos: varias veces la dispersión entre semillas. El E-model con $\alpha_K = 5$, en cambio, produce un $7\%$ menos que el T-model con $N = 64$ y un $13\%$ menos con $N = 128$, del orden de esa dispersión, y sus máximos de hoy se invierten entre las dos semillas. Con estas corridas no los podemos distinguir.
+
+            \paragraph{Con $N = 128$ la forma del espectro no cambia; la amplitud se mueve como entre realizaciones.} Las cuatro corridas son tan buenas como las de $N = 64$: $\langle w\rangle$ a menos de $0.4\%$ de $1/3$, error de Friedmann $\le 2.4 \times 10^{-3}$, $k_{\text{IR}}/(aH) \ge 172$ al final y la integral del espectro igual a $\rho_{GW}/\rho$ a $10^{-15}$. Respecto de $N = 64$ con la misma semilla, $\rho_{GW}/\rho$ baja entre un $3\%$ (T) y un $18\%$ (E, $\alpha_K = 1$). La forma del espectro, en cambio, se mantiene: la fracción de $\rho_{GW}$ en cada rango de $\tilde k$ ($< 1.05$, $1.05$--$3$, $3$--$8$, $8$--$20$) cambia a lo sumo en $0.07$. Si la diferencia viniera de la caja más grande o de la resolución, se concentraría en el IR o en el UV. Con otra grilla, la misma semilla genera otra realización de las fluctuaciones iniciales, así que una diferencia que no cambia la forma es lo esperable de la variación entre realizaciones. La mayor es la del E-model con $\alpha_K = 1$, que resuena más tarde ($\tilde t_\chi \simeq 235$ con esta semilla), no termina de saturar (crece un $8.5\%$ en los últimos 100 de $\tilde t$, con las dos resoluciones) y cuyo $\tilde t_\chi$ es el que más varía con la semilla. Sus valores son cotas inferiores.
+
+            \paragraph{La banda es robusta; el pico no.} Con bins el doble de finos, el pico se mueve hasta un factor $2.5$ en $\tilde k$ (monomial: de $11.2$ a $4.55$), porque los espectros son mesetas anchas y el máximo cae en cualquier punto de ellas. Los bordes de la banda, en cambio, se mueven menos de un bin de $N = 64$ abajo y menos de un $10\%$ arriba. Hoy, con $N = 128$, los cuatro casos superan la mitad de su máximo entre $1.55 \times 10^8$ y $2.1 \times 10^9$\,Hz, con máximos de $4.5$ a $8.8 \times 10^{-11}$.
 
     \section{Corridas cuadráticas: resultados con $N = 64$}
         \label{sec:resultados-cuadraticos}

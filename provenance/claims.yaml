@@ -316,6 +316,44 @@ claims:
       - Notas/Notas.tex «Corridas cuadráticas», «Qué pasa después de la simulación» (Fig. fig:w-post-cuadraticos) y «Hoy, lo que manda es la historia después de la simulación»
     numbers: [wpost_E1_Om_max, wpost_E1_aRD, wpost_E1_a_w01, wpost_E1_banda_max, wpost_E1_banda_min, wpost_E1_eps, wpost_E1_eps_w0, wpost_E1_eps_w025, wpost_E1_f_max, wpost_E1_w_s, wpost_E5_Om_max, wpost_E5_aRD, wpost_E5_a_w01, wpost_E5_banda_max, wpost_E5_banda_min, wpost_E5_eps, wpost_E5_eps_w0, wpost_E5_eps_w025, wpost_E5_f_max, wpost_E5_w_s, wpost_T_Om_max, wpost_T_aRD, wpost_T_a_w01, wpost_T_banda_max, wpost_T_banda_min, wpost_T_eps, wpost_T_eps_w0, wpost_T_eps_w025, wpost_T_f_max, wpost_T_w_s, wpost_continuidad_max, wpost_mono_Om_max, wpost_mono_aRD, wpost_mono_a_w01, wpost_mono_banda_max, wpost_mono_banda_min, wpost_mono_eps, wpost_mono_eps_w0, wpost_mono_eps_w025, wpost_mono_f_max, wpost_mono_w_s]
 
+  - id: semillas-cuarticos
+    statement: >
+      Entre realizaciones de las fluctuaciones iniciales, el T-model con N = 64 varía un 6.4 por ciento
+      en rho_GW/rho, un 7.3 por ciento en el máximo de hoy y un 4 por ciento en t~_chi, con la misma banda y
+      el mismo bin del pico. Con la misma semilla, el orden mono > T > E aK=5 > E aK=1 se mantiene; el
+      monomial (+30 por ciento) y E aK=1 (-28 por ciento) difieren del T-model más que esa dispersión, T y E
+      aK=5 (7-13 por ciento) no.
+    verificacion: >
+      Cinco semillas independientes del T-model; el orden entre modelos se repite con las semillas
+      originales, con 20261005 a N = 64 y con 20261005 a N = 128. La coincidencia al 0.2 por ciento de la
+      validación anterior queda dentro de esta dispersión (fue casual). La dispersión se midió sólo para el
+      T-model; para E aK=1 podría ser mayor (t~_chi 186 contra 239 con dos semillas).
+    evidence:
+      - code/semillas_resolucion.py::main
+      - code/comparar_corridas.py::cargar
+      - Notas/Notas.tex «Semillas y resolución» (Tablas tab:semillas-T y tab:semillas-N128)
+    numbers: [sem_T_Om_pico_desv_rel, sem_T_Om_pico_media, sem_T_Om_pico_orig, sem_T_Om_pico_s1, sem_T_Om_pico_s2, sem_T_Om_pico_s20261005, sem_T_Om_pico_s3, sem_T_rgw_desv_rel, sem_T_rgw_media, sem_T_rgw_orig, sem_T_rgw_s1, sem_T_rgw_s2, sem_T_rgw_s20261005, sem_T_rgw_s3, sem_T_t_chi_desv_rel, sem_T_t_chi_media, sem_T_t_chi_orig, sem_T_t_chi_s1, sem_T_t_chi_s2, sem_T_t_chi_s20261005, sem_T_t_chi_s3]
+
+  - id: resolucion-N128-cuarticos
+    statement: >
+      Con N = 128 y kIR = 0.35 (mismo k~_max, caja doble) la forma del espectro de GWs no cambia (la
+      fracción de rho_GW por rango de k~ se mueve a lo sumo 0.07) y rho_GW/rho cambia entre -3 y -18 por
+      ciento, como entre realizaciones. La banda donde el espectro de hoy supera la mitad del máximo es
+      robusta (1.55e8-2.1e9 Hz en los cuatro casos); el k~ del pico no lo es (hasta un factor 2.5).
+    verificacion: >
+      Chequeos de cada corrida N = 128 con el analizador (<w> a menos de 0.4 por ciento de 1/3, Friedmann
+      <= 2.4e-3, k_IR/(aH) >= 172, integral del espectro = rho_GW/rho a 1e-15). La distribución por rango
+      de k~ distingue un efecto de caja o de resolución (concentrado en IR o UV) de un cambio de
+      normalización. Que el cambio sea de realización y no de N es una inferencia: con una sola semilla
+      por resolución no se puede separar del todo; E aK=1 no satura (+8.5 por ciento en los últimos 100).
+    evidence:
+      - code/semillas_resolucion.py::main
+      - code/semillas_resolucion.py::fracciones
+      - code/comparar_corridas.py::main
+      - code/analisis_cosmolattice.py
+      - Notas/Notas.tex «Semillas y resolución» (Tabla tab:semillas-N128, Fig. fig:corridas-N128)
+    numbers: [res_E1_Om_pico_N128, res_E1_banda_max_Hz, res_E1_banda_min_Hz, res_E1_cambio, res_E1_dfr_max, res_E1_kpico_N128, res_E1_rgw_N128, res_E1_rgw_N64s, res_E1_tchi_N128, res_E1_ult100_N128, res_E5_Om_pico_N128, res_E5_banda_max_Hz, res_E5_banda_min_Hz, res_E5_cambio, res_E5_dfr_max, res_E5_kpico_N128, res_E5_rgw_N128, res_E5_rgw_N64s, res_E5_tchi_N128, res_E5_ult100_N128, res_T_Om_pico_N128, res_T_banda_max_Hz, res_T_banda_min_Hz, res_T_cambio, res_T_dfr_max, res_T_kpico_N128, res_T_rgw_N128, res_T_rgw_N64s, res_T_tchi_N128, res_T_ult100_N128, res_mono_Om_pico_N128, res_mono_banda_max_Hz, res_mono_banda_min_Hz, res_mono_cambio, res_mono_dfr_max, res_mono_kpico_N128, res_mono_rgw_N128, res_mono_rgw_N64s, res_mono_tchi_N128, res_mono_ult100_N128]
+
 figures:
   - file: Notas/figuras/corridas_N64.pdf
     produced_by: code/comparar_corridas.py::main
@@ -420,3 +458,15 @@ figures:
               "Líneas de referencia en w = 0 y w = 1/3.",
               "Colores categóricos en el orden fijo de corridas_N64_cuadraticos.pdf."]
     supports: [w-post-simulacion]
+  - file: Notas/figuras/corridas_N128.pdf
+    produced_by: code/comparar_corridas.py::main
+    shows: >
+      (a) Omega_GW,e(k~) final en la red, (b) h^2 Omega_GW,0(f) hoy con su máximo, (c) rho_GW/rho(t~) con el
+      máximo de rms(chi~) punteado, para los cuatro casos cuárticos con N = 128, kIR = 0.35 y semilla
+      20261005. Se lee lo mismo que con N = 64 (Fig. corridas_N64.pdf), con más resolución en el pico y
+      un bin más en el IR.
+    from_scratch: Lectura de las salidas, pico y reescaleo por corrida.
+    from_library: matplotlib, numpy; code/reescaleo_gws.py
+    choices: ["Misma semilla en los cuatro casos, para que las diferencias no mezclen realizaciones.",
+              "Mismos paneles y colores que corridas_N64.pdf, para compararlas lado a lado."]
+    supports: [resolucion-N128-cuarticos, semillas-cuarticos]
