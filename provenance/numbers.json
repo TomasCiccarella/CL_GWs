@@ -3929,5 +3929,716 @@
     "choices": [
       "Rango a_s-1000 a_s, donde w cambia; más allá w ~ 0 y la comprobación es trivial."
     ]
+  },
+  "sem_T_rgw_orig": {
+    "value": 1.116e-05,
+    "statement": "rho_GW/rho final, T-model aK = 1, N = 64, semilla orig.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_rgw_s20261005": {
+    "value": 1.001e-05,
+    "statement": "rho_GW/rho final, T-model aK = 1, N = 64, semilla s20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_rgw_s1": {
+    "value": 1.145e-05,
+    "statement": "rho_GW/rho final, T-model aK = 1, N = 64, semilla s1.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_rgw_s2": {
+    "value": 1.105e-05,
+    "statement": "rho_GW/rho final, T-model aK = 1, N = 64, semilla s2.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_rgw_s3": {
+    "value": 9.992e-06,
+    "statement": "rho_GW/rho final, T-model aK = 1, N = 64, semilla s3.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_rgw_media": {
+    "value": 1.073e-05,
+    "statement": "media de rho_GW/rho final entre las cinco semillas del T-model (N = 64).",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_rgw_desv_rel": {
+    "value": 0.0637,
+    "statement": "desviación estándar relativa de rho_GW/rho final entre las cinco semillas del T-model (N = 64).",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_Om_pico_orig": {
+    "value": 8.721e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, T-model aK = 1, N = 64, semilla orig.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_Om_pico_s20261005": {
+    "value": 7.68e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, T-model aK = 1, N = 64, semilla s20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_Om_pico_s1": {
+    "value": 7.629e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, T-model aK = 1, N = 64, semilla s1.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_Om_pico_s2": {
+    "value": 8.793e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, T-model aK = 1, N = 64, semilla s2.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_Om_pico_s3": {
+    "value": 7.725e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, T-model aK = 1, N = 64, semilla s3.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_Om_pico_media": {
+    "value": 8.11e-11,
+    "statement": "media de máximo de h^2 Omega_GW,0 hoy entre las cinco semillas del T-model (N = 64).",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_Om_pico_desv_rel": {
+    "value": 0.07308,
+    "statement": "desviación estándar relativa de máximo de h^2 Omega_GW,0 hoy entre las cinco semillas del T-model (N = 64).",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_t_chi_orig": {
+    "value": 120.8,
+    "statement": "t~ del máximo de rms(chi~), T-model aK = 1, N = 64, semilla orig.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_t_chi_s20261005": {
+    "value": 109.8,
+    "statement": "t~ del máximo de rms(chi~), T-model aK = 1, N = 64, semilla s20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_t_chi_s1": {
+    "value": 113.4,
+    "statement": "t~ del máximo de rms(chi~), T-model aK = 1, N = 64, semilla s1.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_t_chi_s2": {
+    "value": 113.4,
+    "statement": "t~ del máximo de rms(chi~), T-model aK = 1, N = 64, semilla s2.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_t_chi_s3": {
+    "value": 120.6,
+    "statement": "t~ del máximo de rms(chi~), T-model aK = 1, N = 64, semilla s3.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_t_chi_media": {
+    "value": 115.6,
+    "statement": "media de t~ del máximo de rms(chi~) entre las cinco semillas del T-model (N = 64).",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "sem_T_t_chi_desv_rel": {
+    "value": 0.04224,
+    "statement": "desviación estándar relativa de t~ del máximo de rms(chi~) entre las cinco semillas del T-model (N = 64).",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Media y desviación estándar muestral (ddof = 1) entre las cinco semillas del T-model con N = 64.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "Cinco semillas (la original más 20261005, 1, 2, 3) y sólo para el T-model, por tiempo de máquina; la dispersión de los otros casos se supone parecida, salvo E aK = 1 (tiene t~_chi más variable).",
+      "Desviación estándar muestral (ddof = 1), no el rango."
+    ]
+  },
+  "res_T_rgw_N64s": {
+    "value": 1.001e-05,
+    "statement": "rho_GW/rho final, T, N = 64, semilla 20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_rgw_N128": {
+    "value": 9.734e-06,
+    "statement": "rho_GW/rho final, T, N = 128, kIR = 0.35, semilla 20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_cambio": {
+    "value": -0.02757,
+    "statement": "cambio relativo de rho_GW/rho de N = 64 a N = 128 con la misma semilla, T.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_dfr_max": {
+    "value": 0.04495,
+    "statement": "máximo cambio de la fracción de rho_GW por rango de k~ entre N = 64 y N = 128, T.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_kpico_N128": {
+    "value": 3.15,
+    "statement": "k~ del pico de hoy, T, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_Om_pico_N128": {
+    "value": 7.943e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, T, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_banda_min_Hz": {
+    "value": 166000000.0,
+    "statement": "frecuencia mínima [Hz] con más de la mitad del máximo hoy, T, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_banda_max_Hz": {
+    "value": 1203000000.0,
+    "statement": "frecuencia máxima [Hz] con más de la mitad del máximo hoy, T, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_ult100_N128": {
+    "value": -0.7622,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, T, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_T_tchi_N128": {
+    "value": 110.0,
+    "statement": "t~ del máximo de rms(chi~), T, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_rgw_N64s": {
+    "value": 7.189e-06,
+    "statement": "rho_GW/rho final, E1, N = 64, semilla 20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_rgw_N128": {
+    "value": 5.883e-06,
+    "statement": "rho_GW/rho final, E1, N = 128, kIR = 0.35, semilla 20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_cambio": {
+    "value": -0.1817,
+    "statement": "cambio relativo de rho_GW/rho de N = 64 a N = 128 con la misma semilla, E1.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_dfr_max": {
+    "value": 0.06798,
+    "statement": "máximo cambio de la fracción de rho_GW por rango de k~ entre N = 64 y N = 128, E1.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_kpico_N128": {
+    "value": 1.4,
+    "statement": "k~ del pico de hoy, E1, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_Om_pico_N128": {
+    "value": 4.476e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, E1, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_banda_min_Hz": {
+    "value": 357400000.0,
+    "statement": "frecuencia mínima [Hz] con más de la mitad del máximo hoy, E1, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_banda_max_Hz": {
+    "value": 2144000000.0,
+    "statement": "frecuencia máxima [Hz] con más de la mitad del máximo hoy, E1, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_ult100_N128": {
+    "value": 8.452,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, E1, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E1_tchi_N128": {
+    "value": 233.4,
+    "statement": "t~ del máximo de rms(chi~), E1, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_rgw_N64s": {
+    "value": 9.338e-06,
+    "statement": "rho_GW/rho final, E5, N = 64, semilla 20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_rgw_N128": {
+    "value": 8.422e-06,
+    "statement": "rho_GW/rho final, E5, N = 128, kIR = 0.35, semilla 20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_cambio": {
+    "value": -0.09816,
+    "statement": "cambio relativo de rho_GW/rho de N = 64 a N = 128 con la misma semilla, E5.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_dfr_max": {
+    "value": 0.0448,
+    "statement": "máximo cambio de la fracción de rho_GW por rango de k~ entre N = 64 y N = 128, E5.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_kpico_N128": {
+    "value": 3.15,
+    "statement": "k~ del pico de hoy, E5, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_Om_pico_N128": {
+    "value": 7.37e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, E5, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_banda_min_Hz": {
+    "value": 246200000.0,
+    "statement": "frecuencia mínima [Hz] con más de la mitad del máximo hoy, E5, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_banda_max_Hz": {
+    "value": 1354000000.0,
+    "statement": "frecuencia máxima [Hz] con más de la mitad del máximo hoy, E5, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_ult100_N128": {
+    "value": 0.7487,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, E5, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_E5_tchi_N128": {
+    "value": 142.2,
+    "statement": "t~ del máximo de rms(chi~), E5, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_rgw_N64s": {
+    "value": 1.3e-05,
+    "statement": "rho_GW/rho final, mono, N = 64, semilla 20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_rgw_N128": {
+    "value": 1.222e-05,
+    "statement": "rho_GW/rho final, mono, N = 128, kIR = 0.35, semilla 20261005.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_cambio": {
+    "value": -0.05998,
+    "statement": "cambio relativo de rho_GW/rho de N = 64 a N = 128 con la misma semilla, mono.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_dfr_max": {
+    "value": 0.03155,
+    "statement": "máximo cambio de la fracción de rho_GW por rango de k~ entre N = 64 y N = 128, mono.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_kpico_N128": {
+    "value": 4.55,
+    "statement": "k~ del pico de hoy, mono, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_Om_pico_N128": {
+    "value": 8.769e-11,
+    "statement": "máximo de h^2 Omega_GW,0 hoy, mono, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_banda_min_Hz": {
+    "value": 155300000.0,
+    "statement": "frecuencia mínima [Hz] con más de la mitad del máximo hoy, mono, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_banda_max_Hz": {
+    "value": 1397000000.0,
+    "statement": "frecuencia máxima [Hz] con más de la mitad del máximo hoy, mono, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_ult100_N128": {
+    "value": 0.612,
+    "statement": "crecimiento [%] de rho_GW/rho en los últimos 100 de t~, mono, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
+  },
+  "res_mono_tchi_N128": {
+    "value": 82.2,
+    "statement": "t~ del máximo de rms(chi~), mono, N = 128.",
+    "produced_by": "code/semillas_resolucion.py::main",
+    "from_scratch": "Cociente de rho_GW/rho final entre N = 128 (kIR = 0.35) y N = 64 (kIR = 0.7) con baseSeed = 20261005; fracción de rho_GW por rango de k~ integrando Omega_GW,e d ln k.",
+    "from_library": "numpy; code/comparar_corridas.py::cargar (lectura y reescaleo a hoy); CosmoLattice para las corridas.",
+    "choices": [
+      "N = 128 con kIR = 0.35 (mismo k~_max, caja el doble) como recomienda Notas.tex «Recomendación», en vez de kIR = 0.7 (doble k~_max), porque el UV ya estaba resuelto.",
+      "Misma baseSeed en las dos resoluciones; aun así la realización cambia con la grilla.",
+      "Rangos de k~ (<1.05, 1.05-3, 3-8, 8-20, >20) elegidos para separar el IR nuevo de la caja grande, el pico y el UV."
+    ]
   }
 }
